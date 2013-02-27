@@ -1,0 +1,71 @@
+" ブラウザタイトルの変更
+" Firefox デフォルトは 「Mozilla - Firefox」、vimperatorを入れると「vimperator」
+set titlestring=Firefox
+" 詳細表示レベル？ 内容確認中、左下のステータス状況か？
+" →「:javascript! 」で表示される内容レベル
+set verbose=9
+" スクロールの端などの際に出るbeepをoff
+set nobeep
+" 不明 内容確認中
+set wildmode=list:full
+set hintchars=asineqv
+
+" 選択文字列ののコピーを <C-c> に割り当て
+" map <C-c> :echo Yank!<CR>Y
+map <C-c> <C-[>
+
+" j/k でのスクロール幅を 1行 から 3行 に変更
+map j 3<C-e>
+map k 3<C-y>
+" fとFの機能を入れ替え
+no f F
+no F f
+" Ctrl-sで.vimperatorrcを再読込
+no <C-s> :source ~/.vimperatorrc<cr>
+" ddにタブを閉じる, dでは何もしない
+no dd :tabclose<CR>
+map d <NOP>
+
+" Backspace に戻るを割り当て
+" map <C-h> <BS>
+" map <BS> <A-Left>
+map <BS> <NOP>
+
+" h/l に戻るや進むを割り当て
+map H <A-Left>
+map L <A-Right>
+
+" H/L や ← → でタブ移動
+map h gT
+map l gt
+" map <Left>  gT
+" map <Right> gt
+no <Left> 5h
+no <Right> 5l
+
+" Shift + ← → で現在のタブの位置変更
+map <S-Right> :tabmove! +1<CR>
+map <S-Left>  :tabmove! -1<CR>
+
+map <C-h> <NOP>
+imap <C-h> <BS>
+cmap <C-h> <BS>
+
+"フォームにフォーカスしないように
+" set focuscontent
+" youtubeのダウンロード
+nmap <silent> ey :fetchyoutube<CR>
+" slideshareの操作
+no <C-]> :slideshare next<CR>
+no <C-_> :slideshare prev<CR>
+
+" :a!
+" 検索キーワードのハイライト
+set hlsearch
+
+" 最初の補完を早くする(らしい)
+set preload
+
+set editor="/usr/local/bin/vim"
+" 読み込んだ事を出力
+echo ".vimperatorrc sourced"
