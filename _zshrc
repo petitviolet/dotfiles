@@ -11,8 +11,8 @@ export OUTPUT_CHARSET=utf-8
 setopt complete_aliases
 
 # 別ファイル読み込み
-[ -f ~/dotfiles/.zshrc.alias ] && source ~/dotfiles/.zshrc.alias
-[ -f ~/dotfiles/.zshrc.local ] && source ~/dotfiles/.zshrc.local
+[ -f ~/.zshrc.alias ] && source ~/.zshrc.alias
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # alias ls='ls -hF'
 # alias ll='ls -l'
@@ -60,7 +60,6 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export LS_COLORS='di=01;36'
 # zmv使う
 autoload zmv
-alias zmv='noglob zmv'
 
 #----------------------------------------------------------
 # 補完関連
