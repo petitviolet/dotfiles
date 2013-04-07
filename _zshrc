@@ -10,27 +10,32 @@ export OUTPUT_CHARSET=utf-8
 # 補完される前にオリジナルのコマンドまで展開してチェックする
 setopt complete_aliases
 
-alias ls='ls -hF'
-alias ll='ls -l'
-alias la='ls -A'
-# alias rm='rm -i'
-alias photorec='~/Downloads/testdisk-6.14-WIP/photorec'
-alias rm='trash-put'
-alias cp='cp -i'
-alias mv='mv -i'
-alias sudo='env PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin \sudo'
-alias python='/Library/Frameworks/Python.framework/Versions/2.7/bin/python'
-alias easy_install='/Library/Frameworks/Python.framework/Versions/2.7/bin/easy_install'
-alias s='screen -U'
-alias t='/usr/local/bin/tmuxx'
-alias pbcopy='reattach-to-user-namespace pbcopy'
-alias pbpaste='reattach-to-user-namespace pbpaste'
-# alias t='tmux'
-alias ta='tmux attach'
-alias pip='/Library/Frameworks/Python.framework/Versions/2.7/bin/pip'
-alias ipython=' /Library/Frameworks/Python.framework/Versions/2.7/bin/ipython'
-alias gcc='/usr/bin/gcc-4.2'
-alias eclipse='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse'
+# 別ファイル読み込み
+[ -f ~/dotfiles/.zshrc.alias ] && source ~/dotfiles/.zshrc.alias
+[ -f ~/dotfiles/.zshrc.local ] && source ~/dotfiles/.zshrc.local
+
+# alias ls='ls -hF'
+# alias ll='ls -l'
+# alias la='ls -A'
+# alias phpmysql='/Applications/MAMP/Library/bin/mysql'
+# # alias rm='rm -i'
+# alias photorec='~/Downloads/testdisk-6.14-WIP/photorec'
+# alias rm='trash-put'
+# alias cp='cp -i'
+# alias mv='mv -i'
+# alias sudo='env PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin \sudo'
+# alias python='/Library/Frameworks/Python.framework/Versions/2.7/bin/python'
+# alias easy_install='/Library/Frameworks/Python.framework/Versions/2.7/bin/easy_install'
+# alias s='screen -U'
+# alias t='/usr/local/bin/tmuxx'
+# alias pbcopy='reattach-to-user-namespace pbcopy'
+# alias pbpaste='reattach-to-user-namespace pbpaste'
+# # alias t='tmux'
+# alias ta='tmux attach'
+# alias pip='/Library/Frameworks/Python.framework/Versions/2.7/bin/pip'
+# alias ipython=' /Library/Frameworks/Python.framework/Versions/2.7/bin/ipython'
+# alias gcc='/usr/bin/gcc-4.2'
+# alias eclipse='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse'
 #----------------------------------------------------------
 # 基本
 #----------------------------------------------------------
@@ -160,7 +165,7 @@ RPROMPT="%T"
 setopt transient_rprompt
 # プロンプト
 function precmd() {
-PROMPT="%{${fg[green]}%}%n%{${fg[yellow]}%} %~%{${reset_color}%}" 
+PROMPT="%{${fg[green]}%}%n%{${fg[yellow]}%} %~%{${reset_color}%}"
 st=`git status 2>/dev/null`
 if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
 	color=${fg[cyan]}
