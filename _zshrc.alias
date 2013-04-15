@@ -1,0 +1,8 @@
+alias ls='ls -hF'
+alias ll='ls -l'
+alias la='ls -A'
+# alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias s='screen -U'
+alias zmv='noglob zmv'

@@ -14,28 +14,6 @@ setopt complete_aliases
 [ -f ~/.zshrc.alias ] && source ~/.zshrc.alias
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-# alias ls='ls -hF'
-# alias ll='ls -l'
-# alias la='ls -A'
-# alias phpmysql='/Applications/MAMP/Library/bin/mysql'
-# # alias rm='rm -i'
-# alias photorec='~/Downloads/testdisk-6.14-WIP/photorec'
-# alias rm='trash-put'
-# alias cp='cp -i'
-# alias mv='mv -i'
-# alias sudo='env PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin \sudo'
-# alias python='/Library/Frameworks/Python.framework/Versions/2.7/bin/python'
-# alias easy_install='/Library/Frameworks/Python.framework/Versions/2.7/bin/easy_install'
-# alias s='screen -U'
-# alias t='/usr/local/bin/tmuxx'
-# alias pbcopy='reattach-to-user-namespace pbcopy'
-# alias pbpaste='reattach-to-user-namespace pbpaste'
-# # alias t='tmux'
-# alias ta='tmux attach'
-# alias pip='/Library/Frameworks/Python.framework/Versions/2.7/bin/pip'
-# alias ipython=' /Library/Frameworks/Python.framework/Versions/2.7/bin/ipython'
-# alias gcc='/usr/bin/gcc-4.2'
-# alias eclipse='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse'
 #----------------------------------------------------------
 # 基本
 #----------------------------------------------------------
@@ -141,20 +119,7 @@ bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 # 全履歴の一覧を出力する
 function history-all { history -E 1 }
-# z
-# . /usr/local/Cellar/z/1.4/etc/profile.d/z.sh
-# function _Z_precmd {
-#     z --add "$(pwd -P)" 61 }
-# precmd_functions=($precmd_functions _Z_precmd)
-# _Z_CMD=j
-# source ~/.zsh/z.sh
-# precmd() {
-#       z --add "$(pwd -P)"
-# }
-# .`brew --prefix`/Celler/z/1.4/etc.profile.d/z.sh
-# function precmd () {
-#   z --add "$(pwd -P)"
-# }
+
 #----------------------------------------------------------
 # プロンプト表示関連
 #----------------------------------------------------------
@@ -215,8 +180,3 @@ bindkey '^x^p' pbcopy-buffer
 # .zshrc.mineがあれば読み込む
 [ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
 # export PATH=$PATH:/Applications/android-sdk-macosx/tools
-export PATH=/usr/local/bin:$PATH
-export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin/:$PATH
-export PYTHONHOME=/Library/Frameworks/Python.framework/Versions/2.7/
-export PYTHONPATH=/Library/Frameworks/Python.framework/Versions/2.7/
-export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
