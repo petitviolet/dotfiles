@@ -3,9 +3,9 @@
 "-----------------------------------------------------
 "色設定
 " syntax enable
-" set background=dark
 " let g:solarized_termcolors=256
 " colorscheme solarized
+" set background=dark
 " colorscheme earendel
 " colorscheme nu42dark
 " colorscheme jellybeans
@@ -64,7 +64,7 @@ imap  <C-x> <esc>xi
 imap  <C-n> <Down>
 imap  <C-p> <Up>
 imap  <C-d> <Del>
-imap  <C-k> <esc>ld$a
+imap  <C-k> <C-o>d$
 map   <C-j> <C-w>p
 map  % <C-o>:%s/
 " imap  <C-w> <esc>bcw
