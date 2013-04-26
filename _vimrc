@@ -49,7 +49,7 @@ nnoremap <silent> co :ContinuousNumber <C-a><CR>
 vnoremap <silent> co :ContinuousNumber <C-a><CR>
 command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <count>?<count>-line('.'):1)|exec 'normal! j' . n . <q-args>|call cursor('.', c)|endfor
 "-----------------------------------------------------
-"キーバインド変更
+" キーバインド変更
 "-----------------------------------------------------
 " map CTRL-E to end-of-line (insert mode)
 imap  <C-e> <End>
@@ -67,15 +67,6 @@ imap  <C-d> <Del>
 imap  <C-k> <C-o>d$
 map   <C-j> <C-w>p
 map  % <C-o>:%s/
-" imap  <C-w> <esc>bcw
-" imap  <C-b> <esc>ha
-" imap  <C-f> <esc>la
-" imap  <C-u> <esc>ui
-" imap  <C-x> <esc>xi
-" imap  <C-n> <esc>ja
-" imap  <C-p> <esc>ka
-" map   <C-j> <C-w>p
-" imap  <C-d> <Del>
 "
 "-----------------------------------------------------
 " ファイル操作関連
@@ -148,7 +139,6 @@ set wildmenu
 " 行末から次の行へ移るようにする
 set whichwrap=b,s,[,],<,>
 " set whichwrap=b,s,h,l,<,>,[,]
-set ambiwidth=double
 set backspace=indent,eol,start
 " 入力されているテキストの最大幅を無効にする
 set textwidth=0
@@ -160,7 +150,7 @@ matc ZenkakuSpace /　/
 " ステータスラインに表示する情報の指定
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=%c\:%l/%L\|%P\|
 " ステータスラインの色
-highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=white
+highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=gray
 
 "-----------------------------------------------------
 " 移動
@@ -192,8 +182,6 @@ set autoindent
 " 新しい行を作ったときに高度な自動インデントを行う。 'cindent'
 " がオンのときは、'smartindent' をオンにしても効果はない。
 set smartindent
-" Cプログラムファイルの自動インデントを始める。
-"set cindent
 
 "----------------------------------------------------
 "" 国際化関係
@@ -243,6 +231,11 @@ let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 
+" C-u uで現在開いているファイルと同ディレクトリのファイルを開く
+" C-u iでunite経由で既に開いたファイルを開く
+" C-u cで最初に開いたファイルのディレクトリのファイルを開く
+" C-u r よく分からない
+
 Bundle 'Shougo/unite.vim'
 let g:unite_enable_start_insert=1
 nnoremap [unite] <Nop>
@@ -251,7 +244,7 @@ nnoremap <silent> [unite]u :<C-u>UniteWithBufferDir -buffer-name=files file file
 nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> [unite]i :<C-u>Unite -buffer-name=files buffer_tab<CR>
-nnoremap <silent> [unite]g :<C-u>Unite vcs_grep/git<CR>
+" nnoremap <silent> [unite]g :<C-u>Unite vcs_grep/git<CR>
 function! s:unite_my_settings()
     " Overwrite settings
     nmap <buffer><ESC> <Plug>(unite_exit)
@@ -271,8 +264,9 @@ function! s:unite_my_settings()
 endfunction
 
 Bundle 'Shougo/vimfiler'
-Bundle 'h1mesuke/unite-outline'
+" space-eでウィンドウ左側にファイルツリー表示
 nnoremap <silent> <space>e :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -toggle -no-quit<CR>
+Bundle 'h1mesuke/unite-outline'
 Bundle 'tsukkee/unite-help'
 Bundle 'sgur/unite-git_grep'
 Bundle 'tpope/vim-surround'
@@ -280,10 +274,13 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'kana/vim-fakeclip'
 
 " ファイル管理(tree表示)
+" \nでファイルツリー表示
 Bundle 'scrooloose/nerdtree'
 nmap <Leader>n :NERDTreeToggle<CR>
 
 " Undo関係
+" undoの履歴を残せる
+" 既に編集し終わったファイルでもuで遡れる
 set undodir=~/.vimundo
 set undofile
 if has('persistent_undo')
@@ -323,6 +320,8 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
+
+" インデントの色
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 
@@ -551,10 +550,3 @@ endif
 "   endfunction
 "   autocmd BufReadPost * call AU_ReCheck_FENC()
 " endif
-" 改行コードの自動認識
-set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
-set whichwrap=b,s,h,l,<,>,[,]
