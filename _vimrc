@@ -550,3 +550,8 @@ endif
 "   endfunction
 "   autocmd BufReadPost * call AU_ReCheck_FENC()
 " endif
+
+" 以下は最後に書くと機能するっぽい
+" 改行コードの自動認識
+set fileformats=unix,dos,mac
+set whichwrap=b,s,h,l,<,>,[,]
