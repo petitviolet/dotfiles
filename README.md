@@ -1,4 +1,4 @@
-dotfilesを設定
+#dotfilesを設定
     git clone https://github.com/petitviolet/dotfiles.git
     cd dotfiles
     sh _install.sh
