@@ -59,7 +59,6 @@ nmap <silent> ey :fetchyoutube<CR>
 no <C-]> :slideshare next<CR>
 no <C-_> :slideshare prev<CR>
 
-" :a!
 " 検索キーワードのハイライト
 set hlsearch
 
