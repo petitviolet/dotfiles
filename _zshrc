@@ -39,6 +39,45 @@ export LS_COLORS='di=01;36'
 # zmv使う
 autoload zmv
 
+# ファイルの削除
+function rmf() {
+  /bin/rm $@
+}
+
+function rm(){
+  for file in $*
+    do
+      __rm_single_file $file
+  done
+}
+
+function __rm_single_file(){
+  local DATE=`date "+%y%m%d"`
+  if ! [ -d ~/.Trash/$DATE/ ]
+  then
+    command /bin/mkdir ~/.Trash/$DATE/
+  fi
+  if ! [ $# -eq 1 ]
+  then
+    echo "__rm_single_file: 1 argument required but $# passed."
+    exit
+  fi
+  if [ -e $1 ]
+  then
+    BASENAME=`basename $1`
+    NAME=$BASENAME
+    COUNT=0
+    while [ -e ~/.Trash/$DATE/$NAME ]
+    do
+      COUNT=$(($COUNT+1))
+      NAME="$BASENAME.$COUNT"
+    done
+    command /bin/mv $1 ~/.Trash/$DATE/$NAME
+  else
+    echo "No such file or directory: $file"
+  fi
+}
+
 #----------------------------------------------------------
 # 補完関連
 #----------------------------------------------------------
@@ -132,13 +171,13 @@ function precmd() {
 PROMPT="%{${fg[green]}%}%n%{${fg[yellow]}%} %~%{${reset_color}%}"
 st=`git status 2>/dev/null`
 if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
-	color=${fg[cyan]}
+  color=${fg[cyan]}
 elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
-	color=${fg[blue]}
+  color=${fg[blue]}
 elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
-	color=${fg_bold[red]}
+  color=${fg_bold[red]}
 else
-	color=${fg[red]}
+  color=${fg[red]}
 fi
 PROMPT+=" %{$color%}$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')%b%{${reset_color}%}
 "
@@ -164,12 +203,12 @@ e_normal=`echo -e "\033[0;30m"`
 e_RED=`echo -e "\033[1;31m"`
 e_BLUE=`echo -e "\033[1;36m"`
 function make() {
-    LANG=C command make "$@" 2>&1 | sed -e "s@[Ee]rror:.*@$e_RED&$e_normal@g" -e "s@cannot\sfind.*@$e_RED&$e_normal@g" -e "s@[Ww]arning:.*@$e_BLUE&$e_normal@g"
+LANG=C command make "$@" 2>&1 | sed -e "s@[Ee]rror:.*@$e_RED&$e_normal@g" -e "s@cannot\sfind.*@$e_RED&$e_normal@g" -e "s@[Ww]arning:.*@$e_BLUE&$e_normal@g"
 }
 
 pbcopy-buffer(){
-    print -rn $BUFFER | pbcopy
-    zle -M "pbcopy: ${BUFFER}"
+  print -rn $BUFFER | pbcopy
+  zle -M "pbcopy: ${BUFFER}"
 }
 zle -N pbcopy-buffer
 bindkey '^x^p' pbcopy-buffer
@@ -177,6 +216,3 @@ bindkey '^x^p' pbcopy-buffer
 #----------------------------------------------------------
 # 環境依存対応
 #----------------------------------------------------------
-# .zshrc.mineがあれば読み込む
-[ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
-# export PATH=$PATH:/Applications/android-sdk-macosx/tools

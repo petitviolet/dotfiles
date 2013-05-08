@@ -40,8 +40,6 @@ endif
 if exists('&ambiwidth')
         set ambiwidth=double
 endif
-" 保存時に行末の空白を除去する
-autocmd BufWritePre * :%s/\s\+$//ge
 
 " 矩形選択で連番入力
 " 数字を選んで co と入力
@@ -128,10 +126,6 @@ set showmatch
 syntax on
 " 検索結果文字列のハイライトを有効にする
 set hlsearch
-" 行末の空白をハイライト
-" highlight WhitespaceEOL ctermbg=red guibg=red
-" matc WhitespaceEOL /\s\+$/
-" autocmd WinEnter * match WhitespaceEOL /\s\+$/
 " コメントの色を変更
 highlight Comment ctermfg=DarkCyan
 " コマンドライン補完を拡張モードにする
@@ -144,9 +138,44 @@ set backspace=indent,eol,start
 set textwidth=0
 " ウィンドウの幅より長い行は折り返して、次の行に続けて表示する
 set wrap
+
+" 行末の空白をハイライト
+" highlight WhitespaceEOL ctermbg=red guibg=red
+" autocmd WinEnter * match WhitespaceEOL /\s\+$/
+" matc WhitespaceEOL /\s\+$/
+" 行末の空白文字を可視化
+highlight WhitespaceEOL cterm=underline ctermbg=red guibg=#FF0000
+au BufWinEnter * let w:m1 = matchadd("WhitespaceEOL", ' +$')
+au WinEnter * let w:m1 = matchadd("WhitespaceEOL", ' +$')
+
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 matc ZenkakuSpace /　/
+
+" 保存時に行末の空白を除去する
+" autocmd BufWritePre * :%s/\s\+$//ge
+" function! s:remove_dust()
+"     let cursor = getpos(".")
+"     " 保存時に行末の空白を除去する
+"     %s/\s\+$//ge
+"     " 保存時にtabを2スペースに変換する
+"     " %s/\t/  /ge
+"     call setpos(".", cursor)
+"     unlet cursor
+" endfunction
+" autocmd BufWritePre * call <SID>remove_dust()
+function! s:RTrim()
+  let s:cursor = getpos(".")
+  if &filetype == "markdown"
+    %s/\s\+\(\s\{2}\)$/\1/e
+    match Underlined /\s\{2}/
+  else
+    %s/\s\+$//ge
+  endif
+  call setpos(".", s:cursor)
+endfunction
+autocmd BufWritePre * call <SID>RTrim()
+
 " ステータスラインに表示する情報の指定
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=%c\:%l/%L\|%P\|
 " ステータスラインの色
