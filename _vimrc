@@ -1,6 +1,7 @@
 "-----------------------------------------------------
 " 基本的な設定
 "-----------------------------------------------------
+
 "色設定
 " syntax enable
 " let g:solarized_termcolors=256
@@ -164,17 +165,20 @@ matc ZenkakuSpace /　/
 "     unlet cursor
 " endfunction
 " autocmd BufWritePre * call <SID>remove_dust()
+" markdownファイルの時は空白をハイライトする
+highlight UnderLined cterm=NONE ctermbg=darkgray guibg=#FF0000
 function! s:RTrim()
   let s:cursor = getpos(".")
   if &filetype == "markdown"
     %s/\s\+\(\s\{2}\)$/\1/e
-    match Underlined /\s\{2}/
+    match UnderLined /\s\{2}/
   else
     %s/\s\+$//ge
   endif
   call setpos(".", s:cursor)
 endfunction
 autocmd BufWritePre * call <SID>RTrim()
+
 
 " ステータスラインに表示する情報の指定
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=%c\:%l/%L\|%P\|

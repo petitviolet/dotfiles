@@ -3,6 +3,6 @@
     cd dotfiles
     sh _install.sh
 これで、$HOMEディレクトリに.vimrc, .zshrc, .zshrc.alias, .tmux.confが作成される。  
-それぞれdotfiles/の_vimrc, _zshrc, _zshrc.alias, _tmux.confのシンボリックリンクとなっている。
-
+それぞれdotfiles/の\_vimrc, \_zshrc, \_zshrc.alias, \_tmux.confのシンボリックリンクとなっている。
+  
 
