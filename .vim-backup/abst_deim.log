@@ -1,0 +1,1221 @@
+This is e-pTeX, Version 3.1415926-p3.2-110415-2.3 (utf8.euc) (TeX Live 2011) (format=platex 2011.12.26)  12 JAN 2012 21:16
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**abst_deim.tex~
+(./abst_deim.tex~
+pLaTeX2e <2006/11/10> (based on LaTeX2e <2009/09/24> patch level 0)
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, af
+rikaans, arabic, basque, bulgarian, catalan, pinyin, croatian, czech, danish, d
+utch, ukenglish, usenglishmax, esperanto, estonian, farsi, finnish, french, gal
+ician, german, ngerman, swissgerman, hungarian, icelandic, indonesian, interlin
+gua, irish, italian, kurmanji, latin, latvian, lithuanian, mongolian, mongolian
+lmc, bokmal, nynorsk, polish, portuguese, romanian, russian, serbian, serbianc,
+ slovak, slovenian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian
+, welsh, ancientgreek, ibycus, monogreek, greek, coptic, loaded.
+
+! LaTeX Error: File `deim_jonly.cls' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: cls)
+
+Enter file name: abst_deim.tex
+
+! LaTeX Error: File `abst_deim.tex' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: tex)
+
+Enter file name: 
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvips.def on input line 91.
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen118
+\Gin@req@width=\dimen119
+)
+! Undefined control sequence.
+l.21 \papernumber
+                 {DEIM Forum 2012 XX-Y}
+? 
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.21 \papernumber{D
+                   EIM Forum 2012 XX-Y}
+? 
+! Undefined control sequence.
+l.22 \jtitle
+            {クエリトピックに対する一般的知識範囲の推定}
+? 
+! Undefined control sequence.
+l.23 \authorlist
+                {%
+? 
+! Undefined control sequence.
+l.24  \authorentry
+                  [komurasaki@dl.kuis.kyoto-u.ac.jp]{小紫 弘貴}{Hiroki KOMUR...
+
+? 
+! Undefined control sequence.
+l.25  \authorentry
+                  [tajima@i.kyoto-u.ac.jp]{田島 敬史}{Keishi TAJIMA}{情報学...
+? 
+! Undefined control sequence.
+l.27 \affiliate
+               [情報学科]{京都大学工学部情報学科\hskip1zw %
+? 
+! Undefined control sequence.
+l.30 \affiliate
+               [情報学研究科]{京都大学大学院情報学研究科 \hskip1zw %
+? 
+
+Overfull \hbox (47.22227pt too wide) in paragraph at lines 21--34
+[]\OT1/cmr/m/n/10 DEIM
+ []
+
+
+Overfull \hbox (14.0278pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 Fo-
+ []
+
+
+Overfull \hbox (17.8056pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 rum
+ []
+
+
+Overfull \hbox (20.00006pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 2012
+ []
+
+
+Overfull \hbox (18.33336pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 XX-
+ []
+
+
+Overfull \hbox (7.50002pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 Y
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 ク
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 エ
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 リ
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 ト
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 ピ
+ []
+
+
+Overfull \hbox (7.47433pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 ッ
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 ク
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 に
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 対
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 す
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 る
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 一
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 般
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 的
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 知
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 識
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 範
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 囲
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 の
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 推
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 定
+ []
+
+
+Overfull \hbox (119.0281pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 [komurasaki@dl.kuis.kyoto-
+ []
+
+
+Overfull \hbox (31.94453pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 u.ac.jp]
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 小
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 紫
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 弘
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 貴
+ []
+
+
+Overfull \hbox (13.61113pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 Hi-
+ []
+
+
+Overfull \hbox (16.97227pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 roki
+ []
+
+
+Overfull \hbox (18.61115pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 KO-
+ []
+
+
+Overfull \hbox (55.97234pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 MURASAKI
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 情
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 報
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 学
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 科
+ []
+
+
+Overfull \hbox (72.22243pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 [tajima@i.kyoto-
+ []
+
+
+Overfull \hbox (31.94453pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 u.ac.jp]
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 田
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 島
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 敬
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 史
+ []
+
+
+Overfull \hbox (27.27783pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 Keishi
+ []
+
+
+Overfull \hbox (39.30562pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 TAJIMA
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 情
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 報
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 学
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 研
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 究
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 科
+ []
+
+
+Overfull \hbox (12.39995pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 [\JY1/mc/m/n/10 情
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 報
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 学
+ []
+
+
+Overfull \hbox (12.39995pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 科\OT1/cmr/m/n/10 ]
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 京
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 都
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 大
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 学
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 工
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 学
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 部
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 情
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 報
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 学
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 科
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 〒
+ []
+
+
+Overfull \hbox (20.00006pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 606--
+ []
+
+
+Overfull \hbox (20.00006pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 8501
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 京
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 都
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 府
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 京
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 都
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 市
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 左
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 京
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 区
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 吉
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 田
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 本
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 町
+ []
+
+
+Overfull \hbox (12.39995pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 [\JY1/mc/m/n/10 情
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 報
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 学
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 研
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 究
+ []
+
+
+Overfull \hbox (12.39995pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 科\OT1/cmr/m/n/10 ]
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 京
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 都
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 大
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 学
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 大
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 学
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 院
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 情
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 報
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 学
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 研
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 究
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 科
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 〒
+ []
+
+
+Overfull \hbox (20.00006pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 606--
+ []
+
+
+Overfull \hbox (20.00006pt too wide) in paragraph at lines 21--34
+\OT1/cmr/m/n/10 8501
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 京
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 都
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 府
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 京
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 都
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 市
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 左
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 京
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 区
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 吉
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 田
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 本
+ []
+
+
+Overfull \hbox (9.62216pt too wide) in paragraph at lines 21--34
+\JY1/mc/m/n/10 町 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+! LaTeX Error: The font size command \normalsize is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.34 
+     
+? 
+[1]
+No file abst_deim.aux.
+\openout1 = `abst_deim.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+
+! LaTeX Error: The font size command \normalsize is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.38 \begin{document}
+                     
+? 
+
+! LaTeX Error: Environment abstract undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.40 \begin{abstract}
+                     
+? 
+
+! LaTeX Error: \begin{document} ended by \end{abstract}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.52 \end{abstract}
+                   
+? 
+
+! LaTeX Error: Environment keyword undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.54 \begin{keyword}
+                    
+? 
+
+! LaTeX Error: \begin{document} ended by \end{keyword}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.56 \end{keyword}
+                  
+? 
+! Undefined control sequence.
+l.58 \maketitle
+               
+? 
+! Undefined control sequence.
+l.60 \section
+             {はじめに}
+? 
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 115.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 115.
+! Undefined control sequence.
+<write> ...Reference `fig:ideal' on page \thepage 
+                                                  \space undefined\on@line .^^J
+l.115 ...，という分布を取得する（図\ref{fig:ideal}
+                                                  ）．先程の例で
+? s
+OK, entering \scrollmode...
+
+LaTeX Warning: Reference `fig:ideal' on page  undefined on input line 115.
+
+
+! LaTeX Error: Environment figure undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.133 \begin{figure}
+                    [t] % htbp:here, top, bottom, page(単独ページ)
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+LaTeX Warning: File `fig1.eps' not found on input line 134.
+
+
+! LaTeX Error: File `fig1.eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134   \includegraphics[scale=0.33]{fig1.eps}
+                                              
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Cannot determine size of graphic in fig1.eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134   \includegraphics[scale=0.33]{fig1.eps}
+                                              
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+File: fig1.eps Graphic file (type eps)
+<fig1.eps>
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.135   \caption
+                {Webページの持つ情報の一般性による分布}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: \begin{document} ended by \end{figure}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.137 \end{figure}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.139 \section
+              {関連研究}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .^^J
+l.143 から抽出する手法を提案した\cite{Zeng}
+                                           ．またKhooらはTF*PDFアルゴリズム
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `Zeng' on page  undefined on input line 143.
+
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .^^J
+l.144 ...題となったトピック抽出を行った\cite{Khoo}
+                                                  ．
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `Khoo' on page  undefined on input line 144.
+
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .^^J
+l.150 ...さを利用した手法を提案した\cite{Sakurai}
+                                                 ．他に，Jamieらは
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `Sakurai' on page  undefined on input line 150.
+
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .^^J
+l.153 \cite{Jamie}
+                  ．複数文書に絞った自動要約の研究としてGoldsteinらは単一文
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `Jamie' on page  undefined on input line 153.
+
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .^^J
+l.156 ...に文章を選択する技術を提案した\cite{Jade}
+                                                  ．
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `Jade' on page  undefined on input line 156.
+
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .^^J
+l.175 る研究を行った．\cite{Wei}
+                                ．
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `Wei' on page  undefined on input line 175.
+
+! Undefined control sequence.
+l.183 \section
+              {クエリトピックに関する知識集合の抽出}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.188 \subsection
+                 {知識集合}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<write> ...ence `fig:knowledges' on page \thepage 
+                                                  \space undefined\on@line .^^J
+l.204 （図\ref{fig:knowledges}
+                              ）．これらのことから，文章ではなく語で知識を表
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Reference `fig:knowledges' on page  undefined on input line 204.
+
+
+
+! LaTeX Error: Environment figure undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.207 \begin{figure}
+                    [b]
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+LaTeX Warning: File `fig2.eps' not found on input line 208.
+
+
+! LaTeX Error: File `fig2.eps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.208   \includegraphics[scale=0.5]{fig2.eps}
+                                             
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Cannot determine size of graphic in fig2.eps (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.208   \includegraphics[scale=0.5]{fig2.eps}
+                                             
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+File: fig2.eps Graphic file (type eps)
+<fig2.eps>
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.209   \caption
+                {トピックに関する知識集合のイメージ}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: \begin{document} ended by \end{figure}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.211 \end{figure}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.213 \subsection
+                 {知識集合の抽出}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.230 \section
+              {ページが持つ情報の一般性判定}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.235 \subsection
+                 {情報の一般性}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.244 \subsection
+                 {ページの詳しさ}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.274 \section
+              {一般的知識範囲の推定}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.279 \subsection
+                 {Webページの詳しさの分布}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<write> ...Reference `fig:ideal' on page \thepage 
+                                                  \space undefined\on@line .^^J
+l.282 \pageref{fig:ideal}
+                         ページ目の図\ref{fig:ideal}である．
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Reference `fig:ideal' on page  undefined on input line 282.
+
+! Undefined control sequence.
+<write> ...Reference `fig:ideal' on page \thepage 
+                                                  \space undefined\on@line .^^J
+l.282 ...ref{fig:ideal}ページ目の図\ref{fig:ideal}
+                                                  である．
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Reference `fig:ideal' on page  undefined on input line 282.
+
+! Undefined control sequence.
+l.287 \subsection
+                 {分布から一般的知識範囲を推定する}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.304 \section
+              {実験}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+No file abst_deim.bbl.
+
+! LaTeX Error: The font size command \normalsize is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.332 \end{document}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[2
+! Undefined control sequence.
+<write> \newlabel{fig:ideal}{{}{\thepage 
+                                         }}
+l.332 \end{document}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<write> \newlabel{fig:knowledges}{{}{\thepage 
+                                              }}
+l.332 \end{document}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+] (./abst_deim.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 350 strings out of 494163
+ 4463 string characters out of 3160585
+ 60177 words of memory out of 3000000
+ 3808 multiletter control sequences out of 15000+200000
+ 7827 words of font info for 32 fonts, out of 3000000 for 9000
+ 745 hyphenation exceptions out of 8191
+ 28i,4n,19p,276b,161s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on abst_deim.dvi (2 pages, 20132 bytes).

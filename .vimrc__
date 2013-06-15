@@ -1,0 +1,46 @@
+" 行番号の表示
+set number
+set autoindent
+" 高度な自動インデントを行う。
+set smartindent
+" マウスを使えるように
+set mouse=a
+" 検索の時に大文字小文字を区別しない
+set ignorecase
+" 検索で最後から先頭に戻らない
+set nowrapscan
+" タイトルを表示
+set title
+" 行番号を表示する
+set number
+" 括弧入力時に対応する括弧を表示
+set showmatch
+let loaded_matchparen = 1
+" シンタックスハイライトを有効にする←色付け！
+syntax on
+" 検索結果文字列をハイライト
+set hlsearch
+" 行末から次の行へ移る
+set whichwrap=b,s,h,l,<,>,[,]
+" 移動について
+nnoremap j gj
+nnoremap k gk
+
+"ここからはpython使うときには必須かな？
+" タブが対応する空白の数
+set tabstop=4
+" タブが対応する空白の数
+set softtabstop=4
+" インデントの空白の数
+set shiftwidth=4
+" タブを挿入するとき、代わりに空白を使う
+set expandtab
+" インデントをオプションの'shiftwidth'の値の倍数にする
+set shiftround
+set smarttab
+set expandtab
+set shiftround
+set nowrapscan
+set hlsearch
+set ignorecase
+set matchtime=1

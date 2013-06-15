@@ -308,6 +308,7 @@ Bundle 'gmarik/vundle'
 
 " neocomplcache
 Bundle 'Shougo/neocomplcache'
+set completeopt=menuone
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 " 文字deleteのさくさく化
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
@@ -546,6 +547,8 @@ filetype plugin indent on     " required!
 
 "-----------------------------------------------------
 " GIST.vim の設定 実行は :Gist
+" :Gist -l でgist一覧
+" :Gist -s hoge でタイトル付きで投稿
 "-----------------------------------------------------
 
 Bundle 'mattn/gist-vim'
