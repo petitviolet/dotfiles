@@ -96,6 +96,47 @@ endif
 nnoremap <silent> co :ContinuousNumber <C-a><CR>
 vnoremap <silent> co :ContinuousNumber <C-a><CR>
 command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <count>?<count>-line('.'):1)|exec 'normal! j' . n . <q-args>|call cursor('.', c)|endfor
+
+"-----------------------------------------------------
+" 文字数カウント
+"-----------------------------------------------------
+" nnoremap <silent> cc :s/./&/g<CR>
+" vnoremap <silent> cc :s/./&/g<CR>
+
+if exists("anekos_charCounter")
+	finish
+endif
+let anekos_charCounter=1
+
+augroup CharCounter
+	autocmd!
+	autocmd BufCreate,BufEnter * call <SID>Initialize()
+	autocmd BufUnload,FileWritePre,BufWritePre * call <SID>Update()
+augroup END
+
+function! s:Initialize()
+	if exists('b:charCounterCount')
+	else
+		return s:Update()
+	endif
+endfunction
+
+function! s:Update()
+	let b:charCounterCount = s:CharCount()
+endfunction
+
+function! s:CharCount()
+	let l:result = 0
+	for l:linenum in range(0, line('$'))
+		let l:line = getline(l:linenum)
+		let l:result += strlen(substitute(l:line, ".", "x", "g"))
+	endfor
+	return l:result
+endfunction
+
+function! AnekoS_CharCounter_CharCount()
+	return s:CharCount()
+endfunction
 "-----------------------------------------------------
 " キーバインド変更
 "-----------------------------------------------------
@@ -249,10 +290,11 @@ autocmd BufWritePre * call <SID>RTrim()
 
 
 " ステータスラインに表示する情報の指定
-set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=%c\:%l/%L\|%P\|
+set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=%c\:%l/%L:
+set statusline+=%{b:charCounterCount}
+set statusline+=\|%P\|
 " ステータスラインの色
 highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=gray
-
 "-----------------------------------------------------
 " 移動
 "-----------------------------------------------------
