@@ -52,7 +52,7 @@
 "-----------------------------------------------------
 
 "色設定
-" syntax enable
+syntax enable
 " let g:solarized_termcolors=256
 " colorscheme solarized
 " set background=dark
@@ -84,11 +84,11 @@ set nrformats-=octal
 " set paste
 " マウスを使える場合はvim内で使用可能にする
 if has("mouse")
-    set mouse=a
+  set mouse=a
 endif
 " UTF-8の□や○でカーソル位置がずれないようにする
 if exists('&ambiwidth')
-        set ambiwidth=double
+  set ambiwidth=double
 endif
 
 " 矩形選択で連番入力
@@ -128,11 +128,11 @@ set browsedir=current
 " バックアップをとる
 set backup
 if !filewritable($HOME."/.vim-backup")
-    call mkdir($HOME."/.vim-backup", "p")
+  call mkdir($HOME."/.vim-backup", "p")
 endif
 set backupdir=$HOME/.vim-backup
 if !filewritable($HOME."/.vim-swap")
-    call mkdir($HOME."/.vim-swap", "p")
+  call mkdir($HOME."/.vim-swap", "p")
 endif
 set directory=$HOME/.vim-swap
 "let &directory = &backup dir
@@ -153,6 +153,25 @@ set nowrapscan
 " インクリメンタルサーチを使う
 set incsearch
 
+"------------------------------
+" マーク関係
+"------------------------------
+if !exists('g:markrement_char')
+  let g:markrement_char = [
+        \     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+        \     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+        \ ]
+endif
+nnoremap <silent>m :<C-u>call <SID>AutoMarkrement()<CR>
+function! s:AutoMarkrement()
+  if !exists('b:markrement_pos')
+    let b:markrement_pos = 0
+  else
+    let b:markrement_pos = (b:markrement_pos + 1) % len(g:markrement_char)
+  endif
+  execute 'mark' g:markrement_char[b:markrement_pos]
+  echo 'marked' g:markrement_char[b:markrement_pos]
+endfunction
 "-----------------------------------------------------
 " 表示関係
 "-----------------------------------------------------
@@ -329,21 +348,21 @@ nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> [unite]i :<C-u>Unite -buffer-name=files buffer_tab<CR>
 " nnoremap <silent> [unite]g :<C-u>Unite vcs_grep/git<CR>
 function! s:unite_my_settings()
-    " Overwrite settings
-    nmap <buffer><ESC> <Plug>(unite_exit)
-    nmap <buffer><C-c> <Plug>(unite_exit)
-    "imap <buffer>jj <Plug>(unite_insert_leave)
-    imap <buffer><C-w> <Plug>(unite_delete_backward_path)
-    " <C-l>: manual neocomplecache completion.
-    inoremap <buffer><C-l> <C-x><C-u><C-p><Down>
-    nmap <buffer><expr><C-d> unite#do_action('delete')
-    imap <buffer><expr><C-d> unite#do_action('delete')
-    nmap <buffer><expr><C-b> unite#do_action('bookmark')
-    imap <buffer><expr><C-b> unite#do_action('bookmark')
-    nmap <buffer><expr><C-k> unite#do_action('split')
-    imap <buffer><expr><C-k> unite#do_action('split')
-    nmap <buffer><expr><C-i> unite#do_action('vsplit')
-    imap <buffer><expr><C-i> unite#do_action('vsplit')
+  " Overwrite settings
+  nmap <buffer><ESC> <Plug>(unite_exit)
+  nmap <buffer><C-c> <Plug>(unite_exit)
+  "imap <buffer>jj <Plug>(unite_insert_leave)
+  imap <buffer><C-w> <Plug>(unite_delete_backward_path)
+  " <C-l>: manual neocomplecache completion.
+  inoremap <buffer><C-l> <C-x><C-u><C-p><Down>
+  nmap <buffer><expr><C-d> unite#do_action('delete')
+  imap <buffer><expr><C-d> unite#do_action('delete')
+  nmap <buffer><expr><C-b> unite#do_action('bookmark')
+  imap <buffer><expr><C-b> unite#do_action('bookmark')
+  nmap <buffer><expr><C-k> unite#do_action('split')
+  imap <buffer><expr><C-k> unite#do_action('split')
+  nmap <buffer><expr><C-i> unite#do_action('vsplit')
+  imap <buffer><expr><C-i> unite#do_action('vsplit')
 endfunction
 
 Bundle 'Shougo/vimfiler'
@@ -468,45 +487,45 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 "-----------------------------------------------------
 Bundle 'mattn/zencoding-vim'
 let g:user_zen_settings = {
-\  'lang' : 'ja',
-\  'indentation' : '  ',
-\  'html' : {
-\    'filters' : 'html',
-\    'snippets' : {
-\      'jq' : "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n<script>\n\\$(function() {\n\t|\n})()\n</script>",
-\      'jqui' : "<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js\"></script>\n<link type=\"css/text\" href=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/ui-lightness/jquery-ui.css\" rel=\"stylesheet\" />",
-\      'cd' : "<![CDATA[|]]>",
-\    },
-\  },
-\  'php' : {
-\    'extends' : 'html',
-\    'filters' : 'html,c',
-\  },
-\  'py' : {
-\    'encoding' : '\# -*- encoding:utf-8 -*-',
-\    'path' : '\#!/usr/local/bin/python'
-\   },
-\  'javascript' : {
-\    'snippets' : {
-\      'jq' : "\\$(function() {\n\t\\${cursor}\\${child}\n});",
-\      'jq:json' : "\\$.getJSON(\"${cursor}\", function(data) {\n\t\\${child}\n});",
-\      'jq:each' : "\\$.each(data, function(index, item) {\n\t\\${child}\n});",
-\      'fn' : "(function() {\n\t\\${cursor}\n})();",
-\      'tm' : "setTimeout(function() {\n\t\\${cursor}\n}, 100);",
-\    },
-\    'use_pipe_for_cursor' : 0,
-\  },
-\  'css' : {
-\    'filters' : 'fc',
-\    'snippets' : {
-\      'box-shadow' : "-webkit-box-shadow: 0 0 0 # 000;\n-moz-box-shadow: 0 0 0 0 # 000;\nbox-shadow: 0 0 0 # 000;",
-\    },
-\  },
-\  'less' : {
-\    'filters' : 'fc',
-\    'extends' : 'css',
-\  },
-\}
+      \  'lang' : 'ja',
+      \  'indentation' : '  ',
+      \  'html' : {
+      \    'filters' : 'html',
+      \    'snippets' : {
+      \      'jq' : "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n<script>\n\\$(function() {\n\t|\n})()\n</script>",
+      \      'jqui' : "<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js\"></script>\n<link type=\"css/text\" href=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/ui-lightness/jquery-ui.css\" rel=\"stylesheet\" />",
+      \      'cd' : "<![CDATA[|]]>",
+      \    },
+      \  },
+      \  'php' : {
+      \    'extends' : 'html',
+      \    'filters' : 'html,c',
+      \  },
+      \  'py' : {
+      \    'encoding' : '\# -*- encoding:utf-8 -*-',
+      \    'path' : '\#!/usr/local/bin/python'
+      \   },
+      \  'javascript' : {
+      \    'snippets' : {
+      \      'jq' : "\\$(function() {\n\t\\${cursor}\\${child}\n});",
+      \      'jq:json' : "\\$.getJSON(\"${cursor}\", function(data) {\n\t\\${child}\n});",
+      \      'jq:each' : "\\$.each(data, function(index, item) {\n\t\\${child}\n});",
+      \      'fn' : "(function() {\n\t\\${cursor}\n})();",
+      \      'tm' : "setTimeout(function() {\n\t\\${cursor}\n}, 100);",
+      \    },
+      \    'use_pipe_for_cursor' : 0,
+      \  },
+      \  'css' : {
+      \    'filters' : 'fc',
+      \    'snippets' : {
+      \      'box-shadow' : "-webkit-box-shadow: 0 0 0 # 000;\n-moz-box-shadow: 0 0 0 0 # 000;\nbox-shadow: 0 0 0 # 000;",
+      \    },
+      \  },
+      \  'less' : {
+      \    'filters' : 'fc',
+      \    'extends' : 'css',
+      \  },
+      \}
 
 " let g:user_zen_expandabbr_key = '<c-e>'
 
@@ -582,7 +601,11 @@ func! s:paste_gist_tag()
 endfunc
 command! -nargs=0 PasteGist     call <sid>paste_gist_tag()
 
-
+" HybridText
+" txtファイルのカラーリング
+Bundle 'vim-scripts/HybridText'
+" autocmd BufEnter * if &filetype == "text" | setlocal ft=hybrid | endif
+au BufRead,BufNewFile *.txt set syntax=hybrid
 "-----------------------------------------------------
 " 文字コードの自動認識
 "-----------------------------------------------------

@@ -7,7 +7,7 @@ do
     fn=$(echo $dotfile | sed -e s/_/\./)
     if [ $HOME/$fn ]
     then
-      #echo $HOME/$fn
+      echo filename is $HOME/$fn
       rm -i $HOME/$fn
     fi
     ln -s $HOME/dotfiles/$dotfile $HOME/$fn

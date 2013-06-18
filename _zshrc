@@ -12,7 +12,19 @@ setopt complete_aliases
 
 # 別ファイル読み込み
 [ -f ~/.zshrc.alias ] && source ~/.zshrc.alias
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+# z.sh
+[ -f ~/.zsh/z.sh ] && source ~/.zsh/z.sh
+
+# auto-fu.zsh
+# なんか動かないのでコメントアウト
+# if [ -f ~/.zsh/auto-fu.zsh ]; then
+#   source ~/.zsh/auto-fu.zsh
+#   function zle-line-init () {
+#     auto-fu-init
+#   }
+#   zle -N zle-line-init
+#   zstyle ':completion:*' completer _oldlist _complete
+# fi
 
 #----------------------------------------------------------
 # 基本
@@ -89,12 +101,8 @@ function __rm_single_file(){
 # 補完機能を強化
 autoload -Uz compinit; compinit
 # URLを自動エスケープ
+# auto-fuと競合する
 autoload -Uz url-quote-magic; zle -N self-insert url-quote-magic
-# 予測の先読み
-# うっとうしい
-# autoload predict-on
-# predict-on
-
 # TABで順に補完候補を切り替える
 setopt auto_menu
 # 補完候補を一覧表示
@@ -121,6 +129,23 @@ setopt correct
 # killコマンドでプロセスを補完
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
 
+#----------------------------------------
+# 予測の先読み
+# -U オプション:既存の関数を読み込むときに、自分で定義した alias によってその関数の内容が書き換えられることを防ぐ
+# うっとうしい！！！
+# autoload -U predict-on
+# zle-line-init() { predict-on }
+# zle -N zle-line-init
+# zle -N predict-on
+# zle -N predict-off
+# # C-x uでon
+# # C-x iでoff
+# bindkey '^xu' predict-on
+# bindkey '^xi' predict-off
+# # コマンドライン編集中は予測しない
+# zstyle ':predict' toggle true
+# 予測のon/offの切り替わりを表示
+# zstyle ':predict' verbose true
 #----------------------------------------------------------
 # 移動関連
 #----------------------------------------------------------
@@ -229,3 +254,5 @@ bindkey '^x^p' pbcopy-buffer
 #----------------------------------------------------------
 # 環境依存対応
 #----------------------------------------------------------
+# ~/.zshrc.localを読み込む
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
