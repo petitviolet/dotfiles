@@ -100,8 +100,6 @@ command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <co
 "-----------------------------------------------------
 " 文字数カウント
 "-----------------------------------------------------
-" nnoremap <silent> cc :s/./&/g<CR>
-" vnoremap <silent> cc :s/./&/g<CR>
 
 if exists("anekos_charCounter")
 	finish
@@ -137,6 +135,10 @@ endfunction
 function! AnekoS_CharCounter_CharCount()
 	return s:CharCount()
 endfunction
+
+vnoremap <silent> cc :s/./&/gn <CR>
+nnoremap <silent> cc :s/hogafadsae/&/gn <CR>
+
 "-----------------------------------------------------
 " キーバインド変更
 "-----------------------------------------------------
