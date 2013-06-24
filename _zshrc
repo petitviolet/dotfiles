@@ -148,7 +148,7 @@ function __rm_single_file(){
 # 補完関連
 #----------------------------------------------------------
 # 補完機能を強化
-autoload -Uz compinit; compinit
+autoload -Uz compinit; compinit -u
 # URLを自動エスケープ
 # auto-fuと競合する
 autoload -Uz url-quote-magic; zle -N self-insert url-quote-magic

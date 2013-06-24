@@ -50,7 +50,10 @@
 "-----------------------------------------------------
 " 基本的な設定
 "-----------------------------------------------------
-
+" release autogroup in MyAutoCmd
+" augroup MyAutoCmd
+"   autocmd!
+" augroup END
 "色設定
 syntax enable
 " let g:solarized_termcolors=256
@@ -100,6 +103,7 @@ command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <co
 "-----------------------------------------------------
 " 文字数カウント
 "-----------------------------------------------------
+" statusbarにファイル中の文字数を表示
 
 if exists("anekos_charCounter")
 	finish
@@ -136,12 +140,19 @@ function! AnekoS_CharCounter_CharCount()
 	return s:CharCount()
 endfunction
 
-vnoremap <silent> cc :s/./&/gn <CR>
-nnoremap <silent> cc :s/hogafadsae/&/gn <CR>
+" ESCを二回押すことでハイライトを消す
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+" 洗濯してccで文字数カウント
+vnoremap <silent> cc :s/./&/gn<Esc><Esc> <CR>
+" vを二回で行末まで選択
+vnoremap v $h
 
 "-----------------------------------------------------
 " キーバインド変更
 "-----------------------------------------------------
+" TABにて対応ペアにジャンプ
+nnoremap <Tab> %
+vnoremap <Tab> %
 " map CTRL-E to end-of-line (insert mode)
 imap  <C-e> <End>
 " map CTRL-A to beginning-of-line (insert mode)
@@ -195,6 +206,18 @@ set smartcase
 set nowrapscan
 " インクリメンタルサーチを使う
 set incsearch
+" バックスラッシュやクエスチョンを状況に合わせ自動的にエスケープ
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+" 検索後にジャンプした際に検索単語を画面中央に持ってくる
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+" 対応括弧に'<'と'>'のペアを追加
+set matchpairs& matchpairs+=<:>
 
 "------------------------------
 " マーク関係
@@ -345,9 +368,21 @@ nnoremap <C-k> :Texplore<Return>
 nnoremap <C-l> :tabnext<Return>
 nnoremap <C-h> :tabprevious<Return>
 
-" set clipboard+=unnamed
-set clipboard+=unnamedplus,unnamed
-" set clipboard+=autoselect
+if has('unnamedplus')
+  set clipboard& clipboard+=unnamedplus
+else
+  set clipboard& clipboard+=unnamed,autoselect
+endif
+" set clipboard+=unnamedplus,unnamed
+
+"----------------------------------------------------
+" その他
+"----------------------------------------------------
+
+" 入力モード中に素早くjjと入力した場合はESCとみなす
+inoremap jj <Esc>
+" w!! でスーパーユーザーとして保存（sudoが使える環境限定）
+cmap w!! w !sudo tee > /dev/null %
 
 filetype on
 
@@ -363,26 +398,88 @@ filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+" NeoBundleの設定
+" NeoBundleLazyで遅延ロードする
+Bundle 'Shougo/neobundle.vim'
+let s:noplugin = 0
+let s:bundle_root = expand('~/.vim/bundle')
+let s:neobundle_root = s:bundle_root . '/neobundle.vim'
+if !isdirectory(s:neobundle_root) || v:version < 702
+  " NeoBundleが存在しない、もしくはVimのバージョンが古い場合はプラグインを一切
+  " 読み込まない
+  let s:noplugin = 1
+else
+  " NeoBundleを'runtimepath'に追加し初期化を行う
+  if has('vim_starting')
+    execute "set runtimepath+=" . s:neobundle_root
+  endif
+  call neobundle#rc(s:bundle_root)
+
+  " NeoBundle自身をNeoBundleで管理させる
+  NeoBundleFetch 'Shougo/neobundle.vim'
+
+  " 非同期通信を可能にする
+  " 'build'が指定されているのでインストール時に自動的に
+  " 指定されたコマンドが実行され vimproc がコンパイルされる
+  NeoBundle "Shougo/vimproc", {
+        \ "build": {
+        \   "windows"   : "make -f make_mingw32.mak",
+        \   "cygwin"    : "make -f make_cygwin.mak",
+        \   "mac"       : "make -f make_mac.mak",
+        \   "unix"      : "make -f make_unix.mak",
+        \ }}
+
+  " (ry
+
+  " インストールされていないプラグインのチェックおよびダウンロード
+  NeoBundleCheck
+endif
+
+
+
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+NeoBundle 'gmarik/vundle'
 
-" Bundle 'altercation/vim-colors-solarized'
+" NeoBundle 'altercation/vim-colors-solarized'
 
 " neocomplcache
-Bundle 'Shougo/neocomplcache'
-set completeopt=menuone
-let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
-" 文字deleteのさくさく化
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+" NeoBundle 'Shougo/neocomplcache'
+NeoBundleLazy "Shougo/neocomplcache.vim", {
+  \ "autoload": {
+    \   "insert": 1,
+      \ }}
 
+" 補完の際のリスト表示の仕方
+set completeopt=menuone
+
+let s:hooks = neobundle#get_hooks("neocomplcache.vim")
+function! s:hooks.on_source(bundle)
+  " let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
+  let g:acp_enableAtStartup = 0
+  let g:neocomplcache_enable_smart_case = 1
+  " 文字deleteのさくさく化
+  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+  " NeoComplCacheを有効化
+  NeoComplCacheEnable
+endfunction
+
+
+"--------------------------------------------------
+" unite.vim
+"--------------------------------------------------
 " C-u uで現在開いているファイルと同ディレクトリのファイルを開く
 " C-u iでunite経由で既に開いたファイルを開く
 " C-u cで最初に開いたファイルのディレクトリのファイルを開く
 " C-u r よく分からない
+" NeoBundle 'Shougo/unite.vim'
 
-Bundle 'Shougo/unite.vim'
+NeoBundleLazy "Shougo/unite.vim", {
+      \ "autoload": {
+      \   "commands": ["Unite", "UniteWithBufferDir"]
+      \ }}
+
 let g:unite_enable_start_insert=1
 nnoremap [unite] <Nop>
 nmap <space>u [unite]
@@ -409,19 +506,32 @@ function! s:unite_my_settings()
   imap <buffer><expr><C-i> unite#do_action('vsplit')
 endfunction
 
-Bundle 'Shougo/vimfiler'
+" NeoBundle 'Shougo/vimfiler'
+NeoBundleLazy "Shougo/vimfiler", {
+      \ "depends": ["Shougo/unite.vim"],
+      \ "autoload": {
+      \   "commands": ["VimFilerTab", "VimFiler", "VimFilerExplorer"],
+      \   "mappings": ['<Plug>(vimfiler_switch)'],
+      \   "explorer": 1,
+      \ }}
+
 " space-eでウィンドウ左側にファイルツリー表示
 nnoremap <silent> <space>e :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -toggle -no-quit<CR>
-Bundle 'h1mesuke/unite-outline'
-Bundle 'tsukkee/unite-help'
-Bundle 'sgur/unite-git_grep'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kana/vim-fakeclip'
 
+" NeoBundle 'h1mesuke/unite-outline'
+NeoBundleLazy 'h1mesuke/unite-outline', {
+      \ "autoload": {
+      \   "unite_sources": ["outline"],
+      \ }}
+
+NeoBundle 'tsukkee/unite-help'
+NeoBundle 'sgur/unite-git_grep'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'kana/vim-fakeclip'
 " ファイル管理(tree表示)
 " \nでファイルツリー表示
-Bundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree'
 nmap <Leader>n :NERDTreeToggle<CR>
 
 " Undo関係
@@ -438,7 +548,7 @@ if has('persistent_undo')
 endif
 " UndoTree
 " \uで開く
-Bundle 'mbbill/undotree'
+NeoBundle 'mbbill/undotree'
 nmap <Leader>u :UndotreeToggle<CR>
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_SplitLocation = 'topleft'
@@ -451,17 +561,34 @@ let g:undotree_HighlightChangedText = 1
 let g:undotree_HighlightSyntax = "UnderLined"
 
 " YankRing.vim
-Bundle 'YankRing.vim'
-" , y でヤンク履歴
+NeoBundle 'YankRing.vim'
 " pでペーストした後，C-p,C-nで過去のものに切り替わっていく
-nmap ,y :YRShow<CR>
+" \ y でヤンク履歴
+nmap <Leader>y :YRShow<CR>
+" vim surrond
+NeoBundle 'tpope/vim-surround'
+" コマンド  実行前  実行後
+" ds"   "Hello World"   Hello world
+" ds(   (Hello World)   Hello World
+" ds)   (Hello World)   Hello World
+" dst   <p>Hello World</p>  Hello World
+" cs"'  "Hello World"   'Hello World'
+" cs([  (Hello World)   [ Hello World ]
+" cs(]  (Hello World)   [Hello World]
+" cs)[  (Hello World)   [ Hello World ]
+" cs)]  (Hello World)   [Hello World]
+" cst<b>  <p>Hello World</p>  <b>Hello World</b>
+" ys$"  Hello World Now   Hello W"orld Now"
+" ysw'  Hello World Now   Hello W'orld' Now
+" ysiw)   Hello World Now   Hello (World) Now
+" yss"  Hello World Now   "Hello World Now"
 
 "-----------------------------------------------------
 " インデントの可視化
 "-----------------------------------------------------
 " set list
 " set listchars=eol:\ ,trail:-
-Bundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 1
@@ -471,7 +598,7 @@ let g:indent_guides_guide_size = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 
-Bundle 'Yggdroot/indentLine'
+NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_enabled=1
 let g:indentLine_color_term=200
 let g:indentLine_loaded = 1
@@ -480,56 +607,59 @@ let g:indentLine_char = ">"
 "-----------------------------------------------------
 " 文法チェック
 "-----------------------------------------------------
-Bundle 'mitechie/pyflakes-pathogen'
+NeoBundle 'mitechie/pyflakes-pathogen'
 " nnoremap <leader>l :<C-u>call Flake8()<CR>
 
 
 "-----------------------------------------------------
 " jedi-vimの設定
+" Pythonのためのプラグインだよ
 "-----------------------------------------------------
-" Bundle 'davidhalter/jedi-vim'
-" function! InitPython()
-"     " jedi.vimとpyhoncompleteがバッティングし得るらしいので
-"     " http://mattn.kaoriya.net/software/vim/20121018212621.htm
-"     let b:did_ftplugin = 1
-"
-"     setlocal commentstring=#%s
-"
-"     " rename用のマッピングを無効にしたため、代わりにコマンドを定義
-"     command! -nargs=0 JediRename :call jedi#rename()
-"
-"     " markdownはインベント幅4,タブ幅8でスペースを使う
-"     " http://d.hatena.ne.jp/over80/20090305/1236264851
-"     " setlocal shiftwidth=4
-"     " setlocal tabstop=8
-"     " setlocal softtabstop=4
-"     " setlocal expandtab
-"     "
-"     " setlocal autoindent
-"     " setlocal smartindent
-"     setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
-"
-"
-"     " IndentGuidesEnable
-" endfunction
-" autocmd BufEnter * if &filetype == 'python' | call InitPython() | endif
-"
-" " pythonのrename用のマッピングがquickrunとかぶるため回避させる
-" let g:jedi#rename_command = '<Leader><C-r>'
-" let g:jedi#pydoc = '<Leader>k'
-"
-" " let g:jedi#auto_initialization = 1
-" " let g:jedi#rename_command ='<C-e>'
-" " let g:jedi#popup_on_dot = 1
-" autocmd FileType python let b:did_ftplugin = 1
+NeoBundle 'davidhalter/jedi-vim'
+" NeoBundleLazy "davidhalter/jedi-vim", {
+"       \ "autoload": {
+"       \   "filetypes": ["python", "python3", "djangohtml"],
+"       \ }}
 
-Bundle 'vim-scripts/pythoncomplete'
+function! InitPython()
+    " jedi.vimとpyhoncompleteがバッティングし得るらしいので
+    " http://mattn.kaoriya.net/software/vim/20121018212621.htm
+    let b:did_ftplugin = 1
+
+    setlocal commentstring=#%s
+
+    " rename用のマッピングを無効にしたため、代わりにコマンドを定義
+    command! -nargs=0 JediRename :call jedi#rename()
+
+    setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
+endfunction
+
+
+let s:hooks = neobundle#get_hooks("jedi-vim")
+function! s:hooks.on_source(bundle)
+  " jediにvimの設定を任せると'completeopt+=preview'するので
+  " 自動設定機能をOFFにし手動で設定を行う
+  let g:jedi#auto_vim_configuration = 0
+  let g:jedi#show_function_definition = 0
+  " 補完の最初の項目が選択された状態だと使いにくいためオフにする
+  let g:jedi#popup_select_first = 0
+  let g:jedi#rename_command = '<Leader>r'
+  let g:jedi#pydoc = '<Leader>k'
+endfunction
+
+autocmd BufEnter * if &filetype == 'python' | call InitPython() | endif
+autocmd FileType python let b:did_ftplugin = 1
+
+NeoBundle 'vim-scripts/pythoncomplete'
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "-----------------------------------------------------
 " zen-coding設定
 "-----------------------------------------------------
-Bundle 'mattn/zencoding-vim'
+" NeoBundle 'mattn/zencoding-vim'
+" HTMLが開かれるまでロードしない
+NeoBundleLazy 'mattn/zencoding-vim', {
+    \ "autoload": {"filetypes": ['html']}}
 let g:user_zen_settings = {
       \  'lang' : 'ja',
       \  'indentation' : '  ',
@@ -576,14 +706,14 @@ let g:user_zen_settings = {
 "-----------------------------------------------------
 "html, css, javascript関係
 "-----------------------------------------------------
-Bundle 'open-browser.vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'tell-k/vim-browsereload-mac'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'taichouchou2/html5.vim'
-Bundle 'taichouchou2/vim-javascript'
-" Bundle 'pangloss/vim-javascript'
-Bundle 'JavaScript-syntax'
+" NeoBundle 'open-browser.vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'tell-k/vim-browsereload-mac'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'taichouchou2/html5.vim'
+NeoBundle 'taichouchou2/vim-javascript'
+" NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'JavaScript-syntax'
 
 autocmd FileType html : setlocal indentexpr=""
 autocmd FileType javascript :compiler gjslint
@@ -593,11 +723,21 @@ nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 
 " quick run
-Bundle 'thinca/vim-quickrun'
+" 非同期で実行...？あんまりうまくいってない
+NeoBundleLazy "thinca/vim-quickrun", {
+      \ "autoload": {
+      \   "mappings": [['nxo', '<Plug>(quickrun)']]
+      \ }}
 nmap <space>r <plug>(quickrun)
+let s:hooks = neobundle#get_hooks("vim-quickrun")
+function! s:hooks.on_source(bundle)
+  let g:quickrun_config = {
+        \ "*": {"runmode": "async:remote:vimproc"},
+        \ }
+endfunction
 
-filetype on
-filetype plugin indent on     " required!
+" filetype on
+" filetype plugin indent on     " required!
 "
 " Brief help
 " :BundleList          - list configured bundles
@@ -614,8 +754,15 @@ filetype plugin indent on     " required!
 " :Gist -s hoge でタイトル付きで投稿
 "-----------------------------------------------------
 
-Bundle 'mattn/gist-vim'
+" NeoBundle 'mattn/gist-vim'
+NeoBundleLazy "mattn/gist-vim", {
+      \ "depends": ["mattn/webapi-vim"],
+      \ "autoload": {
+      \   "commands": ["Gist"],
+      \ }}
+
 let g:github_user = 'usrename'
+let g:github_token = 'token'
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 " Gistのヘルパースクリプト(.vim/autoload/gist_vim_helper.vim)
@@ -646,10 +793,13 @@ endfunc
 command! -nargs=0 PasteGist     call <sid>paste_gist_tag()
 
 " HybridText
-" txtファイルのカラーリング
-Bundle 'vim-scripts/HybridText'
+" txtファイルのカラーリング？
+NeoBundle 'vim-scripts/HybridText'
 " autocmd BufEnter * if &filetype == "text" | setlocal ft=hybrid | endif
 au BufRead,BufNewFile *.txt set syntax=hybrid
+
+" ファイルタイププラグインおよびインデントの有効化
+filetype plugin indent on
 "-----------------------------------------------------
 " 文字コードの自動認識
 "-----------------------------------------------------
