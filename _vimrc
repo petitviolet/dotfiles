@@ -106,38 +106,38 @@ command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <co
 " statusbarにファイル中の文字数を表示
 
 if exists("anekos_charCounter")
-	finish
+  finish
 endif
 let anekos_charCounter=1
 
 augroup CharCounter
-	autocmd!
-	autocmd BufCreate,BufEnter * call <SID>Initialize()
-	autocmd BufUnload,FileWritePre,BufWritePre * call <SID>Update()
+  autocmd!
+  autocmd BufCreate,BufEnter * call <SID>Initialize()
+  autocmd BufUnload,FileWritePre,BufWritePre * call <SID>Update()
 augroup END
 
 function! s:Initialize()
-	if exists('b:charCounterCount')
-	else
-		return s:Update()
-	endif
+  if exists('b:charCounterCount')
+  else
+    return s:Update()
+  endif
 endfunction
 
 function! s:Update()
-	let b:charCounterCount = s:CharCount()
+  let b:charCounterCount = s:CharCount()
 endfunction
 
 function! s:CharCount()
-	let l:result = 0
-	for l:linenum in range(0, line('$'))
-		let l:line = getline(l:linenum)
-		let l:result += strlen(substitute(l:line, ".", "x", "g"))
-	endfor
-	return l:result
+  let l:result = 0
+  for l:linenum in range(0, line('$'))
+    let l:line = getline(l:linenum)
+    let l:result += strlen(substitute(l:line, ".", "x", "g"))
+  endfor
+  return l:result
 endfunction
 
 function! AnekoS_CharCounter_CharCount()
-	return s:CharCount()
+  return s:CharCount()
 endfunction
 
 " ESCを二回押すことでハイライトを消す
@@ -163,8 +163,8 @@ imap  <C-b> <Left>
 imap  <C-f> <Right>
 imap  <C-u> <C-u><C-o>d0
 imap  <C-x> <esc>xi
-imap  <C-n> <Down>
-imap  <C-p> <Up>
+imap  <C-n> <esc>ja
+imap  <C-p> <esc>ka
 imap  <C-d> <Del>
 imap  <C-k> <C-o>d$
 map   <C-j> <C-w>p
@@ -440,31 +440,22 @@ endif
 " let Vundle manage Vundle
 " required!
 NeoBundle 'gmarik/vundle'
+NeoBundle 'myusuf3/numbers'
 
 " NeoBundle 'altercation/vim-colors-solarized'
 
 " neocomplcache
-" NeoBundle 'Shougo/neocomplcache'
-NeoBundleLazy "Shougo/neocomplcache.vim", {
-  \ "autoload": {
-    \   "insert": 1,
-      \ }}
+NeoBundle 'Shougo/neocomplcache'
+" NeoBundleLazy "Shougo/neocomplcache.vim", {
+"   \ "autoload": {
+"     \   "insert": 1,
+"       \ }}
 
-" 補完の際のリスト表示の仕方
 set completeopt=menuone
-
-let s:hooks = neobundle#get_hooks("neocomplcache.vim")
-function! s:hooks.on_source(bundle)
-  " let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
-  let g:acp_enableAtStartup = 0
-  let g:neocomplcache_enable_smart_case = 1
-  " 文字deleteのさくさく化
-  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-  " NeoComplCacheを有効化
-  NeoComplCacheEnable
-endfunction
-
+let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
+" 文字deleteのさくさく化
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 
 "--------------------------------------------------
 " unite.vim
@@ -615,24 +606,24 @@ NeoBundle 'mitechie/pyflakes-pathogen'
 " jedi-vimの設定
 " Pythonのためのプラグインだよ
 "-----------------------------------------------------
-NeoBundle 'davidhalter/jedi-vim'
-" NeoBundleLazy "davidhalter/jedi-vim", {
-"       \ "autoload": {
-"       \   "filetypes": ["python", "python3", "djangohtml"],
-"       \ }}
+" NeoBundle 'davidhalter/jedi-vim'
+NeoBundleLazy "davidhalter/jedi-vim", {
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"]
+      \ }}
 
-function! InitPython()
-    " jedi.vimとpyhoncompleteがバッティングし得るらしいので
-    " http://mattn.kaoriya.net/software/vim/20121018212621.htm
-    let b:did_ftplugin = 1
-
-    setlocal commentstring=#%s
-
-    " rename用のマッピングを無効にしたため、代わりにコマンドを定義
-    command! -nargs=0 JediRename :call jedi#rename()
-
-    setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
-endfunction
+" function! InitPython()
+"     " jedi.vimとpyhoncompleteがバッティングし得るらしいので
+"     " http://mattn.kaoriya.net/software/vim/20121018212621.htm
+"     let b:did_ftplugin = 1
+"
+"     setlocal commentstring=#%s
+"
+"     " rename用のマッピングを無効にしたため、代わりにコマンドを定義
+"
+"     setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
+" endfunction
+" autocmd BufEnter * if &filetype == 'python' | call InitPython() | endif
 
 
 let s:hooks = neobundle#get_hooks("jedi-vim")
@@ -644,10 +635,10 @@ function! s:hooks.on_source(bundle)
   " 補完の最初の項目が選択された状態だと使いにくいためオフにする
   let g:jedi#popup_select_first = 0
   let g:jedi#rename_command = '<Leader>r'
+  command! -nargs=0 JediRename :call jedi#rename()
   let g:jedi#pydoc = '<Leader>k'
 endfunction
 
-autocmd BufEnter * if &filetype == 'python' | call InitPython() | endif
 autocmd FileType python let b:did_ftplugin = 1
 
 NeoBundle 'vim-scripts/pythoncomplete'
@@ -656,10 +647,10 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 "-----------------------------------------------------
 " zen-coding設定
 "-----------------------------------------------------
-" NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'mattn/zencoding-vim'
 " HTMLが開かれるまでロードしない
-NeoBundleLazy 'mattn/zencoding-vim', {
-    \ "autoload": {"filetypes": ['html']}}
+" NeoBundleLazy 'mattn/zencoding-vim', {
+"     \ "autoload": {"filetypes": ['html']}}
 let g:user_zen_settings = {
       \  'lang' : 'ja',
       \  'indentation' : '  ',
@@ -669,6 +660,9 @@ let g:user_zen_settings = {
       \      'jq' : "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n<script>\n\\$(function() {\n\t|\n})()\n</script>",
       \      'jqui' : "<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js\"></script>\n<link type=\"css/text\" href=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/ui-lightness/jquery-ui.css\" rel=\"stylesheet\" />",
       \      'cd' : "<![CDATA[|]]>",
+      \      'r' : "<%= %>",
+      \      'end' : "<% end %>",
+      \      'br' : "<br />",
       \    },
       \  },
       \  'php' : {

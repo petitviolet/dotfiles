@@ -6,6 +6,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias du='du -h'
 alias cat='more'
+alias less='/usr/share/vim/vim72/macros/less.sh'
 # alias s='screen -U'
 alias zmv='noglob zmv'
 alias sudo='sudo '
@@ -14,3 +15,8 @@ alias javac='javac -J-Dfile.encoding=UTF-8'
 alias java='java -Dfile.encoding=UTF-8'
 # .txtファイルを実行するとcatする
 alias -s txt=cat
+function cdls() {
+  \cd $1;
+  ls;
+}
+alias cd=cdls
