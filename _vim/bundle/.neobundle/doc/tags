@@ -23,7 +23,6 @@
 g:neobundle#default_options	neobundle.txt	/*g:neobundle#default_options*
 g:neobundle#default_site	neobundle.txt	/*g:neobundle#default_site*
 g:neobundle#enable_name_conversion	neobundle.txt	/*g:neobundle#enable_name_conversion*
-g:neobundle#enable_tail_path	neobundle.txt	/*g:neobundle#enable_tail_path*
 g:neobundle#install_max_processes	neobundle.txt	/*g:neobundle#install_max_processes*
 g:neobundle#log_filename	neobundle.txt	/*g:neobundle#log_filename*
 g:neobundle#rm_command	neobundle.txt	/*g:neobundle#rm_command*
@@ -33,7 +32,6 @@ g:neobundle#types#raw#calc_hash_command	neobundle.txt	/*g:neobundle#types#raw#ca
 g:neobundle_default_git_protocol	neobundle.txt	/*g:neobundle_default_git_protocol*
 g:neobundle_default_hg_protocol	neobundle.txt	/*g:neobundle_default_hg_protocol*
 g:neobundle_default_site	neobundle.txt	/*g:neobundle_default_site*
-g:neobundle_enable_tail_path	neobundle.txt	/*g:neobundle_enable_tail_path*
 g:neobundle_log_filename	neobundle.txt	/*g:neobundle_log_filename*
 g:neobundle_rm_command	neobundle.txt	/*g:neobundle_rm_command*
 g:stderrencoding	vimproc.txt	/*g:stderrencoding*
@@ -87,7 +85,6 @@ neobundle-options-rtp	neobundle.txt	/*neobundle-options-rtp*
 neobundle-options-script_type	neobundle.txt	/*neobundle-options-script_type*
 neobundle-options-site	neobundle.txt	/*neobundle-options-site*
 neobundle-options-stay_same	neobundle.txt	/*neobundle-options-stay_same*
-neobundle-options-tail_path	neobundle.txt	/*neobundle-options-tail_path*
 neobundle-options-terminal	neobundle.txt	/*neobundle-options-terminal*
 neobundle-options-type	neobundle.txt	/*neobundle-options-type*
 neobundle-options-type__filename	neobundle.txt	/*neobundle-options-type__filename*

@@ -357,14 +357,6 @@ g:neobundle#log_filename			*g:neobundle#log_filename*
 
 		Defaults to "".
 
-g:neobundle#enable_tail_path			*g:neobundle#enable_tail_path*
-		If set to 1, "tail_path" option will be 1 by default.
-
-						*g:neobundle_enable_tail_path*
-		Note: |g:neobundle_enable_tail_path| is obsolete.
-
-		Defaults to 0.
-
 	 				*g:neobundle#enable_name_conversion*
 g:neobundle#enable_name_conversion
 		If you set to 1 and omit bundle name,
@@ -414,13 +406,13 @@ g:neobundle#types#raw#calc_hash_command
 g:neobundle#types#git#default_protocol
 				*g:neobundle#types#git#default_protocol*
 		The default protocol used for git (github).
-		Note: If you need to use a proxy server, you may want to
-		change the value to "https".
+		Note: If you need to use neobundle in proxy or firewall, you
+		must use it in "https".
 
 					*g:neobundle_default_git_protocol*
 		Note: |g:neobundle_default_git_protocol| is obsolete.
 
-		Defaults to "git".
+		Defaults to "https".
 
 g:neobundle#types#hg#default_protocol
 				*g:neobundle#types#hg#default_protocol*
@@ -495,12 +487,6 @@ OPTIONS 					*neobundle-options*
 		NeoBundle 'git://github.com/Shougo/unite.vim.git',
 		   \ {'directory' : 'unite'}
 <
-						*neobundle-options-tail_path*
-		tail_path		(Number)
-		If set to 1, neobundle adds the bundle's path at the end of
-		user runtimepath. Use it to prevent neobundle from overwriting
-		user scripts.
-
 						*neobundle-options-base_path*
 		base			(String)
 		Directory base path to use. If omitted, the path specified
@@ -1161,6 +1147,7 @@ FAQ						*neobundle-faq*
 
 Q: What's the neobundle advantage for Vundle or other plugin management
 system?
+
 A:
    1. improved command name(:Bundle vs :NeoBundle).
    2. neobundle works if you set 'shellslash' in your .vimrc.
@@ -1172,6 +1159,7 @@ A:
    8. and so on...
 
 Q: I want to manage the rsense Vim plugin using neobundle.
+
 A: Use |neocomplcache-rsense|. Installation and settings can be found in the
 neocomplcache-rsense docs.
 Note: neocomplcache-rsense depends |neocomplcache| plugin.
@@ -1179,19 +1167,22 @@ Note: neocomplcache-rsense depends |neocomplcache| plugin.
 https://github.com/Shougo/neocomplcache-rsense
 
 Q: I want to use "https" protocol instead of "git" (over proxy).
+
 A: Change |g:neobundle#types#git#default_protocol|.
 >
 	let g:neobundle#types#git#default_protocol = 'https'
 <
 
 Q: Vim freezes when a NeoBundle command is run with a typo in the repo name.
+
 A: It's a git feature. Git awaits user input when the repo name is
 wrong. You can install |vimproc| to keep your Vim from freezing:
 	https://github.com/Shougo/vimproc
 
 Q: Duplicated error was printed when sourcing .vimrc.
-A: Your .vimrc was wrong. You must reset neobundle setting by |neobundle#rc()| in
-.vimrc.
+
+A: Your .vimrc was wrong. You must reset neobundle setting by |neobundle#rc()|
+in .vimrc.
 Note: You must not call |neobundle#rc()| inner "has('vim_starting')".
 >
 	if has('vim_starting')
@@ -1205,6 +1196,7 @@ Note: You must not call |neobundle#rc()| inner "has('vim_starting')".
 <
 
 Q: I want to compile vimproc automatically.
+
 A:
 >
 	NeoBundle 'Shougo/vimproc', {
@@ -1217,8 +1209,8 @@ A:
 			\ }
 <
 Q: What's the "outdated" plugin?
-A:
-Last update time is older than one week -> Automatic updates are disabled
+
+A: Last update time is older than one week -> Automatic updates are disabled
 until one day from the last update.
 Last update time is older within one week -> Automatic updates are every time.
 Note: If you use update with name or use "all" argument in neobundle/update
@@ -1226,24 +1218,61 @@ source or use "!" in |:NeoBundleUpdate| command, this feature will be
 disabled; it forces updates them.
 
 Q: I want to update messages in unite buffer.
+
 A:
 >
 	Unite -log -wrap neobundle/update
 <
 
 Q: neobundle.vim is not worked in debian/Ubuntu Linux...
+
 A: Did you use "debian.vim"? "debian.vim" changes 'runtimepath'.
 So it conflicts with neobundle. You should not use "debian.vim".
 
 Q: neobundle.vim fails update in submodule repository.
+
 A: neobundle.vim supports submodule repository. But I think the repository was
 changed recently from non-use submodule to use submodule. You must reinstall
 the repository.
 
 Q: I want to install github plugins with Subversion.
+
 A:
 >
 		NeoBundle 'thinca/vim-localrc', {'type' : 'svn'}
 <
+Q: Why change git default protocol to "https" from "git"?
+After update, neobundle asks me to update all of my plugins.  It's a kind of
+nightmare.
+
+A: Because, github changed default protocol "git" to "https".
+https://help.github.com/articles/which-remote-url-should-i-use
+
+In above page, git protocol description is not found.
+
+I think git protocol is default protocol for git and it is fast.
+But in proxy or firewall environment, git protocol cannot be used.
+I responded the firewall problem recently.
+
+If you don't want to change default protocol, you can set
+|g:neobundle#types#git#default_protocol| manually.  I don't change the default
+value.
+
+Q: I want to add absolute path in runtimepath with |:NeoBundle| and
+|:NeoBundleLazy|.
+https://github.com/Shougo/neobundle.vim/issues/136
+
+A: You can use "nosync" type. >
+	NeoBundle '/absolute/path/to/plugin', { 'type' : 'nosync' }
+
+Q: For example, I would like to register the IR_Black colorscheme from it's
+original URL, without cloning one of the many mirror repo.
+https://github.com/Shougo/neobundle.vim/issues/140
+
+A: This feature is already implemented. >
+	NeoBundle 'http://blog.toddwerth.com/entry_files/8/ir_black.vim', {
+	\ 'name': 'ir_black.vim',
+	\ 'script_type': 'colors'}
+
 ==============================================================================
 vim:tw=78:ts=8:ft=help:norl:noet:fen:
