@@ -42,6 +42,7 @@ set vb t_vb=
 " バックスペースで削除できるものを指定
 set backspace=indent,eol,start
 "" Leader
+noremap <Leader>t :noautocmd vimgrep /TODO/j **/*.rb **/*.js **/*.erb **/*.haml<CR>:cw<CR>
 "let mapleader = ","
 " Path
 " let path = "~/my_settings"
@@ -57,6 +58,8 @@ endif
 if exists('&ambiwidth')
   set ambiwidth=double
 endif
+" set wildmode=longest:full,list
+set foldmethod=marker
 
 " 矩形選択で連番入力
 " 数字を選んで co と入力
@@ -132,8 +135,14 @@ imap  <C-p> <esc>ka
 imap  <C-d> <Del>
 imap  <C-k> <C-o>d$
 map   <C-j> <C-w>p
-map  % <C-o>:%s/
+"  map  % <C-o>:%s/
 "
+"-----------------------------------------------------
+" テンプレート関連
+"-----------------------------------------------------
+autocmd BufNewFile *.py 0r $HOME/.vim/template/py.txt
+autocmd BufNewFile *.php 0r $HOME/.vim/template/php.txt
+
 "-----------------------------------------------------
 " ファイル操作関連
 "-----------------------------------------------------
@@ -202,6 +211,7 @@ function! s:AutoMarkrement()
   execute 'mark' g:markrement_char[b:markrement_pos]
   echo 'marked' g:markrement_char[b:markrement_pos]
 endfunction
+" let g:showmarks_include="abcdefghijklmnopqrstuvwxyz"
 "-----------------------------------------------------
 " 表示関係
 "-----------------------------------------------------
@@ -348,9 +358,8 @@ inoremap jj <Esc>
 " w!! でスーパーユーザーとして保存（sudoが使える環境限定）
 cmap w!! w !sudo tee > /dev/null %
 
-filetype on
-
-filetype plugin on
+" filetype on
+" filetype plugin on
 
 "-----------------------------------------------------
 " Plugins
@@ -404,6 +413,14 @@ endif
 " let Vundle manage Vundle
 " required!
 NeoBundle 'gmarik/vundle'
+"-----------------------------------------------------
+" 文法チェック
+"-----------------------------------------------------
+NeoBundle 'mitechie/pyflakes-pathogen'
+" NeoBundle 'tpope/vim-pathogen'
+" call pathogen#infect()
+" nnoremap <leader>l :<C-u>call Flake8()<CR>
+
 NeoBundle 'myusuf3/numbers'
 
 " NeoBundle 'altercation/vim-colors-solarized'
@@ -417,6 +434,10 @@ NeoBundle 'Shougo/neocomplcache'
 
 set completeopt=menuone
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
+let g:neocomplcache_dictionary_filetype_lists = {
+  \ 'javascript' : $HOME.'/.vim/plugin/javascript.dict',
+  \ 'html' : $HOME.'/.vim/plugin/javascript.dict'
+  \ }
 " 文字deleteのさくさく化
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
@@ -560,13 +581,6 @@ let g:indentLine_loaded = 1
 let g:indentLine_char = ">"
 
 "-----------------------------------------------------
-" 文法チェック
-"-----------------------------------------------------
-NeoBundle 'mitechie/pyflakes-pathogen'
-" nnoremap <leader>l :<C-u>call Flake8()<CR>
-
-
-"-----------------------------------------------------
 " jedi-vimの設定
 " Pythonのためのプラグインだよ
 "-----------------------------------------------------
@@ -611,7 +625,7 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 "-----------------------------------------------------
 " zen-coding設定
 "-----------------------------------------------------
-NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'mattn/emmet-vim'
 " HTMLが開かれるまでロードしない
 " NeoBundleLazy 'mattn/zencoding-vim', {
 "     \ "autoload": {"filetypes": ['html']}}
@@ -621,7 +635,9 @@ let g:user_zen_settings = {
       \  'html' : {
       \    'filters' : 'html',
       \    'snippets' : {
-      \      'jq' : "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n<script>\n\\$(function() {\n\t|\n})()\n</script>",
+      \      'jq' : "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n<script>\n\\$(function() {\n\t|\n});\n</script>",
+      \      'jsrender': "<script src=\"http://borismoore.github.com/jsrender/jsrender.js\"></script>",
+      \      'render': "<script type=\"text/x-jsrender\">\n\t|\n</script>",
       \      'jqui' : "<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js\"></script>\n<link type=\"css/text\" href=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/ui-lightness/jquery-ui.css\" rel=\"stylesheet\" />",
       \      'cd' : "<![CDATA[|]]>",
       \      'r' : "<%= %>",
@@ -666,12 +682,22 @@ let g:user_zen_settings = {
 "-----------------------------------------------------
 " NeoBundle 'open-browser.vim'
 NeoBundle 'mattn/webapi-vim'
-NeoBundle 'tell-k/vim-browsereload-mac'
+" NeoBundle 'tell-k/vim-browsereload-mac'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'taichouchou2/html5.vim'
-NeoBundle 'taichouchou2/vim-javascript'
-" NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'pangloss/vim-javascript'
+" NeoBundle 'taichouchou2/vim-javascript'
+NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'JavaScript-syntax'
+NeoBundle 'teramako/jscomplete-vim'
+autocmd FileType javascript :set omnifunc=jscomplete#completeJS
+autocmd FileType html :set omnifunc=jscomplete#completeJS
+NeoBundle 'scrooloose/syntastic'
+" let g:syntastic_javascript_checker = 'JSHINT'
+let g:syntastic_mode_map = {
+      \ 'mode': 'active',
+      \ 'active_filetypes': ['javascript', 'json'],
+      \}
 
 autocmd FileType html : setlocal indentexpr=""
 autocmd FileType javascript :compiler gjslint
