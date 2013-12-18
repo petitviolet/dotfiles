@@ -1,0 +1,4 @@
+<?php
+mb_convert_encoding('utf-8');
+
+?>
