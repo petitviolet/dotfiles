@@ -1,0 +1,10 @@
+[user]
+	name = petitviolet
+	email = violethero0820@gmail.com
+[alias]
+	br = branch
+	di = diff
+	st = status
+	co = checkout
+[color]
+	ui = auto
