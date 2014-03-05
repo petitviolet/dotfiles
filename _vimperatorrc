@@ -7,7 +7,7 @@ set verbose=9
 " スクロールの端などの際に出るbeepをoff
 set nobeep
 " デフォルトの検索エンジン
-set defsearch=yahoo
+set defsearch=google
 " 不明 内容確認中
 set wildmode=list:full
 set hintchars=asineqv

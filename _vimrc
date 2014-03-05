@@ -129,7 +129,7 @@ imap  <C-w> <esc>bcw
 imap  <C-b> <Left>
 imap  <C-f> <Right>
 imap  <C-u> <C-u><C-o>d0
-imap  <C-x> <esc>xi
+" imap  <C-x> <esc>xi
 imap  <C-n> <esc>ja
 imap  <C-p> <esc>ka
 imap  <C-d> <Del>
@@ -365,6 +365,12 @@ cmap w!! w !sudo tee > /dev/null %
 " Plugins
 "-----------------------------------------------------
 
+" gocode
+set rtp+=$GOROOT/misc/vim
+" golint
+exe "set rtp+=" . globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+set completeopt=menu,preview
+
 set nocompatible               " be iMproved
 filetype off                   " required!
 
@@ -408,20 +414,29 @@ else
   NeoBundleCheck
 endif
 
-
-
 " let Vundle manage Vundle
 " required!
 NeoBundle 'gmarik/vundle'
 "-----------------------------------------------------
 " 文法チェック
 "-----------------------------------------------------
+
+" Go
+NeoBundle 'Blackrush/vim-gocode'
+
 NeoBundle 'mitechie/pyflakes-pathogen'
 " NeoBundle 'tpope/vim-pathogen'
 " call pathogen#infect()
 " nnoremap <leader>l :<C-u>call Flake8()<CR>
 
-NeoBundle 'myusuf3/numbers'
+" Template
+" :Template hogehoge
+NeoBundle "mattn/sonictemplate-vim"
+
+" Scala syntax
+NeoBundle 'derekwyatt/vim-scala'
+
+" NeoBundle 'myusuf3/numbers'
 
 " NeoBundle 'altercation/vim-colors-solarized'
 
@@ -435,8 +450,9 @@ NeoBundle 'Shougo/neocomplcache'
 set completeopt=menuone
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 let g:neocomplcache_dictionary_filetype_lists = {
-  \ 'javascript' : $HOME.'/.vim/plugin/javascript.dict',
-  \ 'html' : $HOME.'/.vim/plugin/javascript.dict'
+  \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
+  \ 'html' : $HOME.'/.vim/dict/javascript.dict',
+  \ 'scala' : $HOME . '/.vim/dict/scala.dict',
   \ }
 " 文字deleteのさくさく化
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
@@ -502,13 +518,44 @@ NeoBundleLazy 'h1mesuke/unite-outline', {
 
 NeoBundle 'tsukkee/unite-help'
 NeoBundle 'sgur/unite-git_grep'
+
+"--------------------------------------------------
+" Utility
+"--------------------------------------------------
+
+" Command-T
+NeoBundle 'wincent/Command-T'
+
+" vimsehll
+NeoBundle 'Shougo/vimshell.git'
+let g:vimshell_interactive_update_time = 10
+let g:vimshell_prompt = $USER."% "
+"vimshell map
+nmap vs :VimShell<CR>
+nmap vp :VimShellPop<CR>
+
+NeoBundle 'majutsushi/tagbar'
+" TagBar
+nmap <F8> :TagbarToggle<CR>
+
+NeoBundle 'szw/vim-tags'
+nnoremap <C-]> g<C-]>
+
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'kana/vim-fakeclip'
+
+" nerdtree
 " ファイル管理(tree表示)
 " \nでファイルツリー表示
 NeoBundle 'scrooloose/nerdtree'
 nmap <Leader>n :NERDTreeToggle<CR>
+nmap <silent> <C-e> :NERDTreeToggle<CR>
+vmap <silent> <C-e> <Esc> :NERDTreeToggle<CR>
+omap <silent> <C-e> :NERDTreeToggle<CR>
+imap <silent> <C-e> <Esc> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let g:NERDTreeShowHidden=1
 
 " Undo関係
 " undoの履歴を残せる
@@ -585,10 +632,10 @@ let g:indentLine_char = ">"
 " Pythonのためのプラグインだよ
 "-----------------------------------------------------
 " NeoBundle 'davidhalter/jedi-vim'
-NeoBundleLazy "davidhalter/jedi-vim", {
-      \ "autoload": {
-      \   "filetypes": ["python", "python3", "djangohtml"]
-      \ }}
+" NeoBundleLazy "davidhalter/jedi-vim", {
+"       \ "autoload": {
+"       \   "filetypes": ["python", "python3", "djangohtml"]
+"       \ }}
 
 " function! InitPython()
 "     " jedi.vimとpyhoncompleteがバッティングし得るらしいので
@@ -680,7 +727,6 @@ let g:user_zen_settings = {
 "-----------------------------------------------------
 "html, css, javascript関係
 "-----------------------------------------------------
-" NeoBundle 'open-browser.vim'
 NeoBundle 'mattn/webapi-vim'
 " NeoBundle 'tell-k/vim-browsereload-mac'
 NeoBundle 'hail2u/vim-css3-syntax'
@@ -692,19 +738,30 @@ NeoBundle 'JavaScript-syntax'
 NeoBundle 'teramako/jscomplete-vim'
 autocmd FileType javascript :set omnifunc=jscomplete#completeJS
 autocmd FileType html :set omnifunc=jscomplete#completeJS
-NeoBundle 'scrooloose/syntastic'
-" let g:syntastic_javascript_checker = 'JSHINT'
-let g:syntastic_mode_map = {
-      \ 'mode': 'active',
-      \ 'active_filetypes': ['javascript', 'json'],
-      \}
 
-autocmd FileType html : setlocal indentexpr=""
+NeoBundle 'scrooloose/syntastic'
+
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
+let g:syntastic_mode_map = {'mode': 'passive'}
+" augroup AutoSyntastic
+"   autocmd!
+"   autocmd InsertLeave,TextChanged * call s:syntastic()
+" augroup END
+" function! s:syntastic()
+"   w
+"   SyntasticCheck
+" endfunction
+" let g:syntastic_javascript_checker = 'JSHINT'
+" let g:syntastic_mode_map = {
+"       \ 'mode': 'active',
+"       \ 'active_filetypes': ['javascript', 'json'],
+"       \}
+
+autocmd FileType html : setlocal indentexpr=" "
 autocmd FileType javascript :compiler gjslint
 autocmd QuickFixCmdPost make copen
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
 
 " quick run
 " 非同期で実行...？あんまりうまくいってない
