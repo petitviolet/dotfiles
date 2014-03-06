@@ -758,7 +758,7 @@ let g:syntastic_mode_map = {'mode': 'passive'}
 "       \ 'active_filetypes': ['javascript', 'json'],
 "       \}
 
-autocmd FileType html : setlocal indentexpr=" "
+" autocmd FileType html : setlocal indentexpr=" "
 autocmd FileType javascript :compiler gjslint
 autocmd QuickFixCmdPost make copen
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
