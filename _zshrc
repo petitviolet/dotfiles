@@ -14,68 +14,6 @@ setopt complete_aliases
 # 別ファイル読み込み
 [ -f ~/.zshrc.alias ] && source ~/.zshrc.alias
 
-
-#--------------------------------------------------
-# z.sh
-#--------------------------------------------------
-
-[ -f ~/.zsh/z/z.sh ] && source ~/.zsh/z/z.sh
-
-autoload -Uz is-at-least
-
-# Treat hook functions as array
-typeset -ga chpwd_functions
-typeset -ga precmd_functions
-typeset -ga preexec_functions
-
-# Simulate hook functions for older versions
-if ! is-at-least 4.2.7; then
-  function chpwd() { local f; for f in $chpwd_functions; do $f; done }
-  function precmd() { local f; for f in $precmd_functions; do $f; done }
-  function preexec() { local f; for f in $preexec_functions; do $f; done }
-fi
-
-function load-if-exists() { test -e "$1" && source "$1" }
-
-# https://github.com/rupa/z
-_Z_CMD=j
-export ZDIR=$HOME/.zsh
-_Z_DATA=$ZDIR/.z
-if is-at-least 4.3.9; then
-  load-if-exists $ZDIR/z/z.sh
-else
-  _Z_NO_PROMPT_COMMAND=1
-  load-if-exists $ZDIR/z/z.sh && {
-    function precmd_z() {
-      _z --add "$(pwd -P)"
-    }
-    precmd_functions+=precmd_z
-  }
-fi
-test $? || unset _Z_CMD _Z_DATA _Z_NO_PROMPT_COMMAND
-
-# brew install z
-# if which brew > /dev/null; then
-#   _Z_CMD=j
-#   source $(brew --prefix)/etc/profile.d/z.sh
-# fi
-# .`brew --prefix`/etc/profile.d/z.sh
-# function precmd () {
-#   z --add "$(pwd -P)"
-# }
-
-
-# auto-fu.zsh
-# なんか動かないのでコメントアウト
-# if [ -f ~/.zsh/auto-fu.zsh ]; then
-#   source ~/.zsh/auto-fu.zsh
-#   function zle-line-init () {
-#     auto-fu-init
-#   }
-#   zle -N zle-line-init
-#   zstyle ':completion:*' completer _oldlist _complete
-# fi
-
 #----------------------------------------------------------
 # 基本
 #----------------------------------------------------------
@@ -114,59 +52,59 @@ autoload zmv
 # rmで~/.Trashに日付付きディレクトリを作成してそこにmv
 # rmfで削除
 function rmf() {
-  /bin/rm $@
+/bin/rm $@
 }
 
 function rm(){
-  for file in $*
-    do
-      __rm_single_file $file
-  done
+for file in $*
+do
+  __rm_single_file $file
+done
 }
 
 function __rm_single_file(){
-  local DATE=`date "+%y%m%d"`
-  if ! [ -d ~/.Trash/$DATE/ ]
-  then
-    command /bin/mkdir ~/.Trash/$DATE/
-  fi
-  if ! [ $# -eq 1 ]
-  then
-    echo "__rm_single_file: 1 argument required but $# passed."
-    exit
-  fi
-  if [ -e $1 ]
-  then
-    BASENAME=`basename $1`
-    NAME=$BASENAME
-    COUNT=0
-    while [ -e ~/.Trash/$DATE/$NAME ]
-    do
-      COUNT=$(($COUNT+1))
-      NAME="$BASENAME.$COUNT"
-    done
-    command /bin/mv $1 ~/.Trash/$DATE/$NAME
-  else
-    echo "No such file or directory: $file"
-  fi
+local DATE=`date "+%y%m%d"`
+if ! [ -d ~/.Trash/$DATE/ ]
+then
+  command /bin/mkdir ~/.Trash/$DATE/
+fi
+if ! [ $# -eq 1 ]
+then
+  echo "__rm_single_file: 1 argument required but $# passed."
+  exit
+fi
+if [ -e $1 ]
+then
+  BASENAME=`basename $1`
+  NAME=$BASENAME
+  COUNT=0
+  while [ -e ~/.Trash/$DATE/$NAME ]
+  do
+    COUNT=$(($COUNT+1))
+    NAME="$BASENAME.$COUNT"
+  done
+  command /bin/mv $1 ~/.Trash/$DATE/$NAME
+else
+  echo "No such file or directory: $file"
+fi
 }
 
 # 空でEnter押すとlsとgit status表示
 function do_enter() {
-    if [ -n "$BUFFER" ]; then
-        zle accept-line
-        return 0
-    fi
-    echo
-    ls
-    # ls_abbrev
-    # if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = 'true' ]; then
-    #     echo
-    #     echo -e "\e[0;33m--- git status ---\e[0m"
-    #     git status -sb
-    # fi
-    zle reset-prompt
-    return 0
+if [ -n "$BUFFER" ]; then
+  zle accept-line
+  return 0
+fi
+echo
+ls
+# ls_abbrev
+# if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = 'true' ]; then
+#     echo
+#     echo -e "\e[0;33m--- git status ---\e[0m"
+#     git status -sb
+# fi
+zle reset-prompt
+return 0
 }
 zle -N do_enter
 bindkey '^m' do_enter

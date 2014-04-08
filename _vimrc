@@ -435,6 +435,7 @@ NeoBundle "mattn/sonictemplate-vim"
 
 " Scala syntax
 NeoBundle 'derekwyatt/vim-scala'
+set makeprg=sbtc\ --exec\ compile
 
 " NeoBundle 'myusuf3/numbers'
 
@@ -536,10 +537,14 @@ nmap vp :VimShellPop<CR>
 
 NeoBundle 'majutsushi/tagbar'
 " TagBar
-nmap <F8> :TagbarToggle<CR>
+nmap <silent>tb :TagbarToggle<CR>
+" nmap <F8> :TagbarToggle<CR>
 
 NeoBundle 'szw/vim-tags'
+let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
 nnoremap <C-]> g<C-]>
+nnoremap tt :TagsGenerate<CR>
 
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
@@ -553,7 +558,7 @@ nmap <Leader>n :NERDTreeToggle<CR>
 nmap <silent> <C-e> :NERDTreeToggle<CR>
 vmap <silent> <C-e> <Esc> :NERDTreeToggle<CR>
 omap <silent> <C-e> :NERDTreeToggle<CR>
-imap <silent> <C-e> <Esc> :NERDTreeToggle<CR>
+" imap <silent> <C-e> <Esc> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let g:NERDTreeShowHidden=1
 
