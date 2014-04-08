@@ -576,18 +576,20 @@ if has('persistent_undo')
 endif
 " UndoTree
 " \uで開く
-NeoBundle 'mbbill/undotree'
-nmap <Leader>u :UndotreeToggle<CR>
-let g:undotree_SetFocusWhenToggle = 1
-let g:undotree_WindowLayout = 'topleft'
-" let g:undotree_SplitLocation = 'topleft'
-let g:undotree_SplitWidth = 35
-let g:undotree_diffAutoOpen = 1
-let g:undotree_diffpanelHeight = 25
-let g:undotree_RelativeTimestamp = 1
-let g:undotree_TreeNodeShape = '*'
-let g:undotree_HighlightChangedText = 1
-let g:undotree_HighlightSyntax = "UnderLined"
+NeoBundle 'sjl/gundo.vim'
+nmap U :<C-u>GundoToggle<CR>
+" NeoBundle 'mbbill/undotree'
+" nmap <Leader>u :UndotreeToggle<CR>
+" let g:undotree_SetFocusWhenToggle = 1
+" let g:undotree_WindowLayout = 'topleft'
+" " let g:undotree_SplitLocation = 'topleft'
+" let g:undotree_SplitWidth = 35
+" let g:undotree_diffAutoOpen = 1
+" let g:undotree_diffpanelHeight = 25
+" let g:undotree_RelativeTimestamp = 1
+" let g:undotree_TreeNodeShape = '*'
+" let g:undotree_HighlightChangedText = 1
+" let g:undotree_HighlightSyntax = "UnderLined"
 
 " YankRing.vim
 NeoBundle 'YankRing.vim'
