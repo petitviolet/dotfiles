@@ -120,18 +120,21 @@ vnoremap v $h
 " TABにて対応ペアにジャンプ
 nnoremap <Tab> %
 vnoremap <Tab> %
+" 行頭・行末移動方向をキーの相対位置にあわせる
+nnoremap 0 $
+nnoremap 1 0
 " map CTRL-E to end-of-line (insert mode)
-imap  <C-e> <End>
 " map CTRL-A to beginning-of-line (insert mode)
 " imap  <C-a> <Home>
-imap  <C-a> <esc>^i
+imap  <C-e> <End>
+imap  <C-a> <C-o>^
 imap  <C-w> <esc>bcw
 imap  <C-b> <Left>
 imap  <C-f> <Right>
 imap  <C-u> <C-u><C-o>d0
 " imap  <C-x> <esc>xi
-imap  <C-n> <esc>ja
-imap  <C-p> <esc>ka
+imap  <C-n> <Down>
+imap  <C-p> <Up>
 imap  <C-d> <Del>
 imap  <C-k> <C-o>d$
 map   <C-j> <C-w>p
@@ -676,6 +679,15 @@ autocmd FileType python let b:did_ftplugin = 1
 
 NeoBundle 'vim-scripts/pythoncomplete'
 autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+
+"-----------------------------------------------------
+" ruby設定
+"-----------------------------------------------------
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'bbatsov/rubocop'
+NeoBundle 'vim-ruby/vim-ruby'
+
 
 "-----------------------------------------------------
 " zen-coding設定
