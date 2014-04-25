@@ -121,8 +121,8 @@ vnoremap v $h
 nnoremap <Tab> %
 vnoremap <Tab> %
 " 行頭・行末移動方向をキーの相対位置にあわせる
-nnoremap 0 $
-nnoremap 1 0
+" nnoremap 0 $
+" nnoremap 1 0
 " map CTRL-E to end-of-line (insert mode)
 " map CTRL-A to beginning-of-line (insert mode)
 " imap  <C-a> <Home>
