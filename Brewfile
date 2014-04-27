@@ -65,28 +65,29 @@ install zsh
 install brew-cask
 
 cask install colors
-cask install dash
 cask install dropbox
 cask install evernote
 cask install firefox
 cask install flux
-cask install github
 cask install google-chrome
 cask install google-drive
 cask install google-japanese-ime
+cask install genymotion
 cask install hipchat
+cask install hyperswitch
 cask install iterm2
+cask install java
 cask install keepassx
 cask install keyremap4macbook
 cask install kobito
+cask install magican
+cask install shiftit
 cask install skitch
+cask install skype
 cask install spectacle
+cask install thunderbird
 cask install vagrant
 cask install virtualbox
-cask install hyperswitch
-cask install magican
+cask install xtrafinder
 
-
-cask alfred link
-
-cleanup
+clean
