@@ -1,10 +1,10 @@
-update
-
-tap homebrew/binary
-tap phinze/homebrew-cask
+# update
+#
+# tap homebrew/binary
+# tap phinze/homebrew-cask
 
 install ant
-install apple-gcc42
+# install apple-gcc42
 install autoconf
 install automake
 install bsdmake
@@ -18,7 +18,7 @@ install figlet
 install gibo
 install git
 install go
-install gobject-introspection
+# install gobject-introspection
 install gradle
 install imagemagick
 install jq
@@ -31,28 +31,28 @@ install libtool
 install libyaml
 install little-cms
 install little-cms2
-install llvm
+# install llvm
 install lv
 install mecab
 install mecab-ipadic
-install mercurial
-install mongodb
-install mpfr
+# install mercurial
+# install mongodb
+# install mpfr
 install mysql
 install nkf
 install node
-install objective-caml
+# install objective-caml
 install openssl
-install pkg-config
+# install pkg-config
 install play
 install proctools
-install python
+# install python
 install readline
 install reattach-to-user-namespace
 install sbt
 install scala
 install sqlite
-install subversion
+# install subversion
 install tig
 install tmux
 install tree
@@ -64,8 +64,12 @@ install zsh
 
 install brew-cask
 
+cask install android-studio
+cask install bettertouchtool
 cask install colors
+cask install clipmenu
 cask install dropbox
+cask install day-o
 cask install evernote
 cask install firefox
 cask install flux
@@ -76,7 +80,8 @@ cask install genymotion
 cask install hipchat
 cask install hyperswitch
 cask install iterm2
-cask install java
+# cask install java
+# cask install jdk
 cask install keepassx
 cask install keyremap4macbook
 cask install kobito
@@ -89,5 +94,6 @@ cask install thunderbird
 cask install vagrant
 cask install virtualbox
 cask install xtrafinder
+cask install xquartz
 
-clean
+cleanup
