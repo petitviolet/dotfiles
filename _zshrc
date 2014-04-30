@@ -266,8 +266,23 @@ pbcopy-buffer(){
 zle -N pbcopy-buffer
 bindkey '^x^p' pbcopy-buffer
 
+#--------------------------------------------------
+# anyenv
+#--------------------------------------------------
+# eval "$(anyenv init -)"
+
+if [ -d $HOME/.anyenv ] ; then
+  export PATH="$HOME/.anyenv/bin:$PATH"
+  eval "$(anyenv init -)"
+  for D in `ls $HOME/.anyenv/envs`
+  do
+    export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+  done
+fi
+
 #----------------------------------------------------------
 # 環境依存対応
 #----------------------------------------------------------
 # ~/.zshrc.localを読み込む
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+

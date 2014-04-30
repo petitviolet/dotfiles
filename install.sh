@@ -2,7 +2,7 @@
 cd $(dirname $0)
 for dotfile in _*
 do
-  if [ $dotfile != '_install.sh' ] && [ $dotfile != '_git' ]
+  if [ $dotfile != 'install.sh' ] && [ $dotfile != '_git' ]
   then
     fn=$(echo $dotfile | sed -e s/_/\./)
     if [ $HOME/$fn ]
@@ -13,3 +13,5 @@ do
     ln -s $HOME/dotfiles/$dotfile $HOME/$fn
   fi
 done
+
+git clone https://github.com/riywo/anyenv ~/.anyenv

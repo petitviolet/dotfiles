@@ -13,8 +13,11 @@ install cmake
 install colordiff
 install coreutils
 install ctags
+install docker
+install boot2docker
 install ffmpeg
 install figlet
+install fontforge
 install gibo
 install git
 install go
@@ -56,7 +59,8 @@ install sqlite
 install tig
 install tmux
 install tree
-install vim
+# install vim
+install vim --with-features=huge --enable-multibyte --enable-pythoninterp=yes --enable-tclinterp --enable-cscope --enable-fontset --enable-gnome-check --without-x --enable-gpm --with-python-config-dir=/usr/local/bin/python
 install watch
 install wget
 install z
@@ -71,7 +75,7 @@ cask install clipmenu
 cask install dropbox
 cask install day-o
 cask install evernote
-cask install firefox
+cask install firefox-ja
 cask install flux
 cask install google-chrome
 cask install google-drive
@@ -89,11 +93,15 @@ cask install magican
 cask install shiftit
 cask install skitch
 cask install skype
-cask install spectacle
-cask install thunderbird
+# cask install spectacle
+cask install texshop
+cask install thunderbird-ja
 cask install vagrant
 cask install virtualbox
 cask install xtrafinder
 cask install xquartz
+
+tap sanemat/font
+brew install ricty
 
 cleanup

@@ -568,6 +568,7 @@ let g:NERDTreeShowHidden=1
 " Undo関係
 " undoの履歴を残せる
 " 既に編集し終わったファイルでもuで遡れる
+NeoBundle 'sjl/gundo.vim'
 set undodir=~/.vimundo
 set undofile
 if has('persistent_undo')
@@ -579,7 +580,6 @@ if has('persistent_undo')
 endif
 " UndoTree
 " \uで開く
-NeoBundle 'sjl/gundo.vim'
 nmap U :<C-u>GundoToggle<CR>
 " NeoBundle 'mbbill/undotree'
 " nmap <Leader>u :UndotreeToggle<CR>
