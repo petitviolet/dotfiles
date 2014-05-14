@@ -527,6 +527,10 @@ NeoBundle 'sgur/unite-git_grep'
 " Utility
 "--------------------------------------------------
 
+" smart input
+" 対応する括弧の自動入力
+NeoBundle 'kana/vim-smartinput'
+
 " Command-T
 NeoBundle 'wincent/Command-T'
 
@@ -568,7 +572,8 @@ let g:NERDTreeShowHidden=1
 " Undo関係
 " undoの履歴を残せる
 " 既に編集し終わったファイルでもuで遡れる
-NeoBundle 'sjl/gundo.vim'
+" NeoBundle 'sjl/gundo.vim'
+NeoBundle 'mbbill/undotree'
 set undodir=~/.vimundo
 set undofile
 if has('persistent_undo')
@@ -578,21 +583,20 @@ if has('persistent_undo')
     autocmd BufReadPre ~/* setlocal undofile
   augroup END
 endif
-" UndoTree
-" \uで開く
-nmap U :<C-u>GundoToggle<CR>
-" NeoBundle 'mbbill/undotree'
-" nmap <Leader>u :UndotreeToggle<CR>
-" let g:undotree_SetFocusWhenToggle = 1
-" let g:undotree_WindowLayout = 'topleft'
-" " let g:undotree_SplitLocation = 'topleft'
-" let g:undotree_SplitWidth = 35
-" let g:undotree_diffAutoOpen = 1
-" let g:undotree_diffpanelHeight = 25
-" let g:undotree_RelativeTimestamp = 1
-" let g:undotree_TreeNodeShape = '*'
-" let g:undotree_HighlightChangedText = 1
-" let g:undotree_HighlightSyntax = "UnderLined"
+" " UndoTree
+" " \uで開く
+" nmap U :<C-u>GundoToggle<CR>
+nmap <Leader>u :UndotreeToggle<CR>
+let g:undotree_SetFocusWhenToggle = 1
+let g:undotree_WindowLayout = 'topleft'
+" let g:undotree_SplitLocation = 'topleft'
+let g:undotree_SplitWidth = 35
+let g:undotree_diffAutoOpen = 1
+let g:undotree_diffpanelHeight = 25
+let g:undotree_RelativeTimestamp = 1
+let g:undotree_TreeNodeShape = '*'
+let g:undotree_HighlightChangedText = 1
+let g:undotree_HighlightSyntax = "UnderLined"
 
 " YankRing.vim
 NeoBundle 'YankRing.vim'
@@ -755,9 +759,9 @@ NeoBundle 'pangloss/vim-javascript'
 " NeoBundle 'taichouchou2/vim-javascript'
 NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'JavaScript-syntax'
-NeoBundle 'teramako/jscomplete-vim'
-autocmd FileType javascript :set omnifunc=jscomplete#completeJS
-autocmd FileType html :set omnifunc=jscomplete#completeJS
+" NeoBundle 'teramako/jscomplete-vim'
+" autocmd FileType javascript :set omnifunc=jscomplete#completeJS
+" autocmd FileType html :set omnifunc=jscomplete#completeJS
 
 NeoBundle 'scrooloose/syntastic'
 

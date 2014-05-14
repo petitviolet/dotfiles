@@ -212,12 +212,13 @@ function history-all { history -E 1 }
 # プロンプト表示関連
 #----------------------------------------------------------
 # 右側に時間を表示する
-RPROMPT="%T"
+RPROMPT="%D %*"
 # 右側まで入力が来ら時間を消す
 setopt transient_rprompt
 # プロンプト
 function precmd() {
-PROMPT="%{${fg[green]}%}%n%{${fg[yellow]}%} %~%{${reset_color}%}"
+PROMPT="%(?.%F{cyan}.%F{red})[%M]%f%F{green}%n%f%F{yello} %~% "
+# PROMPT="%(?.%F{green}^-^%f.%F{red}@_@%f) %{${fg[color]%}%}[%m]%{${fg[green]}%}%n%{${fg[yellow]}%} %~%{${reset_color}%}"
 st=`git status 2>/dev/null`
 if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
   color=${fg[cyan]}
@@ -229,7 +230,7 @@ else
   color=${fg[red]}
 fi
 PROMPT+=" %{$color%}$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')%b%{${reset_color}%}
-"
+%B%F{white}$ %f%b"
 }
 PROMPT2="%_%% "
 # コマンドスペルミスの際のプロンプト

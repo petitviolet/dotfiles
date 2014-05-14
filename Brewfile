@@ -3,105 +3,104 @@
 # tap homebrew/binary
 # tap phinze/homebrew-cask
 
-install ant
-# install apple-gcc42
-install autoconf
-install automake
-install bsdmake
-install cloog
-install cmake
-install colordiff
-install coreutils
-install ctags
-install docker
-install boot2docker
-install ffmpeg
-install figlet
-install fontforge
-install gibo
-install git
-install go
-# install gobject-introspection
-install gradle
-install imagemagick
-install jq
-install libevent
-install libffi
-install libmpc
-install libpng
-install libtiff
-install libtool
-install libyaml
-install little-cms
-install little-cms2
-# install llvm
-install lv
-install mecab
-install mecab-ipadic
-# install mercurial
-# install mongodb
-# install mpfr
-install mysql
-install nkf
-install node
-# install objective-caml
-install openssl
-# install pkg-config
-install play
-install proctools
-# install python
-install readline
-install reattach-to-user-namespace
-install sbt
-install scala
-install sqlite
-# install subversion
-install tig
-install tmux
-install tree
-# install vim
-install vim --with-features=huge --enable-multibyte --enable-pythoninterp=yes --enable-tclinterp --enable-cscope --enable-fontset --enable-gnome-check --without-x --enable-gpm --with-python-config-dir=/usr/local/bin/python
-install watch
-install wget
-install z
-install zsh
-
+install ant || true
+# install apple-gcc42 || true
+install autoconf || true
+install automake || true
+install bsdmake || true
+install cloog || true
+install cmake || true
+install colordiff || true
+install coreutils || true
+install ctags || true
+install docker || true
+install boot2docker || true
+install ffmpeg || true
+install figlet || true
+install fontforge || true
+install gibo || true
+install git || true
+install go || true
+# install gobject-introspection || true
+install gradle || true
+install imagemagick || true
+install jq || true
+install libevent || true
+install libffi || true
+install libmpc || true
+install libpng || true
+install libtiff || true
+install libtool || true
+install libyaml || true
+install little-cms || true
+install little-cms2 || true
+# install llvm || true
+install lv || true
+install mecab || true
+install mecab-ipadic || true
+# install mercurial || true
+# install mongodb || true
+# install mpfr || true
+install mysql || true
+install nkf || true
+install node || true
+# install objective-caml || true
+install openssl || true
+# install pkg-config || true
+install play || true
+install proctools || true
+# install python || true
+install readline || true
+install reattach-to-user-namespace || true
+install sbt || true
+install scala || true
+install sqlite || true
+# install subversion || true
+install tig || true
+install tmux || true
+install tree || true
+# install vim || true
+install vim --with-features=huge --enable-multibyte --enable-pythoninterp=yes --enable-tclinterp --enable-cscope --enable-fontset --enable-gnome-check --without-x --enable-gpm --with-python-config-dir=/usr/local/bin/python || true
+install watch || true
+install wget || true
+install z || true
+install zsh || true
 install brew-cask
 
-cask install android-studio
-cask install bettertouchtool
-cask install colors
-cask install clipmenu
-cask install dropbox
-cask install day-o
-cask install evernote
-cask install firefox-ja
-cask install flux
-cask install google-chrome
-cask install google-drive
-cask install google-japanese-ime
-cask install genymotion
-cask install hipchat
-cask install hyperswitch
-cask install iterm2
-# cask install java
-# cask install jdk
-cask install keepassx
-cask install keyremap4macbook
-cask install kobito
-cask install magican
-cask install shiftit
-cask install skitch
-cask install skype
-# cask install spectacle
-cask install texshop
-cask install thunderbird-ja
-cask install vagrant
-cask install virtualbox
-cask install xtrafinder
-cask install xquartz
-
-tap sanemat/font
-brew install ricty
+cask install android-studio || true
+cask install bettertouchtool || true
+cask install colors || true
+cask install coteditor || true
+cask install clipmenu || true
+cask install dropbox || true
+cask install diskwave || true
+cask install day-o || true
+cask install evernote || true
+cask install firefox-ja || true
+cask install flux || true
+cask install google-chrome || true
+cask install google-drive || true
+cask install google-japanese-ime || true
+cask install genymotion || true
+cask install hyperswitch || true
+cask install iterm2 || true
+# cask install java || true
+# cask install jdk || true
+cask install keepassx || true
+cask install keyremap4macbook || true
+cask install kobito || true
+cask install magican || true
+cask install shiftit || true
+cask install skitch || true
+cask install skype || true
+# cask install spectacle || true
+cask install texshop || true
+cask install thunderbird-ja || true
+cask install vagrant || true
+cask install virtualbox || true
+cask install xtrafinder || true
+cask install xquartz || true
+tap sanemat/font || true
+brew install ricty || true
 
 cleanup
