@@ -136,7 +136,10 @@ imap  <C-u> <C-u><C-o>d0
 imap  <C-n> <Down>
 imap  <C-p> <Up>
 imap  <C-d> <Del>
-imap  <C-k> <C-o>d$
+" imap  <C-k> <C-o>d$
+
+inoremap <expr> <C-k> "\<C-g>u".(col('.') == col('$') ? '<C-o>gJ' : '<C-o>D')
+cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 map   <C-j> <C-w>p
 " let mapleader = ","
 "  map  % <C-o>:%s/
@@ -447,11 +450,11 @@ set makeprg=sbtc\ --exec\ compile
 " NeoBundle 'altercation/vim-colors-solarized'
 
 " neocomplcache
-NeoBundle 'Shougo/neocomplcache'
-" NeoBundleLazy "Shougo/neocomplcache.vim", {
-"   \ "autoload": {
-"     \   "insert": 1,
-"       \ }}
+" NeoBundle 'Shougo/neocomplcache'
+NeoBundleLazy "Shougo/neocomplcache.vim", {
+  \ "autoload": {
+    \   "insert": 1,
+      \ }}
 
 set completeopt=menuone
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
@@ -473,10 +476,11 @@ inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 " C-u r よく分からない
 " NeoBundle 'Shougo/unite.vim'
 
-NeoBundleLazy "Shougo/unite.vim", {
-      \ "autoload": {
-      \   "commands": ["Unite", "UniteWithBufferDir"]
-      \ }}
+NeoBundle "Shougo/unite.vim"
+" NeoBundleLazy "Shougo/unite.vim", {
+"       \ "autoload": {
+"       \   "commands": ["Unite", "UniteWithBufferDir"]
+"       \ }}
 
 let g:unite_enable_start_insert=1
 nnoremap [unite] <Nop>
@@ -522,22 +526,89 @@ NeoBundleLazy 'h1mesuke/unite-outline', {
       \   "unite_sources": ["outline"],
       \ }}
 
-NeoBundle 'tsukkee/unite-help'
+NeoBundleLazy 'tsukkee/unite-help', {
+      \ "autoload": {
+      \   "unite_sources": ["help"],
+      \ }}
+
 NeoBundle 'sgur/unite-git_grep'
+
+"--------------------------------------------------
+" smart input & smart chr
+"--------------------------------------------------
+" 対応する括弧の自動入力
+" NeoBundle "kana/vim-smartchr"
+" NeoBundle "kana/vim-smartinput"
+NeoBundleLazy 'kana/vim-smartchr', {'autoload': {'insert' : '1'}}
+NeoBundleLazy 'kana/vim-smartinput', {'autoload': {'insert' : '1'}}
+NeoBundleLazy "cohama/vim-smartinput-endwise", {'autoload': {'insert' : '1'}}
+
+call smartinput_endwise#define_default_rules()
+
+let s:bundle  =  neobundle#get('vim-smartinput')
+function! s:bundle.hooks.on_source(bundle)
+
+  let lst = [ ['<', "smartchr#loop(' < ', ' << ', '<')" ],
+        \ ['>', "smartchr#loop(' > ', ' >> ', ' >>> ', '>')"],
+        \ ['+', "smartchr#loop(' + ', ' ++ ', '+')"],
+        \ ['-', "smartchr#loop(' - ', ' -- ', '-')"],
+        \ ['/', "smartchr#loop(' / ', '//', '/')"],
+        \ ['&', "smartchr#loop(' & ', ' && ', '&')"],
+        \ ['%', "smartchr#loop(' % ', '%')"],
+        \ ['*', "smartchr#loop(' * ', '*')"],
+        \ ['<Bar>', "smartchr#loop(' | ', ' || ', '|')"],
+        \ [',', "smartchr#loop(', ', ',')"]]
+
+  for i in lst
+    call smartinput#map_to_trigger('i', i[0], i[0], i[0])
+    call smartinput#define_rule({'char': i[0], 'at': '\%#', 'input': '<C-R>=' . i[1] . '<CR>'})
+    call smartinput#define_rule({'char': i[0], 'at': '^\([^"]*"[^"]*"\)*[^"]*"[^"]*\%#', 'input': i[0]})
+    call smartinput#define_rule({'char': i[0], 'at': '^\([^'']*''[^'']*''\)*[^'']*''[^'']*\%#', 'input': i[0]})
+  endfor
+  call smartinput#map_to_trigger('i', '<Enter>', '<Enter>', '<Enter>')
+  call smartinput#define_rule({'char': '<Enter>', 'at': '(\%#)', 'input': '<Enter><Enter><UP><Tab>'})
+  call smartinput#define_rule({'char': '<Enter>', 'at': '{\%#}', 'input': '<Enter><Enter><UP><Tab>'})
+
+  call smartinput#define_rule({'char': '>', 'at': ' < \%#', 'input': '<BS><BS><BS><><Left>'})
+
+  call smartinput#map_to_trigger('i', '=', '=', '=')
+  call smartinput#define_rule({'char': '=', 'at': '\%#', 'input': "<C-R>=smartchr#loop(' = ', ' == ', '=')<CR>"})
+  call smartinput#define_rule({'char': '=', 'at': '[&+-/<>|] \%#', 'input': '<BS>= '})
+  call smartinput#define_rule({'char': '=', 'at': '!\%#', 'input': '= '})
+  call smartinput#define_rule({'char': '=', 'at': '^\([^"]*"[^"]*"\)*[^"]*"[^"]*\%#', 'input': '='})
+  call smartinput#define_rule({'char': '=', 'at': '^\([^'']*''[^'']*''\)*[^'']*''[^'']*\%#', 'input': '='})
+
+  call smartinput#map_to_trigger('i', '<BS>', '<BS>', '<BS>')
+  call smartinput#define_rule({'char': '<BS>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
+  call smartinput#define_rule({'char': '<BS>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
+  call smartinput#define_rule({'char': '<BS>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
+  call smartinput#define_rule({'char': '<BS>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
+
+  call smartinput#map_to_trigger('i', '<C-h>',  '<BS>',  '<C-h>')
+
+  " call smartinput#map_to_trigger('i', '<C-h>', '<C-h>', '<BS>')
+  " call smartinput#define_rule({'char': '<C-h>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
+  " call smartinput#define_rule({'char': '<C-h>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
+  " call smartinput#define_rule({'char': '<C-h>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
+  " call smartinput#define_rule({'char': '<C-h>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
+
+  for op in ['<', '>', '+', '-', '/', '&', '%', '\*', '|']
+    call smartinput#define_rule({'char': '<BS>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
+    call smartinput#define_rule({'char': '<C-h>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
+  endfor
+endfunction
+unlet s:bundle
+
 
 "--------------------------------------------------
 " Utility
 "--------------------------------------------------
-"
+
 NeoBundle 'tyru/caw.vim.git'
 " \cで行の先頭にコメントをつけたり外したりできる
 nmap <Leader>c <Plug>(caw:i:toggle)
 vmap <Leader>c <Plug>(caw:i:toggle)
 
-
-" smart input
-" 対応する括弧の自動入力
-NeoBundle 'kana/vim-smartinput'
 
 " Command-T
 NeoBundle 'wincent/Command-T'
