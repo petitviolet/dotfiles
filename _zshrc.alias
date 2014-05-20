@@ -1,5 +1,5 @@
-# alias ls='ls -hF'
-alias ls='ls -hF -G -W'
+alias ls='ls -hF -G'
+# alias ls='ls -hF -G -W'
 alias ll='ls -l'
 alias la='ls -A'
 alias cp='cp -i'
