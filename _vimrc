@@ -43,7 +43,7 @@ set vb t_vb=
 set backspace=indent,eol,start
 "" Leader
 noremap <Leader>t :noautocmd vimgrep /TODO/j **/*.rb **/*.js **/*.erb **/*.haml<CR>:cw<CR>
-"let mapleader = ","
+let mapleader = ","
 " Path
 " let path = "~/my_settings"
 " 8進数を10進数として扱う
@@ -138,6 +138,7 @@ imap  <C-p> <Up>
 imap  <C-d> <Del>
 imap  <C-k> <C-o>d$
 map   <C-j> <C-w>p
+" let mapleader = ","
 "  map  % <C-o>:%s/
 "
 "-----------------------------------------------------
@@ -416,6 +417,7 @@ else
   " インストールされていないプラグインのチェックおよびダウンロード
   NeoBundleCheck
 endif
+let g:neobundle_default_git_protocol='git'
 
 " let Vundle manage Vundle
 " required!
@@ -526,6 +528,12 @@ NeoBundle 'sgur/unite-git_grep'
 "--------------------------------------------------
 " Utility
 "--------------------------------------------------
+"
+NeoBundle 'tyru/caw.vim.git'
+" \cで行の先頭にコメントをつけたり外したりできる
+nmap <Leader>c <Plug>(caw:i:toggle)
+vmap <Leader>c <Plug>(caw:i:toggle)
+
 
 " smart input
 " 対応する括弧の自動入力

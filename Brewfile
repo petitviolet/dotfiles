@@ -65,7 +65,12 @@ install watch || true
 install wget || true
 install z || true
 install zsh || true
-install brew-cask
+
+brew tap homebrew/dupes
+brew install libxml2 libxslt libiconv
+brew link libxml2 libxslt libiconv
+
+install brew-cask || true
 
 cask install android-studio || true
 cask install bettertouchtool || true
