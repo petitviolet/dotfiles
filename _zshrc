@@ -45,50 +45,6 @@ export LSCOLORS=exfxcxdxdxegedabagacad
 autoload zmv
 
 
-# --------------------------------------------------
-#  オリジナルコマンド
-# --------------------------------------------------
-# ファイルの削除
-# rmで~/.Trashに日付付きディレクトリを作成してそこにmv
-# rmfで削除
-function rmf() {
-/bin/rm $@
-}
-
-function rm(){
-for file in $*
-do
-  __rm_single_file $file
-done
-}
-
-function __rm_single_file(){
-local DATE=`date "+%y%m%d"`
-if ! [ -d ~/.Trash/$DATE/ ]
-then
-  command /bin/mkdir ~/.Trash/$DATE/
-fi
-if ! [ $# -eq 1 ]
-then
-  echo "__rm_single_file: 1 argument required but $# passed."
-  exit
-fi
-if [ -e $1 ]
-then
-  BASENAME=`basename $1`
-  NAME=$BASENAME
-  COUNT=0
-  while [ -e ~/.Trash/$DATE/$NAME ]
-  do
-    COUNT=$(($COUNT+1))
-    NAME="$BASENAME.$COUNT"
-  done
-  command /bin/mv $1 ~/.Trash/$DATE/$NAME
-else
-  echo "No such file or directory: $file"
-fi
-}
-
 # 空でEnter押すとlsとgit status表示
 function do_enter() {
 if [ -n "$BUFFER" ]; then

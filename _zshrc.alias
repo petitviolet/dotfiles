@@ -16,10 +16,96 @@ alias javac='javac -J-Dfile.encoding=UTF-8'
 alias java='java -Dfile.encoding=UTF-8'
 alias scalac='scalac -J-Dfile.encoding=UTF-8'
 alias scala='scala -Dfile.encoding=UTF-8'
-# .txtファイルを実行するとcatする
-alias -s txt=cat
+
+# --------------------------------------------------
+#  オリジナルコマンド
+# --------------------------------------------------
+# ファイルの削除
+# rmで~/.Trashに日付付きディレクトリを作成してそこにmv
+# rmfで削除
+function rmf() {
+  /bin/rm $1
+}
+compdef _rmfcmd rmf
+function _rmfcmd {
+  _files
+  return 1;
+}
+
+function rm(){
+for file in $*
+do
+  __rm_single_file $file
+done
+}
+
+function __rm_single_file(){
+local DATE=`date "+%y%m%d"`
+if ! [ -d ~/.Trash/$DATE/ ]
+then
+  command /bin/mkdir ~/.Trash/$DATE/
+fi
+if ! [ $# -eq 1 ]
+then
+  echo "__rm_single_file: 1 argument required but $# passed."
+  exit
+fi
+if [ -e $1 ]
+then
+  BASENAME=`basename $1`
+  NAME=$BASENAME
+  COUNT=0
+  while [ -e ~/.Trash/$DATE/$NAME ]
+  do
+    COUNT=$(($COUNT+1))
+    NAME="$BASENAME.$COUNT"
+  done
+  command /bin/mv $1 ~/.Trash/$DATE/$NAME
+else
+  echo "No such file or directory: $file"
+fi
+}
+
+
 function cdls() {
-  \cd $1;
-  ls;
+\cd $1;
+ls;
 }
 alias cd=cdls
+
+###################################
+
+setopt extended_glob
+
+typeset -A abbreviations
+abbreviations=(
+"G"    "| grep"
+"P"    "| pbcopy"
+"X"    "| xargs"
+"T"    "| tail"
+"C"    "| cat"
+"W"    "| wc"
+"A"    "| awk"
+"S"    "| sed"
+"E"    "2>&1 > /dev/null"
+"N"    "> /dev/null"
+)
+
+magic-abbrev-expand() {
+  local MATCH
+  LBUFFER=${LBUFFER%%(#m)[-_a-zA-Z0-9]#}
+  LBUFFER+=${abbreviations[$MATCH]:-$MATCH}
+  zle self-insert
+
+}
+
+no-magic-abbrev-expand() {
+  LBUFFER+=' '
+
+}
+
+zle -N magic-abbrev-expand
+zle -N no-magic-abbrev-expand
+bindkey " " magic-abbrev-expand
+bindkey "^x " no-magic-abbrev-expand
+
