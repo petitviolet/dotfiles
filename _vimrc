@@ -361,7 +361,8 @@ endif
 "----------------------------------------------------
 
 " 入力モード中に素早くjjと入力した場合はESCとみなす
-inoremap jj <Esc>
+" 入力モード中に素早く;;と入力した場合はESCとみなす
+inoremap  ;;  <Esc>
 " w!! でスーパーユーザーとして保存（sudoが使える環境限定）
 cmap w!! w !sudo tee > /dev/null %
 
@@ -536,7 +537,6 @@ NeoBundle 'sgur/unite-git_grep'
 "--------------------------------------------------
 " smart input & smart chr
 "--------------------------------------------------
-" 対応する括弧の自動入力
 " NeoBundle "kana/vim-smartchr"
 " NeoBundle "kana/vim-smartinput"
 NeoBundleLazy 'kana/vim-smartchr', {'autoload': {'insert' : '1'}}
@@ -545,10 +545,12 @@ NeoBundleLazy "cohama/vim-smartinput-endwise", {'autoload': {'insert' : '1'}}
 
 call smartinput_endwise#define_default_rules()
 
+" \%#はカーソル位置
+
 let s:bundle  =  neobundle#get('vim-smartinput')
 function! s:bundle.hooks.on_source(bundle)
-
-  let lst = [ ['<', "smartchr#loop(' < ', ' << ', '<')" ],
+  let lst = [
+        \ ['<', "smartchr#loop(' < ', ' << ', '<')" ],
         \ ['>', "smartchr#loop(' > ', ' >> ', ' >>> ', '>')"],
         \ ['+', "smartchr#loop(' + ', ' ++ ', '+')"],
         \ ['-', "smartchr#loop(' - ', ' -- ', '-')"],
@@ -556,23 +558,29 @@ function! s:bundle.hooks.on_source(bundle)
         \ ['&', "smartchr#loop(' & ', ' && ', '&')"],
         \ ['%', "smartchr#loop(' % ', '%')"],
         \ ['*', "smartchr#loop(' * ', '*')"],
+        \ ['=', "smartchr#loop(' = ', ' == ', '=')"],
         \ ['<Bar>', "smartchr#loop(' | ', ' || ', '|')"],
-        \ [',', "smartchr#loop(', ', ',')"]]
+        \ [',', "smartchr#loop(', ', ',')"]
+        \]
 
   for i in lst
     call smartinput#map_to_trigger('i', i[0], i[0], i[0])
     call smartinput#define_rule({'char': i[0], 'at': '\%#', 'input': '<C-R>=' . i[1] . '<CR>'})
+    call smartinput#define_rule({'char': i[0], 'at': ' \%#', 'input': '<BS><C-R>='.i[1]."<CR>"})
     call smartinput#define_rule({'char': i[0], 'at': '^\([^"]*"[^"]*"\)*[^"]*"[^"]*\%#', 'input': i[0]})
     call smartinput#define_rule({'char': i[0], 'at': '^\([^'']*''[^'']*''\)*[^'']*''[^'']*\%#', 'input': i[0]})
   endfor
+
   call smartinput#map_to_trigger('i', '<Enter>', '<Enter>', '<Enter>')
   call smartinput#define_rule({'char': '<Enter>', 'at': '(\%#)', 'input': '<Enter><Enter><UP><Tab>'})
   call smartinput#define_rule({'char': '<Enter>', 'at': '{\%#}', 'input': '<Enter><Enter><UP><Tab>'})
 
-  call smartinput#define_rule({'char': '>', 'at': ' < \%#', 'input': '<BS><BS><BS><><Left>'})
+  call smartinput#map_to_trigger('i', '>', '>', '>')
+  call smartinput#define_rule({'char': '>', 'at': ' < \%#', 'input': '<BS><BS><><Left>'})
+  call smartinput#define_rule({'char': '>', 'at': ' = \%#', 'input': '<BS><BS>=> '})
 
   call smartinput#map_to_trigger('i', '=', '=', '=')
-  call smartinput#define_rule({'char': '=', 'at': '\%#', 'input': "<C-R>=smartchr#loop(' = ', ' == ', '=')<CR>"})
+  " call smartinput#define_rule({'char': '=', 'at': '\%#', 'input': "<C-R>=smartchr#loop(' = ', ' == ', '=')<CR>"})
   call smartinput#define_rule({'char': '=', 'at': '[&+-/<>|] \%#', 'input': '<BS>= '})
   call smartinput#define_rule({'char': '=', 'at': '!\%#', 'input': '= '})
   call smartinput#define_rule({'char': '=', 'at': '^\([^"]*"[^"]*"\)*[^"]*"[^"]*\%#', 'input': '='})
@@ -584,7 +592,8 @@ function! s:bundle.hooks.on_source(bundle)
   call smartinput#define_rule({'char': '<BS>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
   call smartinput#define_rule({'char': '<BS>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
 
-  call smartinput#map_to_trigger('i', '<C-h>',  '<BS>',  '<C-h>')
+  call smartinput#map_to_trigger('i', '<C-h>', '<BS>',  '<C-h>')
+  call smartinput#map_to_trigger('i', '<Space>', '<Space>', '<Space>')
 
   " call smartinput#map_to_trigger('i', '<C-h>', '<C-h>', '<BS>')
   " call smartinput#define_rule({'char': '<C-h>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
@@ -592,9 +601,10 @@ function! s:bundle.hooks.on_source(bundle)
   " call smartinput#define_rule({'char': '<C-h>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
   " call smartinput#define_rule({'char': '<C-h>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
 
-  for op in ['<', '>', '+', '-', '/', '&', '%', '\*', '|']
+  for op in ['<', '>', '+', '-', '/', '&', '%', '\*', '|', '=', ',']
     call smartinput#define_rule({'char': '<BS>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
     call smartinput#define_rule({'char': '<C-h>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
+    call smartinput#define_rule({'char': '<Space>', 'at': ''.op.' \%#', 'input': ''})
   endfor
 endfunction
 unlet s:bundle
@@ -614,6 +624,7 @@ vmap <Leader>c <Plug>(caw:i:toggle)
 NeoBundle 'wincent/Command-T'
 
 " vimsehll
+" vsでvimshellを起動
 NeoBundle 'Shougo/vimshell.git'
 let g:vimshell_interactive_update_time = 10
 let g:vimshell_prompt = $USER."% "
