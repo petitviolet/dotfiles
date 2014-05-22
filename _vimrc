@@ -553,12 +553,12 @@ function! s:bundle.hooks.on_source(bundle)
         \ ['<', "smartchr#loop(' < ', ' << ', '<')" ],
         \ ['>', "smartchr#loop(' > ', ' >> ', ' >>> ', '>')"],
         \ ['+', "smartchr#loop(' + ', ' ++ ', '+')"],
-        \ ['-', "smartchr#loop(' - ', ' -- ', '-')"],
-        \ ['/', "smartchr#loop(' / ', '//', '/')"],
+        \ ['-', "smartchr#loop(' - ', ' -- ', '-',' -')"],
+        \ ['/', "smartchr#loop(' / ', '/', '//')"],
         \ ['&', "smartchr#loop(' & ', ' && ', '&')"],
         \ ['%', "smartchr#loop(' % ', '%')"],
-        \ ['*', "smartchr#loop(' * ', '*', ' **')"],
-        \ ['=', "smartchr#loop(' = ', ' == ', '=')"],
+        \ ['*', "smartchr#loop(' * ', ' ** ', '*', '**')"],
+        \ ['=', "smartchr#loop(' = ', ' == ', ' === ', '=')"],
         \ ['<Bar>', "smartchr#loop(' | ', ' || ', '|')"],
         \ [',', "smartchr#loop(', ', ',')"]
         \]
@@ -584,11 +584,8 @@ function! s:bundle.hooks.on_source(bundle)
   call smartinput#define_rule({'char': '-', 'at': ' < \%#', 'input': '<BS><BS><- '})
 
   call smartinput#map_to_trigger('i', '=', '=', '=')
-  " call smartinput#define_rule({'char': '=', 'at': '\%#', 'input': "<C-R>=smartchr#loop(' = ', ' == ', '=')<CR>"})
   call smartinput#define_rule({'char': '=', 'at': '[&+-/<>|] \%#', 'input': '<BS>= '})
   call smartinput#define_rule({'char': '=', 'at': '!\%#', 'input': '= '})
-  call smartinput#define_rule({'char': '=', 'at': '^\([^"]*"[^"]*"\)*[^"]*"[^"]*\%#', 'input': '='})
-  call smartinput#define_rule({'char': '=', 'at': '^\([^'']*''[^'']*''\)*[^'']*''[^'']*\%#', 'input': '='})
 
   call smartinput#map_to_trigger('i', '<BS>', '<BS>', '<BS>')
   call smartinput#define_rule({'char': '<BS>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
