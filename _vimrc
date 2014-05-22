@@ -557,7 +557,7 @@ function! s:bundle.hooks.on_source(bundle)
         \ ['/', "smartchr#loop(' / ', '//', '/')"],
         \ ['&', "smartchr#loop(' & ', ' && ', '&')"],
         \ ['%', "smartchr#loop(' % ', '%')"],
-        \ ['*', "smartchr#loop(' * ', '*')"],
+        \ ['*', "smartchr#loop(' * ', '*', ' **')"],
         \ ['=', "smartchr#loop(' = ', ' == ', '=')"],
         \ ['<Bar>', "smartchr#loop(' | ', ' || ', '|')"],
         \ [',', "smartchr#loop(', ', ',')"]
@@ -566,7 +566,7 @@ function! s:bundle.hooks.on_source(bundle)
   for i in lst
     call smartinput#map_to_trigger('i', i[0], i[0], i[0])
     call smartinput#define_rule({'char': i[0], 'at': '\%#', 'input': '<C-R>=' . i[1] . '<CR>'})
-    call smartinput#define_rule({'char': i[0], 'at': ' \%#', 'input': '<BS><C-R>='.i[1]."<CR>"})
+    call smartinput#define_rule({'char': i[0], 'at': '[^<>+-/&%*=|] \%#', 'input': '<BS><C-R>='.i[1]."<CR>"})
     call smartinput#define_rule({'char': i[0], 'at': '^\([^"]*"[^"]*"\)*[^"]*"[^"]*\%#', 'input': i[0]})
     call smartinput#define_rule({'char': i[0], 'at': '^\([^'']*''[^'']*''\)*[^'']*''[^'']*\%#', 'input': i[0]})
   endfor
@@ -578,6 +578,10 @@ function! s:bundle.hooks.on_source(bundle)
   call smartinput#map_to_trigger('i', '>', '>', '>')
   call smartinput#define_rule({'char': '>', 'at': ' < \%#', 'input': '<BS><BS><><Left>'})
   call smartinput#define_rule({'char': '>', 'at': ' = \%#', 'input': '<BS><BS>=> '})
+  call smartinput#define_rule({'char': '>', 'at': ' - \%#', 'input': '<BS><BS>-> '})
+
+  call smartinput#map_to_trigger('i', '-', '-', '-')
+  call smartinput#define_rule({'char': '-', 'at': ' < \%#', 'input': '<BS><BS><- '})
 
   call smartinput#map_to_trigger('i', '=', '=', '=')
   " call smartinput#define_rule({'char': '=', 'at': '\%#', 'input': "<C-R>=smartchr#loop(' = ', ' == ', '=')<CR>"})
