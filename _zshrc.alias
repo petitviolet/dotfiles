@@ -24,12 +24,17 @@ alias scala='scala -Dfile.encoding=UTF-8'
 # rmで~/.Trashに日付付きディレクトリを作成してそこにmv
 # rmfで削除
 function rmf() {
-  /bin/rm $1
+  for file in $*
+  do
+    echo 'removed' $file
+    /bin/rm $file
+  done
+
 }
 compdef _rmfcmd rmf
 function _rmfcmd {
-  _files
-  return 1;
+_files
+return 1;
 }
 
 function rm(){

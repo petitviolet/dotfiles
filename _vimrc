@@ -126,6 +126,7 @@ vnoremap <Tab> %
 " map CTRL-E to end-of-line (insert mode)
 " map CTRL-A to beginning-of-line (insert mode)
 " imap  <C-a> <Home>
+nmap  <CR> o<ESC>
 imap  <C-e> <End>
 imap  <C-a> <C-o>^
 imap  <C-w> <esc>bcw
@@ -230,6 +231,8 @@ set title
 set number
 " ルーラーを表示
 set ruler
+" 現在のカーソル行をハイライト
+set cursorline
 " 入力中のコマンドをステータスに表示する
 set showcmd
 " ステータスラインを常に表示
@@ -293,6 +296,23 @@ function! s:RTrim()
   call setpos(".", s:cursor)
 endfunction
 autocmd BufWritePre * call <SID>RTrim()
+
+" markdownでsyntaxハイライト
+let g:markdown_fenced_languages = [
+\  'css',
+\  'sh',
+\  'erb=eruby',
+\  'javascript',
+\  'js=javascript',
+\  'json=javascript',
+\  'scala',
+\  'php',
+\  'python',
+\  'py=python',
+\  'ruby',
+\  'sass',
+\  'xml',
+\]
 
 
 " ステータスラインに表示する情報の指定
