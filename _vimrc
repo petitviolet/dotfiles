@@ -42,8 +42,8 @@ set vb t_vb=
 " バックスペースで削除できるものを指定
 set backspace=indent,eol,start
 "" Leader
-noremap <Leader>t :noautocmd vimgrep /TODO/j **/*.rb **/*.js **/*.erb **/*.haml<CR>:cw<CR>
 let mapleader = ","
+noremap <Leader>t :noautocmd vimgrep /TODO/j **/*.rb **/*.js **/*.erb **/*.haml<CR>:cw<CR>
 " Path
 " let path = "~/my_settings"
 " 8進数を10進数として扱う
@@ -453,10 +453,6 @@ NeoBundle 'gmarik/vundle'
 " Go
 NeoBundle 'Blackrush/vim-gocode'
 
-NeoBundle 'mitechie/pyflakes-pathogen'
-" NeoBundle 'tpope/vim-pathogen'
-" call pathogen#infect()
-" nnoremap <leader>l :<C-u>call Flake8()<CR>
 
 " Template
 " :Template hogehoge
@@ -466,11 +462,36 @@ NeoBundle "mattn/sonictemplate-vim"
 NeoBundle 'derekwyatt/vim-scala'
 set makeprg=sbtc\ --exec\ compile
 
-" NeoBundle 'myusuf3/numbers'
+NeoBundle 'scrooloose/syntastic'
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
+let g:syntastic_mode_map = {
+      \ 'mode': 'passive',
+      \ 'active_filetypes': ['javascript', 'json', 'ruby', 'php'],
+      \ 'passive_filetypes': ['java', 'scala', 'python'],
+      \}
 
+
+" augroup AutoSyntastic
+"   autocmd!
+"   autocmd InsertLeave * call s:syntastic()
+" augroup END
+function! s:syntastic()
+  w
+  SyntasticCheck
+endfunction
+nmap <Leader>S :SyntasticCheck<CR>
+
+let g:syntastic_javascript_checker = 'JSHINT'
+" 相対行がぬるぬる表示される
+" NeoBundle 'myusuf3/numbers'
+" solarizedカラースキーマ
 " NeoBundle 'altercation/vim-colors-solarized'
 
-" neocomplcache
+"-----------------------------------------------------
+" Neocomplcache
+"-----------------------------------------------------
+
 " NeoBundle 'Shougo/neocomplcache'
 NeoBundleLazy "Shougo/neocomplcache.vim", {
   \ "autoload": {
@@ -761,24 +782,27 @@ let g:indentLine_char = ">"
 " jedi-vimの設定
 " Pythonのためのプラグインだよ
 "-----------------------------------------------------
-" NeoBundle 'davidhalter/jedi-vim'
-" NeoBundleLazy "davidhalter/jedi-vim", {
-"       \ "autoload": {
-"       \   "filetypes": ["python", "python3", "djangohtml"]
-"       \ }}
+NeoBundleLazy "alfredodeza/khuno.vim", {
+    \ "autoload": {"filetypes": ['python']}}
 
-" function! InitPython()
-"     " jedi.vimとpyhoncompleteがバッティングし得るらしいので
-"     " http://mattn.kaoriya.net/software/vim/20121018212621.htm
-"     let b:did_ftplugin = 1
-"
-"     setlocal commentstring=#%s
-"
-"     " rename用のマッピングを無効にしたため、代わりにコマンドを定義
-"
-"     setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
-" endfunction
-" autocmd BufEnter * if &filetype == 'python' | call InitPython() | endif
+" NeoBundle 'davidhalter/jedi-vim'
+NeoBundleLazy "davidhalter/jedi-vim", {
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"],
+      \ },
+      \ "build": {
+      \   "mac": "pip install jedi",
+      \   "unix": "pip install jedi",
+      \ }}
+function! InitPython()
+    " jedi.vimとpyhoncompleteがバッティングし得るらしいので
+    " http://mattn.kaoriya.net/software/vim/20121018212621.htm
+    let b:did_ftplugin = 1
+    setlocal commentstring=#%s
+    " rename用のマッピングを無効にしたため、代わりにコマンドを定義
+    setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
+endfunction
+autocmd BufEnter * if &filetype == 'python' | call InitPython() | endif
 
 
 let s:hooks = neobundle#get_hooks("jedi-vim")
@@ -789,16 +813,15 @@ function! s:hooks.on_source(bundle)
   let g:jedi#show_function_definition = 0
   " 補完の最初の項目が選択された状態だと使いにくいためオフにする
   let g:jedi#popup_select_first = 0
+  " <Leader>rでリネームする
   let g:jedi#rename_command = '<Leader>r'
   command! -nargs=0 JediRename :call jedi#rename()
   let g:jedi#pydoc = '<Leader>k'
 endfunction
 
 autocmd FileType python let b:did_ftplugin = 1
-
 NeoBundle 'vim-scripts/pythoncomplete'
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-
 
 "-----------------------------------------------------
 " ruby設定
@@ -806,12 +829,12 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'bbatsov/rubocop'
 NeoBundle 'vim-ruby/vim-ruby'
-
-
 "-----------------------------------------------------
 " zen-coding設定
 "-----------------------------------------------------
-NeoBundle 'mattn/emmet-vim'
+" NeoBundle 'mattn/emmet-vim'
+NeoBundleLazy 'mattn/emmet-vim', {
+    \ "autoload": {"filetypes": ['html']}}
 " HTMLが開かれるまでロードしない
 " NeoBundleLazy 'mattn/zencoding-vim', {
 "     \ "autoload": {"filetypes": ['html']}}
@@ -878,30 +901,13 @@ NeoBundle 'JavaScript-syntax'
 " autocmd FileType javascript :set omnifunc=jscomplete#completeJS
 " autocmd FileType html :set omnifunc=jscomplete#completeJS
 
-NeoBundle 'scrooloose/syntastic'
-
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
-let g:syntastic_mode_map = {'mode': 'passive'}
-" augroup AutoSyntastic
-"   autocmd!
-"   autocmd InsertLeave,TextChanged * call s:syntastic()
-" augroup END
-" function! s:syntastic()
-"   w
-"   SyntasticCheck
-" endfunction
-" let g:syntastic_javascript_checker = 'JSHINT'
-" let g:syntastic_mode_map = {
-"       \ 'mode': 'active',
-"       \ 'active_filetypes': ['javascript', 'json'],
-"       \}
-
-" autocmd FileType html : setlocal indentexpr=" "
 autocmd FileType javascript :compiler gjslint
 autocmd QuickFixCmdPost make copen
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 
+"-----------------------------------------------------
+" Quick Run
+"-----------------------------------------------------
 " quick run
 " 非同期で実行...？あんまりうまくいってない
 NeoBundleLazy "thinca/vim-quickrun", {

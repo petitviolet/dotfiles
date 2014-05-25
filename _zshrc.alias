@@ -26,10 +26,10 @@ alias scala='scala -Dfile.encoding=UTF-8'
 function rmf() {
   for file in $*
   do
-    echo 'removed' $file
+    echo 'removed:' $file
     /bin/rm $file
   done
-
+  return 1;
 }
 compdef _rmfcmd rmf
 function _rmfcmd {
