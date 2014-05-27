@@ -126,7 +126,8 @@ vnoremap <Tab> %
 " map CTRL-E to end-of-line (insert mode)
 " map CTRL-A to beginning-of-line (insert mode)
 " imap  <C-a> <Home>
-nmap  <CR> o<ESC>
+" nmap  <CR> o<ESC>
+nmap  <Enter> o<ESC>
 imap  <C-e> <End>
 imap  <C-a> <C-o>^
 imap  <C-w> <esc>bcw
@@ -443,9 +444,9 @@ else
 endif
 let g:neobundle_default_git_protocol='git'
 
+NeoBundle 'gmarik/vundle'
 " let Vundle manage Vundle
 " required!
-NeoBundle 'gmarik/vundle'
 "-----------------------------------------------------
 " 文法チェック
 "-----------------------------------------------------
@@ -805,8 +806,8 @@ endfunction
 autocmd BufEnter * if &filetype == 'python' | call InitPython() | endif
 
 
-let s:hooks = neobundle#get_hooks("jedi-vim")
-function! s:hooks.on_source(bundle)
+let s:bundle = neobundle#get("jedi-vim")
+function! s:bundle.hooks.on_source(bundle)
   " jediにvimの設定を任せると'completeopt+=preview'するので
   " 自動設定機能をOFFにし手動で設定を行う
   let g:jedi#auto_vim_configuration = 0
@@ -818,6 +819,7 @@ function! s:hooks.on_source(bundle)
   command! -nargs=0 JediRename :call jedi#rename()
   let g:jedi#pydoc = '<Leader>k'
 endfunction
+unlet s:bundle
 
 autocmd FileType python let b:did_ftplugin = 1
 NeoBundle 'vim-scripts/pythoncomplete'
@@ -908,31 +910,51 @@ let g:netrw_nogx = 1 " disable netrw's gx mapping.
 "-----------------------------------------------------
 " Quick Run
 "-----------------------------------------------------
-" quick run
-" 非同期で実行...？あんまりうまくいってない
-NeoBundleLazy "thinca/vim-quickrun", {
-      \ "autoload": {
-      \   "mappings": [['nxo', '<Plug>(quickrun)']]
-      \ }}
-nmap <space>r <plug>(quickrun)
-let s:hooks = neobundle#get_hooks("vim-quickrun")
-function! s:hooks.on_source(bundle)
-  let g:quickrun_config = {
-        \ "*": {"runmode": "async:remote:vimproc"},
-        \ }
-endfunction
+" NeoBundle 'osyo-manga/unite-quickrun_config'
+" NeoBundle 'thinca/vim-quickrun'
+" let g:quickrun_config = {}
+" let g:quickrun_config._ = {
+"       \ 'runner' : 'vimproc',
+"       \ 'runner/vimproc/updatetime' : 100,
+"       \ 'outputter/buffer/split' : 'botright 8sp',
+"       \ 'outputter' : 'quickfix',
+"       \}
+"
+" NeoBundleLazy 'osyo-manga/unite-quickrun_config', {
+"       \ 'depends': [
+"       \ 'Shougo/unite.vim',
+"       \ 'thinca/vim-quickrun',
+"       \ ],
+"       \ }
+" NeoBundleSource 'unite-quickrun_config'
 
-" filetype on
-" filetype plugin indent on     " required!
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+NeoBundleLazy 'thinca/vim-quickrun', {
+      \ 'autoload': {
+      \ 'filetypes': ['ruby',  'python', 'sh', 'scala', 'java']
+      \}}
+nmap <space>r :QuickRun -runner vimproc <CR>
+" nmap <space>r <plug>(quickrun)
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+let g:quickrun_config = {
+      \ '_': {
+      \ 'runner' : 'vimproc',
+      \ 'runner/vimproc/updatetime' : 30,
+      \ 'outputter/buffer/split' : 'botright 8sp',
+      \ 'outputter' : 'quickfix',
+      \}}
+
+" quickrun_configがうまく読み込めない
+" let s:bundle = neobundle#get('vim-quickrun')
+" function! s:bundle.hooks.on_source(bundle)
+"   let g:quickrun_config = {}
+"   let g:quickrun_config._ = {
+"         \ 'runner' : 'vimproc',
+"         \ 'runner/vimproc/updatetime' : 30,
+"         \ 'outputter/buffer/split' : 'botright 8sp',
+"         \ 'outputter' : 'quickfix',
+"         \}
+" endfunction
+" unlet s:bundle
 
 "-----------------------------------------------------
 " GIST.vim の設定 実行は :Gist
@@ -993,53 +1015,53 @@ if &encoding !=# 'utf-8'
   set encoding=japan
   set fileencoding=japan
 endif
-" if has('iconv')
-"   let s:enc_euc = 'euc-jp'
-"   let s:enc_jis = 'iso-2022-jp'
-"   " iconvがeucJP-msに対応しているかをチェック
-"   if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-"     let s:enc_euc = 'eucjp-ms'
-"     let s:enc_jis = 'iso-2022-jp-3'
-"   " iconvがJISX0213に対応しているかをチェック
-"   elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-"     let s:enc_euc = 'euc-jisx0213'
-"     let s:enc_jis = 'iso-2022-jp-3'
-"   endif
-"   " fileencodingsを構築
-"   if &encoding ==# 'utf-8'
-"     let s:fileencodings_default = &fileencodings
-"     let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-"     let &fileencodings = &fileencodings .','. s:fileencodings_default
-"     unlet s:fileencodings_default
-"   else
-"     let &fileencodings = &fileencodings .','. s:enc_jis
-"     set fileencodings+=utf-8,ucs-2le,ucs-2
-"     if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-"       set fileencodings-=cp932
-"       set fileencodings-=euc-jp
-"       set fileencodings-=euc-jisx0213
-"       set fileencodings-=eucjp-ms
-"       let &encoding = s:enc_euc
-"       let &fileencoding = s:enc_euc
-"     else
-"       let &fileencodings = &fileencodings .','. s:enc_euc
-"     endif
-"   endif
-"   " 定数を処分
-"   unlet s:enc_euc
-"   unlet s:enc_jis
-" endif
-" " 日本語を含まない場合は fileencoding に encoding を使うようにする
-" if has('autocmd')
-"   function! AU_ReCheck_FENC()
-"     if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-"       let &fileencoding=&encoding
-"     endif
-"   endfunction
-"   autocmd BufReadPost * call AU_ReCheck_FENC()
-" endif
 
-" 以下は最後に書くと機能するっぽい
+if has('iconv')
+  let s:enc_euc = 'euc-jp'
+  let s:enc_jis = 'iso-2022-jp'
+  " iconvがeucJP-msに対応しているかをチェック
+  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'eucjp-ms'
+    let s:enc_jis = 'iso-2022-jp-3'
+    " iconvがJISX0213に対応しているかをチェック
+  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'euc-jisx0213'
+    let s:enc_jis = 'iso-2022-jp-3'
+  endif
+  " fileencodingsを構築
+  if &encoding ==# 'utf-8'
+    let s:fileencodings_default = &fileencodings
+    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
+    let &fileencodings = &fileencodings .','. s:fileencodings_default
+    unlet s:fileencodings_default
+  else
+    let &fileencodings = &fileencodings .','. s:enc_jis
+    set fileencodings+=utf-8,ucs-2le,ucs-2
+    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+      set fileencodings-=cp932
+      set fileencodings-=euc-jp
+      set fileencodings-=euc-jisx0213
+      set fileencodings-=eucjp-ms
+      let &encoding = s:enc_euc
+      let &fileencoding = s:enc_euc
+    else
+      let &fileencodings = &fileencodings .','. s:enc_euc
+    endif
+  endif
+  " 定数を処分
+  unlet s:enc_euc
+  unlet s:enc_jis
+endif
+" 日本語を含まない場合は fileencoding に encoding を使うようにする
+if has('autocmd')
+  function! AU_ReCheck_FENC()
+    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+      let &fileencoding=&encoding
+    endif
+  endfunction
+  autocmd BufReadPost * call AU_ReCheck_FENC()
+endif
+
 " 改行コードの自動認識
 set fileformats=unix,dos,mac
 set whichwrap=b,s,h,l,<,>,[,]

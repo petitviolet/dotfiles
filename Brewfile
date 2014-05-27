@@ -60,7 +60,9 @@ install tig || true
 install tmux || true
 install tree || true
 # install vim || true
-install vim --with-features=huge --enable-multibyte --enable-pythoninterp=yes --enable-tclinterp --enable-cscope --enable-fontset --enable-gnome-check --without-x --enable-gpm --with-python-config-dir=/usr/local/bin/python || true
+
+brew install vim --with-features=huge --enable-multibyte --enable-pythoninterp=dynamic --enable-tclinterp --enable-cscope --enable-fontset --enable-gnome-check --without-x --enable-gpm --with-python --with-python3 --with-lua --with-ruby --with-client-server --with-python-config-dir=/usr/local/bin/python || true
+
 install watch || true
 install wget || true
 install z || true
