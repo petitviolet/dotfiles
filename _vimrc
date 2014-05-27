@@ -785,6 +785,8 @@ let g:indentLine_char = ">"
 "-----------------------------------------------------
 NeoBundleLazy "alfredodeza/khuno.vim", {
     \ "autoload": {"filetypes": ['python']}}
+let g:khuno_ignore="E126"
+nmap <silent><Leader>x <Esc>:Khuno show<CR>
 
 " NeoBundle 'davidhalter/jedi-vim'
 NeoBundleLazy "davidhalter/jedi-vim", {
@@ -935,6 +937,7 @@ NeoBundleLazy 'thinca/vim-quickrun', {
 nmap <space>r :QuickRun -runner vimproc <CR>
 " nmap <space>r <plug>(quickrun)
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+" 読み込めない...
 let g:quickrun_config = {
       \ '_': {
       \ 'runner' : 'vimproc',
