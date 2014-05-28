@@ -685,8 +685,8 @@ nmap <silent>tb :TagbarToggle<CR>
 " nmap <F8> :TagbarToggle<CR>
 
 NeoBundle 'szw/vim-tags'
-let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
-let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
+" let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
+" let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
 nnoremap <C-]> g<C-]>
 nnoremap tt :TagsGenerate<CR>
 
@@ -785,7 +785,7 @@ let g:indentLine_char = ">"
 "-----------------------------------------------------
 NeoBundleLazy "alfredodeza/khuno.vim", {
     \ "autoload": {"filetypes": ['python']}}
-let g:khuno_ignore="E126"
+let g:khuno_ignore="E126,E128,E501,E502"
 nmap <silent><Leader>x <Esc>:Khuno show<CR>
 
 " NeoBundle 'davidhalter/jedi-vim'
