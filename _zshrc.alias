@@ -24,24 +24,54 @@ alias scala='scala -Dfile.encoding=UTF-8'
 # rmで~/.Trashに日付付きディレクトリを作成してそこにmv
 # rmfで削除
 function rmf() {
+  help() {
+    echo 'rmf help!'
+    echo 'Usage: rmf [option] filename'
+    jjjjjjjjj
+    return
+  }
   for file in $*
   do
-    echo 'removed:' $file
-    /bin/rm $file
+    case $file in
+      -h|--help)
+        help
+        return
+        ;;
+      -rf|-fr)
+        option="-rf"
+        ;;
+      -r)
+        option="-r"
+        ;;
+      -f)
+        option="-f"
+        ;;
+      *)
+        echo 'removed:' $file
+        /bin/rm $option $file
+    esac
+    # shift
   done
   return 1;
 }
-compdef _rmfcmd rmf
-function _rmfcmd {
-_files
-return 1;
+
+_rmfcmd() {
+  _arguments \
+    {-h,--help}'[show help]' \
+    -r'[recursive]' \
+    -f'[force]' \
+    -rf'[recursive && force]' \
+    '*: :_files'
 }
 
+
+compdef _rmfcmd rmf
+
 function rm(){
-for file in $*
-do
-  __rm_single_file $file
-done
+  for file in $*
+  do
+    __rm_single_file $file
+  done
 }
 
 function __rm_single_file(){
