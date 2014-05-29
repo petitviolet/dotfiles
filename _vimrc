@@ -127,7 +127,8 @@ vnoremap <Tab> %
 " map CTRL-A to beginning-of-line (insert mode)
 " imap  <C-a> <Home>
 " nmap  <CR> o<ESC>
-nmap  <Enter> o<ESC>
+" nmap  <Enter> o<ESC>
+nmap  <C-_> o<ESC>
 imap  <C-e> <End>
 imap  <C-a> <C-o>^
 imap  <C-w> <esc>bcw
@@ -579,13 +580,18 @@ NeoBundle 'sgur/unite-git_grep'
 "--------------------------------------------------
 " smart input & smart chr
 "--------------------------------------------------
-" NeoBundle "kana/vim-smartchr"
-" NeoBundle "kana/vim-smartinput"
-NeoBundleLazy 'kana/vim-smartchr', {'autoload': {'insert' : '1'}}
-NeoBundleLazy 'kana/vim-smartinput', {'autoload': {'insert' : '1'}}
-NeoBundleLazy "cohama/vim-smartinput-endwise", {'autoload': {'insert' : '1'}}
 
-call smartinput_endwise#define_default_rules()
+NeoBundleLazy 'kana/vim-smartchr', {
+      \ "autoload": {"filetypes": ['python', 'scala', 'ruby']}
+      \}
+NeoBundleLazy 'kana/vim-smartinput', {
+      \ "autoload": {"filetypes": ['python', 'scala', 'ruby']}
+      \}
+NeoBundleLazy "cohama/vim-smartinput-endwise", {
+      \ "autoload": {"filetypes": ['python', 'scala', 'ruby']}
+      \}
+
+" call smartinput_endwise#define_default_rules()
 
 " \%#はカーソル位置
 
@@ -652,6 +658,8 @@ function! s:bundle.hooks.on_source(bundle)
     call smartinput#define_rule({'char': '<BS>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
     call smartinput#define_rule({'char': '<C-h>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
     call smartinput#define_rule({'char': '<Space>', 'at': ''.op.' \%#', 'input': ''})
+
+  call smartinput_endwise#define_default_rules()
   endfor
 endfunction
 unlet s:bundle
@@ -666,7 +674,20 @@ NeoBundle 'tyru/caw.vim.git'
 nmap <Leader>c <Plug>(caw:i:toggle)
 vmap <Leader>c <Plug>(caw:i:toggle)
 
+NeoBundle 'thinca/vim-qfreplace'
+" NeoBundle 'milkypostman/vim-togglelist'
+"
+" nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
+" nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
 
+function! Toggle_quickfix_window()
+  let _ = winnr('$')
+  cclose
+  if _ == winnr('$')
+    copen
+  endif
+endfunction
+nnoremap <Leader>q :call Toggle_quickfix_window()<CR>
 " Command-T
 NeoBundle 'wincent/Command-T'
 
@@ -692,6 +713,9 @@ nnoremap tt :TagsGenerate<CR>
 
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
+nnoremap <Leader>G :Ggrep!
+" nnoremap <Leader>G :Ggrep! | copen
+
 NeoBundle 'kana/vim-fakeclip'
 
 " nerdtree
@@ -784,7 +808,7 @@ let g:indentLine_char = ">"
 " Pythonのためのプラグインだよ
 "-----------------------------------------------------
 NeoBundleLazy "alfredodeza/khuno.vim", {
-    \ "autoload": {"filetypes": ['python']}}
+    \ "autoload": {"filetypes": ['python','python3']}}
 let g:khuno_ignore="E126,E128,E501,E502"
 nmap <silent><Leader>x <Esc>:Khuno show<CR>
 
@@ -1068,3 +1092,4 @@ endif
 " 改行コードの自動認識
 set fileformats=unix,dos,mac
 set whichwrap=b,s,h,l,<,>,[,]
+

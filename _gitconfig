@@ -6,5 +6,10 @@
 	di = diff
 	st = status
 	co = checkout
+  lp = log --decorate --stat --patch
+  ls = ls-files
 [color]
 	ui = auto
+[core]
+	excludesfile = /Users/Komurasaki/.gitignore_global
+	editor = vim
