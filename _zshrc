@@ -67,6 +67,13 @@ bindkey '^m' do_enter
 #----------------------------------------------------------
 # 補完機能を強化
 autoload -Uz compinit; compinit -u
+
+# 補完メッセージを読みやすくする
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' format '%B%d%b'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*' group-name ''
+
 # URLを自動エスケープ
 # auto-fuと競合する
 autoload -Uz url-quote-magic; zle -N self-insert url-quote-magic
@@ -171,6 +178,7 @@ setopt transient_rprompt
 # プロンプト
 function precmd() {
 PROMPT="%(?.%F{cyan}.%F{red})[%M]%f%F{green}%n%f%F{yello} %~% "
+# PROMPT="%(?.%F{cyan}.%F{red})[%M]%f%F{green}%f%F{yello} %~% "
 # PROMPT="%(?.%F{green}^-^%f.%F{red}@_@%f) %{${fg[color]%}%}[%m]%{${fg[green]}%}%n%{${fg[yellow]}%} %~%{${reset_color}%}"
 st=`git status 2>/dev/null`
 if [[ -n `echo "$st" | grep "^nothing to"` ]]; then

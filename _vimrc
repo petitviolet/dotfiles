@@ -61,59 +61,6 @@ endif
 " set wildmode=longest:full,list
 set foldmethod=marker
 
-" 矩形選択で連番入力
-" 数字を選んで co と入力
-nnoremap <silent> co :ContinuousNumber <C-a><CR>
-vnoremap <silent> co :ContinuousNumber <C-a><CR>
-command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <count>?<count>-line('.'):1)|exec 'normal! j' . n . <q-args>|call cursor('.', c)|endfor
-
-"-----------------------------------------------------
-" 文字数カウント
-"-----------------------------------------------------
-" statusbarにファイル中の文字数を表示
-
-if exists("anekos_charCounter")
-  finish
-endif
-let anekos_charCounter=1
-
-augroup CharCounter
-  autocmd!
-  autocmd BufCreate,BufEnter * call <SID>Initialize()
-  autocmd BufUnload,FileWritePre,BufWritePre * call <SID>Update()
-augroup END
-
-function! s:Initialize()
-  if exists('b:charCounterCount')
-  else
-    return s:Update()
-  endif
-endfunction
-
-function! s:Update()
-  let b:charCounterCount = s:CharCount()
-endfunction
-
-function! s:CharCount()
-  let l:result = 0
-  for l:linenum in range(0, line('$'))
-    let l:line = getline(l:linenum)
-    let l:result += strlen(substitute(l:line, ".", "x", "g"))
-  endfor
-  return l:result
-endfunction
-
-function! AnekoS_CharCounter_CharCount()
-  return s:CharCount()
-endfunction
-
-" ESCを二回押すことでハイライトを消す
-nmap <silent> <Esc><Esc> :nohlsearch<CR>
-" 洗濯してccで文字数カウント
-vnoremap <silent> cc :s/./&/gn<Esc><Esc> <CR>
-" vを二回で行末まで選択
-vnoremap v $h
-
 "-----------------------------------------------------
 " キーバインド変更
 "-----------------------------------------------------
@@ -146,7 +93,10 @@ cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 map   <C-j> <C-w>p
 " let mapleader = ","
 "  map  % <C-o>:%s/
-"
+
+nnoremap [q :cprevious<CR>
+nnoremap ]q :cnext<CR>
+
 "-----------------------------------------------------
 " テンプレート関連
 "-----------------------------------------------------
@@ -377,6 +327,59 @@ else
   set clipboard& clipboard+=unnamed,autoselect
 endif
 " set clipboard+=unnamedplus,unnamed
+" 矩形選択で連番入力
+" 数字を選んで co と入力
+nnoremap <silent> co :ContinuousNumber <C-a><CR>
+vnoremap <silent> co :ContinuousNumber <C-a><CR>
+command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <count>?<count>-line('.'):1)|exec 'normal! j' . n . <q-args>|call cursor('.', c)|endfor
+
+"-----------------------------------------------------
+" 文字数カウント
+"-----------------------------------------------------
+" statusbarにファイル中の文字数を表示
+
+if exists("anekos_charCounter")
+  finish
+endif
+let anekos_charCounter=1
+
+augroup CharCounter
+  autocmd!
+  autocmd BufCreate,BufEnter * call <SID>Initialize()
+  autocmd BufUnload,FileWritePre,BufWritePre * call <SID>Update()
+augroup END
+
+function! s:Initialize()
+  if exists('b:charCounterCount')
+  else
+    return s:Update()
+  endif
+endfunction
+
+function! s:Update()
+  let b:charCounterCount = s:CharCount()
+endfunction
+
+function! s:CharCount()
+  let l:result = 0
+  for l:linenum in range(0, line('$'))
+    let l:line = getline(l:linenum)
+    let l:result += strlen(substitute(l:line, ".", "x", "g"))
+  endfor
+  return l:result
+endfunction
+
+function! AnekoS_CharCounter_CharCount()
+  return s:CharCount()
+endfunction
+
+" ESCを二回押すことでハイライトを消す
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+" 洗濯してccで文字数カウント
+vnoremap <silent> cc :s/./&/gn<Esc><Esc> <CR>
+" vを二回で行末まで選択
+vnoremap v $h
+
 
 "----------------------------------------------------
 " その他

@@ -27,7 +27,6 @@ function rmf() {
   help() {
     echo 'rmf help!'
     echo 'Usage: rmf [option] filename'
-    jjjjjjjjj
     return
   }
   for file in $*
@@ -52,12 +51,12 @@ function rmf() {
     esac
     # shift
   done
-  return 1;
+  # return 1;
 }
 
 _rmfcmd() {
   _arguments \
-    {-h,--help}'[show help]' \
+    '(- *)'{-h,--help}'[show help]' \
     -r'[recursive]' \
     -f'[force]' \
     -rf'[recursive && force]' \
@@ -78,7 +77,7 @@ function __rm_single_file(){
 local DATE=`date "+%y%m%d"`
 if ! [ -d ~/.Trash/$DATE/ ]
 then
-  command /bin/mkdir ~/.Trash/$DATE/
+  command /bin/mkdir -p ~/.Trash/$DATE/
 fi
 if ! [ $# -eq 1 ]
 then
