@@ -74,6 +74,8 @@ brew link libxml2 libxslt libiconv
 
 install brew-cask || true
 
+brew tap caskroom/versions || true
+
 cask install android-studio || true
 cask install bettertouchtool || true
 cask install colors || true
@@ -91,7 +93,7 @@ cask install google-japanese-ime || true
 cask install genymotion || true
 cask install hyperswitch || true
 cask install iterm2 || true
-# cask install java || true
+cask install java7 || true
 # cask install jdk || true
 cask install keepassx || true
 cask install keyremap4macbook || true

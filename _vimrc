@@ -585,13 +585,13 @@ NeoBundle 'sgur/unite-git_grep'
 "--------------------------------------------------
 
 NeoBundleLazy 'kana/vim-smartchr', {
-      \ "autoload": {"filetypes": ['python', 'scala', 'ruby']}
+      \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
       \}
 NeoBundleLazy 'kana/vim-smartinput', {
-      \ "autoload": {"filetypes": ['python', 'scala', 'ruby']}
+      \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
       \}
 NeoBundleLazy "cohama/vim-smartinput-endwise", {
-      \ "autoload": {"filetypes": ['python', 'scala', 'ruby']}
+      \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
       \}
 
 " call smartinput_endwise#define_default_rules()
@@ -812,7 +812,7 @@ let g:indentLine_char = ">"
 "-----------------------------------------------------
 NeoBundleLazy "alfredodeza/khuno.vim", {
     \ "autoload": {"filetypes": ['python','python3']}}
-let g:khuno_ignore="E126,E128,E501,E502"
+let g:khuno_ignore="E113,E126,E127,E128,E501,E502"
 nmap <silent><Leader>x <Esc>:Khuno show<CR>
 
 " NeoBundle 'davidhalter/jedi-vim'
