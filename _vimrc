@@ -584,88 +584,88 @@ NeoBundle 'sgur/unite-git_grep'
 " smart input & smart chr
 "--------------------------------------------------
 
-NeoBundleLazy 'kana/vim-smartchr', {
-      \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
-      \}
-NeoBundleLazy 'kana/vim-smartinput', {
-      \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
-      \}
-NeoBundleLazy "cohama/vim-smartinput-endwise", {
-      \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
-      \}
-
-" call smartinput_endwise#define_default_rules()
-
-" \%#はカーソル位置
-
-let s:bundle  =  neobundle#get('vim-smartinput')
-function! s:bundle.hooks.on_source(bundle)
-  let lst = [
-        \ ['<', "smartchr#loop(' < ', ' << ', '<')" ],
-        \ ['>', "smartchr#loop(' > ', ' >> ', ' >>> ', '>')"],
-        \ ['+', "smartchr#loop(' + ', ' ++ ', '+')"],
-        \ ['-', "smartchr#loop(' - ', ' -- ', '-',' -')"],
-        \ ['/', "smartchr#loop(' / ', ' // ', '/', '//')"],
-        \ ['&', "smartchr#loop(' & ', ' && ', '&')"],
-        \ ['%', "smartchr#loop(' % ', '%')"],
-        \ ['*', "smartchr#loop(' * ', ' ** ', '*', '**')"],
-        \ ['=', "smartchr#loop(' = ', ' == ', ' === ', '=')"],
-        \ ['<Bar>', "smartchr#loop(' | ', ' || ', '|')"],
-        \ [',', "smartchr#loop(', ', ',')"]
-        \]
-
-  for i in lst
-    call smartinput#map_to_trigger('i', i[0], i[0], i[0])
-    call smartinput#define_rule({'char': i[0], 'at': '\%#', 'input': '<C-R>='.i[1].'<CR>'})
-    " call smartinput#define_rule({'char': i[0], 'at': '^ \+ \%#', 'input': i[0]})
-    call smartinput#define_rule({'char': i[0], 'at': '[^<>+-/&%*=| ] \%#', 'input': '<BS><C-R>='.i[1].'<CR>'})
-    call smartinput#define_rule({'char': i[0], 'at': '^\([^"]*"[^"]*"\)*[^"]*"[^"]*\%#', 'input': i[0]})
-    call smartinput#define_rule({'char': i[0], 'at': '^\([^'']*''[^'']*''\)*[^'']*''[^'']*\%#', 'input': i[0]})
-  endfor
-
-  call smartinput#map_to_trigger('i', '<Enter>', '<Enter>', '<Enter>')
-  call smartinput#define_rule({'char': '<Enter>', 'at': '(\%#)', 'input': '<Enter><Enter><UP><Tab>'})
-  call smartinput#define_rule({'char': '<Enter>', 'at': '{\%#}', 'input': '<Enter><Enter><UP><Tab>'})
-
-  call smartinput#map_to_trigger('i', '>', '>', '>')
-  call smartinput#define_rule({'char': '>', 'at': ' < \%#', 'input': '<BS><BS><><Left>'})
-  call smartinput#define_rule({'char': '>', 'at': ' = \%#', 'input': '<BS><BS>=> '})
-  call smartinput#define_rule({'char': '>', 'at': ' - \%#', 'input': '<BS><BS>-> '})
-
-  call smartinput#map_to_trigger('i', '-', '-', '-')
-  call smartinput#define_rule({'char': '-', 'at': ' < \%#', 'input': '<BS><BS><- '})
-
-  call smartinput#map_to_trigger('i', '=', '=', '=')
-  call smartinput#define_rule({'char': '=', 'at': '[&+-/<>|] \%#', 'input': '<BS>= '})
-  call smartinput#define_rule({'char': '=', 'at': '!\%#', 'input': '= '})
-
-  call smartinput#map_to_trigger('i', '/', '/', '/')
-  call smartinput#define_rule({'char': '/', 'at': '  / \%#', 'input': '<BS><BS><BS>// '})
-
-  call smartinput#map_to_trigger('i', '<BS>', '<BS>', '<BS>')
-  call smartinput#define_rule({'char': '<BS>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
-  call smartinput#define_rule({'char': '<BS>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
-  call smartinput#define_rule({'char': '<BS>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
-  call smartinput#define_rule({'char': '<BS>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
-
-  call smartinput#map_to_trigger('i', '<C-h>', '<BS>',  '<C-h>')
-  call smartinput#map_to_trigger('i', '<Space>', '<Space>', '<Space>')
-
-  " call smartinput#map_to_trigger('i', '<C-h>', '<C-h>', '<BS>')
-  " call smartinput#define_rule({'char': '<C-h>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
-  " call smartinput#define_rule({'char': '<C-h>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
-  " call smartinput#define_rule({'char': '<C-h>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
-  " call smartinput#define_rule({'char': '<C-h>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
-
-  for op in ['<', '>', '+', '-', '/', '&', '%', '\*', '|', '=', ',']
-    call smartinput#define_rule({'char': '<BS>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
-    call smartinput#define_rule({'char': '<C-h>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
-    call smartinput#define_rule({'char': '<Space>', 'at': ''.op.' \%#', 'input': ''})
-
-  call smartinput_endwise#define_default_rules()
-  endfor
-endfunction
-unlet s:bundle
+" NeoBundleLazy 'kana/vim-smartchr', {
+"       \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
+"       \}
+" NeoBundleLazy 'kana/vim-smartinput', {
+"       \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
+"       \}
+" NeoBundleLazy "cohama/vim-smartinput-endwise", {
+"       \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
+"       \}
+"
+" " call smartinput_endwise#define_default_rules()
+"
+" " \%#はカーソル位置
+"
+" let s:bundle  =  neobundle#get('vim-smartinput')
+" function! s:bundle.hooks.on_source(bundle)
+"   let lst = [
+"         \ ['<', "smartchr#loop(' < ', ' << ', '<')" ],
+"         \ ['>', "smartchr#loop(' > ', ' >> ', ' >>> ', '>')"],
+"         \ ['+', "smartchr#loop(' + ', ' ++ ', '+')"],
+"         \ ['-', "smartchr#loop(' - ', ' -- ', '-',' -')"],
+"         \ ['/', "smartchr#loop(' / ', ' // ', '/', '//')"],
+"         \ ['&', "smartchr#loop(' & ', ' && ', '&')"],
+"         \ ['%', "smartchr#loop(' % ', '%')"],
+"         \ ['*', "smartchr#loop(' * ', ' ** ', '*', '**')"],
+"         \ ['=', "smartchr#loop(' = ', ' == ', ' === ', '=')"],
+"         \ ['<Bar>', "smartchr#loop(' | ', ' || ', '|')"],
+"         \ [',', "smartchr#loop(', ', ',')"]
+"         \]
+"
+"   for i in lst
+"     call smartinput#map_to_trigger('i', i[0], i[0], i[0])
+"     call smartinput#define_rule({'char': i[0], 'at': '\%#', 'input': '<C-R>='.i[1].'<CR>'})
+"     " call smartinput#define_rule({'char': i[0], 'at': '^ \+ \%#', 'input': i[0]})
+"     call smartinput#define_rule({'char': i[0], 'at': '[^<>+-/&%*=| ] \%#', 'input': '<BS><C-R>='.i[1].'<CR>'})
+"     call smartinput#define_rule({'char': i[0], 'at': '^\([^"]*"[^"]*"\)*[^"]*"[^"]*\%#', 'input': i[0]})
+"     call smartinput#define_rule({'char': i[0], 'at': '^\([^'']*''[^'']*''\)*[^'']*''[^'']*\%#', 'input': i[0]})
+"   endfor
+"
+"   call smartinput#map_to_trigger('i', '<Enter>', '<Enter>', '<Enter>')
+"   call smartinput#define_rule({'char': '<Enter>', 'at': '(\%#)', 'input': '<Enter><Enter><UP><Tab>'})
+"   call smartinput#define_rule({'char': '<Enter>', 'at': '{\%#}', 'input': '<Enter><Enter><UP><Tab>'})
+"
+"   call smartinput#map_to_trigger('i', '>', '>', '>')
+"   call smartinput#define_rule({'char': '>', 'at': ' < \%#', 'input': '<BS><BS><><Left>'})
+"   call smartinput#define_rule({'char': '>', 'at': ' = \%#', 'input': '<BS><BS>=> '})
+"   call smartinput#define_rule({'char': '>', 'at': ' - \%#', 'input': '<BS><BS>-> '})
+"
+"   call smartinput#map_to_trigger('i', '-', '-', '-')
+"   call smartinput#define_rule({'char': '-', 'at': ' < \%#', 'input': '<BS><BS><- '})
+"
+"   call smartinput#map_to_trigger('i', '=', '=', '=')
+"   call smartinput#define_rule({'char': '=', 'at': '[&+-/<>|] \%#', 'input': '<BS>= '})
+"   call smartinput#define_rule({'char': '=', 'at': '!\%#', 'input': '= '})
+"
+"   call smartinput#map_to_trigger('i', '/', '/', '/')
+"   call smartinput#define_rule({'char': '/', 'at': '  / \%#', 'input': '<BS><BS><BS>// '})
+"
+"   call smartinput#map_to_trigger('i', '<BS>', '<BS>', '<BS>')
+"   call smartinput#define_rule({'char': '<BS>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
+"   call smartinput#define_rule({'char': '<BS>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
+"   call smartinput#define_rule({'char': '<BS>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
+"   call smartinput#define_rule({'char': '<BS>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
+"
+"   call smartinput#map_to_trigger('i', '<C-h>', '<BS>',  '<C-h>')
+"   call smartinput#map_to_trigger('i', '<Space>', '<Space>', '<Space>')
+"
+"   " call smartinput#map_to_trigger('i', '<C-h>', '<C-h>', '<BS>')
+"   " call smartinput#define_rule({'char': '<C-h>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
+"   " call smartinput#define_rule({'char': '<C-h>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
+"   " call smartinput#define_rule({'char': '<C-h>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
+"   " call smartinput#define_rule({'char': '<C-h>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
+"
+"   for op in ['<', '>', '+', '-', '/', '&', '%', '\*', '|', '=', ',']
+"     call smartinput#define_rule({'char': '<BS>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
+"     call smartinput#define_rule({'char': '<C-h>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
+"     call smartinput#define_rule({'char': '<Space>', 'at': ''.op.' \%#', 'input': ''})
+"
+"   call smartinput_endwise#define_default_rules()
+"   endfor
+" endfunction
+" unlet s:bundle
 
 
 "--------------------------------------------------
