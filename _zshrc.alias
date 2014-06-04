@@ -1,5 +1,12 @@
-alias ls='ls -hF -G'
-# alias ls='ls -hF -G -W'
+case ${OSTYPE} in
+  darwin*)
+    # alias ls='ls -hF -G'
+    alias ls='ls -hFGW'
+    ;;
+  linux*)
+    alias ls='ls -hFG --color=auto'
+    ;;
+esac
 alias ll='ls -l'
 alias la='ls -A'
 alias cp='cp -i'

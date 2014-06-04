@@ -812,8 +812,10 @@ let g:indentLine_char = ">"
 "-----------------------------------------------------
 NeoBundleLazy "alfredodeza/khuno.vim", {
     \ "autoload": {"filetypes": ['python','python3']}}
-let g:khuno_ignore="E113,E126,E127,E128,E501,E502"
-nmap <silent><Leader>x <Esc>:Khuno show<CR>
+let g:khuno_ignore="E113,E123,E126,E127,E128,E251,E501,E502"
+nmap <silent><Leader>xs <Esc>:Khuno show<CR>
+nmap <silent><Leader>xon <Esc>:Khuno on<CR>
+nmap <silent><Leader>xoff <Esc>:Khuno off<CR>
 
 " NeoBundle 'davidhalter/jedi-vim'
 NeoBundleLazy "davidhalter/jedi-vim", {
@@ -866,10 +868,15 @@ NeoBundle 'vim-ruby/vim-ruby'
 " NeoBundle 'mattn/emmet-vim'
 NeoBundleLazy 'mattn/emmet-vim', {
     \ "autoload": {"filetypes": ['html']}}
+" let g:user_emmet_settings = {
+"       \ 'indentation': '  ',
+"       \ 'lang': 'ja'
+"       \}
 " HTMLが開かれるまでロードしない
 " NeoBundleLazy 'mattn/zencoding-vim', {
 "     \ "autoload": {"filetypes": ['html']}}
-let g:user_zen_settings = {
+" let g:user_zen_settings = {
+let g:user_emmet_settings = {
       \  'lang' : 'ja',
       \  'indentation' : '  ',
       \  'html' : {
