@@ -97,6 +97,7 @@ map   <C-j> <C-w>p
 nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
 
+noremap <Leader>W :silent !open /Applications/Firefox.app %<CR>
 "-----------------------------------------------------
 " テンプレート関連
 "-----------------------------------------------------
@@ -317,9 +318,9 @@ set fileencoding=utf-8
 "----------------------------------------------------
 " vim-tab
 "----------------------------------------------------
-nnoremap <C-k> :Texplore<Return>
-nnoremap <C-l> :tabnext<Return>
-nnoremap <C-h> :tabprevious<Return>
+" nnoremap <C-k> :Texplore<Return>
+" nnoremap <C-l> :tabnext<Return>
+" nnoremap <C-h> :tabprevious<Return>
 
 if has('unnamedplus')
   set clipboard& clipboard+=unnamedplus
@@ -536,7 +537,7 @@ nnoremap <silent> [unite]u :<C-u>UniteWithBufferDir -buffer-name=files file file
 nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> [unite]i :<C-u>Unite -buffer-name=files buffer_tab<CR>
-" nnoremap <silent> [unite]g :<C-u>Unite vcs_grep/git<CR>
+nnoremap <silent> [unite]g :<C-u>Unite vcs_grep/git<CR>
 function! s:unite_my_settings()
   " Overwrite settings
   nmap <buffer><ESC> <Plug>(unite_exit)
@@ -580,6 +581,66 @@ NeoBundleLazy 'tsukkee/unite-help', {
 
 NeoBundle 'sgur/unite-git_grep'
 
+
+"--------------------------------------------------
+" neocomplcache
+"--------------------------------------------------
+
+NeoBundle 'Shougo/neocomplcache'
+" NeoBundle 'Shougo/neocomplete'
+
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+
+" call vam#ActivateAddons(['neosnippet', 'neosnippet-snippets'])
+
+" Plugin key-mappings.
+imap <C-l>     <Plug>(neosnippet_expand_or_jump)
+smap <C-l>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-l>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+"--------------------------------------------------
+" UltiSnips
+" 動かない
+"--------------------------------------------------
+" set runtimepath+=~/.vim/bundle/ultisnips/
+" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" " let g:UltiSnipsSnippetsDir ="~/.vim/snippets"
+"
+" " If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
+"
+" " Snippets are separated from the engine. Add this if you want them:
+" NeoBundleLazy 'honza/vim-snippets'
+" " NeoBundleLazy 'honza/vim-snippets', {
+" "       \ "autoload": {
+" "       \   "insert": 1,
+" "       \ }}
+"
+"
+" " Track the engine.
+" NeoBundleLazy 'SirVer/ultisnips'
+" " NeoBundleLazy 'SirVer/ultisnips', {
+" "       \ "autoload": {
+" "       \   "insert": 1,
+" "       \ }}
+"
 "--------------------------------------------------
 " smart input & smart chr
 "--------------------------------------------------
@@ -852,7 +913,8 @@ endfunction
 unlet s:bundle
 
 autocmd FileType python let b:did_ftplugin = 1
-NeoBundle 'vim-scripts/pythoncomplete'
+NeoBundleLazy 'vim-scripts/pythoncomplete', {
+    \ "autoload": {"filetypes": ['python']}}
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "-----------------------------------------------------

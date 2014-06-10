@@ -1,0 +1,20 @@
+# set vertical-split = yes
+set main-view = \
+  line-number:yes,interval=1 \
+  id:yes,color \
+  date:local \
+  author:abbreviated \
+  commit-title:graph=yes,refs=yes
+set split-view-height = 80%
+set diff-context = 6
+
+# set show-author = full
+# set show-refs = true
+# set show-rev-graph = true
+# set show-date = local
+# set show-line-numbers = yes
+# set line-number-interval = 1
+set line-graphics = ascii
+# set show-file-size = units
+# set horizontal-scroll = 20%
+
