@@ -1,3 +1,4 @@
 *.local
 .vimperatorrc
 _vimperator
+_vim/bundle
