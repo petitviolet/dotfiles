@@ -62,6 +62,12 @@ endif
 set foldmethod=marker
 
 "-----------------------------------------------------
+" filetypeのalias
+"-----------------------------------------------------
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+au BufRead,BufNewFile,BufReadPre *.vimperatorrc   set filetype=vim
+
+"-----------------------------------------------------
 " キーバインド変更
 "-----------------------------------------------------
 " TABにて対応ペアにジャンプ
@@ -86,18 +92,21 @@ imap  <C-u> <C-u><C-o>d0
 imap  <C-n> <Down>
 imap  <C-p> <Up>
 imap  <C-d> <Del>
-" imap  <C-k> <C-o>d$
 
 inoremap <expr> <C-k> "\<C-g>u".(col('.') == col('$') ? '<C-o>gJ' : '<C-o>D')
 cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
-map   <C-j> <C-w>p
-" let mapleader = ","
-"  map  % <C-o>:%s/
+map   <C-l> <C-w>l
+map   <C-h> <C-w>h
 
 nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
 
-noremap <Leader>W :silent !open /Applications/Firefox.app %<CR>
+" 入力モード中に素早くjjと入力した場合はESCとみなす
+" 入力モード中に素早く;;と入力した場合はESCとみなす
+inoremap  ;;  <Esc>
+" w!! でスーパーユーザーとして保存（sudoが使える環境限定）
+cmap w!! w !sudo tee > /dev/null %
+
 "-----------------------------------------------------
 " テンプレート関連
 "-----------------------------------------------------
@@ -150,8 +159,6 @@ nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
-" 対応括弧に'<'と'>'のペアを追加
-set matchpairs& matchpairs+=<:>
 
 "------------------------------
 " マーク関係
@@ -210,6 +217,8 @@ set backspace=indent,eol,start
 set textwidth=0
 " ウィンドウの幅より長い行は折り返して、次の行に続けて表示する
 set wrap
+" 対応括弧に'<'と'>'のペアを追加
+set matchpairs& matchpairs+=<:>
 
 " 行末の空白をハイライト
 " highlight WhitespaceEOL ctermbg=red guibg=red
@@ -224,18 +233,7 @@ au WinEnter * let w:m1 = matchadd("WhitespaceEOL", ' +$')
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 matc ZenkakuSpace /　/
 
-" 保存時に行末の空白を除去する
-" autocmd BufWritePre * :%s/\s\+$//ge
-" function! s:remove_dust()
-"     let cursor = getpos(".")
-"     " 保存時に行末の空白を除去する
-"     %s/\s\+$//ge
-"     " 保存時にtabを2スペースに変換する
-"     " %s/\t/  /ge
-"     call setpos(".", cursor)
-"     unlet cursor
-" endfunction
-" autocmd BufWritePre * call <SID>remove_dust()
+" 保存時に末尾の空白を削除
 " markdownファイルの時は空白をハイライトする
 highlight UnderLined cterm=NONE ctermbg=darkgray guibg=#FF0000
 function! s:RTrim()
@@ -274,6 +272,7 @@ set statusline+=%{b:charCounterCount}
 set statusline+=\|%P\|
 " ステータスラインの色
 highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=gray
+
 "-----------------------------------------------------
 " 移動
 "-----------------------------------------------------
@@ -283,7 +282,7 @@ nnoremap <space><space> :<C-u>edit ~/.vimrc<CR>
 nnoremap <space>s :<C-u>source ~/.vimrc<CR>
 
 "-----------------------------------------------------
-" タブ
+" タブ・インデント
 "-----------------------------------------------------
 " タブが対応する空白の数
 set tabstop=2
@@ -295,10 +294,6 @@ set shiftwidth=2
 set expandtab
 " インデントをオプションの'shiftwidth'の値の倍数に丸める
 set shiftround
-
-"-----------------------------------------------------
-" インデント
-"-----------------------------------------------------
 " オートインデントを有効にする
 set autoindent
 " 新しい行を作ったときに高度な自動インデントを行う。 'cindent'
@@ -316,23 +311,14 @@ set termencoding=utf-8
 set fileencoding=utf-8
 
 "----------------------------------------------------
-" vim-tab
+" clipboard
 "----------------------------------------------------
-" nnoremap <C-k> :Texplore<Return>
-" nnoremap <C-l> :tabnext<Return>
-" nnoremap <C-h> :tabprevious<Return>
 
 if has('unnamedplus')
   set clipboard& clipboard+=unnamedplus
 else
   set clipboard& clipboard+=unnamed,autoselect
 endif
-" set clipboard+=unnamedplus,unnamed
-" 矩形選択で連番入力
-" 数字を選んで co と入力
-nnoremap <silent> co :ContinuousNumber <C-a><CR>
-vnoremap <silent> co :ContinuousNumber <C-a><CR>
-command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <count>?<count>-line('.'):1)|exec 'normal! j' . n . <q-args>|call cursor('.', c)|endfor
 
 "-----------------------------------------------------
 " 文字数カウント
@@ -381,19 +367,14 @@ vnoremap <silent> cc :s/./&/gn<Esc><Esc> <CR>
 " vを二回で行末まで選択
 vnoremap v $h
 
+"-----------------------------------------------------
+" 矩形選択で連番入力
+"-----------------------------------------------------
+" 数字を選んで co と入力
+nnoremap <silent> co :ContinuousNumber <C-a><CR>
+vnoremap <silent> co :ContinuousNumber <C-a><CR>
+command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <count>?<count>-line('.'):1)|exec 'normal! j' . n . <q-args>|call cursor('.', c)|endfor
 
-"----------------------------------------------------
-" その他
-"----------------------------------------------------
-
-" 入力モード中に素早くjjと入力した場合はESCとみなす
-" 入力モード中に素早く;;と入力した場合はESCとみなす
-inoremap  ;;  <Esc>
-" w!! でスーパーユーザーとして保存（sudoが使える環境限定）
-cmap w!! w !sudo tee > /dev/null %
-
-" filetype on
-" filetype plugin on
 
 "-----------------------------------------------------
 " Plugins
@@ -450,15 +431,11 @@ endif
 let g:neobundle_default_git_protocol='git'
 
 NeoBundle 'gmarik/vundle'
-" let Vundle manage Vundle
-" required!
 "-----------------------------------------------------
 " 文法チェック
 "-----------------------------------------------------
-
 " Go
 NeoBundle 'Blackrush/vim-gocode'
-
 
 " Template
 " :Template hogehoge
@@ -489,16 +466,42 @@ endfunction
 nmap <Leader>S :SyntasticCheck<CR>
 
 let g:syntastic_javascript_checker = 'JSHINT'
+
+"-----------------------------------------------------
+" 表示関係
+"-----------------------------------------------------
 " 相対行がぬるぬる表示される
 " NeoBundle 'myusuf3/numbers'
-" solarizedカラースキーマ
-" NeoBundle 'altercation/vim-colors-solarized'
+
+NeoBundle 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level = 1
+let g:indent_guides_guide_size = 1
+
+" インデントの色
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
+
+" HybridText
+" txtファイルのカラーリング
+NeoBundle 'vim-scripts/HybridText'
+" autocmd BufEnter * if &filetype == "text" | setlocal ft=hybrid | endif
+au BufRead,BufNewFile *.txt set syntax=hybrid
+
+
+" NeoBundle 'Yggdroot/indentLine'
+" let g:indentLine_enabled=1
+" let g:indentLine_color_term=200
+" let g:indentLine_loaded = 1
+" let g:indentLine_char = ">"
 
 "-----------------------------------------------------
 " Neocomplcache
 "-----------------------------------------------------
 
 " if_luaが有効ならneocompleteを使う
+" うまくいかない...
 " NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 "
 " if neobundle#is_installed('neocomplete')
@@ -525,10 +528,34 @@ let g:syntastic_javascript_checker = 'JSHINT'
 " inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 " NeoBundle 'Shougo/neocomplcache'
+
 NeoBundleLazy "Shougo/neocomplcache.vim", {
   \ "autoload": {
     \   "insert": 1,
       \ }}
+
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+
+" call vam#ActivateAddons(['neosnippet', 'neosnippet-snippets'])
+
+" Plugin key-mappings.
+imap <C-l> <Plug>(neosnippet_expand_or_jump)
+smap <C-l> <Plug>(neosnippet_expand_or_jump)
+xmap <C-l> <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 set completeopt=menuone
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
@@ -550,11 +577,11 @@ inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 " C-u r よく分からない
 " NeoBundle 'Shougo/unite.vim'
 
-NeoBundle "Shougo/unite.vim"
-" NeoBundleLazy "Shougo/unite.vim", {
-"       \ "autoload": {
-"       \   "commands": ["Unite", "UniteWithBufferDir"]
-"       \ }}
+" NeoBundle "Shougo/unite.vim"
+NeoBundleLazy "Shougo/unite.vim", {
+      \ "autoload": {
+      \   "commands": ["Unite", "UniteWithBufferDir"]
+      \ }}
 
 let g:unite_enable_start_insert=1
 nnoremap [unite] <Nop>
@@ -582,15 +609,6 @@ function! s:unite_my_settings()
   imap <buffer><expr><C-i> unite#do_action('vsplit')
 endfunction
 
-" NeoBundle 'Shougo/vimfiler'
-NeoBundleLazy "Shougo/vimfiler", {
-      \ "depends": ["Shougo/unite.vim"],
-      \ "autoload": {
-      \   "commands": ["VimFilerTab", "VimFiler", "VimFilerExplorer"],
-      \   "mappings": ['<Plug>(vimfiler_switch)'],
-      \   "explorer": 1,
-      \ }}
-
 " space-eでウィンドウ左側にファイルツリー表示
 nnoremap <silent> <space>e :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -toggle -no-quit<CR>
 
@@ -607,36 +625,14 @@ NeoBundleLazy 'tsukkee/unite-help', {
 
 NeoBundle 'sgur/unite-git_grep'
 
-
-"--------------------------------------------------
-" neocomplcache
-"--------------------------------------------------
-
-NeoBundle 'Shougo/neocomplcache'
-" NeoBundle 'Shougo/neocomplete'
-
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-
-" call vam#ActivateAddons(['neosnippet', 'neosnippet-snippets'])
-
-" Plugin key-mappings.
-imap <C-l>     <Plug>(neosnippet_expand_or_jump)
-smap <C-l>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-l>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+" NeoBundle 'Shougo/vimfiler'
+" NeoBundleLazy "Shougo/vimfiler", {
+"       \ "depends": ["Shougo/unite.vim"],
+"       \ "autoload": {
+"       \   "commands": ["VimFilerTab", "VimFiler", "VimFilerExplorer"],
+"       \   "mappings": ['<Plug>(vimfiler_switch)'],
+"       \   "explorer": 1,
+"       \ }}
 
 "--------------------------------------------------
 " UltiSnips
@@ -672,13 +668,13 @@ endif
 "--------------------------------------------------
 
 NeoBundleLazy 'kana/vim-smartchr', {
-      \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
+      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
       \}
 NeoBundleLazy 'kana/vim-smartinput', {
-      \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
+      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
       \}
 NeoBundleLazy "cohama/vim-smartinput-endwise", {
-      \ "autoload": {"filetypes": ['php', 'python', 'scala', 'ruby']}
+      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
       \}
 
 call smartinput_endwise#define_default_rules()
@@ -758,8 +754,8 @@ unlet s:bundle
 " Utility
 "--------------------------------------------------
 
-NeoBundle 'tyru/caw.vim.git'
 " <Leader>cで行の先頭にコメントをつけたり外したりできる
+NeoBundle 'tyru/caw.vim.git'
 nmap <Leader>c <Plug>(caw:i:toggle)
 vmap <Leader>c <Plug>(caw:i:toggle)
 
@@ -776,45 +772,44 @@ function! Toggle_quickfix_window()
     copen
   endif
 endfunction
+
+" <Leader>qでquickfixウィンドウをtoggleする
 nnoremap <Leader>q :call Toggle_quickfix_window()<CR>
-" Command-T
-NeoBundle 'wincent/Command-T'
 
 " vimsehll
 " vsでvimshellを起動
-NeoBundle 'Shougo/vimshell.git'
-let g:vimshell_interactive_update_time = 10
-let g:vimshell_prompt = $USER."% "
-"vimshell map
-nmap vs :VimShell<CR>
-nmap vp :VimShellPop<CR>
+" NeoBundle 'Shougo/vimshell.git'
+" let g:vimshell_interactive_update_time = 10
+" let g:vimshell_prompt = $USER."% "
+" "vimshell map
+" nmap vs :VimShell<CR>
+" nmap vp :VimShellPop<CR>
 
 NeoBundle 'majutsushi/tagbar'
 " TagBar
+" tbでIDEっぽくなる
 nmap <silent>tb :TagbarToggle<CR>
-" nmap <F8> :TagbarToggle<CR>
 
+" なぜか暴走するのでコメントアウト
 NeoBundle 'szw/vim-tags'
 " let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
 " let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
 nnoremap <C-]> g<C-]>
 nnoremap tt :TagsGenerate<CR>
 
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-fugitive'
-nnoremap <Leader>G :Ggrep!
-" nnoremap <Leader>G :Ggrep! | copen
-
+" vimとmacのclipboardをつなぐ？
 NeoBundle 'kana/vim-fakeclip'
 
 " nerdtree
 " ファイル管理(tree表示)
 " \nでファイルツリー表示
-NeoBundle 'scrooloose/nerdtree'
+NeoBundleLazy "scrooloose/nerdtree", {
+      \ "autoload": {
+      \   "commands": ["NERDTreeToggle"],
+      \ }}
 nmap <Leader>n :NERDTreeToggle<CR>
 nmap <silent> <C-e> :NERDTreeToggle<CR>
 vmap <silent> <C-e> <Esc> :NERDTreeToggle<CR>
-omap <silent> <C-e> :NERDTreeToggle<CR>
 " imap <silent> <C-e> <Esc> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let g:NERDTreeShowHidden=1
@@ -833,13 +828,12 @@ if has('persistent_undo')
     autocmd BufReadPre ~/* setlocal undofile
   augroup END
 endif
-" " UndoTree
-" " \uで開く
-" nmap U :<C-u>GundoToggle<CR>
+
+" UndoTree
+" \uで開く
 nmap <Leader>u :UndotreeToggle<CR>
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_WindowLayout = 'topleft'
-" let g:undotree_SplitLocation = 'topleft'
 let g:undotree_SplitWidth = 35
 let g:undotree_diffAutoOpen = 1
 let g:undotree_diffpanelHeight = 25
@@ -851,8 +845,9 @@ let g:undotree_HighlightSyntax = "UnderLined"
 " YankRing.vim
 NeoBundle 'YankRing.vim'
 " pでペーストした後，C-p,C-nで過去のものに切り替わっていく
-" \ y でヤンク履歴
+" <Leader>y でヤンク履歴
 nmap <Leader>y :YRShow<CR>
+
 " vim surrond
 NeoBundle 'tpope/vim-surround'
 " コマンド  実行前  実行後
@@ -871,30 +866,9 @@ NeoBundle 'tpope/vim-surround'
 " ysiw)   Hello World Now   Hello (World) Now
 " yss"  Hello World Now   "Hello World Now"
 
-"-----------------------------------------------------
-" インデントの可視化
-"-----------------------------------------------------
-" set list
-" set listchars=eol:\ ,trail:-
-NeoBundle 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_start_level = 1
-let g:indent_guides_guide_size = 1
-
-" インデントの色
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
-
-NeoBundle 'Yggdroot/indentLine'
-let g:indentLine_enabled=1
-let g:indentLine_color_term=200
-let g:indentLine_loaded = 1
-let g:indentLine_char = ">"
 
 "-----------------------------------------------------
-" jedi-vimの設定
-" Pythonのためのプラグインだよ
+" For Pythonプラグイン
 "-----------------------------------------------------
 NeoBundleLazy "alfredodeza/khuno.vim", {
     \ "autoload": {"filetypes": ['python','python3']}}
@@ -944,14 +918,15 @@ NeoBundleLazy 'vim-scripts/pythoncomplete', {
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "-----------------------------------------------------
-" ruby設定
+" ruby
 "-----------------------------------------------------
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'bbatsov/rubocop'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-rails'
+
 "-----------------------------------------------------
-" zen-coding設定
+" emmetg
 "-----------------------------------------------------
 " NeoBundle 'mattn/emmet-vim'
 NeoBundleLazy 'mattn/emmet-vim', {
@@ -1013,19 +988,31 @@ let g:user_emmet_settings = {
 " let g:user_zen_expandabbr_key = '<c-e>'
 
 "-----------------------------------------------------
-"html, css, javascript関係
+" html, css, javascript関係
 "-----------------------------------------------------
-NeoBundle 'mattn/webapi-vim'
-" NeoBundle 'tell-k/vim-browsereload-mac'
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'taichouchou2/html5.vim'
-NeoBundle 'pangloss/vim-javascript'
-" NeoBundle 'taichouchou2/vim-javascript'
-NeoBundle 'jelera/vim-javascript-syntax'
-NeoBundle 'JavaScript-syntax'
-" NeoBundle 'teramako/jscomplete-vim'
-" autocmd FileType javascript :set omnifunc=jscomplete#completeJS
-" autocmd FileType html :set omnifunc=jscomplete#completeJS
+NeoBundleLazy 'hail2u/vim-css3-syntax', {
+      \ 'autoload': {
+      \ 'filetypes': ['html', 'css']
+      \}}
+NeoBundle 'taichouchou2/html5.vim', {
+      \ 'autoload': {
+      \ 'filetypes': ['html', 'css']
+      \}}
+
+NeoBundle 'pangloss/vim-javascript', {
+      \ 'autoload': {
+      \ 'filetypes': ['html', 'css', 'javascript']
+      \}}
+
+NeoBundle 'jelera/vim-javascript-syntax', {
+      \ 'autoload': {
+      \ 'filetypes': ['html', 'css', 'javascript']
+      \}}
+
+NeoBundle 'kchmck/vim-coffee-script', {
+      \ 'autoload': {
+      \ 'filetypes': ['coffee']
+      \}}
 
 autocmd FileType javascript :compiler gjslint
 autocmd QuickFixCmdPost make copen
@@ -1034,24 +1021,6 @@ let g:netrw_nogx = 1 " disable netrw's gx mapping.
 "-----------------------------------------------------
 " Quick Run
 "-----------------------------------------------------
-" NeoBundle 'osyo-manga/unite-quickrun_config'
-" NeoBundle 'thinca/vim-quickrun'
-" let g:quickrun_config = {}
-" let g:quickrun_config._ = {
-"       \ 'runner' : 'vimproc',
-"       \ 'runner/vimproc/updatetime' : 100,
-"       \ 'outputter/buffer/split' : 'botright 8sp',
-"       \ 'outputter' : 'quickfix',
-"       \}
-"
-" NeoBundleLazy 'osyo-manga/unite-quickrun_config', {
-"       \ 'depends': [
-"       \ 'Shougo/unite.vim',
-"       \ 'thinca/vim-quickrun',
-"       \ ],
-"       \ }
-" NeoBundleSource 'unite-quickrun_config'
-
 NeoBundleLazy 'thinca/vim-quickrun', {
       \ 'autoload': {
       \ 'filetypes': ['ruby',  'python', 'sh', 'scala', 'java']
@@ -1083,11 +1052,11 @@ let g:quickrun_config = {
 
 "-----------------------------------------------------
 " GIST.vim の設定 実行は :Gist
-" :Gist -l でgist一覧
-" :Gist -s hoge でタイトル付きで投稿
 "-----------------------------------------------------
 
-" NeoBundle 'mattn/gist-vim'
+" :Gist -l でgist一覧
+" :Gist -s hoge でタイトル付きで投稿
+NeoBundle 'mattn/webapi-vim'
 NeoBundleLazy "mattn/gist-vim", {
       \ "depends": ["mattn/webapi-vim"],
       \ "autoload": {
@@ -1124,12 +1093,6 @@ func! s:paste_gist_tag()
   endif
 endfunc
 command! -nargs=0 PasteGist     call <sid>paste_gist_tag()
-
-" HybridText
-" txtファイルのカラーリング？
-NeoBundle 'vim-scripts/HybridText'
-" autocmd BufEnter * if &filetype == "text" | setlocal ft=hybrid | endif
-au BufRead,BufNewFile *.txt set syntax=hybrid
 
 " ファイルタイププラグインおよびインデントの有効化
 filetype plugin indent on
@@ -1190,4 +1153,3 @@ endif
 " 改行コードの自動認識
 set fileformats=unix,dos,mac
 set whichwrap=b,s,h,l,<,>,[,]
-
