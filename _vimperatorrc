@@ -23,7 +23,9 @@ map k 3<C-y>
 no f F
 no F f
 " Ctrl-sで.vimperatorrcを再読込
-no <C-s> :source ~/.vimperatorrc<cr>
+" no <C-s> :source ~/.vimperatorrc<cr>
+map <C-s> :mapc<CR>:cmapc<CR>:imapc<CR>:source! ~/.vimperatorrc<CR>
+
 " ddにタブを閉じる, dでは何もしない
 no dd :tabclose<CR>
 map d <NOP>
@@ -58,14 +60,25 @@ cmap <C-h> <BS>
 " youtubeのダウンロード
 nmap <silent> ey :fetchyoutube<CR>
 " slideshareの操作
-no <C-]> :slideshare next<CR>
-no <C-_> :slideshare prev<CR>
+nooremap <C-]> :slideshare next<CR>
+nooremap <C-_> :slideshare prev<CR>
 
 " 検索キーワードのハイライト
 set hlsearch
 
 " 最初の補完を早くする(らしい)
 set preload
+
+nnoremap @ :togglepin<CR>
+
+"============================
+" colorscheme
+"============================
+hi Hint font-family: Arial; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+hi HintElem color: gray; background-color: #a1e4e6;
+hi HintActive color: black; background-color: #ff8700;
+
+hi ErrorMsg color:white; background-color: #ec6aa1;
 
 set editor="/usr/local/bin/vim"
 " 読み込んだ事を出力
