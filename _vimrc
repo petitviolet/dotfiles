@@ -313,13 +313,22 @@ set fileencoding=utf-8
 "----------------------------------------------------
 " clipboard
 "----------------------------------------------------
+"
+" if has('unnamedplus')
+"   set clipboard& clipboard+=unnamedplus
+" else
+"   set clipboard& clipboard+=unnamed,autoselect
+" endif
 
-if has('unnamedplus')
-  set clipboard& clipboard+=unnamedplus
-else
-  set clipboard& clipboard+=unnamed,autoselect
+if has("clipboard")
+  vmap ,y "+y
+  nmap ,p "+gP
+  " exclude:{pattern} must be last ^= prepend += append
+  if has("gui_running") || has("xterm_clipboard")
+    silent! set clipboard^=unnamedplus
+    set clipboard^=unnamed
+  endif
 endif
-
 "-----------------------------------------------------
 " 文字数カウント
 "-----------------------------------------------------
@@ -577,11 +586,11 @@ inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 " C-u r よく分からない
 " NeoBundle 'Shougo/unite.vim'
 
-" NeoBundle "Shougo/unite.vim"
-NeoBundleLazy "Shougo/unite.vim", {
-      \ "autoload": {
-      \   "commands": ["Unite", "UniteWithBufferDir"]
-      \ }}
+NeoBundle "Shougo/unite.vim"
+" NeoBundleLazy "Shougo/unite.vim", {
+"       \ "autoload": {
+"       \   "commands": ["Unite", "UniteWithBufferDir"]
+"       \ }}
 
 let g:unite_enable_start_insert=1
 nnoremap [unite] <Nop>
@@ -625,7 +634,7 @@ NeoBundleLazy 'tsukkee/unite-help', {
 
 NeoBundle 'sgur/unite-git_grep'
 
-" NeoBundle 'Shougo/vimfiler'
+NeoBundle 'Shougo/vimfiler'
 " NeoBundleLazy "Shougo/vimfiler", {
 "       \ "depends": ["Shougo/unite.vim"],
 "       \ "autoload": {
@@ -633,7 +642,7 @@ NeoBundle 'sgur/unite-git_grep'
 "       \   "mappings": ['<Plug>(vimfiler_switch)'],
 "       \   "explorer": 1,
 "       \ }}
-
+"
 "--------------------------------------------------
 " UltiSnips
 " 動かない

@@ -60,8 +60,8 @@ cmap <C-h> <BS>
 " youtubeのダウンロード
 nmap <silent> ey :fetchyoutube<CR>
 " slideshareの操作
-nooremap <C-]> :slideshare next<CR>
-nooremap <C-_> :slideshare prev<CR>
+nnoremap -urls=www\\.slideshare\\.net <C-l> :slideshare next<CR>
+nnoremap -urls=www\\.slideshare\\.net <C-h> :slideshare prev<CR>
 
 " 検索キーワードのハイライト
 set hlsearch
