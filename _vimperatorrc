@@ -56,12 +56,16 @@ imap <C-h> <BS>
 cmap <C-h> <BS>
 
 "フォームにフォーカスしないように
-" set focuscontent
+set focuscontent
 " youtubeのダウンロード
 nmap <silent> ey :fetchyoutube<CR>
+
 " slideshareの操作
 nnoremap -urls=www\\.slideshare\\.net <C-l> :slideshare next<CR>
 nnoremap -urls=www\\.slideshare\\.net <C-h> :slideshare prev<CR>
+" speakerdeckの操作
+nnoremap -urls=speakerdeck\\.com <C-l> :speakerdeck next<CR>
+nnoremap -urls=speakerdeck\\.com <C-h> :speakerdeck prev<CR>
 
 " 検索キーワードのハイライト
 set hlsearch
@@ -74,11 +78,15 @@ nnoremap @ :togglepin<CR>
 "============================
 " colorscheme
 "============================
-hi Hint font-family: Arial; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
-hi HintElem color: gray; background-color: #a1e4e6;
+hi Hint font-family: Meiryo; font-size: 21px; text-shadow: -1px -1px 1px #555, 1px -1px 1px #555, -1px 1px 1px #555, 1px 1px 1px #555; color: #FF0;
+hi HintElem color: blue; background-color: #DDD;
 hi HintActive color: black; background-color: #ff8700;
+" hi Hint font-family: Arial; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+" hi HintElem color: gray; background-color: #a1e4e6;
+" hi HintActive color: black; background-color: #ff8700;
 
-hi ErrorMsg color:white; background-color: #ec6aa1;
+hi ErrorMsg color:red; background-color: white;
+" hi ErrorMsg color:white; background-color: #ec6aa1;
 
 set editor="/usr/local/bin/vim"
 " 読み込んだ事を出力

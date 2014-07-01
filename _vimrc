@@ -66,6 +66,7 @@ set foldmethod=marker
 "-----------------------------------------------------
 au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 au BufRead,BufNewFile,BufReadPre *.vimperatorrc   set filetype=vim
+au BufRead,BufNewFile,BufReadPre *zsh*   set filetype=zsh
 
 "-----------------------------------------------------
 " キーバインド変更
@@ -474,7 +475,7 @@ function! s:syntastic()
 endfunction
 nmap <Leader>S :SyntasticCheck<CR>
 
-let g:syntastic_javascript_checker = 'JSHINT'
+" let g:syntastic_javascript_checker = 'JSHINT'
 
 "-----------------------------------------------------
 " 表示関係
@@ -911,13 +912,13 @@ function! s:bundle.hooks.on_source(bundle)
   " jediにvimの設定を任せると'completeopt+=preview'するので
   " 自動設定機能をOFFにし手動で設定を行う
   let g:jedi#auto_vim_configuration = 0
-  let g:jedi#show_function_definition = 0
+  let g:jedi#show_call_signature = 0
   " 補完の最初の項目が選択された状態だと使いにくいためオフにする
   let g:jedi#popup_select_first = 0
   " <Leader>rでリネームする
   let g:jedi#rename_command = '<Leader>r'
   command! -nargs=0 JediRename :call jedi#rename()
-  let g:jedi#pydoc = '<Leader>k'
+  let g:jedi#documentation_command = '<Leader>k'
 endfunction
 unlet s:bundle
 

@@ -24,6 +24,7 @@ alias java='java -Dfile.encoding=UTF-8'
 alias scalac='scalac -J-Dfile.encoding=UTF-8'
 alias scala='scala -Dfile.encoding=UTF-8'
 
+alias o='git ls-files | peco | xargs -o vim'
 # --------------------------------------------------
 #  オリジナルコマンド
 # --------------------------------------------------
@@ -109,8 +110,8 @@ fi
 
 
 function cdls() {
-\cd $1;
-ls;
+  \cd $1;
+  ls;
 }
 alias cd=cdls
 
