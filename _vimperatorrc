@@ -78,7 +78,7 @@ nnoremap @ :togglepin<CR>
 "============================
 " colorscheme
 "============================
-hi Hint font-family: Meiryo; font-size: 21px; text-shadow: -1px -1px 1px #555, 1px -1px 1px #555, -1px 1px 1px #555, 1px 1px 1px #555; color: #FF0;
+hi Hint font-family: Meiryo; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000; color: #FF0;
 hi HintElem color: blue; background-color: #DDD;
 hi HintActive color: black; background-color: #ff8700;
 " hi Hint font-family: Arial; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;

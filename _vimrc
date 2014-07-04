@@ -1,3 +1,11 @@
+
+if has('python')
+python <<EOM
+import sys
+print sys.version
+print sys.path
+EOM
+endif
 "-----------------------------------------------------
 "
 "                o
@@ -96,6 +104,7 @@ imap  <C-d> <Del>
 
 inoremap <expr> <C-k> "\<C-g>u".(col('.') == col('$') ? '<C-o>gJ' : '<C-o>D')
 cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
+map   <C-k> <C-w>p
 map   <C-l> <C-w>l
 map   <C-h> <C-w>h
 
@@ -512,37 +521,37 @@ au BufRead,BufNewFile *.txt set syntax=hybrid
 
 " if_luaが有効ならneocompleteを使う
 " うまくいかない...
-" NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
-"
-" if neobundle#is_installed('neocomplete')
-"   " neocomplete用設定
-"   let g:neocomplete#enable_at_startup = 1
-"   let g:neocomplete#enable_ignore_case = 1
-"   let g:neocomplete#enable_smart_case = 1
-"   if !exists('g:neocomplete#keyword_patterns')
-"     let g:neocomplete#keyword_patterns = {}
-"   endif
-"   let g:neocomplete#keyword_patterns._ = '\h\w*'
-" elseif neobundle#is_installed('neocomplcache')
-"   " neocomplcache用設定
-"   let g:neocomplcache_enable_at_startup = 1
-"   let g:neocomplcache_enable_ignore_case = 1
-"   let g:neocomplcache_enable_smart_case = 1
-"   if !exists('g:neocomplcache_keyword_patterns')
-"     let g:neocomplcache_keyword_patterns = {}
-"   endif
-"   let g:neocomplcache_keyword_patterns._ = '\h\w*'
-"   let g:neocomplcache_enable_camel_case_completion = 1
-"   let g:neocomplcache_enable_underbar_completion = 1
-" endif
-" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-" NeoBundle 'Shougo/neocomplcache'
+NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 
-NeoBundleLazy "Shougo/neocomplcache.vim", {
-  \ "autoload": {
-    \   "insert": 1,
-      \ }}
+if neobundle#is_installed('neocomplete')
+  " neocomplete用設定
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#enable_ignore_case = 1
+  let g:neocomplete#enable_smart_case = 1
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns._ = '\h\w*'
+elseif neobundle#is_installed('neocomplcache')
+  " neocomplcache用設定
+  let g:neocomplcache_enable_at_startup = 1
+  let g:neocomplcache_enable_ignore_case = 1
+  let g:neocomplcache_enable_smart_case = 1
+  if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+  endif
+  let g:neocomplcache_keyword_patterns._ = '\h\w*'
+  let g:neocomplcache_enable_camel_case_completion = 1
+  let g:neocomplcache_enable_underbar_completion = 1
+endif
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" NeoBundle 'Shougo/neocomplcache'
+"
+" NeoBundleLazy "Shougo/neocomplcache.vim", {
+"   \ "autoload": {
+"     \   "insert": 1,
+"       \ }}
 
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
@@ -568,15 +577,15 @@ if has('conceal')
 endif
 
 set completeopt=menuone
-let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
-let g:neocomplcache_dictionary_filetype_lists = {
-  \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
-  \ 'html' : $HOME.'/.vim/dict/javascript.dict',
-  \ 'scala' : $HOME . '/.vim/dict/scala.dict',
-  \ }
-" 文字deleteのさくさく化
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+" let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
+" let g:neocomplcache_dictionary_filetype_lists = {
+"   \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
+"   \ 'html' : $HOME.'/.vim/dict/javascript.dict',
+"   \ 'scala' : $HOME . '/.vim/dict/scala.dict',
+"   \ }
+" " 文字deleteのさくさく化
+" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 
 "--------------------------------------------------
 " unite.vim
@@ -687,7 +696,7 @@ NeoBundleLazy "cohama/vim-smartinput-endwise", {
       \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
       \}
 
-call smartinput_endwise#define_default_rules()
+" call smartinput_endwise#define_default_rules()
 "
 " " \%#はカーソル位置
 "
@@ -749,6 +758,10 @@ function! s:bundle.hooks.on_source(bundle)
   call smartinput#define_rule({'char': '<C-h>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
   call smartinput#define_rule({'char': '<C-h>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
   call smartinput#define_rule({'char': '<C-h>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
+  call smartinput#define_rule({'char': '<C-h>', 'at': "'\s*'\%#", 'input': "<C-O>dF'<BS>"})
+  call smartinput#define_rule({'char': '<C-h>', 'at': '"\s*"\%#', 'input': '<C-O>dF"<BS>'})
+  call smartinput#define_rule({'char': '<C-h>', 'at': "'\%#'", 'input': "<Right><BS><BS>"})
+  call smartinput#define_rule({'char': '<C-h>', 'at': '"\%#"', 'input': '<Right><BS><BS>'})
 
   for op in ['<', '>', '+', '-', '/', '&', '%', '\*', '|', '=', ',']
     call smartinput#define_rule({'char': '<BS>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
@@ -887,7 +900,7 @@ nmap <silent><Leader>xs <Esc>:Khuno show<CR>
 nmap <silent><Leader>xon <Esc>:Khuno on<CR>
 nmap <silent><Leader>xoff <Esc>:Khuno off<CR>
 
-" NeoBundle 'davidhalter/jedi-vim'
+" " NeoBundle 'davidhalter/jedi-vim'
 NeoBundleLazy "davidhalter/jedi-vim", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"],
@@ -896,15 +909,6 @@ NeoBundleLazy "davidhalter/jedi-vim", {
       \   "mac": "pip install jedi",
       \   "unix": "pip install jedi",
       \ }}
-function! InitPython()
-    " jedi.vimとpyhoncompleteがバッティングし得るらしいので
-    " http://mattn.kaoriya.net/software/vim/20121018212621.htm
-    let b:did_ftplugin = 1
-    setlocal commentstring=#%s
-    " rename用のマッピングを無効にしたため、代わりにコマンドを定義
-    setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
-endfunction
-autocmd BufEnter * if &filetype == 'python' | call InitPython() | endif
 
 
 let s:bundle = neobundle#get("jedi-vim")
@@ -912,20 +916,28 @@ function! s:bundle.hooks.on_source(bundle)
   " jediにvimの設定を任せると'completeopt+=preview'するので
   " 自動設定機能をOFFにし手動で設定を行う
   let g:jedi#auto_vim_configuration = 0
-  let g:jedi#show_call_signature = 0
+  let g:jedi#popup_on_dot = 0
+  " let g:jedi#show_function_definition = 0
+  let g:jedi#show_call_signatures = 0
   " 補完の最初の項目が選択された状態だと使いにくいためオフにする
   let g:jedi#popup_select_first = 0
   " <Leader>rでリネームする
   let g:jedi#rename_command = '<Leader>r'
   command! -nargs=0 JediRename :call jedi#rename()
   let g:jedi#documentation_command = '<Leader>k'
+  autocmd FileType python setlocal omnifunc=jedi#completions
+  if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+  endif
+  let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 endfunction
 unlet s:bundle
 
+
 autocmd FileType python let b:did_ftplugin = 1
-NeoBundleLazy 'vim-scripts/pythoncomplete', {
-    \ "autoload": {"filetypes": ['python']}}
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+" NeoBundleLazy 'vim-scripts/pythoncomplete', {
+"     \ "autoload": {"filetypes": ['python']}}
+" autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "-----------------------------------------------------
 " ruby

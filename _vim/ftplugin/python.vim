@@ -30,11 +30,11 @@ setlocal nosmartindent
 setlocal cindent
 
 setlocal colorcolumn=80
-autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 "-----------------------------------------------------
 " 文法チェック
 "-----------------------------------------------------
 
 " let pyflakes_use_quickfix = 0
-autocmd FileType python let g:pydiction_location = '~/.vim/dict/complete-dict'
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+" autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+" autocmd FileType python let g:pydiction_location = '~/.vim/dict/complete-dict'
+" autocmd FileType python set omnifunc=pythoncomplete#Complete

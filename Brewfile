@@ -61,7 +61,7 @@ install tmux || true
 install tree || true
 # install vim || true
 
-brew install vim --with-features=huge --enable-multibyte --enable-pythoninterp=dynamic --enable-tclinterp --enable-cscope --enable-fontset --enable-gnome-check --without-x --enable-gpm --with-python --with-python3 --with-lua --with-ruby --with-client-server --with-python-config-dir=/usr/local/bin/python || true
+brew install vim --with-features=huge --enable-multibyte --enable-pythoninterp=dynamic --enable-tclinterp --enable-cscope --enable-fontset --enable-gnome-check --disable-gui --without-x --enable-gpm --with-python --with-python3 --with-lua --with-ruby --with-python-config-dir=/usr/local/bin/python || true
 
 install watch || true
 install wget || true
