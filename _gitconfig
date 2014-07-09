@@ -11,5 +11,7 @@
 [color]
 	ui = auto
 [core]
-	excludesfile = /Users/Komurasaki/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
+[ghq]
+  root = ~/Code/go/ghq

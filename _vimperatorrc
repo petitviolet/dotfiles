@@ -63,6 +63,8 @@ nmap <silent> ey :fetchyoutube<CR>
 " slideshareの操作
 nnoremap -urls=www\\.slideshare\\.net <C-l> :slideshare next<CR>
 nnoremap -urls=www\\.slideshare\\.net <C-h> :slideshare prev<CR>
+nnoremap -urls=ssslide\\.com <C-l> :slideshare next<CR>
+nnoremap -urls=ssslide\\.com <C-h> :slideshare prev<CR>
 " speakerdeckの操作
 nnoremap -urls=speakerdeck\\.com <C-l> :speakerdeck next<CR>
 nnoremap -urls=speakerdeck\\.com <C-h> :speakerdeck prev<CR>
