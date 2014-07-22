@@ -133,6 +133,19 @@ function peco-select-history() {
 zle -N peco-select-history
 bindkey '^r' peco-select-history
 
+function peco-select-gitadd() {
+    local selected_file_to_add=$(git status --porcelain | \
+        peco --query "$LBUFFER" | \
+        awk -F ' ' '{print $NF}')
+    if [ -n "$selected_file_to_add" ]; then
+      BUFFER="git add ${selected_file_to_add}"
+      zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-select-gitadd
+bindkey '^ga' peco-select-gitadd
+
 ###################################
 
 setopt extended_glob

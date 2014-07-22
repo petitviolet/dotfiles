@@ -418,8 +418,8 @@ nmap <silent>tb :TagbarToggle<CR>
 
 " なぜか暴走するのでコメントアウト
 NeoBundle 'szw/vim-tags'
-" let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
-" let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
+let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
 nnoremap <C-]> g<C-]>
 nnoremap tt :TagsGenerate<CR>
 
