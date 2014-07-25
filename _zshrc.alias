@@ -134,17 +134,32 @@ zle -N peco-select-history
 bindkey '^r' peco-select-history
 
 function peco-select-gitadd() {
-    local selected_file_to_add=$(git status --porcelain | \
-        peco --query "$LBUFFER" | \
-        awk -F ' ' '{print $NF}')
-    if [ -n "$selected_file_to_add" ]; then
-      BUFFER="git add ${selected_file_to_add}"
-      zle accept-line
+    local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
+                                  peco --query "$LBUFFER" | \
+                                  awk -F ' ' '{print $NF}')"
+    if [ -n "$SELECTED_FILE_TO_ADD" ]; then
+      BUFFER="git add $(echo "$SELECTED_FILE_TO_ADD" | tr '\n' ' ')"
+      CURSOR=$#BUFFER
     fi
-    zle clear-screen
+    zle accept-line
+    # zle clear-screen
 }
 zle -N peco-select-gitadd
-bindkey '^ga' peco-select-gitadd
+bindkey "^g^a" peco-select-gitadd
+
+function peco-select-gitdiff() {
+    local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
+                                  peco --query "$LBUFFER" | \
+                                  awk -F ' ' '{print $NF}')"
+    if [ -n "$SELECTED_FILE_TO_ADD" ]; then
+      BUFFER="git diff $(echo "$SELECTED_FILE_TO_ADD" | tr '\n' ' ')"
+      CURSOR=$#BUFFER
+    fi
+    zle accept-line
+    # zle clear-screen
+}
+zle -N peco-select-gitdiff
+bindkey "^g^i" peco-select-gitdiff
 
 ###################################
 
