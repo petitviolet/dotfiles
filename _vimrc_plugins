@@ -289,12 +289,12 @@ NeoBundle 'Shougo/vimfiler'
 " smart input & smart chr
 "--------------------------------------------------
 
-NeoBundleLazy 'kana/vim-smartchr', {
-      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
-      \}
-NeoBundleLazy 'kana/vim-smartinput', {
-      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
-      \}
+" NeoBundleLazy 'kana/vim-smartchr', {
+"       \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
+"       \}
+" NeoBundleLazy 'kana/vim-smartinput', {
+"       \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
+"       \}
 NeoBundleLazy "cohama/vim-smartinput-endwise", {
       \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
       \}
