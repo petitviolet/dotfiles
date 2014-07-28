@@ -133,7 +133,7 @@ function peco-select-history() {
 zle -N peco-select-history
 bindkey '^r' peco-select-history
 
-function peco-select-gitadd() {
+function peco-select-git-add() {
     local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
                                   peco --query "$LBUFFER" | \
                                   awk -F ' ' '{print $NF}')"
@@ -144,15 +144,29 @@ function peco-select-gitadd() {
     zle accept-line
     # zle clear-screen
 }
-zle -N peco-select-gitadd
-bindkey "^g^a" peco-select-gitadd
+zle -N peco-select-git-add
+bindkey "^g^a" peco-select-git-add
+
+function peco-select-git-checkout() {
+    local SELECTED_FILE_TO_CHECKOUT="$(git branch --verbose | \
+                                  peco --query "$LBUFFER" | \
+                                  sed -e 's/\* //g' | \
+                                  awk '{print $1}')"
+    if [ -n "$SELECTED_FILE_TO_CHECKOUT" ]; then
+      BUFFER="git checkout $(echo "$SELECTED_FILE_TO_CHECKOUT" | tr '\n' ' ')"
+      CURSOR=$#BUFFER
+    fi
+    zle accept-line
+}
+zle -N peco-select-git-checkout
+bindkey "^gco" peco-select-git-checkout
 
 function peco-select-gitdiff() {
-    local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
+    local SELECTED_FILE_TO_DIFF="$(git status --porcelain | \
                                   peco --query "$LBUFFER" | \
                                   awk -F ' ' '{print $NF}')"
-    if [ -n "$SELECTED_FILE_TO_ADD" ]; then
-      BUFFER="git diff $(echo "$SELECTED_FILE_TO_ADD" | tr '\n' ' ')"
+    if [ -n "$SELECTED_FILE_TO_DIFF" ]; then
+      BUFFER="git diff $(echo "$SELECTED_FILE_TO_DIFF" | tr '\n' ' ')"
       CURSOR=$#BUFFER
     fi
     zle accept-line

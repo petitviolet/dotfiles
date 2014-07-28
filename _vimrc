@@ -54,8 +54,8 @@ set foldmethod=marker
 "-----------------------------------------------------
 " filetypeのalias
 "-----------------------------------------------------
-au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
-au BufRead,BufNewFile,BufReadPre *.vimperatorrc   set filetype=vim
+au BufRead,BufNewFile,BufReadPre *coffee   set filetype=coffee
+au BufRead,BufNewFile,BufReadPre *vimperatorrc   set filetype=vim
 au BufRead,BufNewFile,BufReadPre *zsh*   set filetype=zsh
 
 "-----------------------------------------------------
