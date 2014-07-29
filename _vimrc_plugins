@@ -122,6 +122,10 @@ NeoBundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 "Disable default mappings
 nmap s <Plug>(easymotion-s2)
 nmap g/ <Plug>(easymotion-sn)
+" カラー設定変更
+hi EasyMotionTarget ctermbg=none ctermfg=red
+hi EasyMotionShade  ctermbg=none ctermfg=green
+hi EasyMotionIncSearch  ctermbg=black ctermfg=white
 
 
 "-----------------------------------------------------
