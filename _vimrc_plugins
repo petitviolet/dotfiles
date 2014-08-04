@@ -147,9 +147,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 " HybridText
 " txtファイルのカラーリング
 NeoBundle 'vim-scripts/HybridText'
-" autocmd BufEnter * if &filetype == "text" | setlocal ft=hybrid | endif
 au BufRead,BufNewFile *.txt set syntax=hybrid
-
 
 " NeoBundle 'Yggdroot/indentLine'
 " let g:indentLine_enabled=1
@@ -425,7 +423,7 @@ unlet s:bundle
 "--------------------------------------------------
 " Utility
 "--------------------------------------------------
-
+NeoBundle 'tpope/vim-fugitive'
 " <Leader>cで行の先頭にコメントをつけたり外したりできる
 NeoBundle 'tyru/caw.vim.git'
 nmap <Leader>c <Plug>(caw:i:toggle)
@@ -542,6 +540,27 @@ NeoBundle 'tpope/vim-surround'
 "-----------------------------------------------------
 " For Pythonプラグイン
 "-----------------------------------------------------
+" PATHの自動更新関数
+" | 指定された path が $PATH に存在せず、ディレクトリとして存在している場合
+" | のみ $PATH に加える
+function s:IncludePath(path)
+  " define delimiter depends on platform
+  if has('win16') || has('win32') || has('win64')
+    let delimiter = ";"
+  else
+    let delimiter = ":"
+  endif
+  let pathlist = split($PATH, delimiter)
+  if isdirectory(a:path) && index(pathlist, a:path) == -1
+    let $PATH=a:path.delimiter.$PATH
+  endif
+endfunction
+
+" ~/.pyenv/shims を $PATH に追加する
+" これを行わないとpythonが正しく検索されない
+call s:IncludePath(expand("~/.pyenv/shims"))
+
+" エラーチェック
 NeoBundleLazy "alfredodeza/khuno.vim", {
     \ "autoload": {"filetypes": ['python','python3']}}
 let g:khuno_ignore="E113,E123,E126,E127,E128,E251,E302,E501,E502"
@@ -549,7 +568,38 @@ nmap <silent><Leader>xs <Esc>:Khuno show<CR>
 nmap <silent><Leader>xon <Esc>:Khuno on<CR>
 nmap <silent><Leader>xoff <Esc>:Khuno off<CR>
 
-" " NeoBundle 'davidhalter/jedi-vim'
+NeoBundleLazy "lambdalisue/vim-django-support", {
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"]
+      \ }}
+
+" NeoBundleLazy "vim-scripts/python_match", {
+"       \ "autoload": {
+"       \   "filetypes": ["python", "python3", "djangohtml"]
+"       \ }}
+"
+NeoBundleLazy "vim-scripts/indentpython.vim", {
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"]
+      \ }}
+
+NeoBundleLazy "mjbrownie/django-template-textobjects", {
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"]
+      \ }}
+
+
+NeoBundleLazy "edsono/vim-matchit", {
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"]
+      \ }}
+
+NeoBundleLazy "lambdalisue/vim-pyenv", {
+      \ "depends": ['davidhalter/jedi-vim'],
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"]
+      \ }}
+
 NeoBundleLazy "davidhalter/jedi-vim", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"],
@@ -597,7 +647,7 @@ NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-rails'
 
 "-----------------------------------------------------
-" emmetg
+" emmet
 "-----------------------------------------------------
 " NeoBundle 'mattn/emmet-vim'
 NeoBundleLazy 'mattn/emmet-vim', {
