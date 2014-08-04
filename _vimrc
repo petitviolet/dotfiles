@@ -274,10 +274,38 @@ let g:markdown_fenced_languages = [
 
 " ステータスラインに表示する情報の指定
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=%c\:%l/%L:
+
+" ステータスラインの表示
+" 参考URL
+"   http://blog.ruedap.com/entry/20110712/vim_statusline_git_branch_name
+set statusline=%<     " 行が長すぎるときに切り詰める位置
+set statusline+=%n  " バッファ番号
+set statusline+=%m    " %m 修正フラグ
+set statusline+=%h    " %h ヘルプバッファフラグ
+set statusline+=%w    " %w プレビューウィンドウフラグ
+set statusline+=%y    " バッファ内のファイルのタイプ
+if winwidth(0) >= 130
+  set statusline+=%F    " バッファ内のファイルのフルパス
+else
+  set statusline+=%t    " ファイル名のみ
+endif
+set statusline+=%r    " %r 読み込み専用フラグ
+set statusline+=\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}  " fencとffを表示
+set statusline+=\     " 空白スペース
+set statusline+=%=    " 左寄せ項目と右寄せ項目の区切り
+set statusline+=%1l   " 何行目にカーソルがあるか
+set statusline+=/
+set statusline+=%L    " バッファ内の総行数
+set statusline+=,
+set statusline+=%c    " 何列目にカーソルがあるか
+" set statusline+=%V    " 画面上の何列目にカーソルがあるか
+set statusline+=\   " 空白スペース2個
 set statusline+=%{b:charCounterCount}
-set statusline+=\|%P\|
+set statusline+=\|%P\|" ファイル内の何％の位置にあるか
+set statusline+=%{fugitive#statusline()}  " Gitのブランチ名を表示
+
 " ステータスラインの色
-highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=gray
+highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=cyan
 
 "-----------------------------------------------------
 " タブ・インデント
