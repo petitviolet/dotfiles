@@ -1,16 +1,16 @@
 "-----------------------------------------------------
 "
-"                                 ___           ___           ___
-"      ___            ___        /  /\         /  /\         /  /\
-"     /  /\          /__/\      /  /::|       /  /::\       /  /::\
-"    /  /:/          \__\:\    /  /:|:|      /  /:/\:\     /  /:/\:\
-"   /  /:/           /  /::\  /  /:/|:|__   /  /::\ \:\   /  /:/  \:\
-"  /__/:/  ___    __/  /:/\/ /__/:/_|::::\ /__/:/\:\_\:\ /__/:/ \  \:\
-"  |  |:| /  /\  /__/\/:/~~  \__\/  /~~/:/ \__\/~|::\/:/ \  \:\  \__\/
-"  |  |:|/  /:/  \  \::/           /  /:/     |  |:|::/   \  \:\
-"  |__|:|__/:/    \  \:\          /  /:/      |  |:|\/     \  \:\
-"   \__\::::/      \__\/         /__/:/       |__|:|~       \  \:\
-"       ~~~~                     \__\/         \__\|         \__\/
+"                                 ___
+"      ___            ___        /  /\
+"     /  /\          /__/\      /  /::|
+"    /  /:/          \__\:\    /  /:|:|
+"   /  /:/           /  /::\  /  /:/|:|__
+"  /__/:/  ___    __/  /:/\/ /__/:/_|::::\
+"  |  |:| /  /\  /__/\/:/~~  \__\/  /~~/:/
+"  |  |:|/  /:/  \  \::/           /  /:/
+"  |__|:|__/:/    \  \:\          /  /:/
+"   \__\::::/      \__\/         /__/:/
+"       ~~~~                     \__\/
 "                    ___       ___           ___                        ___
 "      ___          /  /\     /  /\         /  /\           ___        /  /\
 "     /  /\        /  /:/    /  /:/        /  /::\         /__/\      /  /::|
@@ -23,11 +23,6 @@
 "       \__\/      \  \:\    \  \::/       \  \::/       \__\/         /__/:/
 "                   \__\/     \__\/         \__\/                      \__\/
 "
-"
-"
-"-----------------------------------------------------
-" Plugins
-"-----------------------------------------------------
 " gocode
 set rtp+=$GOROOT/misc/vim
 " golint
@@ -71,8 +66,6 @@ else
         \   "unix"      : "make -f make_unix.mak",
         \ }}
 
-  " (ry
-
   " インストールされていないプラグインのチェックおよびダウンロード
   NeoBundleCheck
 endif
@@ -86,11 +79,13 @@ NeoBundle 'gmarik/vundle'
 NeoBundle 'Blackrush/vim-gocode'
 
 " Template
-" :Template hogehoge
+" Usage: :Template hogehoge
 NeoBundle "mattn/sonictemplate-vim"
 
 " Scala syntax
-NeoBundle 'derekwyatt/vim-scala'
+NeoBundleLazy 'derekwyatt/vim-scala'
+      \ "autoload": {"filetypes": ['scala']}
+      \ }}
 set makeprg=sbtc\ --exec\ compile
 
 NeoBundle 'scrooloose/syntastic'
@@ -101,19 +96,11 @@ let g:syntastic_mode_map = {
       \ 'active_filetypes': ['javascript', 'json', 'ruby', 'php'],
       \ 'passive_filetypes': ['java', 'scala', 'python'],
       \}
-
-
-" augroup AutoSyntastic
-"   autocmd!
-"   autocmd InsertLeave * call s:syntastic()
-" augroup END
 function! s:syntastic()
   w
   SyntasticCheck
 endfunction
 nmap <Leader>S :SyntasticCheck<CR>
-
-" let g:syntastic_javascript_checker = 'JSHINT'
 
 "-----------------------------------------------------
 " easy motion
@@ -126,7 +113,6 @@ nmap g/ <Plug>(easymotion-sn)
 hi EasyMotionTarget ctermbg=none ctermfg=red
 hi EasyMotionShade  ctermbg=none ctermfg=green
 hi EasyMotionIncSearch  ctermbg=black ctermfg=white
-
 
 "-----------------------------------------------------
 " 表示関係
@@ -149,18 +135,11 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 NeoBundle 'vim-scripts/HybridText'
 au BufRead,BufNewFile *.txt set syntax=hybrid
 
-" NeoBundle 'Yggdroot/indentLine'
-" let g:indentLine_enabled=1
-" let g:indentLine_color_term=200
-" let g:indentLine_loaded = 1
-" let g:indentLine_char = ">"
-
 "-----------------------------------------------------
 " Neocomplcache
 "-----------------------------------------------------
 
 " if_luaが有効ならneocompleteを使う
-" うまくいかない...
 NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 
 if neobundle#is_installed('neocomplete')
@@ -186,18 +165,9 @@ elseif neobundle#is_installed('neocomplcache')
 endif
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-" NeoBundle 'Shougo/neocomplcache'
-"
-" NeoBundleLazy "Shougo/neocomplcache.vim", {
-"   \ "autoload": {
-"     \   "insert": 1,
-"       \ }}
 
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
-
-" call vam#ActivateAddons(['neosnippet', 'neosnippet-snippets'])
-
 " Plugin key-mappings.
 imap <C-l> <Plug>(neosnippet_expand_or_jump)
 smap <C-l> <Plug>(neosnippet_expand_or_jump)
@@ -217,24 +187,14 @@ if has('conceal')
 endif
 
 set completeopt=menuone
-" let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
-" let g:neocomplcache_dictionary_filetype_lists = {
-"   \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
-"   \ 'html' : $HOME.'/.vim/dict/javascript.dict',
-"   \ 'scala' : $HOME . '/.vim/dict/scala.dict',
-"   \ }
-" " 文字deleteのさくさく化
-" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 
 "--------------------------------------------------
 " unite.vim
 "--------------------------------------------------
-" C-u uで現在開いているファイルと同ディレクトリのファイルを開く
-" C-u iでunite経由で既に開いたファイルを開く
-" C-u cで最初に開いたファイルのディレクトリのファイルを開く
-" C-u r よく分からない
-" NeoBundle 'Shougo/unite.vim'
+" C-u u 現在開いているファイルと同ディレクトリのファイルを開く
+" C-u i unite経由で既に開いたファイルを開く
+" C-u c 最初に開いたファイルのディレクトリのファイルを開く
+" C-u r 編集履歴
 
 NeoBundle "Shougo/unite.vim"
 " NeoBundleLazy "Shougo/unite.vim", {
@@ -269,6 +229,7 @@ function! s:unite_my_settings()
 endfunction
 
 " space-eでウィンドウ左側にファイルツリー表示
+NeoBundle 'Shougo/vimfiler'
 nnoremap <silent> <space>e :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -toggle -no-quit<CR>
 
 " NeoBundle 'h1mesuke/unite-outline'
@@ -276,52 +237,12 @@ NeoBundleLazy 'h1mesuke/unite-outline', {
       \ "autoload": {
       \   "unite_sources": ["outline"],
       \ }}
-
 NeoBundleLazy 'tsukkee/unite-help', {
       \ "autoload": {
       \   "unite_sources": ["help"],
       \ }}
-
 NeoBundle 'sgur/unite-git_grep'
 
-NeoBundle 'Shougo/vimfiler'
-" NeoBundleLazy "Shougo/vimfiler", {
-"       \ "depends": ["Shougo/unite.vim"],
-"       \ "autoload": {
-"       \   "commands": ["VimFilerTab", "VimFiler", "VimFilerExplorer"],
-"       \   "mappings": ['<Plug>(vimfiler_switch)'],
-"       \   "explorer": 1,
-"       \ }}
-"
-"--------------------------------------------------
-" UltiSnips
-" 動かない
-"--------------------------------------------------
-" set runtimepath+=~/.vim/bundle/ultisnips/
-" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-" " let g:UltiSnipsSnippetsDir ="~/.vim/snippets"
-"
-" " If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
-"
-" " Snippets are separated from the engine. Add this if you want them:
-" NeoBundleLazy 'honza/vim-snippets'
-" " NeoBundleLazy 'honza/vim-snippets', {
-" "       \ "autoload": {
-" "       \   "insert": 1,
-" "       \ }}
-"
-"
-" " Track the engine.
-" NeoBundleLazy 'SirVer/ultisnips'
-" " NeoBundleLazy 'SirVer/ultisnips', {
-" "       \ "autoload": {
-" "       \   "insert": 1,
-" "       \ }}
-"
 "--------------------------------------------------
 " smart input & smart chr
 "--------------------------------------------------
@@ -419,21 +340,15 @@ function! s:bundle.hooks.on_source(bundle)
 endfunction
 unlet s:bundle
 
-
 "--------------------------------------------------
 " Utility
 "--------------------------------------------------
-NeoBundle 'tpope/vim-fugitive'
 " <Leader>cで行の先頭にコメントをつけたり外したりできる
 NeoBundle 'tyru/caw.vim.git'
 nmap <Leader>c <Plug>(caw:i:toggle)
 vmap <Leader>c <Plug>(caw:i:toggle)
 
 NeoBundle 'thinca/vim-qfreplace'
-" NeoBundle 'milkypostman/vim-togglelist'
-"
-" nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
-" nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
 
 function! Toggle_quickfix_window()
   let _ = winnr('$')
@@ -447,6 +362,7 @@ endfunction
 nnoremap <Leader>q :call Toggle_quickfix_window()<CR>
 
 " vimsehll
+" いらない
 " vsでvimshellを起動
 " NeoBundle 'Shougo/vimshell.git'
 " let g:vimshell_interactive_update_time = 10
@@ -460,7 +376,6 @@ NeoBundle 'majutsushi/tagbar'
 " tbでIDEっぽくなる
 nmap <silent>tb :TagbarToggle<CR>
 
-" なぜか暴走するのでコメントアウト
 NeoBundle 'szw/vim-tags'
 let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
 let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
@@ -536,7 +451,6 @@ NeoBundle 'tpope/vim-surround'
 " ysiw)   Hello World Now   Hello (World) Now
 " yss"  Hello World Now   "Hello World Now"
 
-
 "-----------------------------------------------------
 " For Pythonプラグイン
 "-----------------------------------------------------
@@ -572,34 +486,23 @@ NeoBundleLazy "lambdalisue/vim-django-support", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"]
       \ }}
-
-" NeoBundleLazy "vim-scripts/python_match", {
-"       \ "autoload": {
-"       \   "filetypes": ["python", "python3", "djangohtml"]
-"       \ }}
-"
 NeoBundleLazy "vim-scripts/indentpython.vim", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"]
       \ }}
-
 NeoBundleLazy "mjbrownie/django-template-textobjects", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"]
       \ }}
-
-
 NeoBundleLazy "edsono/vim-matchit", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"]
       \ }}
-
 NeoBundleLazy "lambdalisue/vim-pyenv", {
       \ "depends": ['davidhalter/jedi-vim'],
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"]
       \ }}
-
 NeoBundleLazy "davidhalter/jedi-vim", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"],
@@ -608,7 +511,6 @@ NeoBundleLazy "davidhalter/jedi-vim", {
       \   "mac": "pip install jedi",
       \   "unix": "pip install jedi",
       \ }}
-
 
 let s:bundle = neobundle#get("jedi-vim")
 function! s:bundle.hooks.on_source(bundle)
@@ -632,11 +534,7 @@ function! s:bundle.hooks.on_source(bundle)
 endfunction
 unlet s:bundle
 
-
 autocmd FileType python let b:did_ftplugin = 1
-" NeoBundleLazy 'vim-scripts/pythoncomplete', {
-"     \ "autoload": {"filetypes": ['python']}}
-" autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "-----------------------------------------------------
 " ruby
@@ -719,22 +617,18 @@ NeoBundle 'taichouchou2/html5.vim', {
       \ 'autoload': {
       \ 'filetypes': ['html', 'css']
       \}}
-
 NeoBundle 'pangloss/vim-javascript', {
       \ 'autoload': {
       \ 'filetypes': ['html', 'css', 'javascript']
       \}}
-
 NeoBundle 'jelera/vim-javascript-syntax', {
       \ 'autoload': {
       \ 'filetypes': ['html', 'css', 'javascript']
       \}}
-
 NeoBundle 'kchmck/vim-coffee-script', {
       \ 'autoload': {
       \ 'filetypes': ['coffee']
       \}}
-
 autocmd FileType javascript :compiler gjslint
 autocmd QuickFixCmdPost make copen
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
@@ -758,22 +652,11 @@ let g:quickrun_config = {
       \ 'outputter' : 'quickfix',
       \}}
 
-" quickrun_configがうまく読み込めない
-" let s:bundle = neobundle#get('vim-quickrun')
-" function! s:bundle.hooks.on_source(bundle)
-"   let g:quickrun_config = {}
-"   let g:quickrun_config._ = {
-"         \ 'runner' : 'vimproc',
-"         \ 'runner/vimproc/updatetime' : 30,
-"         \ 'outputter/buffer/split' : 'botright 8sp',
-"         \ 'outputter' : 'quickfix',
-"         \}
-" endfunction
-" unlet s:bundle
-
 "-----------------------------------------------------
 " GIST.vim の設定 実行は :Gist
 "-----------------------------------------------------
+" Git関係
+NeoBundle 'tpope/vim-fugitive'
 
 " :Gist -l でgist一覧
 " :Gist -s hoge でタイトル付きで投稿
