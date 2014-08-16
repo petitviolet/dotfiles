@@ -273,7 +273,7 @@ let g:markdown_fenced_languages = [
 \]
 
 " ステータスラインに表示する情報の指定
-set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=%c\:%l/%L:
+" set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=%c\:%l/%L:
 
 " ステータスラインの表示
 " 参考URL
@@ -284,11 +284,12 @@ set statusline+=%m    " %m 修正フラグ
 set statusline+=%h    " %h ヘルプバッファフラグ
 set statusline+=%w    " %w プレビューウィンドウフラグ
 set statusline+=%y    " バッファ内のファイルのタイプ
-if winwidth(0) >= 130
-  set statusline+=%F    " バッファ内のファイルのフルパス
-else
-  set statusline+=%t    " ファイル名のみ
-endif
+set statusline+=%F    " バッファ内のファイルのフルパス
+" if winwidth(0) >= 130
+"   set statusline+=%F    " バッファ内のファイルのフルパス
+" else
+"   set statusline+=%t    " ファイル名のみ
+" endif
 set statusline+=%r    " %r 読み込み専用フラグ
 set statusline+=\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}  " fencとffを表示
 set statusline+=\     " 空白スペース

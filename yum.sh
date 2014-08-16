@@ -1,4 +1,6 @@
 #!/bin/sh
+# とりあえずの開発環境をパーッと整える
+# 不必要になるものも多い
 
 sudo yum -y update
 sudo yum -y groupinstall 'Development tools'

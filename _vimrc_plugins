@@ -83,9 +83,9 @@ NeoBundle 'Blackrush/vim-gocode'
 NeoBundle "mattn/sonictemplate-vim"
 
 " Scala syntax
-NeoBundleLazy 'derekwyatt/vim-scala'
-      \ "autoload": {"filetypes": ['scala']}
-      \ }}
+NeoBundleLazy 'derekwyatt/vim-scala', {
+    \ "autoload": {"filetypes": ['html']}}
+
 set makeprg=sbtc\ --exec\ compile
 
 NeoBundle 'scrooloose/syntastic'
@@ -229,8 +229,8 @@ function! s:unite_my_settings()
 endfunction
 
 " space-eでウィンドウ左側にファイルツリー表示
-NeoBundle 'Shougo/vimfiler'
-nnoremap <silent> <space>e :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -toggle -no-quit<CR>
+" NeoBundle 'Shougo/vimfiler'
+" nnoremap <silent> <space>e :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -toggle -no-quit<CR>
 
 " NeoBundle 'h1mesuke/unite-outline'
 NeoBundleLazy 'h1mesuke/unite-outline', {
@@ -392,12 +392,17 @@ NeoBundleLazy "scrooloose/nerdtree", {
       \ "autoload": {
       \   "commands": ["NERDTreeToggle"],
       \ }}
-nmap <Leader>n :NERDTreeToggle<CR>
+
+" 引数なしで実行したとき、NERDTreeを実行する
+" let file_name = expand("%:p")
+" if has('vim_starting') &&  file_name == ""
+"     autocmd VimEnter * call ExecuteNERDTree()
+" endif
+
 nmap <silent> <C-e> :NERDTreeToggle<CR>
 vmap <silent> <C-e> <Esc> :NERDTreeToggle<CR>
-" imap <silent> <C-e> <Esc> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let g:NERDTreeShowHidden=1
+" let g:NERDTreeShowHidden=1
 
 " Undo関係
 " undoの履歴を残せる
@@ -451,6 +456,8 @@ NeoBundle 'tpope/vim-surround'
 " ysiw)   Hello World Now   Hello (World) Now
 " yss"  Hello World Now   "Hello World Now"
 
+NeoBundle 'terryma/vim-multiple-cursors'
+
 "-----------------------------------------------------
 " For Pythonプラグイン
 "-----------------------------------------------------
@@ -482,15 +489,19 @@ nmap <silent><Leader>xs <Esc>:Khuno show<CR>
 nmap <silent><Leader>xon <Esc>:Khuno on<CR>
 nmap <silent><Leader>xoff <Esc>:Khuno off<CR>
 
-NeoBundleLazy "lambdalisue/vim-django-support", {
-      \ "autoload": {
-      \   "filetypes": ["python", "python3", "djangohtml"]
-      \ }}
 NeoBundleLazy "vim-scripts/indentpython.vim", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"]
       \ }}
+NeoBundleLazy "lambdalisue/vim-django-support", {
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"]
+      \ }}
 NeoBundleLazy "mjbrownie/django-template-textobjects", {
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"]
+      \ }}
+NeoBundleLazy "kana/vim-textobj-user", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"]
       \ }}

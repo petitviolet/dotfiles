@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# vimをinstallする
+# オプションは適宜変更
+
 cd $HOME
 mkdir tmp
 cd tmp
