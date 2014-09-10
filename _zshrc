@@ -73,6 +73,9 @@ zstyle ':completion:*' verbose yes
 zstyle ':completion:*' format '%B%d%b'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
 
 # URLを自動エスケープ
 # auto-fuと競合する
@@ -128,6 +131,12 @@ setopt auto_cd
 # cdのタイミングで自動的にpushd.直前と同じ場合は無視
 setopt auto_pushd
 setopt pushd_ignore_dups
+typeset -ga chpwd_functions
+autoload -U chpwd_recent_dirs cdr
+chpwd_functions+=chpwd_recent_dirs
+zstyle ":chpwd:*" recent-dirs-max 1000
+zstyle ":chpwd:*" recent-dirs-default true
+zstyle ":completion:*" recent-dirs-insert always
 
 #----------------------------------------------------------
 # 履歴関連

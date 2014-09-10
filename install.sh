@@ -7,8 +7,9 @@ do
     fn=$(echo $dotfile | sed -e s/_/\./)
     if [ $HOME/$fn ]
     then
-      echo filename is $HOME/$fn
-      rm -i $HOME/$fn
+      echo symlinked $HOME/$fn
+      # rm -i $HOME/$fn
+      mv $HOME/$fn $HOME/.Trash/
     fi
     ln -s $HOME/dotfiles/$dotfile $HOME/$fn
   fi

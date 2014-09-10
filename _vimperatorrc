@@ -34,6 +34,7 @@ map d <NOP>
 " map <C-h> <BS>
 " map <BS> <A-Left>
 map <BS> <NOP>
+map play <NOP>
 
 " h/l に戻るや進むを割り当て
 map H <A-Left>
