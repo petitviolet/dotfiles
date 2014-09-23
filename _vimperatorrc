@@ -57,7 +57,7 @@ imap <C-h> <BS>
 cmap <C-h> <BS>
 
 "フォームにフォーカスしないように
-set focuscontent
+" set focuscontent
 " youtubeのダウンロード
 nmap <silent> ey :fetchyoutube<CR>
 
