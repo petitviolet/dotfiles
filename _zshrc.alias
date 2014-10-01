@@ -9,8 +9,8 @@ case ${OSTYPE} in
 esac
 alias ll='ls -l'
 alias la='ls -A'
-alias cp='cp -i'
-alias mv='mv -i'
+alias cp='cp -vi'
+alias mv='mv -vi'
 alias du='du -h'
 # alias cat='more'
 alias du='du -h'
