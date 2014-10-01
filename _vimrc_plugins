@@ -457,7 +457,7 @@ NeoBundle 'tpope/vim-surround'
 " ysiw)   Hello World Now   Hello (World) Now
 " yss"  Hello World Now   "Hello World Now"
 
-NeoBundle 'terryma/vim-multiple-cursors'
+" NeoBundle 'terryma/vim-multiple-cursors'
 
 "-----------------------------------------------------
 " For Pythonプラグイン
