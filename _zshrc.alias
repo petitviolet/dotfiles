@@ -145,7 +145,7 @@ zle -N peco-cdr
 bindkey '^@' peco-cdr
 
 function peco-select-git-add() {
-    local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
+    local SELECTED_FILE_TO_ADD="$(git status --short | \
                                   peco --query "$LBUFFER" | \
                                   awk -F ' ' '{print $NF}')"
     if [ -n "$SELECTED_FILE_TO_ADD" ]; then
@@ -173,7 +173,7 @@ zle -N peco-select-git-checkout
 bindkey "^gco" peco-select-git-checkout
 
 function peco-select-gitdiff() {
-    local SELECTED_FILE_TO_DIFF="$(git status --porcelain | \
+    local SELECTED_FILE_TO_DIFF="$(git status --short | \
                                   peco --query "$LBUFFER" | \
                                   awk -F ' ' '{print $NF}')"
     if [ -n "$SELECTED_FILE_TO_DIFF" ]; then
