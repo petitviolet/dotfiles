@@ -561,7 +561,7 @@ NeoBundle 'tpope/vim-rails'
 "-----------------------------------------------------
 " NeoBundle 'mattn/emmet-vim'
 NeoBundleLazy 'mattn/emmet-vim', {
-    \ "autoload": {"filetypes": ['html']}}
+    \ "autoload": {"filetypes": ['html', 'htmldjango']}}
 " let g:user_emmet_settings = {
 "       \ 'indentation': '  ',
 "       \ 'lang': 'ja'
@@ -625,10 +625,10 @@ NeoBundleLazy 'hail2u/vim-css3-syntax', {
       \ 'autoload': {
       \ 'filetypes': ['html', 'css']
       \}}
-NeoBundle 'taichouchou2/html5.vim', {
-      \ 'autoload': {
-      \ 'filetypes': ['html', 'css']
-      \}}
+" NeoBundle 'taichouchou2/html5.vim', {
+"       \ 'autoload': {
+"       \ 'filetypes': ['html', 'css']
+"       \}}
 NeoBundle 'pangloss/vim-javascript', {
       \ 'autoload': {
       \ 'filetypes': ['html', 'css', 'javascript']
