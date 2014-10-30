@@ -8,6 +8,7 @@
 	co = checkout
   lp = log --decorate --stat --patch
   ls = ls-files
+  re = reset
 [color]
 	ui = auto
 [core]
@@ -15,3 +16,7 @@
 	editor = vim
 [ghq]
   root = ~/Code/go/ghq
+[filter "media"]
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
