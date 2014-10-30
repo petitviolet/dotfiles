@@ -50,7 +50,7 @@ else
   if has('vim_starting')
     execute "set runtimepath+=" . s:neobundle_root
   endif
-  call neobundle#rc(s:bundle_root)
+  call neobundle#begin(s:bundle_root)
 
   " NeoBundle自身をNeoBundleで管理させる
   NeoBundleFetch 'Shougo/neobundle.vim'
@@ -68,6 +68,7 @@ else
 
   " インストールされていないプラグインのチェックおよびダウンロード
   NeoBundleCheck
+  call neobundle#end()
 endif
 let g:neobundle_default_git_protocol='git'
 
@@ -229,8 +230,8 @@ function! s:unite_my_settings()
 endfunction
 
 " space-eでウィンドウ左側にファイルツリー表示
-" NeoBundle 'Shougo/vimfiler'
-" nnoremap <silent> <space>e :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -toggle -no-quit<CR>
+NeoBundle 'Shougo/vimfiler'
+nnoremap <silent> <space>e :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -toggle -no-quit<CR>
 
 " NeoBundle 'h1mesuke/unite-outline'
 NeoBundleLazy 'h1mesuke/unite-outline', {
