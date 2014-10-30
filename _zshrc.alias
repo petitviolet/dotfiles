@@ -27,6 +27,7 @@ alias scala='scala -Dfile.encoding=UTF-8'
 alias o='git ls-files | peco | xargs -o vim'
 alias g='cd $(ghq list -p | peco)'
 alias reload='exec $SHELL -l'
+alias mkdir='mkdir -p'
 # --------------------------------------------------
 #  オリジナルコマンド
 # --------------------------------------------------
