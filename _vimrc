@@ -107,7 +107,7 @@ nnoremap <space>p :<C-u>edit ~/.vimrc_plugins<CR>
 
 " 入力モード中に素早くjjと入力した場合はESCとみなす
 " 入力モード中に素早く;;と入力した場合はESCとみなす
-inoremap  ;;  <Esc>
+" inoremap  ;;  <Esc>
 
 " w!! でスーパーユーザーとして保存（sudoが使える環境限定）
 cmap w!! w !sudo tee > /dev/null %
