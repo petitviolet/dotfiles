@@ -197,6 +197,7 @@ set completeopt=menuone
 " C-u c 最初に開いたファイルのディレクトリのファイルを開く
 " C-u r 編集履歴
 
+NeoBundle "Shougo/tabpagebuffer.vim"
 NeoBundle "Shougo/unite.vim"
 " NeoBundleLazy "Shougo/unite.vim", {
 "       \ "autoload": {
