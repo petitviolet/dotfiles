@@ -1,6 +1,6 @@
 # dotfilesを設定
 
-主にzshrc(.alias)とvimrcが大事
+主にzshrc(.alias)とvimrcが大事  
 zshrc.localやvimrc.localにgithubに上げない情報を入れておく
 
 ## 設定ファイルの配置
@@ -19,14 +19,14 @@ sh install.sh
 
 ## vim
 
-プラグインを入れる
-`NeoBundle`を入れるために`Vundle`を使う
-`:BundleInstall`と`:NeoBundleInstall`を実行する
-`:messages`でエラーメッセージを見て適宜対応
+プラグインを入れる  
+`NeoBundle`を入れるために`Vundle`を使う  
+`:BundleInstall`と`:NeoBundleInstall`を実行する  
+`:messages`でエラーメッセージを見て適宜対応  
 
 ## tmux.conf
 
-最下行に`reattach-to-user-namespace`とあるが、この行をコメントアウトする必要がある
+最下行に`reattach-to-user-namespace`とあるが、この行をコメントアウトする必要がある  
 Macであればそのままで良い
 
 ## Mac
