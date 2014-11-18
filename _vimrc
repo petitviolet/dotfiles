@@ -260,6 +260,7 @@ let g:markdown_fenced_languages = [
 \  'css',
 \  'sh',
 \  'erb=eruby',
+\  'java',
 \  'javascript',
 \  'js=javascript',
 \  'json=javascript',
@@ -361,6 +362,7 @@ endif
 "-----------------------------------------------------
 " 文字数カウント
 "-----------------------------------------------------
+
 " statusbarにファイル中の文字数を表示
 
 if exists("anekos_charCounter")
@@ -404,6 +406,7 @@ vnoremap <silent> cc :s/./&/gn <CR>
 "-----------------------------------------------------
 " 矩形選択で連番入力
 "-----------------------------------------------------
+
 " 数字を選んで co と入力
 nnoremap <silent> co :ContinuousNumber <C-a><CR>
 vnoremap <silent> co :ContinuousNumber <C-a><CR>
@@ -416,7 +419,6 @@ command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <co
 if exists("$HOME/.vimrc_plugins")
   source $HOME/.vimrc_plugins
 endif
-
 
 "-----------------------------------------------------
 " 文字コードの自動認識
