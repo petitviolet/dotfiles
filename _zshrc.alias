@@ -105,12 +105,20 @@ then
     COUNT=$(($COUNT+1))
     NAME="$BASENAME.$COUNT"
   done
-  command /bin/mv $1 ~/.Trash/$DATE/$NAME
+  command /bin/mv -v $1 ~/.Trash/$DATE/$NAME
 else
   echo "No such file or directory: $file"
 fi
 }
 
+# function abs_cd() {
+#     command cd "$@"
+#     if [[ ($? -eq 0) && (${#FUNCNAME[*]} -eq 1) ]]; then
+#         history -s cd $(printf "%q" "$PWD")
+#     fi
+# }
+#
+# alias cd=abs_cd
 
 function cdls() {
   \cd $1;
