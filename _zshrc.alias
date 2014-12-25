@@ -14,6 +14,9 @@ alias mv='mv -vi'
 alias du='du -h'
 # alias cat='more'
 alias du='du -h'
+# 文字化け対策
+alias sort="LC_ALL='C' sort"
+alias uniq="LC_ALL='C' uniq"
 # alias s='screen -U'
 alias zmv='noglob zmv'
 alias sudo='sudo '
@@ -28,6 +31,11 @@ alias o='git ls-files | peco | xargs -o vim'
 alias g='cd $(ghq list -p | peco)'
 alias reload='exec $SHELL -l'
 alias mkdir='mkdir -p'
+
+# android
+alias android_uninstallapp='adbp shell pm list package | sed -e s/package:// | peco | xargs adbp uninstall'
+alias restart-adb='adb kill-server; adb start-server'
+
 # --------------------------------------------------
 #  オリジナルコマンド
 # --------------------------------------------------
@@ -42,6 +50,7 @@ function rmf() {
   }
   for file in $*
   do
+    local option
     case $file in
       -h|--help)
         help
@@ -125,6 +134,17 @@ function cdls() {
   ls;
 }
 alias cd=cdls
+
+# コマンドの回数
+function command-count() {
+    local count
+    if [ $# -ne 1 ]; then
+      count=5
+    else
+      count=$1
+    fi
+    history-all | awk '{print $4}' | sort | uniq -c | sort -nr | head -n $count
+}
 
 function peco-select-history() {
     local tac
