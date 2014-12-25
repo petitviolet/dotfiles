@@ -50,6 +50,8 @@ if exists('&ambiwidth')
 endif
 " set wildmode=longest:full,list
 set foldmethod=marker
+set display=lastline
+set pumheight=10
 
 "-----------------------------------------------------
 " filetypeのalias
@@ -206,7 +208,7 @@ set laststatus=2
 " 括弧入力時に対応する括弧を表示
 set showmatch
 " 対応する括弧の表示時間を3にする
-"set matchtime=3
+set matchtime=1
 " シンタックスハイライトを有効にする
 syntax on
 " syntax enable
