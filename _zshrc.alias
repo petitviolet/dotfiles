@@ -222,6 +222,7 @@ setopt extended_glob
 typeset -A abbreviations
 abbreviations=(
 "G"    "| grep"
+"L"    "| less"
 "P"    "| pbcopy"
 "X"    "| xargs"
 "T"    "| tail"
