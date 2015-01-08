@@ -256,13 +256,13 @@ NeoBundle 'sgur/unite-git_grep'
 "--------------------------------------------------
 
 NeoBundleLazy 'kana/vim-smartchr', {
-      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
+      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby', 'tex']}
       \}
 NeoBundleLazy 'kana/vim-smartinput', {
-      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
+      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby', 'tex']}
       \}
 NeoBundleLazy "cohama/vim-smartinput-endwise", {
-      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby']}
+      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby', 'tex']}
       \}
 
 " call smartinput_endwise#define_default_rules()
@@ -690,7 +690,8 @@ NeoBundleLazy 'vim-latex/vim-latex', {
 let s:bundle  =  neobundle#get('vim-latex')
 function! s:bundle.hooks.on_source(bundle)
   imap <C-i> <Plug>IMAP_JumpForward
-  set conceallevel=0
+  " set conceallevel=0
+  let g:tex_conceal=""
   let tex_flavor = 'latex'
   set grepprg=grep\ -nH\ $*
   set shellslash
