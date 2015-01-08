@@ -77,11 +77,11 @@ vnoremap v $h
 imap  <C-e> <End>
 " imap  <C-a> <Home>
 imap  <C-a> <C-o>^
-imap  <C-w> <C-o>db
+imap  <C-w> <C-o>db<C-o>x
 imap  <C-b> <Left>
 imap  <C-f> <Right>
-imap  <C-n> <Down>
-imap  <C-p> <Up>
+imap  <C-n> <C-o>j
+imap  <C-p> <C-o>k
 imap  <C-u> <C-u><C-o>d0
 imap  <C-d> <Del>
 imap <expr> <C-k> "\<C-g>u".(col('.') == col('$') ? '<C-o>gJ' : '<C-o>D')
