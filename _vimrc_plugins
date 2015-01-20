@@ -109,7 +109,7 @@ nmap <Leader>S :SyntasticCheck<CR>
 NeoBundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 "Disable default mappings
 nmap s <Plug>(easymotion-s)
-nmap e <Plug>(easymotion-s2)
+nmap S <Plug>(easymotion-s2)
 nmap g/ <Plug>(easymotion-sn)
 map f <Plug>(easymotion-fl)
 map t <Plug>(easymotion-tl)
