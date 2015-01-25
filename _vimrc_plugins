@@ -114,7 +114,7 @@ nmap g/ <Plug>(easymotion-sn)
 map f <Plug>(easymotion-fl)
 map t <Plug>(easymotion-tl)
 map F <Plug>(easymotion-Fl)
-map T <Plug>(easymotion-Tl)
+" map T <Plug>(easymotion-Tl)
 
 " カラー設定変更
 hi EasyMotionTarget ctermbg=none ctermfg=red
@@ -348,8 +348,11 @@ nmap <silent>tb :TagbarToggle<CR>
 NeoBundle 'szw/vim-tags'
 let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
 let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
-nnoremap <C-]> g<C-]>
-nnoremap tt :TagsGenerate<CR>
+" 候補が複数ある時にそれを表示
+autocmd FileType * nnoremap <C-]> g<C-]>
+autocmd FileType bib,tex nnoremap <C-]> vi}g<C-]>
+
+nnoremap T :TagsGenerate<CR>
 
 " vimとmacのclipboardをつなぐ？
 NeoBundle 'kana/vim-fakeclip'
