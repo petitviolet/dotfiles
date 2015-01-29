@@ -193,6 +193,28 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
+"--------------------------------------------------
+" English
+"--------------------------------------------------
+
+NeoBundleLazy 'ujihisa/neco-look', {
+      \ "autoload": {
+      \   "insert": "1",
+      \ }}
+
+NeoBundleLazy 'rhysd/vim-grammarous', {
+      \ "autoload": {
+      \   "insert": "1",
+      \ }}
+
+let s:bundle  =  neobundle#get('vim-grammarous')
+function! s:bundle.hooks.on_source(bundle)
+  vmap F <Plug>(grammarous-fixall)
+  nmap <Leader>n <Plug>(grammarous-move-to-next-error)
+  nmap <Leader>p <Plug>(grammarous-move-to-previous-error)
+endfunction
+unlet s:bundle
+
 set completeopt=menuone
 
 "--------------------------------------------------
