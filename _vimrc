@@ -77,7 +77,7 @@ vnoremap v $h
 imap <C-e> <End>
 " imap  <C-a> <Home>
 imap <C-a> <C-o>^
-imap  <C-w> <C-o>daw
+imap  <C-w> <C-o>diw
 " imap  <C-w> <C-o>db<C-o>x
 imap <C-b> <Left>
 imap <C-f> <Right>
