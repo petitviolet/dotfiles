@@ -74,28 +74,30 @@ vnoremap <Tab> %
 vnoremap v $h
 
 " インサートモード
-imap  <C-e> <End>
+imap <C-e> <End>
 " imap  <C-a> <Home>
-imap  <C-a> <C-o>^
-imap  <C-w> <C-o>db<C-o>x
-imap  <C-b> <Left>
-imap  <C-f> <Right>
-imap  <C-n> <C-o>j
-imap  <C-p> <C-o>k
-imap  <C-u> <C-u><C-o>d0
-imap  <C-d> <Del>
+imap <C-a> <C-o>^
+imap  <C-w> <C-o>daw
+" imap  <C-w> <C-o>db<C-o>x
+imap <C-b> <Left>
+imap <C-f> <Right>
+imap <C-n> <C-o>j
+imap <C-p> <C-o>k
+imap <C-u> <C-u><C-o>d0
+imap <C-d> <Del>
 imap <expr> <C-k> "\<C-g>u".(col('.') == col('$') ? '<C-o>gJ' : '<C-o>D')
-
 " コマンドモード
-cmap  <C-b> <Left>
-cmap  <C-f> <Right>
-cmap  <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
+cmap <C-b> <Left>
+cmap <C-f> <Right>
+cmap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 
 " ノーマルモード
-map  <C-k> <C-w>p
-map  <C-l> <C-w>l
-map  <C-h> <C-w>h
-map  <C-_> o<ESC>
+map <C-k> <C-w>p
+map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-_> o<ESC>
+map E <End>
+map J gJ
 " ESCを二回押すことでハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
 " quickfixでnextとprev
