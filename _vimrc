@@ -77,7 +77,8 @@ vnoremap v $h
 imap <C-e> <End>
 " imap  <C-a> <Home>
 imap <C-a> <C-o>^
-imap  <C-w> <C-o>diw
+" imap <expr> <C-w> (matchstr(getline('.'), '.', col('.')-1) =~ '[^\s\n\t\r\f$]' ? '<C-o>db' : '<C-o>daw')
+" imap  <C-w> <C-o>db
 " imap  <C-w> <C-o>db<C-o>x
 imap <C-b> <Left>
 imap <C-f> <Right>
