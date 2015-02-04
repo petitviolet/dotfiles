@@ -5,7 +5,7 @@ set titlestring=Firefox
 " →「:javascript! 」で表示される内容レベル
 set verbose=9
 " スクロールの端などの際に出るbeepをoff
-set nobeep
+set visualbell
 " デフォルトの検索エンジン
 set defsearch=google
 " 不明 内容確認中
