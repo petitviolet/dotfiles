@@ -215,6 +215,22 @@ function peco-select-gitdiff() {
 zle -N peco-select-gitdiff
 bindkey "^g^i" peco-select-gitdiff
 
+
+function peco_select_from_git_status(){
+    git status --porcelain | \
+    peco | \
+    awk -F ' ' '{print $NF}' | \
+    tr '\n' ' '
+}
+
+function peco_insert_selected_git_files(){
+    LBUFFER+=$(peco_select_from_git_status)
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+
+zle -N peco_insert_selected_git_files
+bindkey "^g^s" peco_insert_selected_git_files
 ###################################
 
 setopt extended_glob
