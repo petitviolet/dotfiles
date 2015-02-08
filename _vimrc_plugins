@@ -158,6 +158,11 @@ if neobundle#is_installed('neocomplete')
     let g:neocomplete#keyword_patterns = {}
   endif
   let g:neocomplete#keyword_patterns._ = '\h\w*'
+  "ユーザ定義の辞書を指定
+  let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'scala' : $HOME . '/.vim/dict/scala.dict',
+    \ }
 elseif neobundle#is_installed('neocomplcache')
   " neocomplcache用設定
   let g:neocomplcache_enable_at_startup = 1
@@ -169,6 +174,11 @@ elseif neobundle#is_installed('neocomplcache')
   let g:neocomplcache_keyword_patterns._ = '\h\w*'
   let g:neocomplcache_enable_camel_case_completion = 1
   let g:neocomplcache_enable_underbar_completion = 1
+  "ユーザ定義の辞書を指定
+  let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'scala' : $HOME . '/.vim/dict/scala.dict',
+    \ }
 endif
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
@@ -729,6 +739,13 @@ function! s:bundle.hooks.on_source(bundle)
   let g:Tex_FormatDependency_pdf = 'dvi,pdf'
 endfunction
 unlet s:bundle
+
+
+"-----------------------------------------------------
+" Scala
+"-----------------------------------------------------
+NeoBundleLazy 'gre/play2vim', {
+    \ "autoload": {"filetypes": ['scala']}}
 
 "-----------------------------------------------------
 " ファイルタイププラグインおよびインデントの有効化
