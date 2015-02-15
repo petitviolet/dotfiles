@@ -57,9 +57,7 @@ imap <C-h> <BS>
 cmap <C-h> <BS>
 
 "フォームにフォーカスしないように
-" set focuscontent
-" youtubeのダウンロード
-nmap <silent> ey :fetchyoutube<CR>
+set focuscontent
 
 " slideshareの操作
 nnoremap -urls=www\\.slideshare\\.net <C-l> :slideshare next<CR>
