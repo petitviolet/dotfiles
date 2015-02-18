@@ -50,28 +50,25 @@ function rmf() {
   }
   for file in $*
   do
-    local option
     case $file in
       -h|--help)
         help
         return
         ;;
       -rf|-fr)
-        option="-rf"
+        local option="-rf"
         ;;
       -r)
-        option="-r"
+        local option="-r"
         ;;
       -f)
-        option="-f"
+        local option="-f"
         ;;
       *)
         echo 'removed:' $file
         /bin/rm $option $file
     esac
-    # shift
   done
-  # return 1;
 }
 
 _rmfcmd() {
