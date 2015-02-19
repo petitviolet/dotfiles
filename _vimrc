@@ -58,7 +58,7 @@ set pumheight=10
 "-----------------------------------------------------
 au BufRead,BufNewFile,BufReadPre *coffee   set filetype=coffee
 au BufRead,BufNewFile,BufReadPre *vimperatorrc   set filetype=vim
-au BufRead,BufNewFile,BufReadPre *zsh*   set filetype=zsh
+au BufRead,BufNewFile,BufReadPre *zsh*   set filetype=sh
 
 "-----------------------------------------------------
 " キーバインド変更
@@ -332,7 +332,6 @@ set autoindent
 " 新しい行を作ったときに高度な自動インデントを行う。 'cindent'
 " がオンのときは、'smartindent' をオンにしても効果はない。
 set smartindent
-
 "----------------------------------------------------
 "" 国際化関係
 "----------------------------------------------------
