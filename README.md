@@ -33,7 +33,7 @@ Macであればそのままで良い
 
 ```sh
 # homebrewのインストール
-ruby  - e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go/install)"
+ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go/install)"
 # Brewfileに従ってソフトウェアをインストール
 brew bundle
 # Rictyフォントをインストール、配置
