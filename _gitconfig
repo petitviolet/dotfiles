@@ -1,23 +1,27 @@
 [user]
-	name = petitviolet
-	email = violethero0820@gmail.com
+  name = petitviolet
+  email = violethero0820@gmail.com
 [alias]
-	br = branch
-	di = diff
-	st = status
-	co = checkout
+  br = branch
+  di = diff
+  st = status
+  co = checkout
   lp = log --decorate --stat --patch
   ls = ls-files
   re = reset
 [color]
-	ui = auto
+  ui = auto
 [core]
-	excludesfile = ~/.gitignore_global
-	editor = vim
+  excludesfile = ~/.gitignore_global
+  editor = vim
   quotepath = false
 [ghq]
   root = ~/Code/go/ghq
 [filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
+  required = true
+  clean = git media clean %f
+  smudge = git media smudge %f
+[pager]
+  log = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
