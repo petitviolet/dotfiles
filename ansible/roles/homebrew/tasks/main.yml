@@ -1,0 +1,21 @@
+---
+- name: add homebrew tap repository
+  homebrew_tap:
+    tap={{ item }} state=present
+  with_items:
+    taps
+  tags:
+    homebrew
+
+- name: update homebrew
+  homebrew: update_homebrew=yes
+  tags:
+    homebrew
+
+- name: install homebrew packages
+  homebrew:
+    name={{ item }} state=latest
+  with_items:
+    packages
+  tags:
+    homebrew

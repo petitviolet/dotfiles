@@ -1,0 +1,11 @@
+- hosts: target
+  sudo: no
+  connection: local
+  vars:
+    include: vars/vars.yml
+  roles:
+    - homebrew
+    - homebrew-cask
+    - dotfiles
+    - ricty
+    - settings

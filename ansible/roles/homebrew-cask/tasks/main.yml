@@ -1,0 +1,14 @@
+---
+- name: install homebrew-cask
+  homebrew:
+    name=brew-cask state=latest
+  tags:
+    homebrew-cask
+
+- name: install apps with homebrew-cask
+  homebrew_cask:
+    name={{ item }} state=latest
+  with_items:
+    cask-packages
+  tags:
+    homebrew-cask

@@ -1,0 +1,15 @@
+---
+- name: karabiner settings
+  copy:
+    src=private.xml
+    dest=~/Library/Application\ Support/Karabiner/private.xml
+    state=link
+    force=yes
+  tags: settings
+- name: git diff-highlight
+  copy:
+    src=diff-highlight
+    dest=/usr/local/bin/
+    mode=755
+    state=link
+  tags: settings

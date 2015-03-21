@@ -1,0 +1,7 @@
+---
+- name: deploy dotfiles
+  copy: src={{ item }} dest=~/.{{ item }}
+  with_fileglob:
+    - ./*
+  tags:
+    dotfiles
