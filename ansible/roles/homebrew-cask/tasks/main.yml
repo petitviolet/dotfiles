@@ -1,14 +1,16 @@
 ---
 - name: install homebrew-cask
   homebrew:
-    name=brew-cask state=latest
+    name=brew-cask state=present
   tags:
     homebrew-cask
 
 - name: install apps with homebrew-cask
   homebrew_cask:
-    name={{ item }} state=latest
+    name={{ item }} state=present
   with_items:
     cask-packages
   tags:
     homebrew-cask
+  ignore_errors:
+    True

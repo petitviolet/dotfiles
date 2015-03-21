@@ -48,7 +48,6 @@ packages:
   - node
   - openssl
   - peco
-  - play
   - postgresql
   - proctools
   - python
@@ -67,6 +66,7 @@ packages:
   - tmux
   - tree
   - ttyrec
+  - typesafe-activator
   - vim
   - wget
   - z
