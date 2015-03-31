@@ -7,9 +7,9 @@
 
 - name: install apps with homebrew-cask
   homebrew_cask:
-    name={{ item }} state=present
+    name={{ item }} state=installed
   with_items:
-    cask-packages
+    cask_packages
   tags:
     homebrew-cask
   ignore_errors:

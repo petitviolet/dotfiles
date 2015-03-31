@@ -19,8 +19,8 @@
   root = ~/Code/go/ghq
 [filter "media"]
   required = true
-  clean = git media clean %f
-  smudge = git media smudge %f
+	clean = git media clean %f
+	smudge = git media smudge %f
 [pager]
   log = diff-highlight | less
   show = diff-highlight | less
