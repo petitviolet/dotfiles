@@ -2,9 +2,11 @@
 - name: install ricty font
   homebrew: name=ricty state=latest
   tags: ricty
+
 - name: deploy ricty font
   shell: cp -f $(brew --cellar ricty)/*/share/fonts/Ricty*.ttf ~/Library/Fonts/
   tags: ricty
+
 - name: reload font
   shell: fc-cache -vf
   tags: ricty
