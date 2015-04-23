@@ -31,9 +31,9 @@ alias o='git ls-files | peco | xargs -o vim'
 alias g='cd $(ghq list -p | peco)'
 alias reload='exec $SHELL -l'
 alias mkdir='mkdir -p'
-
+alias gg='git grep -I -C3 --break --heading'
 # android
-alias android_uninstallapp='adbp shell pm list package | sed -e s/package:// | peco | xargs adbp uninstall'
+alias android_uninstallapp='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
 alias restart-adb='adb kill-server; adb start-server'
 
 # --------------------------------------------------
@@ -228,6 +228,11 @@ function peco_insert_selected_git_files(){
 
 zle -N peco_insert_selected_git_files
 bindkey "^g^s" peco_insert_selected_git_files
+
+function adb_locat_app() {
+  APP_NAME=$1
+  adb logcat | grep `adb shell ps | grep $1 | cut -c10-15`
+}
 ###################################
 
 setopt extended_glob
