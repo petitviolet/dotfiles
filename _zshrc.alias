@@ -159,7 +159,7 @@ function peco-select-history() {
 zle -N peco-select-history
 bindkey '^r' peco-select-history
 
-function peco-cdr () {
+function peco-cdr(){
     local selected_dir=$(cdr -l | awk '{ print $2 }' | peco)
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
@@ -169,6 +169,13 @@ function peco-cdr () {
 }
 zle -N peco-cdr
 bindkey '^@' peco-cdr
+
+function peco_tree_vim(){
+  tree --charset=o -f | peco | tr -d '|' | tr -d '`' | tr -d '-' | xargs -o vim
+  zle clear-screen
+}
+zle -N peco_tree_vim
+bindkey "^t" peco_tree_vim
 
 function peco-select-git-add() {
     local SELECTED_FILE_TO_ADD="$(git status --short | \
