@@ -171,7 +171,7 @@ zle -N peco-cdr
 bindkey '^@' peco-cdr
 
 function peco_tree_vim(){
-  tree --charset=o -f | peco | tr -d '|' | tr -d '`' | tr -d '-' | xargs -o vim
+  tree --charset=o -f | peco | tr -d '\||`|-' | xargs -o vim
   zle clear-screen
 }
 zle -N peco_tree_vim
