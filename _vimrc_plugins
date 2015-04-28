@@ -417,15 +417,15 @@ let NERDTreeQuitOnOpen=1
 " 既に編集し終わったファイルでもuで遡れる
 " NeoBundle 'sjl/gundo.vim'
 NeoBundle 'mbbill/undotree'
-set undodir=~/.vimundo
-set undofile
-if has('persistent_undo')
-  set undodir=./.vimundo,~/.vimundo
-  augroup vimrc-undofile
-    autocmd!
-    autocmd BufReadPre ~/* setlocal undofile
-  augroup END
-endif
+" set undodir=~/.vimundo
+" set undofile
+" if has('persistent_undo')
+"   set undodir=./.vimundo,~/.vimundo
+"   augroup vimrc-undofile
+"     autocmd!
+"     autocmd BufReadPre ~/* setlocal undofile
+"   augroup END
+" endif
 
 " UndoTree
 " \uで開く
@@ -439,6 +439,11 @@ let g:undotree_RelativeTimestamp = 1
 let g:undotree_TreeNodeShape = '*'
 let g:undotree_HighlightChangedText = 1
 let g:undotree_HighlightSyntax = "UnderLined"
+
+if has('persistent_undo')
+  set undodir=$HOME/.vim/undodir/
+  set undofile
+endif
 
 " YankRing.vim
 NeoBundle 'YankRing.vim'

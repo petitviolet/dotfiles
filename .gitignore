@@ -2,5 +2,6 @@
 .vimperatorrc
 _vimperator
 _vim/bundle
+_vim/undodir/*
 _zsh
 .python*
