@@ -33,7 +33,7 @@ alias reload='exec $SHELL -l'
 alias mkdir='mkdir -p'
 
 # android
-alias android_uninstallapp='adbp shell pm list package | sed -e s/package:// | peco | xargs adbp uninstall'
+alias android_uninstallapp='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
 alias restart-adb='adb kill-server; adb start-server'
 
 # --------------------------------------------------
