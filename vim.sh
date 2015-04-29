@@ -8,6 +8,7 @@ mkdir tmp
 cd tmp
 hg clone https://vim.googlecode.com/hg/ vim
 # 更新する場合は
+cd ./vim
 hg pull
 hg update
 

@@ -2,7 +2,7 @@
   name = petitviolet
   email = violethero0820@gmail.com
 [alias]
-  br = branch
+  br = branch --verbose
   di = diff
   st = status
   co = checkout
@@ -25,3 +25,7 @@
   log = diff-highlight | less
   show = diff-highlight | less
   diff = diff-highlight | less
+[grep]
+	lineNumber = true
+[github]
+	user = petitviolet
