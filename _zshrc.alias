@@ -172,8 +172,10 @@ bindkey '^@' peco-cdr
 
 function peco-tree-vim(){
   local SELECTED_FILE=$(tree --charset=o -f | peco | tr -d '\||`|-' | xargs echo)
-  BUFFER="vim $SELECTED_FILE"
-  zle accept-line
+  if [ -n "$SELECTED_FILE" ]; then
+    BUFFER="vim $SELECTED_FILE"
+    zle accept-line
+  fi
 }
 zle -N peco-tree-vim
 bindkey "^t" peco-tree-vim
