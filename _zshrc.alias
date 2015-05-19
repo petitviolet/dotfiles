@@ -26,7 +26,7 @@ alias javac='javac -J-Dfile.encoding=UTF-8'
 alias java='java -Dfile.encoding=UTF-8'
 alias scalac='scalac -J-Dfile.encoding=UTF-8'
 alias scala='scala -Dfile.encoding=UTF-8'
-
+# alias grep='grep -C 3 --color=always --line-number --with-filename'
 alias o='git ls-files | peco | xargs -o vim'
 alias g='cd $(ghq list -p | peco)'
 alias reload='exec $SHELL -l'
@@ -35,7 +35,9 @@ alias gg='git grep -I -C3 --break --heading'
 # android
 alias android_uninstallapp='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
 alias restart-adb='adb kill-server; adb start-server'
-
+export GREP_OPTIONS="--color=always"
+export LESS=' -R '
+export LESSOPEN='| src-hilite-lesspipe.sh %s'
 # --------------------------------------------------
 #  オリジナルコマンド
 # --------------------------------------------------
@@ -172,7 +174,9 @@ bindkey '^@' peco-cdr
 
 function peco-tree-vim(){
   local SELECTED_FILE=$(tree --charset=o -f | peco | tr -d '\||`|-' | xargs echo)
-  BUFFER="vim $SELECTED_FILE"
+  if [ -n "$SELECTED_FILE" ]; then
+    BUFFER="vim $SELECTED_FILE"
+  fi
   zle accept-line
 }
 zle -N peco-tree-vim
