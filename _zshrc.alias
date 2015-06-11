@@ -35,6 +35,8 @@ alias gg='git grep -I -C3 --break --heading'
 # android
 alias android_uninstallapp='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
 alias restart-adb='adb kill-server; adb start-server'
+alias adb='adbp'
+alias pidcat='pidcatp'
 export GREP_OPTIONS="--color=always"
 export LESS=' -R '
 export LESSOPEN='| src-hilite-lesspipe.sh %s'
@@ -173,9 +175,9 @@ zle -N peco-cdr
 bindkey '^@' peco-cdr
 
 function peco-tree-vim(){
-  local SELECTED_FILE=$(tree --charset=o -f | peco | tr -d '\||`|-' | xargs echo)
+local SELECTED_FILE=$(tree --charset=o -f | peco | tr -d '\||`| ' | xargs echo)
   if [ -n "$SELECTED_FILE" ]; then
-    BUFFER="vim $SELECTED_FILE"
+    BUFFER="vim $SELECTED_FILE[3,-1]"
   fi
   zle accept-line
 }

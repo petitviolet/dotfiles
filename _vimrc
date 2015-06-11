@@ -278,6 +278,11 @@ let g:markdown_fenced_languages = [
 \  'xml',
 \]
 
+command! -nargs=? Jq call s:Jq(<f-args>)
+function! s:Jq(...)
+    execute "%! jq ."
+endfunction
+
 " ステータスラインに表示する情報の指定
 " set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=%c\:%l/%L:
 

@@ -154,6 +154,10 @@ if neobundle#is_installed('neocomplete')
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_ignore_case = 1
   let g:neocomplete#enable_smart_case = 1
+  " camle caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
+  let g:neocomplete#enable_camel_case_completion = 1
+  " _(アンダーバー)区切りの補完を有効化
+  let g:neocomplete#enable_underbar_completion = 1
   if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
   endif

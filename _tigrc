@@ -7,6 +7,8 @@ set main-view = \
   commit-title:graph=yes,refs=yes
 set split-view-height = 80%
 set diff-context = 6
+bind generic <Ctrl-f> scroll-page-down
+bind generic <Ctrl-b> scroll-page-up
 
 # set show-author = full
 # set show-refs = true
