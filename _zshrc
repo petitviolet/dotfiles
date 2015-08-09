@@ -269,3 +269,8 @@ fi
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.zshrc.alias ] && source ~/.zshrc.alias
 
+
+#----------------------------------------------------------
+# terminal-notifier with zsh-notify
+#----------------------------------------------------------
+export REPORTTIME=5
