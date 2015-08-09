@@ -199,7 +199,7 @@ zle -N peco-select-git-add
 bindkey "^g^a" peco-select-git-add
 
 function peco-select-git-checkout() {
-    local SELECTED_FILE_TO_CHECKOUT="$(git branch --verbose | \
+    local SELECTED_FILE_TO_CHECKOUT="$(git branch --all --verbose | \
                                   peco --query "$LBUFFER" | \
                                   sed -e 's/\* //g' | \
                                   awk '{print $1}')"
@@ -253,7 +253,7 @@ setopt extended_glob
 
 typeset -A abbreviations
 abbreviations=(
-"G"    "| grep"
+"G"    "| ag"
 "L"    "| less"
 "P"    "| pbcopy"
 "X"    "| xargs"
