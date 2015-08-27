@@ -174,15 +174,16 @@ function peco-cdr(){
 zle -N peco-cdr
 bindkey '^@' peco-cdr
 
-function peco-tree-vim(){
+function peco-tree-select(){
 local SELECTED_FILE=$(tree --charset=o -f | peco | tr -d '\||`| ' | xargs echo)
   if [ -n "$SELECTED_FILE" ]; then
-    BUFFER="vim $SELECTED_FILE[3,-1]"
+    LBUFFER+="$SELECTED_FILE[3,-1]"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
   fi
-  zle accept-line
 }
-zle -N peco-tree-vim
-bindkey "^t" peco-tree-vim
+zle -N peco-tree-select
+bindkey "^t" peco-tree-select
 
 function peco-select-git-add() {
     local SELECTED_FILE_TO_ADD="$(git status --short | \
@@ -229,9 +230,9 @@ bindkey "^g^i" peco-select-gitdiff
 
 function peco_select_from_git_status(){
     git status --porcelain | \
-    peco | \
-    awk -F ' ' '{print $NF}' | \
-    tr '\n' ' '
+      peco | \
+      awk -F ' ' '{print $NF}' | \
+      tr '\n' ' '
 }
 
 function peco_insert_selected_git_files(){
