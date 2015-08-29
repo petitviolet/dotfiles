@@ -18,7 +18,7 @@
   ui = auto
 [core]
   # autocrlf = true
-	excludesfile = /Users/komurasaki/.gitignore_global
+	excludesfile = $HOME/.gitignore_global
   editor = vim
   quotepath = false
 [ghq]
