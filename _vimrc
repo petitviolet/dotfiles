@@ -59,6 +59,7 @@ set pumheight=10
 au BufRead,BufNewFile,BufReadPre *coffee   set filetype=coffee
 au BufRead,BufNewFile,BufReadPre *vimperatorrc   set filetype=vim
 au BufRead,BufNewFile,BufReadPre *zsh*   set filetype=sh
+au BufRead,BufNewFile,BufReadPre *gradle   set filetype=groovy
 
 "-----------------------------------------------------
 " キーバインド変更
@@ -247,7 +248,7 @@ matc ZenkakuSpace /　/
 
 " 保存時に末尾の空白を削除
 " markdownファイルの時は空白をハイライトする
-highlight UnderLined cterm=NONE ctermbg=darkgray guibg=#FF0000
+" highlight UnderLined cterm=NONE ctermbg=darkgray guibg=#FF0000
 function! s:RTrim()
   let s:cursor = getpos(".")
   if &filetype == "markdown"
