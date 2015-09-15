@@ -175,7 +175,7 @@ zle -N peco-cdr
 bindkey '^@' peco-cdr
 
 function peco-tree-vim(){
-local SELECTED_FILE=$(tree --charset=o -f | peco | tr -d '\||`| ' | xargs echo)
+local SELECTED_FILE=$(tree -N --charset=o -f | peco | tr -d '\||`| ' | xargs echo)
   if [ -n "$SELECTED_FILE" ]; then
     BUFFER="vim $SELECTED_FILE[3,-1]"
   fi
@@ -185,7 +185,7 @@ zle -N peco-tree-vim
 bindkey "^v^t" peco-tree-vim
 
 function peco-tree-select(){
-local SELECTED_FILE=$(tree --charset=o -f | peco | tr -d '\||`| ' | xargs echo)
+local SELECTED_FILE=$(tree -N --charset=o -f | peco | tr -d '\||`| ' | xargs echo)
   if [ -n "$SELECTED_FILE" ]; then
     LBUFFER+="$SELECTED_FILE[3,-1]"
     CURSOR=$#LBUFFER
