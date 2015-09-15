@@ -419,7 +419,7 @@ vmap <silent> <Leader>e <Esc> :NERDTreeToggle<CR>
 " nmap <silent> <C-e> :NERDTreeToggle<CR>
 " vmap <silent> <C-e> <Esc> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let NERDTreeQuitOnOpen=1
+" let NERDTreeQuitOnOpen=1
 " let g:NERDTreeShowHidden=1
 
 " Undo関係
