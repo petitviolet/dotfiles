@@ -37,6 +37,7 @@ alias android_uninstallapp='adb shell pm list package | sed -e s/package:// | pe
 alias restart-adb='adb kill-server; adb start-server'
 # alias adb='adbp'
 # alias pidcat='pidcatp'
+alias ip="ipconfig getifaddr `netstat -rn -f inet | awk '/^default/{print $6;exit}'`"
 export GREP_OPTIONS="--color=always"
 export LESS=' -R '
 export LESSOPEN='| src-hilite-lesspipe.sh %s'
