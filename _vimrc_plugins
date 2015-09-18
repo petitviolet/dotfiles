@@ -72,6 +72,7 @@ else
 endif
 let g:neobundle_default_git_protocol='git'
 
+call neobundle#begin(s:bundle_root)
 NeoBundle 'gmarik/vundle'
 "-----------------------------------------------------
 " 文法チェック
@@ -774,6 +775,7 @@ NeoBundle 'tyru/open-browser.vim'
 au BufRead,BufNewFile *.md set filetype=markdown
 let g:previm_open_cmd = 'open -a Firefox'
 
+call neobundle#end()
 "-----------------------------------------------------
 " ファイルタイププラグインおよびインデントの有効化
 filetype plugin indent on
