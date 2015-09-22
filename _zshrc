@@ -274,3 +274,4 @@ fi
 # terminal-notifier with zsh-notify
 #----------------------------------------------------------
 export REPORTTIME=5
+export PATH=$PATH:~/.cabal/bin
