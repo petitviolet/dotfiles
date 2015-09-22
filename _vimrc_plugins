@@ -765,6 +765,21 @@ NeoBundleLazy 'gre/play2vim', {
     \ "autoload": {"filetypes": ['scala']}}
 
 "-----------------------------------------------------
+" Haskell
+"-----------------------------------------------------
+
+NeoBundleLazy "dag/vim2hs", {"autoload" : { "filetypes" : ["haskell"] }}
+" NeoBundleLazy "eagletmt/ghcmod-vim", {"autoload" : { "filetypes" : ["haskell"] }}
+NeoBundleLazy "eagletmt/unite-haddock",{"autoload" : { "filetypes" : ["haskell"] }}
+NeoBundleLazy "ujihisa/neco-ghc", {"autoload" : { "filetypes" : ["haskell"] }}
+NeoBundleLazy "ujihisa/unite-haskellimport", {"autoload" : { "filetypes" : ["haskell"] }}
+let g:haskell_conceal_wide = 0
+let g:haskell_conceal              = 0
+let g:haskell_conceal_enumerations = 0
+" set foldlevelstart=99
+" set foldlevel=99
+
+"-----------------------------------------------------
 " markdown
 "-----------------------------------------------------
 
