@@ -52,6 +52,7 @@ endif
 set foldmethod=marker
 set display=lastline
 set pumheight=10
+set nofoldenable
 
 "-----------------------------------------------------
 " filetypeのalias
