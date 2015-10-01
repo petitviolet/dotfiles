@@ -143,6 +143,10 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 NeoBundle 'vim-scripts/HybridText'
 au BufRead,BufNewFile *.txt set syntax=hybrid
 
+NeoBundle 'junegunn/vim-easy-align'
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 "-----------------------------------------------------
 " Neocomplcache
 "-----------------------------------------------------
@@ -759,6 +763,11 @@ unlet s:bundle
 
 
 "-----------------------------------------------------
+" Like IDE
+"-----------------------------------------------------
+" NeoBundle 'wincent/Command-T'
+
+"-----------------------------------------------------
 " Scala
 "-----------------------------------------------------
 NeoBundleLazy 'gre/play2vim', {
@@ -776,8 +785,8 @@ NeoBundleLazy "ujihisa/unite-haskellimport", {"autoload" : { "filetypes" : ["has
 let g:haskell_conceal_wide = 0
 let g:haskell_conceal              = 0
 let g:haskell_conceal_enumerations = 0
-" set foldlevelstart=99
-" set foldlevel=99
+set foldlevelstart=99
+set foldlevel=99
 
 "-----------------------------------------------------
 " markdown
