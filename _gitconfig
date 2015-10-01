@@ -18,7 +18,7 @@
   ui = auto
 [core]
   # autocrlf = true
-	excludesfile = $HOME/.gitignore_global
+	excludesfile = ~/.gitignore_global
   editor = vim
   quotepath = false
 [ghq]
