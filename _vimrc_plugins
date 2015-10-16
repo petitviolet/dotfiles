@@ -222,18 +222,18 @@ NeoBundleLazy 'ujihisa/neco-look', {
       \   "insert": "1",
       \ }}
 
-NeoBundleLazy 'rhysd/vim-grammarous', {
-      \ "autoload": {
-      \   "insert": "1",
-      \ }}
+" NeoBundleLazy 'rhysd/vim-grammarous', {
+"       \ "autoload": {
+"       \   "insert": "1",
+"       \ }}
 
-let s:bundle  =  neobundle#get('vim-grammarous')
-function! s:bundle.hooks.on_source(bundle)
-  vmap F <Plug>(grammarous-fixall)
-  nmap <Leader>n <Plug>(grammarous-move-to-next-error)
-  nmap <Leader>p <Plug>(grammarous-move-to-previous-error)
-endfunction
-unlet s:bundle
+" let s:bundle  =  neobundle#get('vim-grammarous')
+" function! s:bundle.hooks.on_source(bundle)
+"   vmap F <Plug>(grammarous-fixall)
+"   nmap <Leader>n <Plug>(grammarous-move-to-next-error)
+"   nmap <Leader>p <Plug>(grammarous-move-to-previous-error)
+" endfunction
+" unlet s:bundle
 
 set completeopt=menuone
 
@@ -791,6 +791,8 @@ set foldlevel=99
 "-----------------------------------------------------
 " markdown
 "-----------------------------------------------------
+
+" NeoBundle 'fuenor/qfixhowm'
 
 " NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
