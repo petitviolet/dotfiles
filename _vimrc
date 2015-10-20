@@ -61,6 +61,7 @@ au BufRead,BufNewFile,BufReadPre *coffee   set filetype=coffee
 au BufRead,BufNewFile,BufReadPre *vimperatorrc   set filetype=vim
 au BufRead,BufNewFile,BufReadPre *zsh*   set filetype=sh
 au BufRead,BufNewFile,BufReadPre *gradle   set filetype=groovy
+au BufRead,BufNewFile,BufReadPre *conf   set filetype=conf
 
 "-----------------------------------------------------
 " キーバインド変更
@@ -111,6 +112,8 @@ nnoremap k gk
 nnoremap <space><space> :<C-u>edit ~/.vimrc<CR>
 nnoremap <space>s :<C-u>source ~/.vimrc<CR>
 nnoremap <space>p :<C-u>edit ~/.vimrc_plugins<CR>
+" nnoremap ; :
+" nnoremap : ;
 
 " 入力モード中に素早くjjと入力した場合はESCとみなす
 " 入力モード中に素早く;;と入力した場合はESCとみなす
