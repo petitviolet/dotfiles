@@ -78,8 +78,9 @@ NeoBundle 'gmarik/vundle'
 " 文法チェック
 "-----------------------------------------------------
 " Go
-NeoBundle 'Blackrush/vim-gocode'
-
+NeoBundleLazy 'Blackrush/vim-gocode', {
+      \ "autoload": {"filetypes": ['go']}
+      \}
 " Template
 " Usage: :Template hogehoge
 NeoBundle "mattn/sonictemplate-vim"
@@ -107,20 +108,20 @@ nmap <Leader>S :SyntasticCheck<CR>
 "-----------------------------------------------------
 " easy motion
 "-----------------------------------------------------
-NeoBundle 'Lokaltog/vim-easymotion'
-let g:EasyMotion_do_mapping = 0 "Disable default mappings
-nmap s <Plug>(easymotion-s)
-nmap S <Plug>(easymotion-s2)
-nmap g/ <Plug>(easymotion-sn)
-map f <Plug>(easymotion-fl)
-map t <Plug>(easymotion-tl)
-map F <Plug>(easymotion-Fl)
-" map T <Plug>(easymotion-Tl)
-
-" カラー設定変更
-hi EasyMotionTarget ctermbg=none ctermfg=red
-hi EasyMotionShade  ctermbg=none ctermfg=green
-hi EasyMotionIncSearch  ctermbg=black ctermfg=white
+" NeoBundle 'Lokaltog/vim-easymotion'
+" let g:EasyMotion_do_mapping = 0 "Disable default mappings
+" nmap s <Plug>(easymotion-s)
+" nmap S <Plug>(easymotion-s2)
+" nmap g/ <Plug>(easymotion-sn)
+" map f <Plug>(easymotion-fl)
+" map t <Plug>(easymotion-tl)
+" map F <Plug>(easymotion-Fl)
+" " map T <Plug>(easymotion-Tl)
+"
+" " カラー設定変更
+" hi EasyMotionTarget ctermbg=none ctermfg=red
+" hi EasyMotionShade  ctermbg=none ctermfg=green
+" hi EasyMotionIncSearch  ctermbg=black ctermfg=white
 
 "-----------------------------------------------------
 " 表示関係
@@ -140,8 +141,8 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 
 " HybridText
 " txtファイルのカラーリング
-NeoBundle 'vim-scripts/HybridText'
-au BufRead,BufNewFile *.txt set syntax=hybrid
+" NeoBundle 'vim-scripts/HybridText'
+" au BufRead,BufNewFile *.txt set syntax=hybrid
 
 NeoBundle 'junegunn/vim-easy-align'
 vmap <Enter> <Plug>(EasyAlign)
@@ -303,59 +304,59 @@ NeoBundle 'rking/ag.vim'
 " smart input & smart chr
 "--------------------------------------------------
 
-NeoBundleLazy 'kana/vim-smartchr', {
-      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby', 'tex']}
-      \}
-NeoBundleLazy 'kana/vim-smartinput', {
-      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby', 'tex']}
-      \}
-NeoBundleLazy "cohama/vim-smartinput-endwise", {
-      \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby', 'tex']}
-      \}
-
-" call smartinput_endwise#define_default_rules()
+" NeoBundleLazy 'kana/vim-smartchr', {
+"       \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby', 'tex']}
+"       \}
+" NeoBundleLazy 'kana/vim-smartinput', {
+"       \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby', 'tex']}
+"       \}
+" NeoBundleLazy "cohama/vim-smartinput-endwise", {
+"       \ "autoload": {"filetypes": ['javascript', 'php', 'python', 'scala', 'ruby', 'tex']}
+"       \}
 "
-" " \%#はカーソル位置
-let s:bundle  =  neobundle#get('vim-smartinput')
-function! s:bundle.hooks.on_source(bundle)
-  call smartinput#map_to_trigger('i', '<Enter>', '<Enter>', '<Enter>')
-  call smartinput#define_rule({'char': '<Enter>', 'at': '(\%#)', 'input': '<Enter><Enter><UP><Tab>'})
-  call smartinput#define_rule({'char': '<Enter>', 'at': '{\%#}', 'input': '<Enter><Enter><UP><Tab>'})
-
-  call smartinput#map_to_trigger('i', '<BS>', '<BS>', '<BS>')
-  call smartinput#define_rule({'char': '<BS>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
-  call smartinput#define_rule({'char': '<BS>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
-  call smartinput#define_rule({'char': '<BS>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
-  call smartinput#define_rule({'char': '<BS>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
-
-  call smartinput#map_to_trigger('i', '<C-h>', '<BS>',  '<C-h>')
-  call smartinput#map_to_trigger('i', '<Space>', '<Space>', '<Space>')
-
-  call smartinput#map_to_trigger('i', '<C-h>', '<C-h>', '<BS>')
-  call smartinput#define_rule({'char': '<C-h>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
-  call smartinput#define_rule({'char': '<C-h>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
-  call smartinput#define_rule({'char': '<C-h>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
-  call smartinput#define_rule({'char': '<C-h>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
-  call smartinput#define_rule({'char': '<C-h>', 'at': "'\s*'\%#", 'input': "<C-O>dF'<BS>"})
-  call smartinput#define_rule({'char': '<C-h>', 'at': '"\s*"\%#', 'input': '<C-O>dF"<BS>'})
-
-  call smartinput#define_rule({'char': '<C-h>', 'at': '(\%#)', 'input': '<C-O>X<C-O>x'})
-  call smartinput#define_rule({'char': '<C-h>', 'at': '{\%#}', 'input': '<C-O>X<C-O>x'})
-  call smartinput#define_rule({'char': '<C-h>', 'at': '<\%#>', 'input': '<C-O>X<C-O>x'})
-  call smartinput#define_rule({'char': '<C-h>', 'at': '\[\%#\]', 'input': '<C-O>X<C-O>x'})
-  call smartinput#define_rule({'char': '<C-h>', 'at': "'\%#'", 'input': "<C-O>X<C-O>x"})
-  call smartinput#define_rule({'char': '<C-h>', 'at': '"\%#"', 'input': '<C-O>X<C-O>x'})
-  call smartinput#define_rule({'char': '<C-h>', 'at': "'\%#'", 'input': "<C-O>X<C-O>x"})
-  call smartinput#define_rule({'char': '<C-h>', 'at': '"\%#"', 'input': '<C-O>X<C-O>x'})
-
-  for op in ['<', '>', '+', '-', '/', '&', '%', '\*', '|', '=', ',']
-    call smartinput#define_rule({'char': '<BS>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
-    call smartinput#define_rule({'char': '<C-h>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
-    call smartinput#define_rule({'char': '<Space>', 'at': ''.op.' \%#', 'input': ''})
-    call smartinput_endwise#define_default_rules()
-  endfor
-endfunction
-unlet s:bundle
+" " call smartinput_endwise#define_default_rules()
+" "
+" " " \%#はカーソル位置
+" let s:bundle  =  neobundle#get('vim-smartinput')
+" function! s:bundle.hooks.on_source(bundle)
+"   call smartinput#map_to_trigger('i', '<Enter>', '<Enter>', '<Enter>')
+"   call smartinput#define_rule({'char': '<Enter>', 'at': '(\%#)', 'input': '<Enter><Enter><UP><Tab>'})
+"   call smartinput#define_rule({'char': '<Enter>', 'at': '{\%#}', 'input': '<Enter><Enter><UP><Tab>'})
+"
+"   call smartinput#map_to_trigger('i', '<BS>', '<BS>', '<BS>')
+"   call smartinput#define_rule({'char': '<BS>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
+"   call smartinput#define_rule({'char': '<BS>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
+"   call smartinput#define_rule({'char': '<BS>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
+"   call smartinput#define_rule({'char': '<BS>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
+"
+"   call smartinput#map_to_trigger('i', '<C-h>', '<BS>',  '<C-h>')
+"   call smartinput#map_to_trigger('i', '<Space>', '<Space>', '<Space>')
+"
+"   call smartinput#map_to_trigger('i', '<C-h>', '<C-h>', '<BS>')
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '(\s*)\%#', 'input': '<C-O>dF(<BS>'})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '{\s*}\%#', 'input': '<C-O>dF{<BS>'})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '<\s*>\%#', 'input': '<C-O>dF<<BS>'})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '\[\s*\]\%#', 'input': '<C-O>dF[<BS>'})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': "'\s*'\%#", 'input': "<C-O>dF'<BS>"})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '"\s*"\%#', 'input': '<C-O>dF"<BS>'})
+"
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '(\%#)', 'input': '<C-O>X<C-O>x'})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '{\%#}', 'input': '<C-O>X<C-O>x'})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '<\%#>', 'input': '<C-O>X<C-O>x'})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '\[\%#\]', 'input': '<C-O>X<C-O>x'})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': "'\%#'", 'input': "<C-O>X<C-O>x"})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '"\%#"', 'input': '<C-O>X<C-O>x'})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': "'\%#'", 'input': "<C-O>X<C-O>x"})
+"   call smartinput#define_rule({'char': '<C-h>', 'at': '"\%#"', 'input': '<C-O>X<C-O>x'})
+"
+"   for op in ['<', '>', '+', '-', '/', '&', '%', '\*', '|', '=', ',']
+"     call smartinput#define_rule({'char': '<BS>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
+"     call smartinput#define_rule({'char': '<C-h>', 'at': ' ' . op . ' \%#', 'input': '<BS><BS><BS>'})
+"     call smartinput#define_rule({'char': '<Space>', 'at': ''.op.' \%#', 'input': ''})
+"     call smartinput_endwise#define_default_rules()
+"   endfor
+" endfunction
+" unlet s:bundle
 
 "--------------------------------------------------
 " Utility
@@ -391,7 +392,7 @@ nnoremap <Leader>q :call Toggle_quickfix_window()<CR>
 NeoBundle 'majutsushi/tagbar'
 " TagBar
 " tbでIDEっぽくなる
-nmap <silent>tb :TagbarToggle<CR>
+nmap <space>tb :TagbarToggle<CR>
 
 NeoBundle 'szw/vim-tags'
 let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
