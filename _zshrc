@@ -5,6 +5,7 @@ export LANG=ja_JP.UTF-8
 export JLESSCHARSET=japanese-sjis
 export OUTPUT_CHARSET=utf-8
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+export DISABLE_AUTO_TITLE=true
 #----------------------------------------------------------
 # エイリアス
 #----------------------------------------------------------
@@ -184,6 +185,10 @@ bindkey "^N" history-beginning-search-forward-end
 # インクリメンタルサーチの設定
 bindkey "^r" history-incremental-search-backward
 bindkey "^s" history-incremental-search-forward
+
+# 重複を記録しない
+setopt hist_ignore_dups
+
 # 全履歴の一覧を出力する
 function history-all { history -E 1 }
 
