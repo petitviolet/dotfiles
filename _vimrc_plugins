@@ -487,6 +487,11 @@ NeoBundle 'tpope/vim-surround'
 
 " NeoBundle 'terryma/vim-multiple-cursors'
 
+" NeoBundle 'kana/vim-operator-user'
+" NeoBundle 'haya14busa/vim-operator-flashy'
+" map y <Plug>(operator-flashy)
+" nmap Y <Plug>(operator-flashy)$
+
 "-----------------------------------------------------
 " For Pythonプラグイン
 "-----------------------------------------------------
