@@ -1,0 +1,66 @@
+# 基本は github.com のレポジトリーを指定するだけ
+[[plugins]]
+repo = 'Shougo/dein.vim'
+[[plugins]]
+repo = 'gmarik/vundle'
+[[plugins]]
+repo = "mattn/sonictemplate-vim"
+[[plugins]]
+repo = 'scrooloose/syntastic'
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+[[plugins]]
+repo = 'Shougo/neosnippet'
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+[[plugins]]
+repo = "Shougo/tabpagebuffer.vim"
+[[plugins]]
+repo = "Shougo/unite.vim"
+[[plugins]]
+repo = 'Shougo/vimfiler'
+[[plugins]]
+repo = 'sgur/unite-git_grep'
+[[plugins]]
+repo = 'rking/ag.vim'
+[[plugins]]
+repo = 'tyru/caw.vim.git'
+[[plugins]]
+repo = 'thinca/vim-qfreplace'
+[[plugins]]
+repo = 'majutsushi/tagbar'
+[[plugins]]
+repo = 'szw/vim-tags'
+[[plugins]]
+repo = 'kana/vim-fakeclip'
+[[plugins]]
+repo = 'mbbill/undotree'
+[[plugins]]
+repo = 'YankRing.vim'
+[[plugins]]
+repo = 'tpope/vim-surround'
+[[plugins]]
+repo = 'tpope/vim-endwise'
+[[plugins]]
+repo = 'bbatsov/rubocop'
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
+[[plugins]]
+repo = 'tpope/vim-rails'
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+[[plugins]]
+repo = 'mattn/webapi-vim'
+[[plugins]]
+repo = 'kannokanno/previm'
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+[[plugins]]
+repo = 'superbrothers/vim-quickrun-markdown-gfm'
+
+
+# repo = has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'

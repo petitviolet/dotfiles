@@ -1,0 +1,90 @@
+# 基本は github.com のレポジトリーを指定するだけ
+
+# repo = has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+#
+#
+[[plugins]]
+repo = 'Blackrush/vim-gocode'
+on_ft = ['go']
+[[plugins]]
+repo = 'derekwyatt/vim-scala'
+on_ft = ['scala']
+[[plugins]]
+repo = 'ujihisa/neco-look'
+on_i = 1
+[[plugins]]
+repo = 'Shougo/unite.vim'
+on_cmd = ['Unite']
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+on_cmd = ['NERDTreeToggle']
+[[plugins]]
+repo = 'h1mesuke/unite-outline'
+on_source = ['unite.vim']
+[[plugins]]
+repo = 'tsukkee/unite-help'
+on_source = ['unite.vim']
+[[plugins]]
+repo = "alfredodeza/khuno.vim"
+on_ft = ['python', 'python3']
+[[plugins]]
+repo = "vim-scripts/indentpython.vim"
+on_ft = ['python', 'python3']
+[[plugins]]
+repo = "lambdalisue/vim-django-support"
+on_ft = ['python', 'python3']
+[[plugins]]
+repo = "mjbrownie/django-template-textobjects"
+on_ft = ['python', 'python3']
+[[plugins]]
+repo = "kana/vim-textobj-user"
+on_ft = ['python', 'python3']
+[[plugins]]
+repo = "edsono/vim-matchit"
+on_ft = ['python', 'python3']
+[[plugins]]
+repo = "lambdalisue/vim-pyenv"
+on_ft = ['python', 'python3']
+[[plugins]]
+repo = "davidhalter/jedi-vim"
+on_ft = ['python', 'python3']
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html']
+[[plugins]]
+repo = 'hail2u/vim-css3-syntax'
+on_ft = ['html', 'css']
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+on_ft = ['html', 'css', 'javascript']
+[[plugins]]
+repo = 'jelera/vim-javascript-syntax'
+on_ft = ['html', 'css', 'javascript']
+[[plugins]]
+repo = 'kchmck/vim-coffee-script'
+on_ft = ['coffee']
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+on_ft = ['ruby', 'python', 'sh', 'scala', 'java']
+[[plugins]]
+repo = "mattn/gist-vim"
+on_cmd = ['Gist']
+[[plugins]]
+repo = 'vim-latex/vim-latex'
+on_ft = ['tex']
+[[plugins]]
+repo = 'gre/play2vim'
+on_ft = ['scala']
+[[plugins]]
+repo = "dag/vim2hs"
+on_ft = ['haskell']
+[[plugins]]
+repo = "eagletmt/unite-haddock"
+on_ft = ['haskell']
+[[plugins]]
+repo = "ujihisa/neco-ghc"
+on_ft = ['haskell']
+[[plugins]]
+repo = "ujihisa/unite-haskellimport"
+on_ft = ['haskell']
+
