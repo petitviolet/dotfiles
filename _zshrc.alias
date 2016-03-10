@@ -210,11 +210,25 @@ function peco-select-git-add() {
 zle -N peco-select-git-add
 bindkey "^g^a" peco-select-git-add
 
+function peco-select-from-git-branch() {
+  git branch --all --verbose | \
+    peco | \
+    sed -e 's/\* //g' | \
+    awk '{print $1}'  | \
+    rev | cut -f1 -d'/' | rev  # branch名のみ
+
+}
+
+function peco-insert-branch() {
+    LBUFFER+=$(peco-select-from-git-branch)
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco-insert-branch
+bindkey "^g^o" peco-insert-branch
+
 function peco-select-git-checkout() {
-    local SELECTED_FILE_TO_CHECKOUT="$(git branch --all --verbose | \
-                                  peco --query "$LBUFFER" | \
-                                  sed -e 's/\* //g' | \
-                                  awk '{print $1}')"
+    local SELECTED_FILE_TO_CHECKOUT=`peco-select-from-git-branch`
     if [ -n "$SELECTED_FILE_TO_CHECKOUT" ]; then
       BUFFER="git checkout $(echo "$SELECTED_FILE_TO_CHECKOUT" | tr '\n' ' ')"
       CURSOR=$#BUFFER
@@ -276,6 +290,7 @@ abbreviations=(
 "S"    "| sed"
 "E"    "2>&1 > /dev/null"
 "N"    "> /dev/null"
+"J"    "| jq ."
 )
 
 magic-abbrev-expand() {
