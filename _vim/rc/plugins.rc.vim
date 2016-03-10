@@ -406,19 +406,19 @@ command! -nargs=0 PasteGist     call <sid>paste_gist_tag()
 " latex
 "-----------------------------------------------------
 
-if dein#tap('vim-latex')
-  imap <C-i> <Plug>IMAP_JumpForward
-  " set conceallevel=0
-  let g:tex_conceal=""
-  let tex_flavor = 'latex'
-  set grepprg=grep\ -nH\ $*
-  set shellslash
-  "Macの人はデフォルトでpdfなので必要ない その他のOSの人はデフォルトがdviなので必要
-  let g:Tex_DefaultTargetFormat='pdf'
-  let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
-  let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-  let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-endif
+" if dein#tap('vim-latex')
+"   imap <C-i> <Plug>IMAP_JumpForward
+"   " set conceallevel=0
+"   let g:tex_conceal=""
+"   let tex_flavor = 'latex'
+"   set grepprg=grep\ -nH\ $*
+"   set shellslash
+"   "Macの人はデフォルトでpdfなので必要ない その他のOSの人はデフォルトがdviなので必要
+"   let g:Tex_DefaultTargetFormat='pdf'
+"   let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
+"   let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+"   let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+" endif
 
 "-----------------------------------------------------
 " Like IDE

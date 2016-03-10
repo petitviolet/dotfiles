@@ -61,6 +61,9 @@ repo = 'tyru/open-browser.vim'
 repo = 'tyru/open-browser.vim'
 [[plugins]]
 repo = 'superbrothers/vim-quickrun-markdown-gfm'
-
-
-# repo = has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+[[plugins]]
+repo = 'Shougo/neocomplete'
+if = '''has('lua')'''
+[[plugins]]
+repo = 'Shougo/neocomplcache'
+if = '''!has('lua')'''

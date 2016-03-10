@@ -42,9 +42,9 @@ on_ft = ['python', 'python3']
 [[plugins]]
 repo = "edsono/vim-matchit"
 on_ft = ['python', 'python3']
-[[plugins]]
-repo = "lambdalisue/vim-pyenv"
-on_ft = ['python', 'python3']
+# [[plugins]]
+# repo = "lambdalisue/vim-pyenv"
+# on_ft = ['python', 'python3']
 [[plugins]]
 repo = "davidhalter/jedi-vim"
 on_ft = ['python', 'python3']
