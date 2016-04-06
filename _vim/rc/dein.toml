@@ -67,3 +67,7 @@ if = '''has('lua')'''
 [[plugins]]
 repo = 'Shougo/neocomplcache'
 if = '''!has('lua')'''
+[[plugins]]
+repo = "Shougo/vimproc"
+on_source = ['QuickRun']
+build = 'make'

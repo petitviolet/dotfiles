@@ -65,7 +65,9 @@ repo = 'kchmck/vim-coffee-script'
 on_ft = ['coffee']
 [[plugins]]
 repo = 'thinca/vim-quickrun'
-on_ft = ['ruby', 'python', 'sh', 'scala', 'java']
+# on_cmd = ['QuickRun']
+on_map = [['n', '<Plug>']]
+hook_add = 'nmap <silent> <Space>r <Plug>(quickrun)'
 [[plugins]]
 repo = "mattn/gist-vim"
 on_cmd = ['Gist']
@@ -87,4 +89,6 @@ on_ft = ['haskell']
 [[plugins]]
 repo = "ujihisa/unite-haskellimport"
 on_ft = ['haskell']
-
+[[plugins]]
+repo = "wlangstroth/vim-racket"
+on_ft = ['rkt', 'racket']
