@@ -3,7 +3,7 @@
   email = violethero0820@gmail.com
 [alias]
   br = branch --verbose
-  di = diff
+  di = diff --unified=0
   st = status
   co = checkout
   lp = log --decorate --stat --patch
