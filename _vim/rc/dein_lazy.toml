@@ -92,3 +92,6 @@ on_ft = ['haskell']
 [[plugins]]
 repo = "wlangstroth/vim-racket"
 on_ft = ['rkt', 'racket']
+[[plugins]]
+repo = "vim-scripts/dbext.vim"
+on_ft = ['sql']

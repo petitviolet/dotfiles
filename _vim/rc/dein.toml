@@ -71,3 +71,5 @@ if = '''!has('lua')'''
 repo = "Shougo/vimproc"
 on_source = ['QuickRun']
 build = 'make'
+[[plugins]]
+repo = 'Shougo/neomru.vim'

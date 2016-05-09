@@ -125,8 +125,9 @@ cmap w!! w !sudo tee > /dev/null %
 "-----------------------------------------------------
 " テンプレート関連
 "-----------------------------------------------------
-autocmd BufNewFile *.py 0r $HOME/.vim/template/py.txt
-autocmd BufNewFile *.php 0r $HOME/.vim/template/php.txt
+autocmd BufNewFile *.py -r $HOME/.vim/template/py.txt
+autocmd BufNewFile *.php -r $HOME/.vim/template/php.txt
+autocmd BufNewFile *.rkt -r $HOME/.vim/template/rkt.txt
 
 "-----------------------------------------------------
 " ファイル操作関連
