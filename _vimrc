@@ -111,7 +111,7 @@ nnoremap j gj
 nnoremap k gk
 nnoremap <space><space> :<C-u>edit ~/.vimrc<CR>
 nnoremap <space>s :<C-u>source ~/.vimrc<CR>
-nnoremap <space>p :<C-u>edit ~/.vimrc_plugins<CR>
+nnoremap <space>p :<C-u>edit ~/.vim/rc/plugins.rc.vim<CR>
 " nnoremap ; :
 " nnoremap : ;
 
