@@ -1,8 +1,8 @@
 # 基本は github.com のレポジトリーを指定するだけ
 [[plugins]]
 repo = 'Shougo/dein.vim'
-[[plugins]]
-repo = 'gmarik/vundle'
+# [[plugins]]
+# repo = 'gmarik/vundle'
 [[plugins]]
 repo = "mattn/sonictemplate-vim"
 [[plugins]]
@@ -15,8 +15,8 @@ repo = 'junegunn/vim-easy-align'
 repo = 'Shougo/neosnippet'
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-[[plugins]]
-repo = "Shougo/tabpagebuffer.vim"
+# [[plugins]]
+# repo = "Shougo/tabpagebuffer.vim"
 [[plugins]]
 repo = "Shougo/unite.vim"
 [[plugins]]
@@ -44,19 +44,11 @@ repo = 'tpope/vim-surround'
 [[plugins]]
 repo = 'tpope/vim-endwise'
 [[plugins]]
-repo = 'bbatsov/rubocop'
-[[plugins]]
-repo = 'vim-ruby/vim-ruby'
-[[plugins]]
-repo = 'tpope/vim-rails'
-[[plugins]]
 repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'mattn/webapi-vim'
 [[plugins]]
 repo = 'kannokanno/previm'
-[[plugins]]
-repo = 'tyru/open-browser.vim'
 [[plugins]]
 repo = 'tyru/open-browser.vim'
 [[plugins]]
@@ -73,3 +65,4 @@ on_source = ['QuickRun']
 build = 'make'
 [[plugins]]
 repo = 'Shougo/neomru.vim'
+on_source = ['unite.vim']

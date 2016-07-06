@@ -30,12 +30,13 @@ on_ft = ['python', 'python3']
 [[plugins]]
 repo = "vim-scripts/indentpython.vim"
 on_ft = ['python', 'python3']
-[[plugins]]
-repo = "lambdalisue/vim-django-support"
-on_ft = ['python', 'python3']
-[[plugins]]
-repo = "mjbrownie/django-template-textobjects"
-on_ft = ['python', 'python3']
+on_i = 1
+# [[plugins]]
+# repo = "lambdalisue/vim-django-support"
+# on_ft = ['python', 'python3']
+# [[plugins]]
+# repo = "mjbrownie/django-template-textobjects"
+# on_ft = ['python', 'python3']
 [[plugins]]
 repo = "kana/vim-textobj-user"
 on_ft = ['python', 'python3']
@@ -48,9 +49,11 @@ on_ft = ['python', 'python3']
 [[plugins]]
 repo = "davidhalter/jedi-vim"
 on_ft = ['python', 'python3']
+on_i = 1
 [[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft = ['html']
+on_i = 1
 [[plugins]]
 repo = 'hail2u/vim-css3-syntax'
 on_ft = ['html', 'css']
@@ -95,3 +98,12 @@ on_ft = ['rkt', 'racket']
 [[plugins]]
 repo = "vim-scripts/dbext.vim"
 on_ft = ['sql']
+[[plugins]]
+repo = 'bbatsov/rubocop'
+on_ft = ['ruby']
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
+on_ft = ['ruby']
+[[plugins]]
+repo = 'tpope/vim-rails'
+on_ft = ['ruby']
