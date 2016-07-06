@@ -217,7 +217,8 @@ function peco-select-from-git-branch() {
     peco | \
     sed -e 's/\* //g' | \
     awk '{print $1}'  | \
-    rev | cut -f1 -d'/' | rev  # branch名のみ
+    rev | cut -f1 -d'/' | rev | \
+    perl -pe 's/\n/ /g'
 
 }
 
@@ -293,6 +294,11 @@ abbreviations=(
 "E"    "2>&1 > /dev/null"
 "N"    "> /dev/null"
 "J"    "| jq ."
+"v"    "vim"
+"gs"   "git status"
+"gco"  "git commit -m"
+"gl"   "git log"
+"jvm"  "-jvm-debug 5005"
 )
 
 magic-abbrev-expand() {
