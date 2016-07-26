@@ -384,6 +384,8 @@ let g:github_user = 'usrename'
 let g:github_token = 'token'
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
+
 " Gistのヘルパースクリプト(.vim/autoload/gist_vim_helper.vim)
 command! -nargs=? -range=% GHPostGist call gist_vim_helper#post_cmd(<count>, <line1>, <line2>, <f-args>)
 command! -nargs=? -range=% GHEditGist call gist_vim_helper#edit_cmd(<count>, <line1>, <line2>, <f-args>)
