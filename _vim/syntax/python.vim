@@ -38,7 +38,7 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-setlocal foldmethod=syntax
+" setlocal foldmethod=syntax
 
 syn keyword pythonStatement	break continue del
 syn keyword pythonStatement	except exec finally
