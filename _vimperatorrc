@@ -14,7 +14,7 @@ set hintchars=asineqv
 
 " 選択文字列ののコピーを <C-c> に割り当て
 " map <C-c> :echo Yank!<CR>Y
-map <C-c> <C-[>
+" map <C-c> <C-[>
 
 " j/k でのスクロール幅を 1行 から 3行 に変更
 map j 3<C-e>
@@ -52,21 +52,23 @@ no <Right> 5l
 map <S-Right> :tabmove! +1<CR>
 map <S-Left>  :tabmove! -1<CR>
 
-map <C-h> <NOP>
-imap <C-h> <BS>
-cmap <C-h> <BS>
+" map <C-h> <NOP>
+" imap <C-h> <BS>
+" cmap <C-h> <BS>
 
 "フォームにフォーカスしないように
 " set focuscontent
 
 " slideshareの操作
-nnoremap -urls=www\\.slideshare\\.net <C-l> :slideshare next<CR>
-nnoremap -urls=www\\.slideshare\\.net <C-h> :slideshare prev<CR>
-nnoremap -urls=ssslide\\.com <C-l> :slideshare next<CR>
-nnoremap -urls=ssslide\\.com <C-h> :slideshare prev<CR>
+nnoremap -urls=www\\.slideshare\\.net <C-k> :slideshare next<CR>
+nnoremap -urls=www\\.slideshare\\.net <C-j> :slideshare prev<CR>
+nnoremap -urls=ssslide\\.com <C-k> :slideshare next<CR>
+nnoremap -urls=ssslide\\.com <C-j> :slideshare prev<CR>
 " speakerdeckの操作
-nnoremap -urls=speakerdeck\\.com <C-l> :speakerdeck next<CR>
-nnoremap -urls=speakerdeck\\.com <C-h> :speakerdeck prev<CR>
+" nmap <C-[> :speakerdeck prev<CR>
+" nmap <C-]> :speakerdeck next<CR>
+nnoremap -urls=speakerdeck\\.com <C-k> :speakerdeck next<CR>
+nnoremap -urls=speakerdeck\\.com <C-j> :speakerdeck prev<CR>
 
 " 検索キーワードのハイライト
 set hlsearch
