@@ -66,3 +66,5 @@ build = 'make'
 [[plugins]]
 repo = 'Shougo/neomru.vim'
 on_source = ['unite.vim']
+[[plugins]]
+repo = 'Konfekt/FastFold'
