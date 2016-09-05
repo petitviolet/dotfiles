@@ -1,0 +1,41 @@
+"*":
+  "autocomplete-plus":
+    backspaceTriggersAutocomplete: true
+    confirmCompletion: "tab"
+    defaultProvider: "Fuzzy"
+    minimumWordLength: 2
+  core:
+    disabledPackages: [
+      "minimap"
+      "vim-mode"
+      "language-gfm"
+    ]
+    packagesWithKeymapsDisabled: [
+      "markdown-writer"
+    ]
+    themes: [
+      "slack-ui"
+      "one-dark-syntax"
+    ]
+  editor:
+    fontFamily: "Ricty"
+    fontSize: 17
+    invisibles: {}
+    showIndentGuide: true
+    tabType: "soft"
+    zoomFontWhenCtrlScrolling: true
+  "exception-reporting":
+    userId: "295eaec7-8ee3-a79f-a7a1-3b4b2a585220"
+  "git-diff":
+    showIconsInEditorGutter: true
+  "markdown-preview": {}
+  "markdown-writer":
+    relativeImagePath: true
+  minimap: {}
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  "vim-mode-plus": {}
+  welcome:
+    showOnStartup: false
+  whitespace:
+    removeTrailingWhitespace: false
