@@ -368,10 +368,11 @@ if has("clipboard")
   vmap ,y "+y
   nmap ,p "+gP
   " exclude:{pattern} must be last ^= prepend += append
-  if has("gui_running") || has("xterm_clipboard")
-    silent! set clipboard^=unnamedplus
-    set clipboard^=unnamed
-  endif
+  " if has("gui_running") || has("xterm_clipboard")
+  "   silent! set clipboard^=unnamedplus
+  "   set clipboard^=unnamed
+  " endif
+  set clipboard=unnamed,autoselect
 endif
 
 "-----------------------------------------------------

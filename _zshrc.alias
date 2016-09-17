@@ -7,7 +7,6 @@ case ${OSTYPE} in
     alias ls='ls -hFG --color=auto'
     ;;
 esac
-# alias ssh=sshrc
 alias ll='ls -l'
 alias la='ls -A'
 alias cp='cp -vi'
@@ -331,3 +330,5 @@ zle -N magic-abbrev-expand
 zle -N no-magic-abbrev-expand
 bindkey " " magic-abbrev-expand
 bindkey "^x " no-magic-abbrev-expand
+
+alias today='date +"%Y%m%d"'
