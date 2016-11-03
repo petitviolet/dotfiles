@@ -39,8 +39,13 @@ alias restart-adb='adb kill-server; adb start-server'
 # alias adb='adbp'
 # alias pidcat='pidcatp'
 alias ip="ipconfig getifaddr `netstat -rn -f inet | awk '/^default/{print $6;exit}'`"
-alias ga="git add"
-export GREP_OPTIONS="--color=always"
+alias git-home="cd `git rev-parse --show-toplevel`"
+
+
+eurl() {
+ curl -sw '%{url_effective}' --data-urlencode "$1" -G '' | tr -d '?' | tr -d '/'
+}
+
 export LESS=' -R '
 # export LESSOPEN='| src-hilite-lesspipe.sh %s'
 # --------------------------------------------------
@@ -178,7 +183,7 @@ zle -N peco-cdr
 bindkey '^@' peco-cdr
 
 function peco-tree-vim(){
-local SELECTED_FILE=$(tree -N --charset=o -f | peco | tr -d '\||`| ' | xargs echo)
+  local SELECTED_FILE=$(tree -N --charset=o -f | peco | sed -e "s/ ->.*\$//g" | tr -d '\||`| ' | xargs echo)
   if [ -n "$SELECTED_FILE" ]; then
     BUFFER="vim $SELECTED_FILE[3,-1]"
   fi
@@ -188,7 +193,7 @@ zle -N peco-tree-vim
 bindkey "^v^t" peco-tree-vim
 
 function peco-tree-select(){
-local SELECTED_FILE=$(tree -N --charset=o -f | peco | tr -d '\||`| ' | xargs echo)
+  local SELECTED_FILE=$(tree -N --charset=o -f | peco | sed -e "s/ ->.*\$//g" | tr -d '\||`| ' | xargs echo)
   if [ -n "$SELECTED_FILE" ]; then
     LBUFFER+="$SELECTED_FILE[3,-1]"
     CURSOR=$#LBUFFER
@@ -271,6 +276,16 @@ function peco_insert_selected_git_files(){
 
 zle -N peco_insert_selected_git_files
 bindkey "^g^s" peco_insert_selected_git_files
+
+function peco_docker_image_id(){
+    LBUFFER+=$(docker ps | tail -n +2 | peco | cut -d" " -f1)
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+
+zle -N peco_docker_image_id
+bindkey "^gd" peco_docker_image_id
+
 
 function adb_locat_app() {
   APP_NAME=$1
