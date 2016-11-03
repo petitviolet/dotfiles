@@ -34,6 +34,7 @@
 'body':
   'cmd-]': 'pane:show-next-item'
   'cmd-[': 'pane:show-previous-item'
+  'cmd-ctrl-s': 'editor:toggle-soft-wrap'
 
 'atom-workspace atom-text-editor:not([mini])':
   'cmd-]': 'unset!'

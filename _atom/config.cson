@@ -9,10 +9,12 @@
       "minimap"
       "vim-mode"
       "language-gfm"
+      "slides-preview"
     ]
     packagesWithKeymapsDisabled: [
       "markdown-writer"
     ]
+    telemetryConsent: "no"
     themes: [
       "slack-ui"
       "one-dark-syntax"
@@ -21,7 +23,11 @@
     fontFamily: "Ricty"
     fontSize: 17
     invisibles: {}
+    preferredLineLength: 120
     showIndentGuide: true
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+    softWrapHangingIndent: 2
     tabType: "soft"
     zoomFontWhenCtrlScrolling: true
   "exception-reporting":
