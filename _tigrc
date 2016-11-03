@@ -1,12 +1,14 @@
 # set vertical-split = yes
 set main-view = \
   line-number:yes,interval=1 \
+  date \
   id:yes,color \
-  date:local \
   author:abbreviated \
   commit-title:graph=yes,refs=yes
 set split-view-height = 80%
 set diff-context = 6
+# set main-view-date = date-local
+# set main-view-date-local = true
 bind generic <Ctrl-f> scroll-page-down
 bind generic <Ctrl-b> scroll-page-up
 
