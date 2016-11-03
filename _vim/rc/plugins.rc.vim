@@ -133,9 +133,9 @@ nnoremap [unite] <Nop>
 nmap <space>u [unite]
 nnoremap <silent> [unite]u :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
 nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru<CR>
-nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]i :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> [unite]i :<C-u>Unite -buffer-name=files buffer_tab<CR>
+nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=files buffer_tab<CR>
 nnoremap <silent> [unite]g :<C-u>Unite vcs_grep/git<CR>
 function! s:unite_my_settings()
   " Overwrite settings
