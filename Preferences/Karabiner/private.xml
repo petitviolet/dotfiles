@@ -8,4 +8,10 @@
             <autogen>--KeyToKey-- KeyCode::C, VK_CONTROL, KeyCode::C, VK_CONTROL, KeyCode::JIS_EISUU</autogen>
         </item>
     </list>
+    <replacementdef>
+      <replacementname>EMACS_MODE_IGNORE_APPS</replacementname>
+      <replacementvalue>
+        Atom,FIREFOX,TERMINAL
+      </replacementvalue>
+    </replacementdef>
 </root>
