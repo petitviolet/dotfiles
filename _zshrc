@@ -281,6 +281,5 @@ fi
 export REPORTTIME=5
 export PATH=$PATH:~/.cabal/bin
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
