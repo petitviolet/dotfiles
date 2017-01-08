@@ -11,7 +11,7 @@
     <replacementdef>
       <replacementname>EMACS_MODE_IGNORE_APPS</replacementname>
       <replacementvalue>
-        Atom,FIREFOX,TERMINAL
+        Atom,FIREFOX,TERMINAL,IntelliJ
       </replacementvalue>
     </replacementdef>
 </root>
