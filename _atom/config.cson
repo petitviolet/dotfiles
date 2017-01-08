@@ -7,9 +7,7 @@
   core:
     disabledPackages: [
       "minimap"
-      "vim-mode"
       "language-gfm"
-      "slides-preview"
     ]
     packagesWithKeymapsDisabled: [
       "markdown-writer"
@@ -21,19 +19,19 @@
     ]
   editor:
     fontFamily: "Ricty"
-    fontSize: 17
+    fontSize: 16
     invisibles: {}
     preferredLineLength: 120
     showIndentGuide: true
-    softWrap: true
-    softWrapAtPreferredLineLength: true
-    softWrapHangingIndent: 2
     tabType: "soft"
     zoomFontWhenCtrlScrolling: true
   "exception-reporting":
     userId: "295eaec7-8ee3-a79f-a7a1-3b4b2a585220"
   "git-diff":
     showIconsInEditorGutter: true
+  "git-plus":
+    general:
+      _analyticsUserId: "0e90be4c-3c93-4181-94fa-e9f53a1afeed"
   "markdown-preview": {}
   "markdown-writer":
     relativeImagePath: true
@@ -45,3 +43,9 @@
     showOnStartup: false
   whitespace:
     removeTrailingWhitespace: false
+".gfm.source":
+  editor:
+    preferredLineLength: 120
+".scala.source":
+  editor:
+    preferredLineLength: 120
