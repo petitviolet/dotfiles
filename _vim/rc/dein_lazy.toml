@@ -40,9 +40,9 @@ on_i = 1
 [[plugins]]
 repo = "kana/vim-textobj-user"
 on_ft = ['python', 'python3']
-[[plugins]]
-repo = "edsono/vim-matchit"
-on_ft = ['python', 'python3']
+# [[plugins]]
+# repo = "edsono/vim-matchit"
+# on_ft = ['python', 'python3']
 # [[plugins]]
 # repo = "lambdalisue/vim-pyenv"
 # on_ft = ['python', 'python3']
