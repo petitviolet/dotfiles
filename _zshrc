@@ -283,3 +283,5 @@ export PATH=$PATH:~/.cabal/bin
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export HOMEBREW_BREWFILE=~/dotfiles/Brewfile

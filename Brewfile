@@ -1,115 +1,206 @@
-# update
-#
-# tap homebrew/binary
-# tap phinze/homebrew-cask
 
-install ant || true
-# install apple-gcc42 || true
-install autoconf || true
-install automake || true
-install bsdmake || true
-install cloog || true
-install cmake || true
-install colordiff || true
-install coreutils || true
-install ctags || true
-install docker || true
-install boot2docker || true
-install ffmpeg || true
-install figlet || true
-install fontforge || true
-install gibo || true
-install git || true
-install go || true
-# install gobject-introspection || true
-install gradle || true
-install imagemagick || true
-install jq || true
-install libevent || true
-install libffi || true
-install libmpc || true
-install libpng || true
-install libtiff || true
-install libtool || true
-install libyaml || true
-install little-cms || true
-install little-cms2 || true
-# install llvm || true
-install lv || true
-install mecab || true
-install mecab-ipadic || true
-# install mercurial || true
-# install mongodb || true
-# install mpfr || true
-install mysql || true
-install nkf || true
-install node || true
-# install objective-caml || true
-install openssl || true
-# install pkg-config || true
-install play || true
-install proctools || true
-# install python || true
-install readline || true
-install reattach-to-user-namespace || true
-install sbt || true
-install scala || true
-install sqlite || true
-# install subversion || true
-install tig || true
-install tmux || true
-install tree || true
-# install vim || true
+# tap repositories and their packages
 
-brew install vim --with-features=huge --enable-multibyte --enable-pythoninterp=dynamic --enable-tclinterp --enable-cscope --enable-fontset --enable-gnome-check --disable-gui --without-x --enable-gpm --with-python --with-python3 --with-lua --with-ruby --with-python-config-dir=/usr/local/bin/python || true
+tap caskroom/cask
+cask alfred
+cask bettertouchtool
+cask burn
+cask clipmenu
+cask colorpicker
+cask coteditor
+cask day-o
+cask diskwave
+cask dropbox
+cask evernote
+cask flux
+cask google-chrome
+cask google-drive
+cask google-japanese-ime
+cask hyperswitch
+cask imageoptim
+cask iterm2
+cask java
+cask karabiner
+cask keepassx
+cask keycastr
+cask kindle
+cask licecap
+cask magican
+cask nosleep
+cask shiftit
+cask skitch
+cask skype
+cask slack
+cask vagrant
+cask virtualbox
+cask xquartz
+cask xtrafinder
 
-install watch || true
-install wget || true
-install z || true
-install zsh || true
+tap homebrew/core
+brew ansible
+brew autoconf
+brew automake
+brew bash
+brew boost
+brew boot2docker
+brew bsdmake
+brew c-ares
+brew cabal-install
+brew cairo
+brew cctools
+brew cloog
+brew cmake
+brew cmigemo
+brew colordiff
+brew coreutils
+brew ctags
+brew curl
+brew czmq
+brew dirmngr
+brew docker
+brew ffmpeg
+brew flow
+brew fontconfig
+brew fontforge
+brew freetype
+brew gcc
+brew gdbm
+brew gettext
+brew ghc
+brew gibo
+brew git
+brew giter8
+brew glib
+brew gmp
+brew gmp@4
+brew gnupg2
+brew go
+brew gobject-introspection
+brew gpg-agent
+brew gradle
+brew harfbuzz
+brew heroku
+brew hub
+brew icu4c
+brew imagemagick
+brew isl
+brew isl@0.12
+brew jansson
+brew jemalloc
+brew jenkins
+brew jo
+brew john
+brew jpeg
+brew jq
+brew lame
+brew libassuan
+brew libev
+brew libevent
+brew libffi
+brew libgcrypt
+brew libgpg-error
+brew libksba
+brew libmpc
+brew libpng
+brew libsodium
+brew libtiff
+brew libtool
+brew libusb
+brew libusb-compat
+brew libvo-aacenc
+brew libxml2
+brew libxslt
+brew libyaml
+brew lua
+brew md5sha1sum
+brew mecab
+brew mecab-ipadic
+brew mercurial
+brew mpfr
+brew mysql
+brew nghttp2
+brew nkf
+brew nmap
+brew node
+brew oniguruma
+brew openssl
+brew openssl@1.1
+brew pango
+brew pcre
+brew peco
+brew perl
+brew pidcat
+brew pinentry
+brew pixman
+brew pkg-config
+brew postgresql
+brew proctools
+brew pth
+brew python
+brew python3
+brew readline
+brew reattach-to-user-namespace
+brew redis
+brew ruby
+brew sbt
+brew scala
+brew source-highlight
+brew spdylay
+brew sqlite
+brew the_silver_searcher
+brew tig
+brew tmux
+brew tree
+brew ttyrec
+brew typesafe-activator
+brew vim
+brew watchman
+brew wget
+brew x264
+brew xvid
+brew xz
+brew yasm
+brew z
+brew zeromq
+brew zsh
+brew zsh-completions
+brew mas
 
-brew tap homebrew/dupes
-brew install libxml2 libxslt libiconv
-brew link libxml2 libxslt libiconv
+tap rcmdnk/file
+brew brew-file
 
-install brew-cask || true
+# Below applications were installed by Cask,
+# but do not have corresponding casks.
 
-brew tap caskroom/versions || true
+#cask adobe-reader-ja (!)
+#cask Caskroom (!)
+#cask colors (!)
+#cask firefox-ja (!)
+#cask intellij-idea-ce (!)
+#cask java6 (!)
+#cask java7 (!)
+#cask thunderbird-ja (!)
 
-cask install android-studio || true
-cask install bettertouchtool || true
-cask install colors || true
-cask install coteditor || true
-cask install clipmenu || true
-cask install dropbox || true
-cask install diskwave || true
-cask install day-o || true
-cask install evernote || true
-cask install firefox-ja || true
-cask install flux || true
-cask install google-chrome || true
-cask install google-drive || true
-cask install google-japanese-ime || true
-cask install genymotion || true
-cask install hyperswitch || true
-cask install iterm2 || true
-cask install java7 || true
-# cask install jdk || true
-cask install keepassx || true
-cask install keyremap4macbook || true
-cask install kobito || true
-cask install magican || true
-cask install shiftit || true
-cask install skitch || true
-cask install skype || true
-# cask install spectacle || true
-cask install texshop || true
-cask install thunderbird-ja || true
-cask install vagrant || true
-cask install virtualbox || true
-cask install xtrafinder || true
-cask install xquartz || true
-tap sanemat/font || true
-brew install ricty || true
+# App Store applications
+appstore 726828968 Astro (1.137)
+appstore 1024640650 CotEditor (3.1.2)
+appstore 682658836 GarageBand (10.1.4)
+appstore 1127487414 Install macOS Sierra (12.0.49)
+appstore 409183694 Keynote (6.6.2)
+appstore 896624060 Kobito (2.3.8)
+appstore 539883307 LINE (4.11.0)
+appstore 540348655 Monosnap (3.3.0)
+appstore 409203825 Numbers (3.6.2)
+appstore 409201541 Pages (5.6.2)
+appstore 948415170 Pushbullet (4)
+appstore 425955336 Skitch (2.7.8)
+appstore 803453959 Slack (2.3.3)
+appstore 886106985 Sunrise Calendar (1.10)
+appstore 425424353 The Unarchiver (3.11.1)
+appstore 414298354 ToyViewer (5.4.0)
+appstore 428834068 YoruFukurou (2.85)
+appstore 408981434 iMovie (10.1.4)
+appstore 408981381 iPhoto (9.6.1)
 
+# Other commands
 cleanup
