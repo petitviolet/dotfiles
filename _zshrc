@@ -284,4 +284,16 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/komurasaki/tmp/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/komurasaki/tmp/google-cloud-sdk/completion.zsh.inc'
+
+#----------------------------------------------------------
+# Brewfile
+#----------------------------------------------------------
+
 export HOMEBREW_BREWFILE=~/dotfiles/Brewfile
