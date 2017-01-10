@@ -5,9 +5,21 @@
     defaultProvider: "Fuzzy"
     minimumWordLength: 2
   core:
+    audioBeep: false
     disabledPackages: [
       "minimap"
       "language-gfm"
+    ]
+    excludeVcsIgnoredPaths: true
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "activator"
+      "*.log"
     ]
     packagesWithKeymapsDisabled: [
       "markdown-writer"
@@ -21,7 +33,7 @@
     fontFamily: "Ricty"
     fontSize: 16
     invisibles: {}
-    preferredLineLength: 120
+    preferredLineLength: 140
     showIndentGuide: true
     tabType: "soft"
     zoomFontWhenCtrlScrolling: true
@@ -36,8 +48,13 @@
   "markdown-writer":
     relativeImagePath: true
   minimap: {}
+  "project-manager":
+    alwaysOpenInSameWindow: true
+    ignoreDirectories: ".git"
+    sortBy: "last modified"
   "tree-view":
-    hideVcsIgnoredFiles: true
+    alwaysOpenExisting: true
+    hideIgnoredNames: true
   "vim-mode-plus": {}
   welcome:
     showOnStartup: false
