@@ -4,7 +4,7 @@
 #
 #
 [[plugins]]
-repo = 'Blackrush/vim-gocode'
+repo = 'fatih/vim-go'
 on_ft = ['go']
 [[plugins]]
 repo = 'derekwyatt/vim-scala'
