@@ -67,6 +67,7 @@ if dein#tap('neocomplete') && has('lua')
   if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
   endif
+  " let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
   let g:neocomplete#keyword_patterns._ = '\h\w*'
   "ユーザ定義の辞書を指定
   let g:neocomplete#sources#dictionary#dictionaries = {
@@ -186,15 +187,25 @@ nnoremap <Leader>q :call Toggle_quickfix_window()<CR>
 " nmap vs :VimShell<CR>
 " nmap vp :VimShellPop<CR>
 
+"--------------------------------------------------
+" IDEっぽいやつ
+"--------------------------------------------------
+
 " TagBar
 " tbでIDEっぽくなる
 nmap <space>tb :TagbarToggle<CR>
 
+" tag jump
 let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
 let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
 " 候補が複数ある時にそれを表示
-autocmd FileType * nnoremap <C-]> g<C-]>
-autocmd FileType bib,tex nnoremap <C-]> vi}g<C-]>
+set notagbsearch
+" nnoremap <C-t> :exe("tjump ".expand('<cword>'))<CR>
+autocmd FileType * nnoremap <C-t> g<C-]>
+autocmd FileType bib,tex nnoremap <C-t> vi}g<C-]>
+nnoremap <silent> tn :tag<CR>
+nnoremap <silent> tb :pop<CR>
+set tags=./tags;
 
 nnoremap T :TagsGenerate<CR>
 
