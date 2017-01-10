@@ -1,7 +1,7 @@
 case ${OSTYPE} in
   darwin*)
     # alias ls='ls -hF -G'
-    alias ls='ls -hFGW'
+    alias ls='ls -hFG --color=auto'
     ;;
   linux*)
     alias ls='ls -hFG --color=auto'
@@ -38,13 +38,15 @@ alias restart-adb='adb kill-server; adb start-server'
 # alias adb='adbp'
 # alias pidcat='pidcatp'
 alias ip="ipconfig getifaddr `netstat -rn -f inet | awk '/^default/{print $6;exit}'`"
-function git-home {
-  "cd `git rev-parse --show-toplevel`"
+
+git-home() {
+  cd `git rev-parse --show-toplevel`
 }
 
 
 eurl() {
- curl -sw '%{url_effective}' --data-urlencode "$1" -G '' | tr -d '?' | tr -d '/'
+ # curl -sw '%{url_effective}' --data-urlencode "$1" -G '' | tr -d '?' | tr -d '/'
+ echo $1 | nkf -WwMQ | tr = %H
 }
 
 export LESS=' -R '
