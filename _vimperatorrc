@@ -52,6 +52,7 @@ no <Right> 5l
 map <S-Right> :tabmove! +1<CR>
 map <S-Left>  :tabmove! -1<CR>
 
+map Y :yankmarkdown<CR>
 " map <C-h> <NOP>
 " imap <C-h> <BS>
 " cmap <C-h> <BS>
