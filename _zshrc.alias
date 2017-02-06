@@ -50,7 +50,8 @@ function mas-install {
 
 eurl() {
  # curl -sw '%{url_effective}' --data-urlencode "$1" -G '' | tr -d '?' | tr -d '/'
- echo $1 | nkf -WwMQ | tr = %H
+ # nkf automatically insert new line at 60char length
+ echo $1 | nkf -WwMQ | tr = % | sed -e "s/%$//g" | tr -d '\n'
 }
 
 export LESS=' -R '
