@@ -256,7 +256,7 @@ matc ZenkakuSpace /　/
 " highlight UnderLined cterm=NONE ctermbg=darkgray guibg=#FF0000
 function! s:RTrim()
   let s:cursor = getpos(".")
-  if &filetype == "markdown"
+  if &filetype == "markdown" || &filetype == "gitcommit"
     %s/\s\+\(\s\{2}\)$/\1/e
     match UnderLined /\s\{2}/
   else
