@@ -1,7 +1,7 @@
 case ${OSTYPE} in
   darwin*)
-    alias ls='ls -hFG'
-    # alias ls='ls -hFG --color=auto'
+    # alias ls='ls -hFG'
+    alias ls='ls -hFG --color=auto'
     ;;
   linux*)
     alias ls='ls -hFG --color=auto'
@@ -54,7 +54,7 @@ eurl() {
  echo $1 | nkf -WwMQ | tr = % | sed -e "s/%$//g" | tr -d '\n'
 }
 
-export LESS=' -R '
+export LESS=' -R -N '
 alias ga="git add"
 export GREP_OPTIONS="--color=always"
 # export LESS=' -R '
@@ -153,6 +153,7 @@ function cdls() {
   \cd $1;
   ls;
 }
+
 alias cd=cdls
 
 # コマンドの回数
@@ -296,6 +297,12 @@ function peco_docker_image_id(){
 
 zle -N peco_docker_image_id
 bindkey "^gd" peco_docker_image_id
+
+function peco_grep() {
+  exec ack "$@" . | peco --exec 'awk -F : '"'"'{print "+" $2 " " $1}'"'"' | xargs less -N '
+}
+zle -N peco_grep
+bindkey "^g^g" peco_grep
 
 
 function adb_locat_app() {
