@@ -39,3 +39,6 @@
 'atom-workspace atom-text-editor:not([mini])':
   'cmd-]': 'unset!'
   'cmd-[': 'unset!'
+
+'atom-workspace atom-text-editor':
+  'ctrl-m ctrl-t': 'markdown-hopper:toggle-markdown-toc-view'
