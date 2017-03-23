@@ -19,6 +19,7 @@ repo = 'Shougo/neosnippet-snippets'
 # repo = "Shougo/tabpagebuffer.vim"
 [[plugins]]
 repo = "Shougo/unite.vim"
+# repo = 'Shougo/denite.nvim'
 [[plugins]]
 repo = 'Shougo/vimfiler'
 [[plugins]]
@@ -68,3 +69,5 @@ repo = 'Shougo/neomru.vim'
 on_source = ['unite.vim']
 [[plugins]]
 repo = 'Konfekt/FastFold'
+[[plugins]]
+repo = 'terryma/vim-multiple-cursors'
