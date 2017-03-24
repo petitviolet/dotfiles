@@ -317,20 +317,33 @@ function adb_locat_app() {
 # return true if provided file created at in 1day
 function is_too_old() {
   local FILE=$1
+  local COMPARISON=$2 # seconds
   if [ -f $FILE ]; then
-    [ $(( $(date +%s) - $(stat -c %Y "$1") )) -gt $((60 * 60 * 24)) ]
+    [ $(( $(date +%s) - $(stat -c %Y "$1") )) -gt $COMPARISON ]
   else
     return false
   fi
 }
 
+function read-from-cache() {
+  local CACHE=$1
+  local COMPARISON=$2  # seconds
+  local COMMAND=$3
+  if $(is_too_old $CACHE $COMPARISON);then
+    local result=$(sh -c "$3")
+    if [ -z $result ]; then
+      return
+    else
+      echo $result > $CACHE
+      cat $CACHE
+    fi
+  fi
+}
+
 function gcloud-select-project() {
   local PROJECT_CACHE=/var/tmp/gcloud-project.txt
-  if $(is_too_old $PROJECT_CACHE);then
-    gcloud projects list > $PROJECT_CACHE
-  fi
-  cat $PROJECT_CACHE | peco | awk '{print $1}'
-  # echo $(gcloud projects list | peco | awk '{print $1}')
+  local result=$(read-from-cache $PROJECT_CACHE $((60 * 60 * 24)) "gcloud projects list")
+  echo $result | peco | awk '{print $1}'
 }
 
 function gcloud-set-project() {
@@ -344,30 +357,33 @@ zle -N gcloud-set-project
 bindkey "^gcp" gcloud-set-project
 
 # insert gcloud compute instance
-function gcloud-list-gcp() {
+function gcloud-compute-instance() {
+  local INSTANCE_CACHE=/var/tmp/gcloud-instance.txt
   local project=$(gcloud-select-project)
   if [ -z $project ]; then
     return;
   fi
-  local vm_data=$(gcloud compute instances list --project $project | peco)
+  local vm_data_raw=$(read-from-cache $INSTANCE_CACHE $((60 * 10)) "gcloud compute instances list --project $project")
+  local vm_data=$(echo $vm_data_raw | peco)
+
   local instance_name=$(echo ${vm_data} | awk '{print $1}')
   local zone_name=$(echo ${vm_data} | awk '{print $2}')
   if [ -n "${instance_name}" ] && [ -n "${zone_name}" ]; then
-    LBUFFER="gcloud compute  --project ${project} --zone ${zone_name} ${instance_name}"
-    CURSOR=15 # move cursor next to `compute `
+    echo "--project ${project} --zone ${zone_name} ${instance_name}"
+  else
+    return false
   fi
 }
-zle -N gcloud-list-gcp
-bindkey "^gcl" gcloud-list-gcp
+function gcloud-compute-instance-edit() {
+  LBUFFER="gcloud compute  $(gcloud-compute-instance)"
+  CURSOR=15 # move cursor next to `compute `
+}
+zle -N gcloud-compute-instance-edit
+bindkey "^gcl" gcloud-compute-instance-edit
 
 function gcloud-ssh() {
-  local vm_data=$(gcloud compute instances list | peco)
-  local instance_name=$(echo ${vm_data} | awk '{print $1}')
-  local zone_name=$(echo ${vm_data} | awk '{print $2}')
-  if [ -n "${instance_name}" ] && [ -n "${zone_name}" ]; then
-    LBUFFER="gcloud compute ssh ${instance_name} --zone ${zone_name}"
-    zle accept-line
-  fi
+  LBUFFER="gcloud compute ssh $(gcloud-compute-instance)"
+  zle accept-line
 }
 zle -N gcloud-ssh
 bindkey "^gcs" gcloud-ssh
