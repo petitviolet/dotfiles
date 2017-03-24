@@ -330,14 +330,14 @@ function read-from-cache() {
   local COMPARISON=$2  # seconds
   local COMMAND=$3
   if $(is_too_old $CACHE $COMPARISON);then
-    local result=$(sh -c "$3")
+    local result=$(sh -c "$COMMAND")
     if [ -z $result ]; then
       return
     else
       echo $result > $CACHE
-      cat $CACHE
     fi
   fi
+  cat $CACHE
 }
 
 function gcloud-select-project() {
@@ -348,6 +348,9 @@ function gcloud-select-project() {
 
 function gcloud-set-project() {
   local proj=$(gcloud-select-project)
+  if [ -z $proj ]; then
+    return;
+  fi
   echo "project set to $proj"
   LBUFFER="gcloud config set project ${proj}"
   zle accept-line
@@ -356,7 +359,6 @@ function gcloud-set-project() {
 zle -N gcloud-set-project
 bindkey "^gcp" gcloud-set-project
 
-# insert gcloud compute instance
 function gcloud-compute-instance() {
   local INSTANCE_CACHE=/var/tmp/gcloud-instance.txt
   local project=$(gcloud-select-project)
@@ -364,6 +366,9 @@ function gcloud-compute-instance() {
     return;
   fi
   local vm_data_raw=$(read-from-cache $INSTANCE_CACHE $((60 * 10)) "gcloud compute instances list --project $project")
+  if [ -z $vm_data_raw ]; then
+    return;
+  fi
   local vm_data=$(echo $vm_data_raw | peco)
 
   local instance_name=$(echo ${vm_data} | awk '{print $1}')
@@ -374,10 +379,12 @@ function gcloud-compute-instance() {
     return false
   fi
 }
+
 function gcloud-compute-instance-edit() {
   LBUFFER="gcloud compute  $(gcloud-compute-instance)"
   CURSOR=15 # move cursor next to `compute `
 }
+
 zle -N gcloud-compute-instance-edit
 bindkey "^gcl" gcloud-compute-instance-edit
 
