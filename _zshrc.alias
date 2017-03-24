@@ -167,6 +167,10 @@ function command-count() {
     history-all | awk '{print $4}' | sort | uniq -c | sort -nr | head -n $count
 }
 
+##########################################
+# peco
+##########################################
+
 function peco-select-history() {
     local tac
     if which tac > /dev/null; then
@@ -301,14 +305,72 @@ bindkey "^gd" peco_docker_image_id
 function peco_grep() {
   exec ack "$@" . | peco --exec 'awk -F : '"'"'{print "+" $2 " " $1}'"'"' | xargs less -N '
 }
-zle -N peco_grep
-bindkey "^g^g" peco_grep
+# zle -N peco_grep
+# bindkey "^g^g" peco_grep
 
 
 function adb_locat_app() {
   APP_NAME=$1
   adb logcat | grep `adb shell ps | grep $1 | cut -c10-15`
 }
+
+# return true if provided file created at in 1day
+function is_too_old() {
+  local FILE=$1
+  if [ -f $FILE ]; then
+    [ $(( $(date +%s) - $(stat -c %Y "$1") )) -gt $((60 * 60 * 24)) ]
+  else
+    return false
+  fi
+}
+
+function gcloud-select-project() {
+  local PROJECT_CACHE=/var/tmp/gcloud-project.txt
+  if $(is_too_old $PROJECT_CACHE);then
+    gcloud projects list > $PROJECT_CACHE
+  fi
+  cat $PROJECT_CACHE | peco | awk '{print $1}'
+  # echo $(gcloud projects list | peco | awk '{print $1}')
+}
+
+function gcloud-set-project() {
+  local proj=$(gcloud-select-project)
+  echo "project set to $proj"
+  LBUFFER="gcloud config set project ${proj}"
+  zle accept-line
+}
+
+zle -N gcloud-set-project
+bindkey "^gcp" gcloud-set-project
+
+# insert gcloud compute instance
+function gcloud-list-gcp() {
+  local project=$(gcloud-select-project)
+  if [ -z $project ]; then
+    return;
+  fi
+  local vm_data=$(gcloud compute instances list --project $project | peco)
+  local instance_name=$(echo ${vm_data} | awk '{print $1}')
+  local zone_name=$(echo ${vm_data} | awk '{print $2}')
+  if [ -n "${instance_name}" ] && [ -n "${zone_name}" ]; then
+    LBUFFER="gcloud compute  --project ${project} --zone ${zone_name} ${instance_name}"
+    CURSOR=15 # move cursor next to `compute `
+  fi
+}
+zle -N gcloud-list-gcp
+bindkey "^gcl" gcloud-list-gcp
+
+function gcloud-ssh() {
+  local vm_data=$(gcloud compute instances list | peco)
+  local instance_name=$(echo ${vm_data} | awk '{print $1}')
+  local zone_name=$(echo ${vm_data} | awk '{print $2}')
+  if [ -n "${instance_name}" ] && [ -n "${zone_name}" ]; then
+    LBUFFER="gcloud compute ssh ${instance_name} --zone ${zone_name}"
+    zle accept-line
+  fi
+}
+zle -N gcloud-ssh
+bindkey "^gcs" gcloud-ssh
 ###################################
 
 setopt extended_glob
