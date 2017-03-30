@@ -325,6 +325,7 @@ function is_too_old() {
   fi
 }
 
+# cache
 function read-from-cache() {
   local CACHE=$1
   local COMPARISON=$2  # seconds
@@ -340,8 +341,19 @@ function read-from-cache() {
   cat $CACHE
 }
 
+function gcloud-active-acount() {
+  gcloud auth list --filter=status:ACTIVE --format="value(account)"
+}
+
+function gcloud-set-acount() {
+  local selected=$(gcloud auth list --format="value(account)" | peco)
+  echo "Account =>" . $selected
+  gcloud config set account $selected
+}
+
 function gcloud-select-project() {
-  local PROJECT_CACHE=/var/tmp/gcloud-project.txt
+  local account=$(gcloud-active-acount)
+  local PROJECT_CACHE="/var/tmp/gcloud-$account-project.txt"
   local result=$(read-from-cache $PROJECT_CACHE $((60 * 60 * 24)) "gcloud projects list")
   echo $result | peco | awk '{print $1}'
 }
@@ -360,8 +372,9 @@ zle -N gcloud-set-project
 bindkey "^gcp" gcloud-set-project
 
 function gcloud-compute-instance() {
-  local INSTANCE_CACHE=/var/tmp/gcloud-instance.txt
+  local account=$(gcloud-active-acount)
   local project=$(gcloud-select-project)
+  local INSTANCE_CACHE="/var/tmp/gcloud-$account-$project-instance.txt"
   if [ -z $project ]; then
     return;
   fi
