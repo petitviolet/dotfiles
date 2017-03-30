@@ -14,7 +14,7 @@ alias mv='mv -vi'
 alias du='du -h'
 # alias cat='more'
 alias du='du -h'
-# 文字化け対策
+# for charset
 alias sort="LC_ALL='C' sort"
 alias uniq="LC_ALL='C' uniq"
 # alias s='screen -U'
@@ -38,16 +38,13 @@ alias restart-adb='adb kill-server; adb start-server'
 # alias adb='adbp'
 # alias pidcat='pidcatp'
 alias ip="ipconfig getifaddr `netstat -rn -f inet | awk '/^default/{print $6;exit}'`"
-
-git-home() {
-  cd `git rev-parse --show-toplevel`
-}
+alias today='date +"%Y%m%d"'
 
 function mas-install {
   mas search $1 | head -n 1 | cut -d' ' -f 1 | xargs -I{} mas install {}
 }
 
-
+# URL-encode
 eurl() {
  # curl -sw '%{url_effective}' --data-urlencode "$1" -G '' | tr -d '?' | tr -d '/'
  # nkf automatically insert new line at 60char length
@@ -55,16 +52,17 @@ eurl() {
 }
 
 export LESS=' -R -N '
-alias ga="git add"
 export GREP_OPTIONS="--color=always"
 # export LESS=' -R '
 # export LESSOPEN='| src-hilite-lesspipe.sh %s'
+
+
 # --------------------------------------------------
-#  オリジナルコマンド
+#  original commands
 # --------------------------------------------------
-# ファイルの削除
-# rmで~/.Trashに日付付きディレクトリを作成してそこにmv
-# rmfで削除
+# remove files
+# rm: just `mv` file(s) to ~/.Trash/<yyyymmdd>/
+# rmf: original `rm`
 function rmf() {
   help() {
     echo 'rmf help!'
@@ -102,8 +100,6 @@ _rmfcmd() {
     -rf'[recursive && force]' \
     '*: :_files'
 }
-
-
 compdef _rmfcmd rmf
 
 function rm(){
@@ -114,49 +110,40 @@ function rm(){
 }
 
 function __rm_single_file(){
-local DATE=`date "+%y%m%d"`
-if ! [ -d ~/.Trash/$DATE/ ]
-then
-  command /bin/mkdir -p ~/.Trash/$DATE/
-fi
-if ! [ $# -eq 1 ]
-then
-  echo "__rm_single_file: 1 argument required but $# passed."
-  exit
-fi
-if [ -e $1 ]
-then
-  BASENAME=`basename $1`
-  NAME=$BASENAME
-  COUNT=0
-  while [ -e ~/.Trash/$DATE/$NAME ]
-  do
-    COUNT=$(($COUNT+1))
-    NAME="$BASENAME.$COUNT"
-  done
-  command /bin/mv -v $1 ~/.Trash/$DATE/$NAME
-else
-  echo "No such file or directory: $file"
-fi
+  local DATE=`date "+%y%m%d"`
+  if ! [ -d ~/.Trash/$DATE/ ]
+  then
+    command /bin/mkdir -p ~/.Trash/$DATE/
+  fi
+  if ! [ $# -eq 1 ]
+  then
+    echo "__rm_single_file: 1 argument required but $# passed."
+    exit
+  fi
+  if [ -e $1 ]
+  then
+    local BASENAME=`basename $1`
+    local NAME=$BASENAME
+    local COUNT=0
+    while [ -e ~/.Trash/$DATE/$NAME ]
+    do
+      COUNT=$(($COUNT+1))
+      NAME="$BASENAME.$COUNT"
+    done
+    command /bin/mv -v $1 ~/.Trash/$DATE/$NAME
+  else
+    echo "No such file or directory: $file"
+  fi
 }
 
-# function abs_cd() {
-#     command cd "$@"
-#     if [[ ($? -eq 0) && (${#FUNCNAME[*]} -eq 1) ]]; then
-#         history -s cd $(printf "%q" "$PWD")
-#     fi
-# }
-#
-# alias cd=abs_cd
-
+# `cd` to cd and ls
 function cdls() {
   \cd $1;
   ls;
 }
-
 alias cd=cdls
 
-# コマンドの回数
+# counts of most used commands
 function command-count() {
     local count
     if [ $# -ne 1 ]; then
@@ -167,10 +154,16 @@ function command-count() {
     history-all | awk '{print $4}' | sort | uniq -c | sort -nr | head -n $count
 }
 
+# change directory to git-home
+function git-home() {
+  cd `git rev-parse --show-toplevel`
+}
+
 ##########################################
-# peco
+# commands using peco
 ##########################################
 
+# select from command-history
 function peco-select-history() {
     local tac
     if which tac > /dev/null; then
@@ -187,6 +180,7 @@ function peco-select-history() {
 zle -N peco-select-history
 bindkey '^r' peco-select-history
 
+# select directory and `cd`
 function peco-cdr(){
     local selected_dir=$(cdr -l | awk '{ print $2 }' | peco)
     if [ -n "$selected_dir" ]; then
@@ -198,6 +192,7 @@ function peco-cdr(){
 zle -N peco-cdr
 bindkey '^@' peco-cdr
 
+# select file from `tree` and open it with vim
 function peco-tree-vim(){
   local SELECTED_FILE=$(tree -N --charset=o -f | peco | sed -e "s/ ->.*\$//g" | tr -d '\||`| ' | xargs echo)
   if [ -n "$SELECTED_FILE" ]; then
@@ -208,6 +203,7 @@ function peco-tree-vim(){
 zle -N peco-tree-vim
 bindkey "^v^t" peco-tree-vim
 
+# select file from `tree`
 function peco-tree-select(){
   local SELECTED_FILE=$(tree -N --charset=o -f | peco | sed -e "s/ ->.*\$//g" | tr -d '\||`| ' | xargs echo)
   if [ -n "$SELECTED_FILE" ]; then
@@ -219,6 +215,33 @@ function peco-tree-select(){
 zle -N peco-tree-select
 bindkey "^t" peco-tree-select
 
+# select docker image hash
+function peco_docker_image_id(){
+    LBUFFER+=$(docker ps | tail -n +2 | peco | cut -d" " -f1)
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco_docker_image_id
+bindkey "^gd" peco_docker_image_id
+
+# grep files from current directory, select it and open in `less`
+function peco_grep() {
+  exec ack "$@" . | peco --exec 'awk -F : '"'"'{print "+" $2 " " $1}'"'"' | xargs less -N '
+}
+# zle -N peco_grep
+# bindkey "^g^g" peco_grep
+
+# select android device
+function adb_locat_app() {
+  APP_NAME=$1
+  adb logcat | grep `adb shell ps | grep $1 | cut -c10-15`
+}
+
+##########################################
+# Git commands using peco
+##########################################
+
+# select file to git add
 function peco-select-git-add() {
     local SELECTED_FILE_TO_ADD="$(git status --short | \
                                   peco --query "$LBUFFER" | \
@@ -233,6 +256,7 @@ function peco-select-git-add() {
 zle -N peco-select-git-add
 bindkey "^g^a" peco-select-git-add
 
+# select branch
 function peco-select-from-git-branch() {
   git branch --all --verbose | \
     peco | \
@@ -243,6 +267,7 @@ function peco-select-from-git-branch() {
 
 }
 
+# select branch and insert it as current input
 function peco-insert-branch() {
     LBUFFER+=$(peco-select-from-git-branch)
     CURSOR=$#LBUFFER
@@ -251,6 +276,7 @@ function peco-insert-branch() {
 zle -N peco-insert-branch
 bindkey "^g^o" peco-insert-branch
 
+# select branch to checkout
 function peco-select-git-checkout() {
     local SELECTED_FILE_TO_CHECKOUT=`peco-select-from-git-branch`
     if [ -n "$SELECTED_FILE_TO_CHECKOUT" ]; then
@@ -262,6 +288,7 @@ function peco-select-git-checkout() {
 zle -N peco-select-git-checkout
 bindkey "^gco" peco-select-git-checkout
 
+# select file to show git diff which has changed from HEAD
 function peco-select-gitdiff() {
     local SELECTED_FILE_TO_DIFF="$(git status --short | \
                                   peco --query "$LBUFFER" | \
@@ -276,7 +303,7 @@ function peco-select-gitdiff() {
 zle -N peco-select-gitdiff
 bindkey "^g^i" peco-select-gitdiff
 
-
+# select file from git status view
 function peco_select_from_git_status(){
     git status --porcelain | \
       peco | \
@@ -284,35 +311,18 @@ function peco_select_from_git_status(){
       tr '\n' ' '
 }
 
+# select file from git status view and insert it as current input
 function peco_insert_selected_git_files(){
     LBUFFER+=$(peco_select_from_git_status)
     CURSOR=$#LBUFFER
     zle reset-prompt
 }
-
 zle -N peco_insert_selected_git_files
 bindkey "^g^s" peco_insert_selected_git_files
 
-function peco_docker_image_id(){
-    LBUFFER+=$(docker ps | tail -n +2 | peco | cut -d" " -f1)
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-}
-
-zle -N peco_docker_image_id
-bindkey "^gd" peco_docker_image_id
-
-function peco_grep() {
-  exec ack "$@" . | peco --exec 'awk -F : '"'"'{print "+" $2 " " $1}'"'"' | xargs less -N '
-}
-# zle -N peco_grep
-# bindkey "^g^g" peco_grep
-
-
-function adb_locat_app() {
-  APP_NAME=$1
-  adb logcat | grep `adb shell ps | grep $1 | cut -c10-15`
-}
+##########################################
+# GCP commands(gcloud) using peco
+##########################################
 
 # return true if provided file created at in 1day
 function is_too_old() {
@@ -341,16 +351,19 @@ function read-from-cache() {
   cat $CACHE
 }
 
+# show active GCP acount
 function gcloud-active-acount() {
   gcloud auth list --filter=status:ACTIVE --format="value(account)"
 }
 
+# configurating active GCP account
 function gcloud-set-acount() {
   local selected=$(gcloud auth list --format="value(account)" | peco)
   echo "Account =>" . $selected
   gcloud config set account $selected
 }
 
+# select GCP project from active acount
 function gcloud-select-project() {
   local account=$(gcloud-active-acount)
   local PROJECT_CACHE="/var/tmp/gcloud-$account-project.txt"
@@ -358,6 +371,7 @@ function gcloud-select-project() {
   echo $result | peco | awk '{print $1}'
 }
 
+# configurating active GCP project
 function gcloud-set-project() {
   local proj=$(gcloud-select-project)
   if [ -z $proj ]; then
@@ -367,10 +381,10 @@ function gcloud-set-project() {
   LBUFFER="gcloud config set project ${proj}"
   zle accept-line
 }
-
 zle -N gcloud-set-project
 bindkey "^gcp" gcloud-set-project
 
+# select GCP instance with selecting project from active account
 function gcloud-compute-instance() {
   local account=$(gcloud-active-acount)
   local project=$(gcloud-select-project)
@@ -393,20 +407,22 @@ function gcloud-compute-instance() {
   fi
 }
 
+# select GCP instance information and insert it as current input
 function gcloud-compute-instance-edit() {
   LBUFFER="gcloud compute  $(gcloud-compute-instance)"
   CURSOR=15 # move cursor next to `compute `
 }
-
 zle -N gcloud-compute-instance-edit
 bindkey "^gcl" gcloud-compute-instance-edit
 
+# select GCP instance and ssh
 function gcloud-ssh() {
   LBUFFER="gcloud compute ssh $(gcloud-compute-instance)"
   zle accept-line
 }
 zle -N gcloud-ssh
 bindkey "^gcs" gcloud-ssh
+
 ###################################
 
 setopt extended_glob
@@ -448,4 +464,3 @@ zle -N no-magic-abbrev-expand
 bindkey " " magic-abbrev-expand
 bindkey "^x " no-magic-abbrev-expand
 
-alias today='date +"%Y%m%d"'
