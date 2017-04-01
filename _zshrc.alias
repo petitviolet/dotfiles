@@ -155,7 +155,7 @@ function command-count() {
 }
 
 # change directory to git-home
-function git-home() {
+function git_home() {
   cd `git rev-parse --show-toplevel`
 }
 
@@ -164,7 +164,7 @@ function git-home() {
 ##########################################
 
 # select from command-history
-function peco-select-history() {
+function peco_select_history() {
     local tac
     if which tac > /dev/null; then
         tac="tac"
@@ -177,11 +177,11 @@ function peco-select-history() {
     CURSOR=$#BUFFER
     zle clear-screen
 }
-zle -N peco-select-history
-bindkey '^r' peco-select-history
+zle -N peco_select_history
+bindkey '^r' peco_select_history
 
 # select directory and `cd`
-function peco-cdr(){
+function peco_cdr(){
     local selected_dir=$(cdr -l | awk '{ print $2 }' | peco)
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
@@ -189,22 +189,22 @@ function peco-cdr(){
     fi
     zle clear-screen
 }
-zle -N peco-cdr
-bindkey '^@' peco-cdr
+zle -N peco_cdr
+bindkey '^@' peco_cdr
 
 # select file from `tree` and open it with vim
-function peco-tree-vim(){
+function peco_tree_vim(){
   local SELECTED_FILE=$(tree -N --charset=o -f | peco | sed -e "s/ ->.*\$//g" | tr -d '\||`| ' | xargs echo)
   if [ -n "$SELECTED_FILE" ]; then
     BUFFER="vim $SELECTED_FILE[3,-1]"
   fi
   zle accept-line
 }
-zle -N peco-tree-vim
-bindkey "^v^t" peco-tree-vim
+zle -N peco_tree_vim
+bindkey "^v^t" peco_tree_vim
 
 # select file from `tree`
-function peco-tree-select(){
+function peco_tree_select(){
   local SELECTED_FILE=$(tree -N --charset=o -f | peco | sed -e "s/ ->.*\$//g" | tr -d '\||`| ' | xargs echo)
   if [ -n "$SELECTED_FILE" ]; then
     LBUFFER+="$SELECTED_FILE[3,-1]"
@@ -212,8 +212,8 @@ function peco-tree-select(){
     zle reset-prompt
   fi
 }
-zle -N peco-tree-select
-bindkey "^t" peco-tree-select
+zle -N peco_tree_select
+bindkey "^t" peco_tree_select
 
 # select docker image hash
 function peco_docker_image_id(){
@@ -242,7 +242,7 @@ function adb_locat_app() {
 ##########################################
 
 # select file to git add
-function peco-select-git-add() {
+function peco_select_git_add() {
     local SELECTED_FILE_TO_ADD="$(git status --short | \
                                   peco --query "$LBUFFER" | \
                                   awk -F ' ' '{print $NF}')"
@@ -253,11 +253,11 @@ function peco-select-git-add() {
     zle accept-line
     # zle clear-screen
 }
-zle -N peco-select-git-add
-bindkey "^g^a" peco-select-git-add
+zle -N peco_select_git_add
+bindkey "^g^a" peco_select_git_add
 
 # select branch
-function peco-select-from-git-branch() {
+function peco_select_from_git_branch() {
   git branch --all --verbose | \
     peco | \
     sed -e 's/\* //g' | \
@@ -268,28 +268,28 @@ function peco-select-from-git-branch() {
 }
 
 # select branch and insert it as current input
-function peco-insert-branch() {
-    LBUFFER+=$(peco-select-from-git-branch)
+function peco_insert_branch() {
+    LBUFFER+=$(peco_select_from_git_branch)
     CURSOR=$#LBUFFER
     zle reset-prompt
 }
-zle -N peco-insert-branch
-bindkey "^g^o" peco-insert-branch
+zle -N peco_insert_branch
+bindkey "^g^o" peco_insert_branch
 
 # select branch to checkout
-function peco-select-git-checkout() {
-    local SELECTED_FILE_TO_CHECKOUT=`peco-select-from-git-branch`
+function peco_select_git_checkout() {
+    local SELECTED_FILE_TO_CHECKOUT=`peco_select_from_git_branch`
     if [ -n "$SELECTED_FILE_TO_CHECKOUT" ]; then
       BUFFER="git checkout $(echo "$SELECTED_FILE_TO_CHECKOUT" | tr '\n' ' ')"
       CURSOR=$#BUFFER
     fi
     zle accept-line
 }
-zle -N peco-select-git-checkout
-bindkey "^gco" peco-select-git-checkout
+zle -N peco_select_git_checkout
+bindkey "^gco" peco_select_git_checkout
 
 # select file to show git diff which has changed from HEAD
-function peco-select-gitdiff() {
+function peco_select_git_diff() {
     local SELECTED_FILE_TO_DIFF="$(git status --short | \
                                   peco --query "$LBUFFER" | \
                                   awk -F ' ' '{print $NF}')"
@@ -300,8 +300,8 @@ function peco-select-gitdiff() {
     zle accept-line
     # zle clear-screen
 }
-zle -N peco-select-gitdiff
-bindkey "^g^i" peco-select-gitdiff
+zle -N peco_select_git_diff
+bindkey "^g^i" peco_select_git_diff
 
 # select file from git status view
 function peco_select_from_git_status(){
@@ -326,54 +326,54 @@ bindkey "^g^s" peco_insert_selected_git_files
 
 # return true if provided file created at in 1day
 function is_too_old() {
-  local FILE=$1
-  local COMPARISON=$2 # seconds
-  if [ -f $FILE ]; then
-    [ $(( $(date +%s) - $(stat -c %Y "$1") )) -gt $COMPARISON ]
+  local file=$1
+  local ttl=$2 # seconds
+  if [ -f $file ]; then
+    [ $(( $(date +%s) - $(stat -c %Y "$1") )) -gt $ttl ]
   else
-    return false
+    false
   fi
 }
 
 # cache
-function read-from-cache() {
-  local CACHE=$1
-  local COMPARISON=$2  # seconds
-  local COMMAND=$3
-  if $(is_too_old $CACHE $COMPARISON);then
-    local result=$(sh -c "$COMMAND")
+function read_from_cache() {
+  local cache=$1
+  local ttl=$2  # seconds
+  local command=$3
+  if $(is_too_old $cache $ttl);then
+    local result=$(sh -c "$command")
     if [ -z $result ]; then
       return
     else
-      echo $result > $CACHE
+      echo $result > $cache
     fi
   fi
-  cat $CACHE
+  cat $cache
 }
 
 # show active GCP acount
-function gcloud-active-acount() {
+function gcloud_active_account() {
   gcloud auth list --filter=status:ACTIVE --format="value(account)"
 }
 
 # configurating active GCP account
-function gcloud-set-acount() {
+function gcloud_set_account() {
   local selected=$(gcloud auth list --format="value(account)" | peco)
   echo "Account =>" . $selected
   gcloud config set account $selected
 }
 
 # select GCP project from active acount
-function gcloud-select-project() {
-  local account=$(gcloud-active-acount)
+function gcloud_select_project() {
+  local account=$(gcloud_active_account)
   local PROJECT_CACHE="/var/tmp/gcloud-$account-project.txt"
-  local result=$(read-from-cache $PROJECT_CACHE $((60 * 60 * 24)) "gcloud projects list")
+  local result=$(read_from_cache $PROJECT_CACHE $((60 * 60 * 24)) "gcloud projects list")
   echo $result | peco | awk '{print $1}'
 }
 
 # configurating active GCP project
-function gcloud-set-project() {
-  local proj=$(gcloud-select-project)
+function gcloud_set_project() {
+  local proj=$(gcloud_select_project)
   if [ -z $proj ]; then
     return;
   fi
@@ -381,18 +381,18 @@ function gcloud-set-project() {
   LBUFFER="gcloud config set project ${proj}"
   zle accept-line
 }
-zle -N gcloud-set-project
-bindkey "^gcp" gcloud-set-project
+zle -N gcloud_set_project
+bindkey "^gcp" gcloud_set_project
 
 # select GCP instance with selecting project from active account
-function gcloud-compute-instance() {
-  local account=$(gcloud-active-acount)
-  local project=$(gcloud-select-project)
+function gcloud_compute_instance() {
+  local account=$(gcloud_active_account)
+  local project=$(gcloud_select_project)
   local INSTANCE_CACHE="/var/tmp/gcloud-$account-$project-instance.txt"
   if [ -z $project ]; then
     return;
   fi
-  local vm_data_raw=$(read-from-cache $INSTANCE_CACHE $((60 * 10)) "gcloud compute instances list --project $project")
+  local vm_data_raw=$(read_from_cache $INSTANCE_CACHE $((60 * 10)) "gcloud compute instances list --project $project")
   if [ -z $vm_data_raw ]; then
     return;
   fi
@@ -408,20 +408,20 @@ function gcloud-compute-instance() {
 }
 
 # select GCP instance information and insert it as current input
-function gcloud-compute-instance-edit() {
-  LBUFFER="gcloud compute  $(gcloud-compute-instance)"
+function gcloud_compute_instance_edit() {
+  LBUFFER="gcloud compute  $(gcloud_compute_instance)"
   CURSOR=15 # move cursor next to `compute `
 }
-zle -N gcloud-compute-instance-edit
-bindkey "^gcl" gcloud-compute-instance-edit
+zle -N gcloud_compute_instance_edit
+bindkey "^gcl" gcloud_compute_instance_edit
 
 # select GCP instance and ssh
-function gcloud-ssh() {
-  LBUFFER="gcloud compute ssh $(gcloud-compute-instance)"
+function gcloud_ssh() {
+  LBUFFER="gcloud compute ssh $(gcloud_compute_instance)"
   zle accept-line
 }
-zle -N gcloud-ssh
-bindkey "^gcs" gcloud-ssh
+zle -N gcloud_ssh
+bindkey "^gcs" gcloud_ssh
 
 ###################################
 
