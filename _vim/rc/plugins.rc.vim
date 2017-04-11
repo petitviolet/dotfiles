@@ -19,7 +19,7 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 let g:syntastic_mode_map = {
       \ 'mode': 'passive',
-      \ 'active_filetypes': ['javascript', 'json', 'ruby', 'php'],
+      \ 'active_filetypes': ['javascript', 'json', 'ruby', 'php', 'python'],
       \ 'passive_filetypes': ['java', 'scala', 'python'],
       \}
 function! s:syntastic()
@@ -114,6 +114,24 @@ if has('conceal')
   " set conceallevel=2 concealcursor=i
   set conceallevel=0
 endif
+
+
+"-------------
+" multiple-cursor with neocomplete
+"-------------
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+endfunction
 
 "--------------------------------------------------
 " English
