@@ -329,7 +329,7 @@ function is_too_old() {
   local file=$1
   local ttl=$2 # seconds
   if [ -f $file ]; then
-    [ $(( $(date +%s) - $(stat -c %Y "$1") )) -gt $ttl ]
+    [ $(( $(date +%s) - $(stat -c %Y $file) )) -gt $ttl ]
   else
     false
   fi
