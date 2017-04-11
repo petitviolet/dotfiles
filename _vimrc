@@ -115,6 +115,11 @@ nnoremap <space>p :<C-u>edit ~/.vim/rc/plugins.rc.vim<CR>
 " nnoremap ; :
 " nnoremap : ;
 
+" paste with overwrite
+noremap p "0p
+noremap P "0P
+vnoremap p "0p
+
 " 入力モード中に素早くjjと入力した場合はESCとみなす
 " 入力モード中に素早く;;と入力した場合はESCとみなす
 " inoremap  ;;  <Esc>
