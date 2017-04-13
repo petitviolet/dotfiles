@@ -331,7 +331,7 @@ function is_too_old() {
   if [ -f $file ]; then
     [ $(( $(date +%s) - $(stat -c %Y $file) )) -gt $ttl ]
   else
-    false
+    return false
   fi
 }
 
@@ -341,7 +341,20 @@ function read_from_cache() {
   local ttl=$2  # seconds
   local command=$3
   if $(is_too_old $cache $ttl);then
+    # if old, refresh cache
+
+    # show loading indicator
+    set +m
+    loading 100 &
+    set -m
+    local loading_pid=$!
+
+    # execute heavy command
     local result=$(sh -c "$command")
+
+    # remove indicator even if already loading process finished
+    kill -INT $loading_pid &>/dev/null
+
     if [ -z $result ]; then
       return
     else
@@ -353,7 +366,8 @@ function read_from_cache() {
 
 # show active GCP acount
 function gcloud_active_account() {
-  gcloud auth list --filter=status:ACTIVE --format="value(account)"
+  local ACCOUNT_CACHE="/var/tmp/gcloud-active-acount.txt"
+  read_from_cache $ACCOUNT_CACHE $((60 * 60 * 1)) "gcloud auth list --filter=status:ACTIVE --format=\"value(account)\""
 }
 
 # configurating active GCP account
@@ -388,6 +402,7 @@ bindkey "^gcp" gcloud_set_project
 function gcloud_compute_instance() {
   local account=$(gcloud_active_account)
   local project=$(gcloud_select_project)
+
   local INSTANCE_CACHE="/var/tmp/gcloud-$account-$project-instance.txt"
   if [ -z $project ]; then
     return;
