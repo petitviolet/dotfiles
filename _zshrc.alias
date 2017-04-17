@@ -372,8 +372,11 @@ function gcloud_active_account() {
 
 # configurating active GCP account
 function gcloud_set_account() {
-  local selected=$(gcloud auth list --format="value(account)" | peco)
-  echo "Account =>" . $selected
+  local ACCOUNT_CACHE="/var/tmp/gcloud-account.txt"
+  local accounts=$(read_from_cache $ACCOUNT_CACHE $((60 * 60 * 24)) "gcloud auth list --format='value(account)'")
+
+  local selected=$(echo $accounts | peco)
+  echo "Account =>" $selected
   gcloud config set account $selected
 }
 
