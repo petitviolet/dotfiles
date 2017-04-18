@@ -324,7 +324,7 @@ bindkey "^g^s" peco_insert_selected_git_files
 # GCP commands(gcloud) using peco
 ##########################################
 
-# return true if provided file created at in 1day
+# return true if provided file($1) is older than TTL($2)
 function is_too_old() {
   local file=$1
   local ttl=$2 # seconds
