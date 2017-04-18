@@ -344,16 +344,20 @@ function read_from_cache() {
     # if old, refresh cache
 
     # show loading indicator
+    ## disable job control to suppress show background process id
     set +m
-    loading 100 &
-    set -m
+    loading 1000 &
     local loading_pid=$!
 
-    # execute heavy command
+    ## execute heavy command
     local result=$(sh -c "$command")
 
-    # remove indicator even if already loading process finished
+    ## remove indicator even if already loading process finished
     kill -INT $loading_pid &>/dev/null
+    ## wait loading indicator dead
+    sleep 0.1
+    ## recover job control
+    set -m
 
     if [ -z $result ]; then
       return
