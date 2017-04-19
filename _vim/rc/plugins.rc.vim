@@ -133,12 +133,16 @@ function! Multiple_cursors_after()
   endif
 endfunction
 
+let g:multi_cursor_next_key='<C-g>'
+let g:multi_cursor_prev_key='<C-G>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
 "--------------------------------------------------
 " English
 "--------------------------------------------------
 
 set completeopt=menuone
-
 
 "--------------------------------------------------
 " denite.vim
@@ -262,7 +266,15 @@ endif
 " YankRing.vim
 " pでペーストした後，C-p,C-nで過去のものに切り替わっていく
 " <Leader>y でヤンク履歴
-nmap <Leader>y :YRShow<CR>
+" nmap <Leader>y :YRShow<CR>
+
+" Yankround
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+
+
 
 " vim surrond
 " コマンド  実行前  実行後
