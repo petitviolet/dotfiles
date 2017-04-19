@@ -43,6 +43,9 @@ export LSCOLORS=exfxcxdxdxegedabagacad
 # zmv使う
 autoload zmv
 
+function git_current_branch() {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /'
+}
 
 # 空でEnter押すとlsとgit status表示
 function do_enter() {
@@ -262,7 +265,7 @@ elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
 else
   color=${fg[red]}
 fi
-PROMPT+=" %{$color%}$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')%b%{${reset_color}%}
+PROMPT+=" %{$color%}$(git_current_branch)%b%{${reset_color}%}
 %B%F{white}$ %f%b"
 }
 PROMPT2="%_%% "
