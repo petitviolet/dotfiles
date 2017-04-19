@@ -39,7 +39,10 @@ repo = 'kana/vim-fakeclip'
 [[plugins]]
 repo = 'mbbill/undotree'
 [[plugins]]
-repo = 'YankRing.vim'
+# repo = 'YankRing.vim'
+repo = 'LeafCage/yankround.vim'
+# [[plugins]]
+# repo = 'kien/ctrlp.vim'
 [[plugins]]
 repo = 'tpope/vim-surround'
 [[plugins]]
