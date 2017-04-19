@@ -188,8 +188,8 @@ nnoremap <silent> <space>e :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -
 " Utility
 "--------------------------------------------------
 " <Leader>cで行の先頭にコメントをつけたり外したりできる
-nmap <Leader>c <Plug>(caw:i:toggle)
-vmap <Leader>c <Plug>(caw:i:toggle)
+nmap <Leader>c <Plug>(caw:hatpos:toggle)
+vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
 function! Toggle_quickfix_window()
   let _ = winnr('$')
