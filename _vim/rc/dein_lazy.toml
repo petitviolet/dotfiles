@@ -10,10 +10,19 @@ on_ft = ['go']
 repo = 'derekwyatt/vim-scala'
 on_ft = ['scala']
 [[plugins]]
+repo = 'vim-erlang/vim-erlang-omnicomplete'
+on_ft = ['erlang']
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-compiler'
+on_ft = ['erlang']
+[[plugins]]
 repo = 'ujihisa/neco-look'
 on_i = 1
 [[plugins]]
 repo = 'Shougo/unite.vim'
+on_cmd = ['Unite']
+[[plugins]]
+repo = 'sgur/unite-git_grep'
 on_cmd = ['Unite']
 [[plugins]]
 repo = 'scrooloose/nerdtree'
@@ -107,3 +116,33 @@ on_ft = ['ruby']
 [[plugins]]
 repo = 'tpope/vim-rails'
 on_ft = ['ruby']
+[[plugins]]
+repo = 'majutsushi/tagbar'
+on_cmd = ['Tagbar']
+[[plugins]]
+repo = 'kannokanno/previm'
+on_cmd = ['Previm']
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+on_cmd = ['Previm']
+[[plugins]]
+repo = "Shougo/vimproc"
+on_source = ['QuickRun']
+build = 'make'
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_source = ['unite.vim']
+[[plugins]]
+repo = 'Shougo/neocomplete'
+if = '''has('lua')'''
+on_i = 1
+[[plugins]]
+repo = 'Shougo/neocomplcache'
+if = '''!has('lua')'''
+on_i = 1
+[[plugins]]
+repo = 'superbrothers/vim-quickrun-markdown-gfm'
+on_ft = 'md'
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+on_cmd = ['EasyAlign']

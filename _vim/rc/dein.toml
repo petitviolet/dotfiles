@@ -10,28 +10,19 @@ repo = 'scrooloose/syntastic'
 [[plugins]]
 repo = 'nathanaelkane/vim-indent-guides'
 [[plugins]]
-repo = 'junegunn/vim-easy-align'
-[[plugins]]
 repo = 'Shougo/neosnippet'
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 # [[plugins]]
 # repo = "Shougo/tabpagebuffer.vim"
-[[plugins]]
-repo = "Shougo/unite.vim"
-# repo = 'Shougo/denite.nvim'
-[[plugins]]
-repo = 'Shougo/vimfiler'
-[[plugins]]
-repo = 'sgur/unite-git_grep'
+# [[plugins]]
+# repo = 'Shougo/vimfiler'
 [[plugins]]
 repo = 'rking/ag.vim'
 [[plugins]]
 repo = 'tyru/caw.vim.git'
 [[plugins]]
 repo = 'thinca/vim-qfreplace'
-[[plugins]]
-repo = 'majutsushi/tagbar'
 [[plugins]]
 repo = 'szw/vim-tags'
 [[plugins]]
@@ -52,25 +43,10 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'mattn/webapi-vim'
 [[plugins]]
-repo = 'kannokanno/previm'
-[[plugins]]
-repo = 'tyru/open-browser.vim'
-[[plugins]]
-repo = 'superbrothers/vim-quickrun-markdown-gfm'
-[[plugins]]
-repo = 'Shougo/neocomplete'
-if = '''has('lua')'''
-[[plugins]]
-repo = 'Shougo/neocomplcache'
-if = '''!has('lua')'''
-[[plugins]]
-repo = "Shougo/vimproc"
-on_source = ['QuickRun']
-build = 'make'
-[[plugins]]
-repo = 'Shougo/neomru.vim'
-on_source = ['unite.vim']
-[[plugins]]
 repo = 'Konfekt/FastFold'
 [[plugins]]
 repo = 'terryma/vim-multiple-cursors'
+[[plugins]]
+repo = 'haya14busa/incsearch.vim'
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
