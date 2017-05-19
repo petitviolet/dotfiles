@@ -237,6 +237,15 @@ function adb_locat_app() {
   adb logcat | grep `adb shell ps | grep $1 | cut -c10-15`
 }
 
+function peco_kill() {
+  local selected=$(ps aux | peco)
+  local pid=$(echo $selected | awk '{ print $2 }')
+  BUFFER="kill $pid"
+  zle accept-line
+}
+zle -N peco_kill
+bindkey "^xp" peco_kill
+
 ##########################################
 # Git commands using peco
 ##########################################
@@ -414,7 +423,7 @@ function gcloud_compute_instance() {
   if [ -z $project ]; then
     return;
   fi
-  local vm_data_raw=$(read_from_cache $INSTANCE_CACHE $((60 * 10)) "gcloud compute instances list --project $project")
+  local vm_data_raw=$(read_from_cache $INSTANCE_CACHE $((60 * 60)) "gcloud compute instances list --project $project")
   if [ -z $vm_data_raw ]; then
     return;
   fi
