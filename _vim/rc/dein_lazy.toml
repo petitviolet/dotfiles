@@ -7,6 +7,12 @@
 repo = 'fatih/vim-go'
 on_ft = ['go']
 [[plugins]]
+repo = 'vim-erlang/vim-erlang-compiler'
+on_ft = ['erlang']
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-omnicomplete'
+on_ft = ['erlang']
+[[plugins]]
 repo = 'derekwyatt/vim-scala'
 on_ft = ['scala']
 [[plugins]]
