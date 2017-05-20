@@ -341,3 +341,4 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 #----------------------------------------------------------
 
 export HOMEBREW_BREWFILE=~/dotfiles/Brewfile
+export fpath=(/usr/local/share/zsh-completions $fpath)
