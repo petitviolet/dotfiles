@@ -240,8 +240,10 @@ function adb_locat_app() {
 function peco_kill() {
   local selected=$(ps aux | peco)
   local pid=$(echo $selected | awk '{ print $2 }')
-  BUFFER="kill $pid"
-  zle accept-line
+  if [ -n $selcted ]; then
+    BUFFER="kill $pid"
+    zle accept-line
+  fi
 }
 zle -N peco_kill
 bindkey "^xp" peco_kill
