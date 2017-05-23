@@ -26,6 +26,8 @@ repo = 'thinca/vim-qfreplace'
 [[plugins]]
 repo = 'szw/vim-tags'
 [[plugins]]
+repo = 'majutsushi/tagbar'
+[[plugins]]
 repo = 'kana/vim-fakeclip'
 [[plugins]]
 repo = 'mbbill/undotree'

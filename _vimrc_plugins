@@ -79,3 +79,5 @@ call s:source_rc('plugins.rc.vim')
 if dein#check_install()
   call dein#install()
 endif
+
+nnoremap <space>d :call dein#update()<CR>

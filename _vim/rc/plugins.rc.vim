@@ -248,6 +248,12 @@ nnoremap <Leader>q :call Toggle_quickfix_window()<CR>
 " TagBar
 " tbでIDEっぽくなる
 nmap <space>tb :TagbarToggle<CR>
+autocmd FileType * nested :call tagbar#autoopen(0)
+
+"" TagBarのcolor
+autocmd VimEnter,Colorscheme * :hi TagbarSignature ctermfg=250 " ctermbg=240
+autocmd VimEnter,Colorscheme * :hi TagbarVisibilityPublic ctermfg=154 " ctermbg=240
+autocmd VimEnter,Colorscheme * :hi TagbarVisibilityPrivate ctermfg=160 " ctermbg=240
 
 " tag jump
 let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"

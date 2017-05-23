@@ -123,9 +123,6 @@ on_ft = ['ruby']
 repo = 'tpope/vim-rails'
 on_ft = ['ruby']
 [[plugins]]
-repo = 'majutsushi/tagbar'
-on_cmd = ['Tagbar']
-[[plugins]]
 repo = 'kannokanno/previm'
 on_cmd = ['Previm']
 [[plugins]]
