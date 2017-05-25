@@ -1,8 +1,8 @@
 " gocode
-set rtp+=$GOROOT/misc/vim
+" set rtp+=$GOROOT/misc/vim
 " golint
-exe "set rtp+=" . globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-set completeopt=menu,preview
+" exe "set rtp+=" . globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+" set completeopt=menu,preview
 
 set nocompatible               " be iMproved
 filetype off                   " required!
@@ -514,6 +514,13 @@ command! -nargs=0 PasteGist     call <sid>paste_gist_tag()
 " Like IDE
 "-----------------------------------------------------
 " NeoBundle 'wincent/Command-T'
+
+
+"-----------------------------------------------------
+" golang
+"-----------------------------------------------------
+
+let g:go_fmt_command = "goimports"
 
 "-----------------------------------------------------
 " Scala
