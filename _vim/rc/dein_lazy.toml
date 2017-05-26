@@ -28,7 +28,7 @@ on_i = 1
 repo = 'Shougo/unite.vim'
 on_cmd = ['Unite']
 [[plugins]]
-repo = 'sgur/unite-git_grep'
+repo = 'lambdalisue/unite-grep-vcs'
 on_cmd = ['Unite']
 [[plugins]]
 repo = 'scrooloose/nerdtree'

@@ -191,7 +191,7 @@ nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir -buffer-name=files buffer f
 nnoremap <silent> [unite]i :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=files buffer_tab<CR>
-nnoremap <silent> [unite]g :<C-u>Unite vcs_grep/git<CR>
+nnoremap <silent> [unite]g :<C-u>Unite grep/git<CR>
 function! s:unite_my_settings()
   " Overwrite settings
   nmap <buffer><ESC> <Plug>(unite_exit)
@@ -210,8 +210,8 @@ function! s:unite_my_settings()
   imap <buffer><expr><C-i> unite#do_action('vsplit')
 endfunction
 
-" space-eでウィンドウ左側にファイルツリー表示
-nnoremap <silent> <space>e :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -toggle -no-quit<CR>
+autocmd BufEnter,BufWinEnter \[unite\]* highlight! link CursorLine PmenuSel
+autocmd BufLeave \[unite\]* highlight! link CursorLine NONE
 
 "--------------------------------------------------
 " Utility
