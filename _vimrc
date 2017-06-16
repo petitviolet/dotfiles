@@ -106,6 +106,7 @@ map <C-h> <C-w>h
 map <C-_> o<ESC>
 map E <End>
 map J gJ
+
 " ESCを二回押すことでハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
 " quickfixでnextとprev
@@ -310,12 +311,12 @@ set statusline+=%m    " %m 修正フラグ
 set statusline+=%h    " %h ヘルプバッファフラグ
 set statusline+=%w    " %w プレビューウィンドウフラグ
 set statusline+=%y    " バッファ内のファイルのタイプ
-set statusline+=%F    " バッファ内のファイルのフルパス
-" if winwidth(0) >= 130
-"   set statusline+=%F    " バッファ内のファイルのフルパス
-" else
-"   set statusline+=%t    " ファイル名のみ
-" endif
+" set statusline+=%F    " バッファ内のファイルのフルパス
+if winwidth(0) >= 130
+  set statusline+=%F    " バッファ内のファイルのフルパス
+else
+  set statusline+=%t    " ファイル名のみ
+endif
 set statusline+=%r    " %r 読み込み専用フラグ
 set statusline+=\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}  " fencとffを表示
 set statusline+=\     " 空白スペース
@@ -332,7 +333,7 @@ set statusline+=\|%P\|" ファイル内の何％の位置にあるか
 set statusline+=%{fugitive#statusline()}  " Gitのブランチ名を表示
 
 " ステータスラインの色
-highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=cyan
+highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=lightgray
 
 "-----------------------------------------------------
 " タブ・インデント
