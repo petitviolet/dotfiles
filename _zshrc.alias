@@ -322,7 +322,7 @@ bindkey "^g^i" peco_select_git_diff
 
 # select file from git status view
 function peco_select_from_git_status(){
-    git status --porcelain | \
+    git status --short | \
       peco | \
       awk -F ' ' '{print $NF}' | \
       tr '\n' ' '
