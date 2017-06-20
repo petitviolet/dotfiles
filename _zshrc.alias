@@ -144,7 +144,7 @@ function cdls() {
 alias cd=cdls
 
 # counts of most used commands
-function command-count() {
+function command_count() {
     local count
     if [ $# -ne 1 ]; then
       count=5
@@ -157,6 +157,12 @@ function command-count() {
 # change directory to git-home
 function git_home() {
   cd `git rev-parse --show-toplevel`
+}
+
+function git_replace() {
+  before=$1
+  after=$2
+  git grep -l $before | xargs sed -i "" -e "s/$before/$after/g" 2>&1
 }
 
 ##########################################
