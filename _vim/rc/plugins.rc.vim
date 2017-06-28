@@ -248,7 +248,7 @@ nnoremap <Leader>q :call Toggle_quickfix_window()<CR>
 " TagBar
 " tbでIDEっぽくなる
 nmap <space>tb :TagbarToggle<CR>
-autocmd FileType * nested :call tagbar#autoopen(0)
+" autocmd FileType * nested :call tagbar#autoopen(0)
 
 "" TagBarのcolor
 autocmd VimEnter,Colorscheme * :hi TagbarSignature ctermfg=250 " ctermbg=240
@@ -274,7 +274,7 @@ nnoremap T :TagsGenerate<CR>
 " \nでファイルツリー表示
 nmap <silent> <Leader>e :NERDTreeToggle<CR>
 vmap <silent> <Leader>e <Esc> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " UndoTree
 " \uで開く
