@@ -1,7 +1,7 @@
 case ${OSTYPE} in
   darwin*)
-    # alias ls='ls -hFG'
-    alias ls='ls -hFG --color=auto'
+    alias ls='ls -hFG'
+    # alias ls='ls -hFG --color=auto'
     ;;
   linux*)
     alias ls='ls -hFG --color=auto'
@@ -53,8 +53,6 @@ eurl() {
 
 export LESS=' -R -N '
 export GREP_OPTIONS="--color=always"
-# export LESS=' -R '
-# export LESSOPEN='| src-hilite-lesspipe.sh %s'
 
 
 # --------------------------------------------------
