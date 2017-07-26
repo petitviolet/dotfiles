@@ -79,8 +79,11 @@ on_ft = ['html', 'css', 'javascript']
 repo = 'jelera/vim-javascript-syntax'
 on_ft = ['html', 'css', 'javascript']
 [[plugins]]
-repo = 'kchmck/vim-coffee-script'
-on_ft = ['coffee']
+repo = 'leafgarland/typescript-vim'
+on_ft = ['ts','tsx', 'typescript', 'typescript.jsx']
+[[plugins]]
+repo = 'peitalin/vim-jsx-typescript'
+on_ft = ['ts','tsx', 'typescript', 'typescript.jsx']
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 # on_cmd = ['QuickRun']
