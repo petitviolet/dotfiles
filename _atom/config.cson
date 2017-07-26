@@ -7,8 +7,10 @@
   core:
     audioBeep: false
     disabledPackages: [
-      "language-gfm"
       "slides-preview"
+      "language-markdown"
+      "git-plus"
+      "language-gfm2"
     ]
     excludeVcsIgnoredPaths: true
     ignoredNames: [
@@ -31,7 +33,7 @@
       "slack-ui"
       "one-dark-syntax"
     ]
-    useCustomTitleBar: true
+    titleBar: "custom"
   editor:
     fontFamily: "Ricty"
     invisibles: {}
@@ -48,6 +50,7 @@
   "git-plus":
     general:
       _analyticsUserId: "c8de80a9-7978-4db2-9ad8-cc4159eafce5"
+  "linter-ui-default": {}
   "markdown-hopper":
     notification:
       verboseLevel: "normal"

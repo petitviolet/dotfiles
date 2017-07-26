@@ -42,3 +42,10 @@
 
 'atom-workspace atom-text-editor':
   'ctrl-m ctrl-t': 'markdown-hopper:toggle-markdown-toc-view'
+
+'atom-workspace':
+  'cmd-2': 'typescript:go-to-declaration'
+  'cmd-\\': 'typescript:return-from-declaration'
+
+'atom-workspace atom-text-editor:not([mini])[data-grammar^="source ts"]':
+  'shift-f6': 'typescript:rename-refactor'
