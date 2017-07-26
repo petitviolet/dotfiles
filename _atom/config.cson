@@ -6,6 +6,7 @@
     minimumWordLength: 2
   core:
     audioBeep: false
+    closeDeletedFileTabs: true
     disabledPackages: [
       "slides-preview"
       "language-markdown"
@@ -35,6 +36,7 @@
     ]
     titleBar: "custom"
   editor:
+    atomicSoftTabs: false
     fontFamily: "Ricty"
     invisibles: {}
     preferredLineLength: 140
@@ -50,7 +52,8 @@
   "git-plus":
     general:
       _analyticsUserId: "c8de80a9-7978-4db2-9ad8-cc4159eafce5"
-  "linter-ui-default": {}
+  "linter-ui-default":
+    showPanel: true
   "markdown-hopper":
     notification:
       verboseLevel: "normal"
@@ -72,4 +75,5 @@
   welcome:
     showOnStartup: false
   whitespace:
-    removeTrailingWhitespace: false
+    ensureSingleTrailingNewline: false
+    ignoreWhitespaceOnCurrentLine: false
