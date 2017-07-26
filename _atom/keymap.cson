@@ -46,6 +46,9 @@
 'atom-workspace':
   'cmd-2': 'typescript:go-to-declaration'
   'cmd-\\': 'typescript:return-from-declaration'
+  'cmd-shift-o': 'typescript-import:insert'
 
 'atom-workspace atom-text-editor:not([mini])[data-grammar^="source ts"]':
   'shift-f6': 'typescript:rename-refactor'
+  'cmd-ctrl-f': 'typescript:format-code'
+
