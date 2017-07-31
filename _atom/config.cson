@@ -4,6 +4,8 @@
     confirmCompletion: "tab always, enter when suggestion explicitly selected"
     defaultProvider: "Fuzzy"
     minimumWordLength: 2
+  autosave:
+    enabled: true
   core:
     audioBeep: false
     closeDeletedFileTabs: true
@@ -12,6 +14,9 @@
       "language-markdown"
       "git-plus"
       "language-gfm2"
+      "move-cursor-improved"
+      "tree-view-git-status"
+      "vim-surround"
     ]
     excludeVcsIgnoredPaths: true
     ignoredNames: [
@@ -27,6 +32,7 @@
     packagesWithKeymapsDisabled: [
       "markdown-writer"
       "markdown-hopper"
+      "move-cursor-improved"
     ]
     projectHome: "~/Dropbox/memo/"
     telemetryConsent: "no"
@@ -39,7 +45,7 @@
     atomicSoftTabs: false
     fontFamily: "Ricty"
     invisibles: {}
-    preferredLineLength: 140
+    preferredLineLength: 160
     showIndentGuide: true
     softWrap: true
     softWrapAtPreferredLineLength: true
@@ -63,6 +69,8 @@
     useGitHubStyle: true
   "markdown-writer":
     relativeImagePath: true
+    tableAlignment: "center"
+    tableExtraPipes: true
   minimap: {}
   "project-manager":
     alwaysOpenInSameWindow: true
