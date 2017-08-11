@@ -30,6 +30,9 @@
 '.platform-darwin':
   'cmd-alt-t': 'tree-view:toggle'
 
+'.platform-darwin atom-text-editor':
+  'ctrl-t': 'goto-definition:go'
+
 'atom-text-editor:not(mini) .autocomplete-plus.autocomplete-suggestion-list':
   'tab': 'unset!'
   'enter': 'autocomplete-plus:confirm'
