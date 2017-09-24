@@ -4,23 +4,15 @@
     confirmCompletion: "tab always, enter when suggestion explicitly selected"
     defaultProvider: "Fuzzy"
     minimumWordLength: 2
-  autosave:
-    enabled: true
-  "chary-tree-view":
-    dirSingleClick: false
   core:
     audioBeep: false
+    closeDeletedFileTabs: true
     disabledPackages: [
-      "move-cursor-improved"
-      "tree-view-git-status"
-      "vim-surround"
-      "language-markdown"
-      "show-first-line-on-tab"
-      "go-to-line"
-      "file-type-icons"
       "slides-preview"
-      "plantuml"
-      "plantuml-viewer"
+      "language-markdown"
+      "git-plus"
+      "language-gfm2"
+      "show-first-line-on-tab"
     ]
     excludeVcsIgnoredPaths: true
     ignoredNames: [
@@ -36,20 +28,19 @@
     packagesWithKeymapsDisabled: [
       "markdown-writer"
       "markdown-hopper"
-      "move-cursor-improved"
-      "useful-context-menu"
     ]
     projectHome: "~/Dropbox/memo/"
     telemetryConsent: "no"
     themes: [
-      "atom-dark-ui"
+      "atom-material-ui"
       "one-dark-syntax"
     ]
     titleBar: "custom"
   editor:
+    atomicSoftTabs: false
     fontFamily: "Ricty"
     invisibles: {}
-    preferredLineLength: 160
+    preferredLineLength: 140
     showIndentGuide: true
     softWrap: true
     softWrapAtPreferredLineLength: true
@@ -57,12 +48,13 @@
     zoomFontWhenCtrlScrolling: true
   "exception-reporting":
     userId: "295eaec7-8ee3-a79f-a7a1-3b4b2a585220"
-  "file-icons": {}
   "git-diff":
     showIconsInEditorGutter: true
   "git-plus":
     general:
       _analyticsUserId: "c8de80a9-7978-4db2-9ad8-cc4159eafce5"
+  "linter-ui-default":
+    showPanel: true
   "markdown-hopper":
     notification:
       verboseLevel: "normal"
@@ -72,8 +64,6 @@
     useGitHubStyle: true
   "markdown-writer":
     relativeImagePath: true
-    tableAlignment: "center"
-    tableExtraPipes: true
   minimap: {}
   "project-manager":
     alwaysOpenInSameWindow: true
@@ -86,7 +76,10 @@
   welcome:
     showOnStartup: false
   whitespace:
-    removeTrailingWhitespace: false
+    ensureSingleTrailingNewline: false
+    ignoreWhitespaceOnCurrentLine: false
   zentabs:
-    maximumOpenedTabs: 10
+    maximumOpenedTabs: 8
+    neverCloseDirty: true
+    neverCloseNew: true
     neverCloseUnsaved: true

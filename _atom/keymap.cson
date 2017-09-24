@@ -27,6 +27,9 @@
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
 
 
+'atom-text-editor':
+  'shift-space': 'autocomplete-plus:activate'
+
 '.platform-darwin':
   'cmd-alt-t': 'tree-view:toggle'
 
