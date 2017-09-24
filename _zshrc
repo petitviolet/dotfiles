@@ -251,7 +251,7 @@ RPROMPT="%D %*"
 setopt transient_rprompt
 # プロンプト
 function precmd() {
-PROMPT="%(?.%F{cyan}.%F{red})[%M]%f%F{green}%n%f%F{yello} %~% "
+PROMPT="%(?.%F{cyan}.%F{red})%f%F{yello} %~% "
 # やや匿名ver
 # PROMPT="%(?.%F{cyan}.%F{red})%f%F{green}%f%F{yello} %~% "
 # PROMPT="%(?.%F{green}^-^%f.%F{red}@_@%f) %{${fg[color]%}%}[%m]%{${fg[green]}%}%n%{${fg[yellow]}%} %~%{${reset_color}%}"
