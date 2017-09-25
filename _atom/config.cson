@@ -8,11 +8,18 @@
     audioBeep: false
     closeDeletedFileTabs: true
     disabledPackages: [
-      "slides-preview"
+      "tree-view-git-status"
+      "vim-surround"
       "language-markdown"
       "git-plus"
       "language-gfm2"
       "show-first-line-on-tab"
+      "go-to-line"
+      "file-type-icons"
+      "slides-preview"
+      "spell-check"
+      "plantuml"
+      "plantuml-viewer"
     ]
     excludeVcsIgnoredPaths: true
     ignoredNames: [
@@ -39,6 +46,7 @@
   editor:
     atomicSoftTabs: false
     fontFamily: "Ricty"
+    fontSize: 17
     invisibles: {}
     preferredLineLength: 140
     showIndentGuide: true
@@ -62,9 +70,20 @@
     breakOnSingleNewline: true
     openPreviewInSplitPane: false
     useGitHubStyle: true
+  "markdown-preview-enhanced":
+    openPreviewPaneAutomatically: false
   "markdown-writer":
     relativeImagePath: true
   minimap: {}
+  "plantuml-viewer":
+    grammars: [
+      "plantuml"
+      "source.plantuml"
+      "text.plain"
+      "text.plain.null-grammar"
+      "md"
+      "markdown"
+    ]
   "project-manager":
     alwaysOpenInSameWindow: true
     ignoreDirectories: ".git"

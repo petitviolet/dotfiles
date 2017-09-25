@@ -1,12 +1,26 @@
 [
   {
-    title: "fringe81"
+    title: "memo"
     group: "document"
     paths: [
-      "/Users/komurasaki/Dropbox/f81"
       "/Users/komurasaki/Dropbox/memo"
+    ]
+  },
+  {
+    title: "fringe81-docomo"
+    group: "document"
+    paths: [
+      "/Users/komurasaki/Dropbox/memo/f81"
       "/Users/komurasaki/code/gitlab/puyol"
       "/Users/komurasaki/code/gitlab/ferguson"
+    ]
+  },
+  {
+    title: "fringe81-unipos"
+    group: "document"
+    paths: [
+      "/Users/komurasaki/Dropbox/memo/f81"
+      "/Users/komurasaki/code/gitlab/unipos/document"
     ]
   }
 ]
