@@ -4,15 +4,16 @@
     confirmCompletion: "tab always, enter when suggestion explicitly selected"
     defaultProvider: "Fuzzy"
     minimumWordLength: 2
+  autosave:
+    enabled: true
+  "chary-tree-view":
+    dirSingleClick: false
   core:
     audioBeep: false
-    closeDeletedFileTabs: true
     disabledPackages: [
       "tree-view-git-status"
       "vim-surround"
       "language-markdown"
-      "git-plus"
-      "language-gfm2"
       "show-first-line-on-tab"
       "go-to-line"
       "file-type-icons"
@@ -35,20 +36,21 @@
     packagesWithKeymapsDisabled: [
       "markdown-writer"
       "markdown-hopper"
+      "move-cursor-improved"
+      "useful-context-menu"
     ]
     projectHome: "~/Dropbox/memo/"
     telemetryConsent: "no"
     themes: [
-      "atom-material-ui"
+      "atom-dark-ui"
       "one-dark-syntax"
     ]
     titleBar: "custom"
   editor:
-    atomicSoftTabs: false
     fontFamily: "Ricty"
     fontSize: 17
     invisibles: {}
-    preferredLineLength: 140
+    preferredLineLength: 160
     showIndentGuide: true
     softWrap: true
     softWrapAtPreferredLineLength: true
@@ -56,13 +58,12 @@
     zoomFontWhenCtrlScrolling: true
   "exception-reporting":
     userId: "295eaec7-8ee3-a79f-a7a1-3b4b2a585220"
+  "file-icons": {}
   "git-diff":
     showIconsInEditorGutter: true
   "git-plus":
     general:
       _analyticsUserId: "c8de80a9-7978-4db2-9ad8-cc4159eafce5"
-  "linter-ui-default":
-    showPanel: true
   "markdown-hopper":
     notification:
       verboseLevel: "normal"
@@ -74,6 +75,8 @@
     openPreviewPaneAutomatically: false
   "markdown-writer":
     relativeImagePath: true
+    tableAlignment: "center"
+    tableExtraPipes: true
   minimap: {}
   "plantuml-viewer":
     grammars: [
@@ -95,10 +98,7 @@
   welcome:
     showOnStartup: false
   whitespace:
-    ensureSingleTrailingNewline: false
-    ignoreWhitespaceOnCurrentLine: false
+    removeTrailingWhitespace: false
   zentabs:
-    maximumOpenedTabs: 8
-    neverCloseDirty: true
-    neverCloseNew: true
+    maximumOpenedTabs: 10
     neverCloseUnsaved: true
