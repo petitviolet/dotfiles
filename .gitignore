@@ -5,3 +5,9 @@ _vim/bundle
 _vim/undodir/*
 _zsh
 .python*
+_atom/blob-store
+_atom/blob-store/*
+_atom/compile-cache
+_atom/local-history
+_atom/recovery
+_atom/storage
