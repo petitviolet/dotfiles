@@ -1,7 +1,7 @@
 case ${OSTYPE} in
   darwin*)
-    alias ls='ls -hFG'
-    # alias ls='ls -hFG --color=auto'
+    # alias ls='ls -hFG'
+    alias ls='ls -hFG --color=auto'
     ;;
   linux*)
     alias ls='ls -hFG --color=auto'
@@ -26,6 +26,7 @@ alias javac='javac -J-Dfile.encoding=UTF-8'
 alias java='java -Dfile.encoding=UTF-8'
 alias scalac='scalac -J-Dfile.encoding=UTF-8'
 alias scala='scala -Dfile.encoding=UTF-8'
+alias ku='kubectl'
 # alias grep='grep -C 3 --color=always --line-number --with-filename'
 alias o='git ls-files | peco | xargs -o vim'
 alias g='cd $(ghq list -p | peco)'
@@ -244,7 +245,7 @@ function adb_locat_app() {
 function peco_kill() {
   local selected=$(ps aux | peco)
   local pid=$(echo $selected | awk '{ print $2 }')
-  if [ -n $selcted ]; then
+  if [ -n $pid ]; then
     BUFFER="kill $pid"
     zle accept-line
   fi
