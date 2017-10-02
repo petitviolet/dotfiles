@@ -88,8 +88,7 @@
       "markdown"
     ]
   "project-manager":
-    alwaysOpenInSameWindow: true
-    ignoreDirectories: ".git"
+    ignoreDirectories: ".git,node_modules,target"
     sortBy: "last modified"
   "tree-view":
     alwaysOpenExisting: true
