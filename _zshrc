@@ -251,10 +251,12 @@ RPROMPT="%D %*"
 setopt transient_rprompt
 # プロンプト
 function precmd() {
-PROMPT="%(?.%F{cyan}.%F{red})%f%F{yello} %~% "
+# PROMPT="%(?.%F{cyan}.%F{red})%f%F{yello} %~% "
 # やや匿名ver
 # PROMPT="%(?.%F{cyan}.%F{red})%f%F{green}%f%F{yello} %~% "
+
 # PROMPT="%(?.%F{green}^-^%f.%F{red}@_@%f) %{${fg[color]%}%}[%m]%{${fg[green]}%}%n%{${fg[yellow]}%} %~%{${reset_color}%}"
+PROMPT="%(?.%F{green}%n% %f.%F{red}%n% %f)${fg[yellow]}%} %~%{${reset_color}%}"
 st=`git status 2>/dev/null`
 if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
   color=${fg[cyan]}
@@ -341,4 +343,12 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 #----------------------------------------------------------
 
 export HOMEBREW_BREWFILE=~/dotfiles/Brewfile
-export fpath=(/usr/local/share/zsh-completions $fpath)
+# export fpath=(/usr/local/share/zsh-completions $fpath)
+
+#-------------------
+# plugin
+#-------------------
+source ~/.zshrc.plugin
+
+# direnv
+eval "$(direnv hook zsh)"
