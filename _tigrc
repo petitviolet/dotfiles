@@ -22,3 +22,5 @@ set line-graphics = ascii
 # set show-file-size = units
 # set horizontal-scroll = 20%
 
+bind main    R !git rebase -i %(commit)
+bind diff    R !git rebase -i %(commit)
