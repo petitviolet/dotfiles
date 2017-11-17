@@ -54,7 +54,7 @@ set display=lastline
 set pumheight=10
 set nofoldenable
 
-setlocal omnifunc=syntaxcomplete#Complete
+" setlocal omnifunc=syntaxcomplete#Complete
 
 "-----------------------------------------------------
 " filetypeのalias
@@ -64,6 +64,7 @@ au BufRead,BufNewFile,BufReadPre *vimperatorrc   set filetype=vim
 au BufRead,BufNewFile,BufReadPre *zsh*   set filetype=sh
 au BufRead,BufNewFile,BufReadPre *gradle   set filetype=groovy
 au BufRead,BufNewFile,BufReadPre *conf   set filetype=conf
+au BufRead,BufNewFile,BufReadPre *gohtmltmpl   set filetype=html
 
 "-----------------------------------------------------
 " キーバインド変更
