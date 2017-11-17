@@ -46,9 +46,12 @@
       "one-dark-syntax"
     ]
     titleBar: "custom"
+  "document-outline":
+    highlightCurrentSection: false
+    showByDefault: false
   editor:
     fontFamily: "Ricty"
-    fontSize: 17
+    fontSize: 15
     invisibles: {}
     preferredLineLength: 160
     showIndentGuide: true
@@ -93,7 +96,8 @@
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true
-  "vim-mode-plus": {}
+  "vim-mode-plus":
+    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
   welcome:
     showOnStartup: false
   whitespace:
