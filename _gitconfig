@@ -13,6 +13,7 @@
   cm = commit -m
   ap = add -p
   ae = add -e
+  rc = rebase --continue
 [push]
   default = simple
 [color]
