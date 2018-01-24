@@ -53,7 +53,7 @@ eurl() {
 }
 
 export LESS=' -R -N '
-export GREP_OPTIONS="--color=always"
+export GREP_OPTIONS="--color=auto"
 
 
 # --------------------------------------------------
@@ -484,6 +484,7 @@ abbreviations=(
 "gco"  "git commit -m"
 "gl"   "git log"
 "jvm"  "-jvm-debug 5005"
+"curlj"  'curl -H "Content-Type: application/json" -d "$(jo'
 )
 
 magic-abbrev-expand() {
