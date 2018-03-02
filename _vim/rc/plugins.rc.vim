@@ -42,6 +42,7 @@ let g:indent_guides_guide_size = 1
 " インデントの色
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
+autocmd VimEnter,Colorscheme * :hi Normal ctermbg=234
 
 " HybridText
 " txtファイルのカラーリング
