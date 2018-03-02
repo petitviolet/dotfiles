@@ -112,6 +112,9 @@ setopt correct
 # killコマンドでプロセスを補完
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
 
+# AWS-CLIの補完
+source /usr/local/bin/aws_zsh_completer.sh
+
 #----------------------------------------
 # 予測の先読み
 # -U オプション:既存の関数を読み込むときに、自分で定義した alias によってその関数の内容が書き換えられることを防ぐ
