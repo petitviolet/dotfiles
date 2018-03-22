@@ -16,7 +16,7 @@ setlocal expandtab
 " インデントをオプションの'shiftwidth'の値の倍数に丸める
 setlocal shiftround
 
-setlocal textwidth=80
+setlocal textwidth=120
 
 "-----------------------------------------------------
 " インデント
@@ -29,7 +29,7 @@ setlocal nosmartindent
 " Cプログラムファイルの自動インデントを始める。
 setlocal cindent
 
-setlocal colorcolumn=80
+setlocal colorcolumn=120
 "-----------------------------------------------------
 " 文法チェック
 "-----------------------------------------------------

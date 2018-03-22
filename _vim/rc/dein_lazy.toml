@@ -4,6 +4,9 @@
 #
 #
 [[plugins]]
+repo = 'tomlion/vim-solidity'
+on_ft = ['solidity']
+[[plugins]]
 repo = 'fatih/vim-go'
 on_ft = ['go']
 [[plugins]]
@@ -133,7 +136,7 @@ repo = 'tyru/open-browser.vim'
 on_cmd = ['Previm']
 [[plugins]]
 repo = "Shougo/vimproc"
-on_source = ['QuickRun']
+# on_source = ['QuickRun']
 build = 'make'
 [[plugins]]
 repo = 'Shougo/neomru.vim'
