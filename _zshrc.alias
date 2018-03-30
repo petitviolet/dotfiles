@@ -280,9 +280,7 @@ function peco_select_from_git_branch() {
     peco | \
     sed -e 's/\* //g' | \
     awk '{print $1}'  | \
-    rev | cut -f1 -d'/' | rev | \
-    perl -pe 's/\n/ /g'
-
+    tr -d '\n'
 }
 
 # select branch and insert it as current input
