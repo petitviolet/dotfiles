@@ -11,3 +11,4 @@ _atom/compile-cache
 _atom/local-history
 _atom/recovery
 _atom/storage
+_atom/projects.cson
