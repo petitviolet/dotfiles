@@ -246,8 +246,9 @@ function adb_locat_app() {
 
 function peco_kill() {
   local selected=$(ps aux | peco)
-  local pid=$(echo $selected | awk '{ print $2 }')
-  if [ -n $pid ]; then
+  if [ -n "$selected" ]; then
+    echo "kill target: [$selected]"
+    local pid=$(echo $selected | awk '{ print $2 }')
     BUFFER="kill $pid"
     zle accept-line
   fi
@@ -280,7 +281,8 @@ function peco_select_from_git_branch() {
     peco | \
     sed -e 's/\* //g' | \
     awk '{print $1}'  | \
-    tr -d '\n'
+    sed -e "s;remotes/;;g" | \
+    perl -pe 's/\n/ /g'
 }
 
 # select branch and insert it as current input
@@ -294,7 +296,7 @@ bindkey "^g^o" peco_insert_branch
 
 # select branch to checkout
 function peco_select_git_checkout() {
-    local SELECTED_FILE_TO_CHECKOUT=`peco_select_from_git_branch`
+    local SELECTED_FILE_TO_CHECKOUT=`peco_select_from_git_branch | sed -e "s;origin/;;g"`
     if [ -n "$SELECTED_FILE_TO_CHECKOUT" ]; then
       BUFFER="git checkout $(echo "$SELECTED_FILE_TO_CHECKOUT" | tr '\n' ' ')"
       CURSOR=$#BUFFER
