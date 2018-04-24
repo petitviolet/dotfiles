@@ -2,7 +2,6 @@
   "autocomplete-plus":
     backspaceTriggersAutocomplete: true
     confirmCompletion: "tab always, enter when suggestion explicitly selected"
-    defaultProvider: "Fuzzy"
     minimumWordLength: 2
   autosave:
     enabled: true
@@ -21,6 +20,8 @@
       "spell-check"
       "plantuml"
       "plantuml-viewer"
+      "markdown-scroll-sync"
+      "symbols-tree-view"
     ]
     excludeVcsIgnoredPaths: true
     ignoredNames: [
@@ -46,13 +47,16 @@
       "one-dark-syntax"
     ]
     titleBar: "custom"
+    useProxySettingsWhenCallingApm: false
   "document-outline":
+    autoScrollOutline: false
     highlightCurrentSection: false
     showByDefault: false
   editor:
     fontFamily: "Ricty"
     fontSize: 15
     invisibles: {}
+    nonWordCharacters: "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-…、。「」【】『』（）！？　てにをはがのともへでや"
     preferredLineLength: 160
     showIndentGuide: true
     softWrap: true
@@ -76,6 +80,7 @@
     useGitHubStyle: true
   "markdown-preview-enhanced":
     openPreviewPaneAutomatically: false
+  "markdown-toc-auto": {}
   "markdown-writer":
     relativeImagePath: true
     tableAlignment: "center"
@@ -96,8 +101,7 @@
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true
-  "vim-mode-plus":
-    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
+  "vim-mode-plus": {}
   welcome:
     showOnStartup: false
   whitespace:
@@ -105,3 +109,6 @@
   zentabs:
     maximumOpenedTabs: 10
     neverCloseUnsaved: true
+".gfm.source":
+  editor:
+    tabLength: 2
