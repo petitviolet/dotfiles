@@ -54,10 +54,10 @@
     showByDefault: false
   editor:
     fontFamily: "Ricty"
-    fontSize: 15
     invisibles: {}
     nonWordCharacters: "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-…、。「」【】『』（）！？　てにをはがのともへでや"
     preferredLineLength: 160
+    scrollPastEnd: true
     showIndentGuide: true
     softWrap: true
     softWrapAtPreferredLineLength: true
@@ -82,6 +82,7 @@
     openPreviewPaneAutomatically: false
   "markdown-toc-auto": {}
   "markdown-writer":
+    fileExtension: ".md"
     relativeImagePath: true
     tableAlignment: "center"
     tableExtraPipes: true
@@ -100,8 +101,11 @@
     sortBy: "last modified"
   "tree-view":
     alwaysOpenExisting: true
+    autoReveal: true
     hideIgnoredNames: true
-  "vim-mode-plus": {}
+  "vim-mode-plus":
+    automaticallyEscapeInsertModeOnActivePaneItemChange: true
+    sequentialPaste: true
   welcome:
     showOnStartup: false
   whitespace:
