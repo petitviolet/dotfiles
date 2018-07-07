@@ -62,3 +62,6 @@
   'shift-f6': 'typescript:rename-refactor'
   'cmd-ctrl-f': 'typescript:format-code'
 
+'atom-text-editor:not(.mini)':
+  'j'      : 'move-cursor-improved:move-down'
+  'k'      : 'move-cursor-improved:move-up'

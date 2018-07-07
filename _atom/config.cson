@@ -37,8 +37,8 @@
     packagesWithKeymapsDisabled: [
       "markdown-writer"
       "markdown-hopper"
-      "move-cursor-improved"
       "useful-context-menu"
+      "move-cursor-improved"
     ]
     projectHome: "~/Dropbox/memo/"
     telemetryConsent: "no"
