@@ -346,7 +346,11 @@ set softtabstop=2
 " インデントの各段階に使われる空白の数
 set shiftwidth=2
 " タブを挿入するとき、代わりに空白を使う
-set expandtab
+if expand("%:r") == 'Makefile'
+  set noexpandtab
+else
+  set expandtab
+endif
 " インデントをオプションの'shiftwidth'の値の倍数に丸める
 set shiftround
 " オートインデントを有効にする
