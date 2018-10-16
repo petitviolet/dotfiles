@@ -1,4 +1,10 @@
 "*":
+  "autocomplete-paths":
+    extensions: [
+      "md"
+    ]
+    ignoreSubmodules: true
+    ignoredNames: false
   "autocomplete-plus":
     backspaceTriggersAutocomplete: true
     confirmCompletion: "tab always, enter when suggestion explicitly selected"
