@@ -229,7 +229,15 @@ function peco_docker_image_id(){
     zle reset-prompt
 }
 zle -N peco_docker_image_id
-bindkey "^gd" peco_docker_image_id
+bindkey "^g^d^h" peco_docker_image_id
+
+# select docker image repository:tag
+function peco_docker_image(){
+    LBUFFER+=$(docker images | peco | awk '{print $1":"$2" "}' | tr -d "\n")
+    CURSOR=$#LBUFFER
+}
+zle -N peco_docker_image
+bindkey "^g^d^i" peco_docker_image
 
 # grep files from current directory, select it and open in `less`
 function peco_grep() {
@@ -462,6 +470,39 @@ function gcloud_ssh() {
 }
 zle -N gcloud_ssh
 bindkey "^gcs" gcloud_ssh
+
+# select kubenetes pod
+function kubernetes_pod() {
+  local SELECTED=$(kubectl get pod | peco | awk '{print $1}')
+  LBUFFER+=$SELECTED
+}
+zle -N kubernetes_pod
+bindkey "^q^p" kubernetes_pod
+
+function kubernetes_namespace() {
+  local SELECTED=$(kubectl get namespace | awk '{print $1}' | peco | tr -d '\n')
+  LBUFFER+=$SELECTED
+}
+zle -N kubernetes_namespace
+bindkey "^q^n" kubernetes_namespace
+
+function kubernetes_use_context()
+{
+  local SELECTED=$(kubectl config get-contexts | awk '{print $2}' | peco | tr -d '\n')
+  LBUFFER="kubectl config use-context ${SELECTED}"
+  zle accept-line
+}
+zle -N kubernetes_use_context
+bindkey "^quc" kubernetes_use_context
+
+function kubernetes_use_ns()
+{
+  local SELECTED=$(kubectl get namespace | awk '{print $1}' | peco | tr -d '\n')
+  LBUFFER="kubectl config set-context $(kubectl config current-context) --namespace=${SELECTED}"
+  zle accept-line
+}
+zle -N kubernetes_use_ns
+bindkey "^qun" kubernetes_use_ns
 
 ###################################
 
