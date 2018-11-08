@@ -473,7 +473,7 @@ bindkey "^gcs" gcloud_ssh
 
 # select kubenetes pod
 function kubernetes_pod() {
-  local SELECTED=$(kubectl get pod | peco | awk '{print $1}')
+  local SELECTED=$(kubectl get pod -a | peco | awk '{print $1}')
   LBUFFER+=$SELECTED
 }
 zle -N kubernetes_pod
