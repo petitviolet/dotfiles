@@ -471,6 +471,10 @@ function gcloud_ssh() {
 zle -N gcloud_ssh
 bindkey "^gcs" gcloud_ssh
 
+##########################################
+# kubernetes commands(kubectl) using peco
+##########################################
+
 # select kubenetes pod
 function kubernetes_pod() {
   local SELECTED=$(kubectl get pod -a | peco | awk '{print $1}')
