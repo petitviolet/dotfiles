@@ -112,9 +112,6 @@ setopt correct
 # killコマンドでプロセスを補完
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
 
-# AWS-CLIの補完
-source /usr/local/bin/aws_zsh_completer.sh
-
 #----------------------------------------
 # 予測の先読み
 # -U オプション:既存の関数を読み込むときに、自分で定義した alias によってその関数の内容が書き換えられることを防ぐ
@@ -351,7 +348,42 @@ export HOMEBREW_BREWFILE=~/dotfiles/Brewfile
 #-------------------
 # plugin
 #-------------------
-source ~/.zshrc.plugin
 
-# direnv
-eval "$(direnv hook zsh)"
+# Check if 'kubectl' is a command in $PATH
+if [ $commands[kubectl] ]; then
+
+  # Placeholder 'kubectl' shell function:
+  # Will only be executed on the first call to 'kubectl'
+  kubectl() {
+
+    # Remove this function, subsequent calls will execute 'kubectl' directly
+    unfunction "$0"
+
+    # Load auto-completion
+    source <(kubectl completion zsh)
+    echo 'loaded kubectl completion'
+
+    # Execute 'kubectl' binary
+    $0 "$@"
+  }
+fi
+
+# Check if 'aws' is a command in $PATH
+if [ $commands[aws] ]; then
+
+  # Placeholder 'aws' shell function:
+  # Will only be executed on the first call to 'aws'
+  aws() {
+
+    # Remove this function, subsequent calls will execute 'aws' directly
+    unfunction "$0"
+
+    # Load completion
+    source /usr/local/bin/aws_zsh_completer.sh
+    echo 'loaded aws completion'
+
+    # Execute 'aws' binary
+    $0 "$@"
+  }
+fi
+
