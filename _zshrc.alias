@@ -224,7 +224,7 @@ bindkey "^t" peco_tree_select
 
 # select docker image hash
 function peco_docker_image_id(){
-    LBUFFER+=$(docker ps | tail -n +2 | peco | cut -d" " -f1)
+    LBUFFER+=$(docker ps -a | tail -n +2 | peco | cut -d" " -f1)
     CURSOR=$#LBUFFER
     zle reset-prompt
 }
