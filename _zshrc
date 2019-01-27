@@ -112,6 +112,11 @@ setopt correct
 # killコマンドでプロセスを補完
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
 
+# AWS-CLIの補完
+if [ -z '/usr/local/bin/aws_zsh_completer.sh' ]; then
+  source /usr/local/bin/aws_zsh_completer.sh
+fi
+
 #----------------------------------------
 # 予測の先読み
 # -U オプション:既存の関数を読み込むときに、自分で定義した alias によってその関数の内容が書き換えられることを防ぐ
@@ -308,11 +313,9 @@ bindkey '^x^p' pbcopy-buffer
 #--------------------------------------------------
 # anyenv
 #--------------------------------------------------
-# eval "$(anyenv init -)"
-
 if [ -d $HOME/.anyenv ] ; then
   export PATH="$HOME/.anyenv/bin:$PATH"
-  eval "$(anyenv init -)"
+  eval "$(anyenv init - zsh)"
   for D in `ls $HOME/.anyenv/envs`
   do
     export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
@@ -345,13 +348,12 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export HOMEBREW_BREWFILE=~/dotfiles/Brewfile
 # export fpath=(/usr/local/share/zsh-completions $fpath)
 
-
 # direnv
 eval "$(direnv hook zsh)"
 
-#-------------------
-# plugin
-#-------------------
+#----------------------------------------------------------
+# completion
+#----------------------------------------------------------
 
 # Check if 'kubectl' is a command in $PATH
 if [ $commands[kubectl] ]; then
@@ -390,4 +392,5 @@ if [ $commands[aws] ]; then
     $0 "$@"
   }
 fi
+# source ~/.zshrc.plugin
 
