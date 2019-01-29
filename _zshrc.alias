@@ -418,6 +418,13 @@ function gcloud_select_project() {
   echo $result | peco | awk '{print $1}'
 }
 
+function gcloud_select_project_buffer() {
+  local project=$(gcloud_select_project)
+  LBUFFER+="--project ${project}"
+}
+zle -N gcloud_select_project_buffer
+bindkey "^gcp" gcloud_select_project_buffer
+
 # configurating active GCP project
 function gcloud_set_project() {
   local proj=$(gcloud_select_project)
@@ -429,7 +436,7 @@ function gcloud_set_project() {
   zle accept-line
 }
 zle -N gcloud_set_project
-bindkey "^gcp" gcloud_set_project
+bindkey "^gcs" gcloud_set_project
 
 # select GCP instance with selecting project from active account
 function gcloud_compute_instance() {
@@ -469,7 +476,7 @@ function gcloud_ssh() {
   zle accept-line
 }
 zle -N gcloud_ssh
-bindkey "^gcs" gcloud_ssh
+bindkey "^gcl" gcloud_ssh
 
 ##########################################
 # kubernetes commands(kubectl) using peco
