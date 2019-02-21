@@ -52,9 +52,9 @@ eurl() {
  echo $1 | nkf -WwMQ | tr = % | sed -e "s/%$//g" | tr -d '\n'
 }
 
-alias less=/usr/share/vim/vim80/macros/less.sh
-export LESS=' -R -N '
-export LESSOPEN='| /usr/local/bin/src-hilite-lesspipe.sh %s'
+alias less=bat
+# export LESS=' -R -N '
+# export LESSOPEN='| /usr/local/bin/src-hilite-lesspipe.sh %s'
 export GREP_OPTIONS="--color=auto"
 
 
