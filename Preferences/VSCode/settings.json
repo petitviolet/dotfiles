@@ -1,0 +1,66 @@
+{
+    "editor.fontSize": 16,
+    "vim.hlsearch": true,
+    "vim.useCtrlKeys": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "<C-n>"
+            ],
+            "after": [
+                "<C-o>",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "<C-p>"
+            ],
+            "after": [
+                "<C-o>",
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "<C-a>"
+            ],
+            "after": [
+                "<C-o>",
+                "I"
+            ]
+        },
+        {
+            "before": [
+                "<C-e>"
+            ],
+            "after": [
+                "<C-o>",
+                "A"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "j"
+            ],
+            "after": [
+                "g",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "k"
+            ],
+            "after": [
+                "g",
+                "k"
+            ]
+        }
+    ],
+    "editor.formatOnSave": true,
+    "zenMode.hideTabs": false,
+    "editor.minimap.enabled": false
+}
