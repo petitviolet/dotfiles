@@ -7,6 +7,9 @@
 repo = 'tomlion/vim-solidity'
 on_ft = ['solidity']
 [[plugins]]
+repo = 'elmcast/elm-vim'
+on_ft = ['elm']
+[[plugins]]
 repo = 'fatih/vim-go'
 on_ft = ['go']
 [[plugins]]
