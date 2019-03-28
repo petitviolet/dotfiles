@@ -6,6 +6,7 @@ export JLESSCHARSET=japanese-sjis
 export OUTPUT_CHARSET=utf-8
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export DISABLE_AUTO_TITLE=true
+export BAT_CONFIG_PATH=$HOME/.bat.conf
 #----------------------------------------------------------
 # エイリアス
 #----------------------------------------------------------
@@ -333,7 +334,7 @@ fi
 #----------------------------------------------------------
 # terminal-notifier with zsh-notify
 #----------------------------------------------------------
-export REPORTTIME=5
+# export REPORTTIME=5
 export PATH=$PATH:~/.cabal/bin
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
