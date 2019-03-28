@@ -22,6 +22,11 @@
         "when": "editorTextFocus"
     },
     {
+        "key": "ctrl+a",
+        "command": "cursorHome",
+        "when": "editorTextFocus && vim.active && vim.use<C-a> && !inDebugRepl"
+    },
+    {
         "key": "ctrl+e",
         "command": "cursorEnd",
         "when": "editorTextFocus"

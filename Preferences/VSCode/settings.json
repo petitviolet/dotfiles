@@ -2,7 +2,7 @@
     "editor.fontSize": 16,
     "vim.hlsearch": true,
     "vim.useCtrlKeys": true,
-    "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?、。",
+    "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?、。「」【】『』（）！？　てにをはがのともへでや",
     "vim.insertModeKeyBindings": [
         {
             "before": [
