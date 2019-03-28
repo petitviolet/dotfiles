@@ -52,8 +52,8 @@ eurl() {
  echo $1 | nkf -WwMQ | tr = % | sed -e "s/%$//g" | tr -d '\n'
 }
 
-alias less=bat
-# export LESS=' -R -N '
+# alias less=bat
+export LESS=' -R -N '
 # export LESSOPEN='| /usr/local/bin/src-hilite-lesspipe.sh %s'
 export GREP_OPTIONS="--color=auto"
 
@@ -224,7 +224,8 @@ bindkey "^t" peco_tree_select
 
 # select docker image hash
 function peco_docker_image_id(){
-    LBUFFER+=$(docker ps -a | tail -n +2 | peco | cut -d" " -f1 | tr "\n" " ")
+    # LBUFFER+=$(docker ps -a | tail -n +2 | peco | cut -d" " -f1 | tr "\n" " ")
+    LBUFFER+=$(docker ps -a --format '{{.ID}}\t{{.Names}}\t{{.Image}}\t{{.CreatedAt}}' | peco | awk -F '\t' '{ print $2 }' | tr "\n" " ")
     CURSOR=$#LBUFFER
     zle reset-prompt
 }
@@ -268,11 +269,16 @@ bindkey "^xp" peco_kill
 # Git commands using peco
 ##########################################
 
+function select_file_from_git_status() {
+  git status --short | \
+    fzf --ansi --reverse --preview 'git diff --color $(echo {+2..})' | \
+    # peco --query "$LBUFFER" | \
+    awk -F ' ' '{print $NF}'
+}
+
 # select file to git add
 function peco_select_git_add() {
-    local SELECTED_FILE_TO_ADD="$(git status --short | \
-                                  peco --query "$LBUFFER" | \
-                                  awk -F ' ' '{print $NF}')"
+    local SELECTED_FILE_TO_ADD="$(select_file_from_git_status)"
     if [ -n "$SELECTED_FILE_TO_ADD" ]; then
       BUFFER="git add $(echo "$SELECTED_FILE_TO_ADD" | tr '\n' ' ')"
       CURSOR=$#BUFFER
@@ -285,7 +291,7 @@ bindkey "^g^a" peco_select_git_add
 
 # select branch
 function peco_select_from_git_branch() {
-  git branch --all --verbose | \
+  git branch --all --verbose --sort=-authordate | \
     peco | \
     sed -e 's/\* //g' | \
     awk '{print $1}'  | \
@@ -316,9 +322,7 @@ bindkey "^gco" peco_select_git_checkout
 
 # select file to show git diff which has changed from HEAD
 function peco_select_git_diff() {
-    local SELECTED_FILE_TO_DIFF="$(git status --short | \
-                                  peco --query "$LBUFFER" | \
-                                  awk -F ' ' '{print $NF}')"
+    local SELECTED_FILE_TO_ADD="$(select_file_from_git_status)"
     if [ -n "$SELECTED_FILE_TO_DIFF" ]; then
       BUFFER="git diff $(echo "$SELECTED_FILE_TO_DIFF" | tr '\n' ' ')"
       CURSOR=$#BUFFER
@@ -339,7 +343,7 @@ function peco_select_from_git_status(){
 
 # select file from git status view and insert it as current input
 function peco_insert_selected_git_files(){
-    LBUFFER+=$(peco_select_from_git_status)
+    LBUFFER+=$(select_file_from_git_status)
     CURSOR=$#LBUFFER
     zle reset-prompt
 }
@@ -532,7 +536,7 @@ abbreviations=(
 "S"    "| sed"
 "E"    "2>&1 > /dev/null"
 "N"    "> /dev/null"
-"J"    "| jq ."
+"J"    "| jq -S ."
 "v"    "vim"
 "gs"   "git status"
 "gco"  "git commit -m"
