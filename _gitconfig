@@ -14,6 +14,8 @@
   ap = add -p
   ae = add -e
   rc = rebase --continue
+[rebase]
+  instructionFormat = [%ad][%an] %s
 [push]
   default = simple
 [color]
@@ -29,10 +31,6 @@
   required = true
 	clean = git media clean %f
 	smudge = git media smudge %f
-[pager]
-  log = diff-highlight | less
-  show = diff-highlight | less
-  diff = diff-highlight | less
 [grep]
 	lineNumber = true
 [github]
@@ -48,4 +46,6 @@
 	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [init]
-	templatedir = ~/.git_template
+	# templatedir = ~/.git_template
+[pretty]
+	oneline-log = format:%C(red)%ad%Creset %C(green)%h%Creset %C(blue)%<(15,trunc)%an%Creset: %s
