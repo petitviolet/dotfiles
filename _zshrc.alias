@@ -295,30 +295,15 @@ function peco_select_git_add() {
 zle -N peco_select_git_add
 bindkey "^g^a" peco_select_git_add
 
-fco_preview() {
-  local tags branches target
-  tags=$(
-git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
-  branches=$(
-git branch --all | grep -v HEAD |
-sed "s/.* //" | sed "s#remotes/[^/]*/##" |
-sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
-  target=$(
-(echo "$tags"; echo "$branches") |
-    fzf --no-hscroll --no-multi --delimiter="\t" -n 2 \
-        --ansi --preview="git log -200 --pretty=format:%s $(echo {+2..} |  sed 's/$/../' )" ) || return
-  git checkout $(echo "$target" | awk '{print $2}')
-}
-
 # select branch
 function peco_select_from_git_branch() {
   local list=$(git branch --sort=refname --sort=-authordate --color --all  --format='%(color:red)%(authordate:short)%(color:reset) %(objectname:short) %(align:width=45,position=left)%(color:green)%(refname:short)%(color:reset)%(end) <%(align:20,left)%(authorname)%(end)>[%(subject)] %(if)%(HEAD)%(then)* %(else)%(end)'; \
     git tag --color -l --format='%(color:red)%(creatordate:short)%(color:reset) %(color:yellow)%(align:width=45,position=left)%(refname:short)%(color:reset)%(end) [%(subject)]')
   # echo $list | fzf --preview 'unbuffer git --no-pager log -100 --oneline $(echo {+11..} | awk -F" " "{print $2}") 2> /dev/null' | \
-  echo $list | fzf --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git graph -100 --color=always $1 ; }; f {}' |\
+  echo $list | fzf --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git --no-pager log --oneline -10 --pretty=format:"%C(red)%ad%Creset %C(green)%h%Creset %C(blue)%<(15,trunc)%an%Creset: %s" --date=short --color $1 ; }; f {}' |\
   # echo $list | fzf | \
     sed -e 's/\* //g' | \
-    awk '{print $2}'  | \
+    awk '{print $3}'  | \
     sed -e "s;remotes/;;g" | \
     perl -pe 's/\n/ /g'
 }
