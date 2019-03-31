@@ -28,6 +28,7 @@
       "plantuml-viewer"
       "markdown-scroll-sync"
       "symbols-tree-view"
+      "markdown-preview"
     ]
     excludeVcsIgnoredPaths: true
     ignoredNames: [
@@ -60,6 +61,7 @@
     showByDefault: false
   editor:
     fontFamily: "Ricty"
+    fontSize: 15
     invisibles: {}
     nonWordCharacters: "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-…、。「」【】『』（）！？　てにをはがのともへでや"
     preferredLineLength: 160
@@ -86,6 +88,13 @@
     useGitHubStyle: true
   "markdown-preview-enhanced":
     openPreviewPaneAutomatically: false
+  "markdown-preview-plus":
+    pandocConfig:
+      pandocRemoveReferences: false
+    renderer: "pandoc"
+    saveConfig:
+      saveToPDFOptions: {}
+    useGitHubStyle: true
   "markdown-toc-auto": {}
   "markdown-writer":
     fileExtension: ".md"
@@ -111,7 +120,7 @@
     hideIgnoredNames: true
   "vim-mode-plus":
     automaticallyEscapeInsertModeOnActivePaneItemChange: true
-    sequentialPaste: true
+    sequentialPaste: false
   welcome:
     showOnStartup: false
   whitespace:

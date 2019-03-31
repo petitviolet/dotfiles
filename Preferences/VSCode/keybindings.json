@@ -39,7 +39,7 @@
     {
         "key": "ctrl+b",
         "command": "cursorLeft",
-        "when": "editorTextFocus"
+        "when": "textInputFocus && !editorReadonly && vim.mode == 'Insert'"
     },
     {
         "key": "ctrl+j",
