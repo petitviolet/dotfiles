@@ -61,7 +61,7 @@
     showByDefault: false
   editor:
     fontFamily: "Ricty"
-    fontSize: 15
+    fontSize: 18
     invisibles: {}
     nonWordCharacters: "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-…、。「」【】『』（）！？　てにをはがのともへでや"
     preferredLineLength: 160
@@ -84,9 +84,9 @@
       verboseLevel: "normal"
   "markdown-preview":
     breakOnSingleNewline: true
-    openPreviewInSplitPane: false
     useGitHubStyle: true
   "markdown-preview-enhanced":
+    enableWikiLinkSyntax: false
     openPreviewPaneAutomatically: false
   "markdown-preview-plus":
     pandocConfig:
