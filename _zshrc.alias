@@ -273,7 +273,7 @@ bindkey "^xp" peco_kill
 # Git commands using peco/fzf
 ##########################################
 
-export FZF_DEFAULT_OPTS="--exact --cycle --multi --ansi --reverse --border --sync --bind=ctrl-t:toggle --bind=ctrl-k:kill-line --bind=?:toggle-preview --bind=down:preview-down --bind=up:preview-up"
+export FZF_DEFAULT_OPTS="--no-sort --exact --cycle --multi --ansi --reverse --border --sync --bind=ctrl-t:toggle --bind=ctrl-k:kill-line --bind=?:toggle-preview --bind=down:preview-down --bind=up:preview-up"
 
 function select_file_from_git_status() {
   git status --short | \
