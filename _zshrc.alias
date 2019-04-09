@@ -297,8 +297,10 @@ bindkey "^g^a" peco_select_git_add
 
 # select branch
 function peco_select_from_git_branch() {
-  local list=$(git branch --sort=refname --sort=-authordate --color --all  --format='%(color:red)%(authordate:short)%(color:reset) %(objectname:short) %(align:width=45,position=left)%(color:green)%(refname:short)%(color:reset)%(end) <%(align:20,left)%(authorname)%(end)>[%(subject)] %(if)%(HEAD)%(then)* %(else)%(end)'; \
-    git tag --color -l --format='%(color:red)%(creatordate:short)%(color:reset) %(color:yellow)%(align:width=45,position=left)%(refname:short)%(color:reset)%(end) [%(subject)]')
+  # local list=$(git branch --sort=refname --sort=-authordate --color --all  --format='%(color:red)%(authordate:short)%(color:reset) %(objectname:short) %(align:width=45,position=left)%(color:green)%(refname:short)%(color:reset)%(end) <%(align:20,left)%(authorname)%(end)>[%(subject)] %(if)%(HEAD)%(then)* %(else)%(end)'; \
+  local list=$(git branch --sort=refname --sort=-authordate --color --all  --format='%(color:red)%(authordate:short)%(color:reset) %(objectname:short) %(color:green)%(refname:short)%(color:reset) %(if)%(HEAD)%(then)* %(else)%(end)'; \
+    git tag --color -l --format='%(color:red)%(creatordate:short)%(color:reset) %(objectname:short) %(color:yellow)%(align:width=45,position=left)%(refname:short)%(color:reset)%(end)')
+    # git tag --color -l --format='%(color:red)%(creatordate:short)%(color:reset) %(color:yellow)%(align:width=45,position=left)%(refname:short)%(color:reset)%(end) [%(subject)]')
   # echo $list | fzf --preview 'unbuffer git --no-pager log -100 --oneline $(echo {+11..} | awk -F" " "{print $2}") 2> /dev/null' | \
   echo $list | fzf --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git --no-pager log --oneline -100 --pretty=format:"%C(red)%ad%Creset %C(green)%h%Creset %C(blue)%<(15,trunc)%an%Creset: %s" --date=short --color $1 ; }; f {}' |\
   # echo $list | fzf | \
