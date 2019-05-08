@@ -1,5 +1,5 @@
 {
-    "editor.fontSize": 16,
+    "editor.fontSize": 18,
     "vim.hlsearch": true,
     "vim.useCtrlKeys": true,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-…、。「」【】『』（）！？　てにをはがのともへでや",
@@ -63,5 +63,12 @@
     ],
     "editor.formatOnSave": true,
     "zenMode.hideTabs": false,
-    "editor.minimap.enabled": false
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 2,
+    "markdown.preview.fontSize": 20,
+    "window.zoomLevel": 0,
+    "markdownlint.run": "onSave",
+    "markdown.extension.orderedList.marker": "one",
+    "markdown.extension.toc.githubCompatibility": true,
+    "workbench.iconTheme": "vscode-icons"
 }
