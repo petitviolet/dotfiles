@@ -277,7 +277,7 @@ export FZF_DEFAULT_OPTS="--no-sort --exact --cycle --multi --ansi --reverse --bo
 
 function select_file_from_git_status() {
   git status --short | \
-    fzf -m --ansi --reverse --preview 'git diff --color $(echo {+2..})' | \
+    fzf -m --ansi --reverse --preview 'f() { set -- $(echo "$@"); [ $(echo $@ | grep "??" | wc -l) -eq 0 ] && git diff --color $2 || git diff --color --no-index /dev/null $2 }; f {}' |\
     # peco --query "$LBUFFER" | \
     awk -F ' ' '{print $NF}'
 }
