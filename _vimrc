@@ -111,6 +111,8 @@ map J gJ
 " ESCを二回押すことでハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
 " quickfixでnextとprev
+au FileType qf nnoremap <silent><buffer>q :quit<CR>
+
 nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
 nnoremap j gj
