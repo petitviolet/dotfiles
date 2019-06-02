@@ -13,6 +13,17 @@ repo = 'nathanaelkane/vim-indent-guides'
 repo = 'Shougo/neosnippet'
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
+
+# vim-lsp and completions
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
 # [[plugins]]
 # repo = "Shougo/tabpagebuffer.vim"
 # [[plugins]]

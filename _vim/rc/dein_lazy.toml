@@ -138,7 +138,7 @@ on_cmd = ['Previm']
 repo = 'tyru/open-browser.vim'
 on_cmd = ['Previm']
 [[plugins]]
-repo = "Shougo/vimproc"
+repo = "Shougo/vimproc.vim"
 # on_source = ['QuickRun']
 build = 'make'
 [[plugins]]

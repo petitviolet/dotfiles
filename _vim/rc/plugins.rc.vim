@@ -268,7 +268,7 @@ nnoremap <silent> tn :tag<CR>
 nnoremap <silent> tb :pop<CR>
 set tags=./tags;
 
-nnoremap T :TagsGenerate<CR>
+nnoremap T :TagsGenerate!<CR>
 
 " nerdtree
 " ファイル管理(tree表示)
@@ -438,12 +438,13 @@ let g:netrw_nogx = 1 " disable netrw's gx mapping.
 "-----------------------------------------------------
 " Quick Run
 "-----------------------------------------------------
-nmap <space>r :QuickRun -runner vimproc <CR>
+nmap <space>r :QuickRun <CR>
 " nmap <space>r <plug>(quickrun)
 " nmap <space>r :<C-u>QuickRun <CR>
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 " 読み込めない...
-let g:quickrun_config = {}
+let g:quickrun_config = get(g:, 'quickrun_config', {})
+
 let g:quickrun_config._ = {
       \ 'runner' : 'vimproc',
       \ 'runner/vimproc/updatetime' : 30,
@@ -510,6 +511,38 @@ command! -nargs=0 PasteGist     call <sid>paste_gist_tag()
 "   let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
 "   let g:Tex_FormatDependency_pdf = 'dvi,pdf'
 " endif
+
+"-----------------------------------------------------
+" LSP
+"-----------------------------------------------------
+let g:lsp_auto_enable = 1
+let g:lsp_signs_enabled = 1         " enable diagnostic signs / we use ALE for now
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+let g:lsp_signs_error = {'text': '✖'}
+let g:lsp_signs_warning = {'text': '~'}
+let g:lsp_signs_hint = {'text': '?'}
+let g:lsp_signs_information = {'text': '!!'}
+let g:lsp_async_completion = 1
+
+let g:lsp_diagnostics_enabled = 0
+" debug
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/.vim/vim-lsp.log')
+" let g:asyncomplete_log_file = expand('~/.vim/asyncomplete.log')
+
+" ruby
+if executable('solargraph')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "true"},
+        \ 'whitelist': ['ruby'],
+        \ })
+endif
+let g:LanguageClient_serverCommands = {
+        \ 'ruby': ['solargraph', 'stdio'],
+        \ }
+
 
 "-----------------------------------------------------
 " Like IDE
