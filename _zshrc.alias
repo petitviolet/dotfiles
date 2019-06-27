@@ -314,9 +314,9 @@ function select_file_from_git_status() {
 
 # select file to git add
 function select_git_add() {
-    local SELECTED_FILE_TO_ADD="$(select_file_from_git_status)"
-    if [ -n "$SELECTED_FILE_TO_ADD" ]; then
-      BUFFER="git add $(echo "$SELECTED_FILE_TO_ADD" | tr '\n' ' ')"
+    local selected_file_to_add="$(select_file_from_git_status)"
+    if [ -n "$selected_file_to_add" ]; then
+      BUFFER="git add $(echo "$selected_file_to_add" | tr '\n' ' ')"
       CURSOR=$#BUFFER
     fi
     zle accept-line
