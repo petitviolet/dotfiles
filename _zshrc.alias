@@ -211,9 +211,9 @@ function tree_select() {
 
 # open file in vim
 function open_from_tree_vim(){
-  local SELECTED_FILE=$(tree_select)
-  if [ -n "$SELECTED_FILE" ]; then
-    BUFFER="vim $SELECTED_FILE"
+  local selected_file=$(tree_select)
+  if [ -n "$selected_file" ]; then
+    BUFFER="vim $selected_file"
   fi
   zle accept-line
 }
@@ -222,9 +222,9 @@ bindkey "^v^t" open_from_tree_vim
 
 # select file from `tree`
 function open_from_tree_select(){
-  local SELECTED_FILE=$(tree_select)
-  if [ -n "$SELECTED_FILE" ]; then
-    LBUFFER+="$SELECTED_FILE"
+  local selected_file=$(tree_select)
+  if [ -n "$selected_file" ]; then
+    LBUFFER+="$selected_file"
     CURSOR=$#LBUFFER
     zle reset-prompt
   fi
