@@ -232,20 +232,22 @@ function open_from_tree_select(){
 zle -N open_from_tree_select
 bindkey "^t" open_from_tree_select
 
-# select docker image hash
-function select_docker_image_id(){
+# select docker process
+function select_docker_process(){
     LBUFFER+=$(docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Ports}}\t{{.Networks}}' | \
       fzf --preview-window=down --preview 'f() {
           set -- $(echo -- "$@")
-          docker logs --tail 300 $3
+          if [[ $3 != "ID" ]]; then
+            docker logs --tail 300 $3
+          fi
         }; f {}' | \
       awk -F '\t' '{ print $2 }' | \
       tr "\n" " ")
     CURSOR=$#LBUFFER
     zle reset-prompt
 }
-zle -N select_docker_image_id
-bindkey "^g^d^h" select_docker_image_id
+zle -N select_docker_process
+bindkey "^g^d^p" select_docker_process
 
 # select docker image repository:tag
 function select_docker_image(){
