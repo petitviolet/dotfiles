@@ -1,7 +1,7 @@
 case ${OSTYPE} in
   darwin*)
-    # alias ls='ls -hFG'
-    alias ls='ls -hFG --color=auto'
+    alias ls='ls -hFG'
+    # alias ls='ls -hFG --color=auto'
     ;;
   linux*)
     alias ls='ls -hFG --color=auto'
@@ -29,7 +29,6 @@ alias scala='scala -Dfile.encoding=UTF-8'
 alias ku='kubectl'
 # alias grep='grep -C 3 --color=always --line-number --with-filename'
 alias o='git ls-files | peco | xargs -o vim'
-alias g='cd $(ghq list -p | peco)'
 alias reload='exec $SHELL -l'
 alias mkdir='mkdir -p'
 alias gg='git grep -I -C3 --break --heading'
@@ -141,7 +140,7 @@ function __rm_single_file(){
 # `cd` to cd and ls
 function cdls() {
   \cd $1;
-  ls;
+  # ls;
 }
 alias cd=cdls
 
@@ -394,6 +393,19 @@ function insert_selected_git_files(){
 }
 zle -N insert_selected_git_files
 bindkey "^g^s" insert_selected_git_files
+
+#########################################
+# ghq with fzf
+
+function cd_ghq() {
+  local selected_repository=$(ghq list -p | fzf --preview 'ls -l {}')
+  cd $selected_repository
+  BUFFER="cd $selected_repository"
+  zle accept-line
+}
+
+zle -N cd_ghq
+bindkey "^gd" cd_ghq
 
 ##########################################
 # GCP commands(gcloud) using peco
