@@ -199,7 +199,11 @@ function tree_select() {
   tree -N -a --charset=o -f -I '.git|.idea|resolution-cache|target/streams|node_modules' | \
     fzf --preview 'f() {
       set -- $(echo -- "$@" | grep -o "\./.*$");
-      [ $# -eq 0 -a ! -d $1 ] || head -n 100 $1;
+      if [ -d $1 ]; then
+        ls -lh $1
+      else
+        head -n 100 $1
+      fi
     }; f {}' | \
       sed -e "s/ ->.*\$//g" | \
       tr -d '\||`| ' | \
