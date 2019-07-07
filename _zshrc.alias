@@ -1,7 +1,7 @@
 case ${OSTYPE} in
   darwin*)
-    alias ls='ls -hFG'
-    # alias ls='ls -hFG --color=auto'
+    # alias ls='ls -hFG'
+    alias ls='ls -hFG --color=auto'
     ;;
   linux*)
     alias ls='ls -hFG --color=auto'
@@ -196,11 +196,11 @@ bindkey '^@' select_cdr
 
 # select file from `tree` and open it with vim
 function tree_select() {
-  tree -N -a --charset=o -f -I '.git|.idea|resolution-cache|target/streams|node_modules' | \
+  tree -N -a --charset=o -f -I '.DS_Store|.git|.idea|resolution-cache|target/streams|node_modules' | \
     fzf --preview 'f() {
       set -- $(echo -- "$@" | grep -o "\./.*$");
       if [ -d $1 ]; then
-        ls -lh $1
+        ls -lFG --color=auto $1
       else
         head -n 100 $1
       fi
