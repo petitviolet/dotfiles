@@ -7,6 +7,13 @@ export OUTPUT_CHARSET=utf-8
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export DISABLE_AUTO_TITLE=true
 export BAT_CONFIG_PATH=$HOME/.bat.conf
+
+#----------------------------------------------------------
+# use coreutils as default
+#----------------------------------------------------------
+
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+
 #----------------------------------------------------------
 # エイリアス
 #----------------------------------------------------------
