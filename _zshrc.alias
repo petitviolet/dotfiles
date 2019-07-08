@@ -39,6 +39,7 @@ alias restart-adb='adb kill-server; adb start-server'
 # alias pidcat='pidcatp'
 alias ip="ipconfig getifaddr `netstat -rn -f inet | awk '/^default/{print $6;exit}'`"
 alias today='date +"%Y%m%d"'
+alias now='date +"%Y-%m-%d %H:%M:%S %Z"'
 alias be='bundle exec'
 
 function mas-install {
@@ -184,7 +185,7 @@ bindkey '^r' select_history
 # select directory and `cd`
 function select_cdr(){
     local selected_dir=$(cdr -l | awk '{ print $2 }' | \
-      fzf --preview 'f() { sh -c "ls -hFGl --color $1" }; f {}')
+      fzf --preview 'f() { sh -c "ls -hFGl $1" }; f {}')
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
@@ -244,10 +245,10 @@ function select_docker_process(){
             docker logs --tail 300 $3
           fi
         }; f {}' | \
-      awk -F '\t' '{ print $2 }' | \
+      awk -F ' ' '{ print $2 }' | \
       tr "\n" " ")
     CURSOR=$#LBUFFER
-    zle reset-prompt
+    # zle reset-prompt
 }
 zle -N select_docker_process
 bindkey "^g^d^p" select_docker_process
@@ -401,15 +402,26 @@ bindkey "^g^s" insert_selected_git_files
 #########################################
 # ghq with fzf
 
+function select_path_from_ghq() {
+  ghq list -p | fzf --preview 'ls -l {}' | tr -d '\n'
+}
+function insert_selected_path_from_ghq() {
+    LBUFFER+=$(select_path_from_ghq)
+    CURSOR=$#LBUFFER
+}
+zle -N insert_selected_path_from_ghq
+bindkey "^g^h" insert_selected_path_from_ghq
+
 function cd_ghq() {
-  local selected_repository=$(ghq list -p | fzf --preview 'ls -l {}')
-  cd $selected_repository
-  BUFFER="cd $selected_repository"
-  zle accept-line
+  local selected_repository=$(select_path_from_ghq)
+  if [[ -n $selected_repository ]]; then
+    BUFFER="cd $selected_repository"
+    zle accept-line
+  fi
 }
 
 zle -N cd_ghq
-bindkey "^gd" cd_ghq
+bindkey "^g^p" cd_ghq
 
 ##########################################
 # GCP commands(gcloud) using peco
