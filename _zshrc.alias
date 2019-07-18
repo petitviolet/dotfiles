@@ -401,6 +401,22 @@ function insert_selected_git_files(){
 zle -N insert_selected_git_files
 bindkey "^g^s" insert_selected_git_files
 
+function select_git_hash() {
+  git log --date=short --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset) %C(cyan)@%an%C(reset) %C(auto)%d%C(reset) %s" | \
+    fzf --preview 'f() {
+      set -- $(echo "$@");
+      git show --color=auto $1
+    }; f {}' | \
+    awk -F' ' '{ print $1 }' | \
+    tr '\n' ' '
+}
+function insert_selected_git_hashes(){
+    LBUFFER+=$(select_git_hash)
+    CURSOR=$#LBUFFER
+}
+zle -N insert_selected_git_hashes
+bindkey "^g^l" insert_selected_git_hashes
+
 #########################################
 # ghq with fzf
 
