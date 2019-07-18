@@ -41,6 +41,8 @@ alias ip="ipconfig getifaddr `netstat -rn -f inet | awk '/^default/{print $6;exi
 alias today='date +"%Y%m%d"'
 alias now='date +"%Y-%m-%d %H:%M:%S %Z"'
 alias be='bundle exec'
+alias browse='open -a Vivaldi'
+alias curl='curl -sS -A"petitviolet curl"'
 
 function mas-install {
   mas search $1 | head -n 1 | cut -d' ' -f 1 | xargs -I{} mas install {}
