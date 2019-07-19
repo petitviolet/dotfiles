@@ -83,5 +83,8 @@
     "ruby.useLanguageServer": true,
     "solargraph.definitions": true,
     "solargraph.diagnostics": true,
-    "languageTool.enabled": false
+    "languageTool.enabled": false,
+    "explorer.confirmDelete": false,
+    "editor.wordWrap": "on",
+    "editor.wordWrapColumn": 100
 }
