@@ -176,7 +176,7 @@ function git_replace() {
 # select from command-history
 function select_history() {
     BUFFER=$(history -i -r -n 1 | \
-      fzf --preview-window=right:wrap --preview 'f() {
+      fzf --preview-window=down:wrap --preview 'f() {
         set -- $(echo -- "$@");
         echo "${@:4}" | highlight -O ansi --syntax sh
       }; f {}'|\
@@ -202,7 +202,7 @@ bindkey '^@' select_cdr
 
 # select file from `tree` and open it with vim
 function tree_select() {
-  tree -N -a --charset=o -f -I '.DS_Store|undodir|.git|.idea|resolution-cache|target/streams|node_modules' | \
+  tree -N -a --charset=o -f -I '.DS_Store|undodir|.git|.idea|resolution-cache|target/streams|node_modules|.db/data' | \
     fzf --preview 'f() {
       set -- $(echo -- "$@" | grep -o "\./.*$");
       if [ -d $1 ]; then
@@ -298,7 +298,9 @@ bindkey "^xp" select_kill
 # Git commands using peco/fzf
 ##########################################
 
-export FZF_DEFAULT_OPTS="--no-sort --exact --cycle --multi --ansi --reverse --border --sync --bind=ctrl-t:toggle --bind=ctrl-k:kill-line --bind=?:toggle-preview --bind=down:preview-down --bind=up:preview-up"
+export FZF_DEFAULT_OPTS="--no-sort --exact --cycle --multi --ansi --reverse --border --bind=ctrl-t:toggle --bind=ctrl-k:kill-line --bind=?:toggle-preview --bind=down:preview-down --bind=up:preview-up"
+# export FZF_DEFAULT_COMMAND='ag --nocolor --hidden -g ""'
+# export FZF_DEFAULT_COMMAND='echo "hoge"'
 
 function select_file_from_git_status() {
   git status -u --short | \
