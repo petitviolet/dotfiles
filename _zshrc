@@ -221,6 +221,7 @@ HISTFILE=$HOME/.zsh-history
 HISTSIZE=100000
 # 保存する履歴の数
 SAVEHIST=100000
+setopt HIST_IGNORE_ALL_DUPS
 # ヒストリ全体でのコマンドの重複を禁止する
 setopt hist_ignore_dups
 # コマンドの空白をけずる
