@@ -4,8 +4,7 @@
     "vim.useCtrlKeys": true,
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-…、。「」【】『』（）！？　てにをはがのともへでや",
     "vim.useSystemClipboard": true,
-    "vim.insertModeKeyBindings": [
-        {
+    "vim.insertModeKeyBindings": [{
             "before": [
                 "<C-n>"
             ],
@@ -42,8 +41,7 @@
             ]
         }
     ],
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
+    "vim.normalModeKeyBindingsNonRecursive": [{
             "before": [
                 "j"
             ],
@@ -76,6 +74,7 @@
         "markdown",
         "md"
     ],
+    "json.format.enable": true,
     "markdown.extension.toc.levels": "1..3",
     "pasteImage.basePath": "${currentFileDir}/assets",
     "pasteImage.path": "${currentFileDir}/assets",
@@ -86,5 +85,19 @@
     "languageTool.enabled": false,
     "explorer.confirmDelete": false,
     "editor.wordWrap": "on",
-    "editor.wordWrapColumn": 100
+    "editor.wordWrapColumn": 100,
+    "workbench.commandPalette.history": 9999,
+    "rest-client.defaultHeaders": {
+        "User-Agent": "vscode-restclient",
+        "Accept-Encoding": "gzip"
+    },
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "version": "v1"
+        },
+        "local": {
+            "version": "v2",
+            "host": "localhost"
+        }
+    }
 }
