@@ -64,10 +64,13 @@
     "zenMode.hideTabs": false,
     "editor.minimap.enabled": false,
     "editor.tabSize": 2,
+    "[markdown]": {
+      "editor.tabSize": 2
+    },
+    "editor.insertSpaces": true,
     "markdown.preview.fontSize": 20,
     "window.zoomLevel": 0,
     "markdownlint.run": "onSave",
-    "markdown.extension.orderedList.marker": "one",
     "markdown.extension.toc.githubCompatibility": true,
     "workbench.iconTheme": "vscode-icons",
     "prettier.disableLanguages": [
@@ -99,5 +102,10 @@
             "version": "v2",
             "host": "localhost"
         }
-    }
+    },
+    "markdown.extension.list.indentationSize": "inherit",
+    "vscode-markdown.config": {
+      "lists": { "indent": 2 }
+    },
+    "editor.detectIndentation": false
 }
