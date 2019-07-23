@@ -407,10 +407,10 @@ zle -N insert_selected_git_files
 bindkey "^g^s" insert_selected_git_files
 
 function select_git_hash() {
-  git log --date=short --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset) %C(cyan)@%an%C(reset) %C(auto)%d%C(reset) %s" | \
+  git log --color=always --date=short --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset) %C(cyan)@%an%C(reset) %C(auto)%d%C(reset) %s" | \
     fzf --preview 'f() {
       set -- $(echo "$@");
-      git show --color=auto $1
+      git show --color=always $1
     }; f {}' | \
     awk -F' ' '{ print $1 }' | \
     tr '\n' ' '
