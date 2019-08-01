@@ -176,7 +176,7 @@ function git_replace() {
 # select from command-history
 function select_history() {
     BUFFER=$(history -i -r -n 1 | \
-      fzf --preview-window=down:wrap --preview 'f() {
+      fzf --query="$LBUFFER" --preview-window=down:wrap --preview 'f() {
         set -- $(echo -- "$@");
         echo "${@:4}" | highlight -O ansi --syntax sh
       }; f {}'|\
