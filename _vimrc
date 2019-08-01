@@ -55,7 +55,6 @@ set pumheight=10
 set nofoldenable
 
 " setlocal omnifunc=syntaxcomplete#Complete
-
 "-----------------------------------------------------
 " filetypeのalias
 "-----------------------------------------------------
@@ -93,8 +92,6 @@ imap <C-p> <C-o>k
 imap <C-u> <C-u><C-o>d0
 imap <C-d> <Del>
 imap <expr> <C-k> "\<C-g>u".(col('.') == col('$') ? '<C-o>gJ' : '<C-o>D')
-" Ctrl + f でオムニ補完発動
-" imap <C-f> <C-x><C-o>
 " コマンドモード
 cmap <C-b> <Left>
 cmap <C-f> <Right>
