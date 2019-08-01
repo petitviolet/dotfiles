@@ -138,5 +138,10 @@
   {
     "key": "cmd+q",
     "command": "-workbench.action.quit"
+  },
+  {
+    "key": "cmd+b",
+    "command": "-markdown.extension.editing.toggleBold",
+    "when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
   }
 ]
