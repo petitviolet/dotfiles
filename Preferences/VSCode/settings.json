@@ -107,5 +107,8 @@
     "vscode-markdown.config": {
       "lists": { "indent": 2 }
     },
-    "editor.detectIndentation": false
+    "editor.detectIndentation": false,
+    "[jsonc]": {
+      "editor.defaultFormatter": "HookyQR.beautify"
+    }
 }
