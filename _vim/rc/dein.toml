@@ -63,3 +63,5 @@ repo = 'terryma/vim-multiple-cursors'
 repo = 'haya14busa/incsearch.vim'
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
+[[plugins]]
+repo = 'airblade/vim-gitgutter'

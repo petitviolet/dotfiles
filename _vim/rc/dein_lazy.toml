@@ -22,12 +22,6 @@ on_ft = ['erlang']
 repo = 'derekwyatt/vim-scala'
 on_ft = ['scala']
 [[plugins]]
-repo = 'vim-erlang/vim-erlang-omnicomplete'
-on_ft = ['erlang']
-[[plugins]]
-repo = 'vim-erlang/vim-erlang-compiler'
-on_ft = ['erlang']
-[[plugins]]
 repo = 'ujihisa/neco-look'
 on_i = 1
 [[plugins]]
@@ -145,13 +139,20 @@ build = 'make'
 repo = 'Shougo/neomru.vim'
 on_source = ['unite.vim']
 [[plugins]]
-repo = 'Shougo/neocomplete'
-if = '''has('lua')'''
-on_i = 1
+repo = 'Shougo/deoplete.nvim'
+
 [[plugins]]
-repo = 'Shougo/neocomplcache'
-if = '''!has('lua')'''
+repo = 'Shougo/neco-syntax'
 on_i = 1
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+# [[plugins]]
+# repo = 'Shougo/neocomplete'
+# on_i = 1
 [[plugins]]
 repo = 'superbrothers/vim-quickrun-markdown-gfm'
 on_ft = 'md'

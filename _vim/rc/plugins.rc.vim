@@ -54,62 +54,64 @@ nmap ga <Plug>(EasyAlign)
 "-----------------------------------------------------
 " Neocomplcache
 "-----------------------------------------------------
-
-" if_luaが有効ならneocompleteを使う
-if dein#tap('neocomplete') && has('lua')
-  " neocomplete用設定
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_ignore_case = 1
-  let g:neocomplete#enable_smart_case = 1
-  " camle caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
-  let g:neocomplete#enable_camel_case_completion = 1
-  " _(アンダーバー)区切りの補完を有効化
-  let g:neocomplete#enable_underbar_completion = 1
-  if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-  endif
-  " let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
-  let g:neocomplete#keyword_patterns._ = '\h\w*'
-  "ユーザ定義の辞書を指定
-  let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'scala' : $HOME . '/.vim/dict/scala.dict',
-    \ 'racket' : $HOME . '/.vim/dict/racket.dict',
-    \ }
-elseif dein#tap('neocomplcache')
-  " neocomplcache用設定
-  let g:neocomplcache_enable_at_startup = 1
-  let g:neocomplcache_enable_ignore_case = 1
-  let g:neocomplcache_enable_smart_case = 1
-  if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-  endif
-  let g:neocomplcache_keyword_patterns._ = '\h\w*'
-  let g:neocomplcache_enable_camel_case_completion = 1
-  let g:neocomplcache_enable_underbar_completion = 1
-  "ユーザ定義の辞書を指定
-  let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'scala' : $HOME . '/.vim/dict/scala.dict',
-    \ 'racket' : $HOME . '/.vim/dict/racket.dict',
-    \ }
+call dein#add('Shougo/deoplete.nvim')
+if !has('nvim')
+  call dein#add('roxma/nvim-yarp')
+  call dein#add('roxma/vim-hug-neovim-rpc')
 endif
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
-" Plugin key-mappings.
-imap <C-l> <Plug>(neosnippet_expand_or_jump)
-smap <C-l> <Plug>(neosnippet_expand_or_jump)
-xmap <C-l> <Plug>(neosnippet_expand_target)
+" 起動時にneocompleteを有効にする
+let g:deoplete#enable_at_startup = 1
+imap <expr><Tab> pumvisible() ? "\<DOWN>" : "\<Tab>"
+imap <expr><S-Tab> pumvisible() ? "\<UP>" : "\<S-Tab>"
+let g:neocomplete#enable_at_startup = 1
+" smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
+let g:deoplete#enable_smart_case = 1
+" 区切り文字まで補完する
+let g:deoplete#enable_auto_delimiter = 1
+" 1文字目の入力から補完のポップアップを表示
+let g:deoplete#auto_completion_start_length = 1
+" バックスペースで補完のポップアップを閉じる
+inoremap <expr><BS> deoplete#smart_close_popup()."<C-h>"
 
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
+" " if_luaが有効ならneocompleteを使う
+" if dein#tap('neocomplete') && has('lua')
+"   " neocomplete用設定
+"   let g:neocomplete#enable_at_startup = 1
+"   let g:neocomplete#enable_ignore_case = 1
+"   let g:neocomplete#enable_smart_case = 1
+"   " camle caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
+"   let g:neocomplete#enable_camel_case_completion = 1
+"   " _(アンダーバー)区切りの補完を有効化
+"   let g:neocomplete#enable_underbar_completion = 1
+"   if !exists('g:neocomplete#keyword_patterns')
+"     let g:neocomplete#keyword_patterns = {}
+"   endif
+"   " let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
+"   let g:neocomplete#keyword_patterns._ = '\h\w*'
+"   "ユーザ定義の辞書を指定
+"   let g:neocomplete#sources#dictionary#dictionaries = {
+"     \ 'default' : '',
+"     \ 'scala' : $HOME . '/.vim/dict/scala.dict',
+"     \ 'racket' : $HOME . '/.vim/dict/racket.dict',
+"     \ }
+" endif
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+"
+" " Plugin key-mappings.
+" imap <C-l> <Plug>(neosnippet_expand_or_jump)
+" smap <C-l> <Plug>(neosnippet_expand_or_jump)
+" xmap <C-l> <Plug>(neosnippet_expand_target)
+"
+" " SuperTab like snippets behavior.
+" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+" \ "\<Plug>(neosnippet_expand_or_jump)"
+" \: pumvisible() ? "\<C-n>" : "\<TAB>"
+" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+" \ "\<Plug>(neosnippet_expand_or_jump)"
+" \: "\<TAB>"
+"
 " For snippet_complete marker.
 if has('conceal')
   " set conceallevel=2 concealcursor=i
@@ -493,6 +495,14 @@ func! s:paste_gist_tag()
   endif
 endfunc
 command! -nargs=0 PasteGist     call <sid>paste_gist_tag()
+
+
+" airblade/vim-gitgutter
+nnoremap [gitgutter] <Nop>
+nmap <C-h> [gitgutter]
+nmap [gitgutter]j <Plug>GitGutterNextHunk
+nmap [gitgutter]k <Plug>GitGutterPrevHunk
+nmap [gitgutter]u <Plug>GitGutterUndoHunk
 
 "-----------------------------------------------------
 " latex

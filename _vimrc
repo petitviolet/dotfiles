@@ -54,7 +54,7 @@ set display=lastline
 set pumheight=10
 set nofoldenable
 
-" setlocal omnifunc=syntaxcomplete#Complete
+setlocal omnifunc=syntaxcomplete#Complete
 "-----------------------------------------------------
 " filetypeのalias
 "-----------------------------------------------------
@@ -328,7 +328,7 @@ set statusline+=,
 set statusline+=%c    " 何列目にカーソルがあるか
 " set statusline+=%V    " 画面上の何列目にカーソルがあるか
 set statusline+=\   " 空白スペース2個
-set statusline+=%{b:charCounterCount}
+" set statusline+=%{b:charCounterCount}
 set statusline+=\|%P\|" ファイル内の何％の位置にあるか
 set statusline+=%{fugitive#statusline()}  " Gitのブランチ名を表示
 
@@ -395,43 +395,43 @@ endif
 
 " statusbarにファイル中の文字数を表示
 
-if exists("anekos_charCounter")
-  finish
-endif
-let anekos_charCounter=1
-
-augroup CharCounter
-  autocmd!
-  autocmd BufCreate,BufEnter * call <SID>Initialize()
-  autocmd BufUnload,FileWritePre,BufWritePre * call <SID>Update()
-augroup END
-
-function! s:Initialize()
-  if exists('b:charCounterCount')
-  else
-    return s:Update()
-  endif
-endfunction
-
-function! s:Update()
-  let b:charCounterCount = s:CharCount()
-endfunction
-
-function! s:CharCount()
-  let l:result = 0
-  for l:linenum in range(0, line('$'))
-    let l:line = getline(l:linenum)
-    let l:result += strlen(substitute(l:line, ".", "x", "g"))
-  endfor
-  return l:result
-endfunction
-
-function! AnekoS_CharCounter_CharCount()
-  return s:CharCount()
-endfunction
+" if exists("anekos_charCounter")
+"   finish
+" endif
+" let anekos_charCounter=1
+"
+" augroup CharCounter
+"   autocmd!
+"   autocmd BufCreate,BufEnter * call <SID>Initialize()
+"   autocmd BufUnload,FileWritePre,BufWritePre * call <SID>Update()
+" augroup END
+"
+" function! s:Initialize()
+"   if exists('b:charCounterCount')
+"   else
+"     return s:Update()
+"   endif
+" endfunction
+"
+" function! s:Update()
+"   let b:charCounterCount = s:CharCount()
+" endfunction
+"
+" function! s:CharCount()
+"   let l:result = 0
+"   for l:linenum in range(0, line('$'))
+"     let l:line = getline(l:linenum)
+"     let l:result += strlen(substitute(l:line, ".", "x", "g"))
+"   endfor
+"   return l:result
+" endfunction
+"
+" function! AnekoS_CharCounter_CharCount()
+"   return s:CharCount()
+" endfunction
 
 " 選択してccで文字数カウント
-vnoremap <silent> cc :s/./&/gn <CR>
+" vnoremap <silent> cc :s/./&/gn <CR>
 
 "-----------------------------------------------------
 " 矩形選択で連番入力
