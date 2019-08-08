@@ -1,114 +1,121 @@
 {
-    "editor.fontSize": 18,
-    "vim.hlsearch": true,
-    "vim.useCtrlKeys": true,
-    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-…、。「」【】『』（）！？　てにをはがのともへでや",
-    "vim.useSystemClipboard": true,
-    "vim.insertModeKeyBindings": [{
-            "before": [
-                "<C-n>"
-            ],
-            "after": [
-                "<C-o>",
-                "j"
-            ]
-        },
-        {
-            "before": [
-                "<C-p>"
-            ],
-            "after": [
-                "<C-o>",
-                "k"
-            ]
-        },
-        {
-            "before": [
-                "<C-a>"
-            ],
-            "after": [
-                "<C-o>",
-                "I"
-            ]
-        },
-        {
-            "before": [
-                "<C-e>"
-            ],
-            "after": [
-                "<C-o>",
-                "A"
-            ]
-        }
-    ],
-    "vim.normalModeKeyBindingsNonRecursive": [{
-            "before": [
-                "j"
-            ],
-            "after": [
-                "g",
-                "j"
-            ]
-        },
-        {
-            "before": [
-                "k"
-            ],
-            "after": [
-                "g",
-                "k"
-            ]
-        }
-    ],
-    "editor.formatOnSave": true,
-    "zenMode.hideTabs": false,
-    "editor.minimap.enabled": false,
-    "editor.tabSize": 2,
-    "[markdown]": {
-      "editor.tabSize": 2
+  "editor.fontSize": 18,
+  "vim.hlsearch": true,
+  "vim.useCtrlKeys": true,
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-…、。「」【】『』（）！？　てにをはがのともへでや",
+  "vim.useSystemClipboard": true,
+  "vim.insertModeKeyBindings": [{
+      "before": [
+        "<C-n>"
+      ],
+      "after": [
+        "<C-o>",
+        "j"
+      ]
     },
-    "editor.insertSpaces": true,
-    "markdown.preview.fontSize": 20,
-    "window.zoomLevel": 0,
-    "markdownlint.run": "onSave",
-    "markdown.extension.toc.githubCompatibility": true,
-    "workbench.iconTheme": "vscode-icons",
-    "prettier.disableLanguages": [
-        "markdown",
-        "md"
-    ],
-    "json.format.enable": true,
-    "markdown.extension.toc.levels": "1..3",
-    "pasteImage.basePath": "${currentFileDir}/assets",
-    "pasteImage.path": "${currentFileDir}/assets",
-    "ruby.intellisense": "rubyLocate",
-    "ruby.useLanguageServer": true,
-    "solargraph.definitions": true,
-    "solargraph.diagnostics": true,
-    "languageTool.enabled": false,
-    "explorer.confirmDelete": false,
-    "editor.wordWrap": "on",
-    "editor.wordWrapColumn": 100,
-    "workbench.commandPalette.history": 9999,
-    "rest-client.defaultHeaders": {
-        "User-Agent": "vscode-restclient",
-        "Accept-Encoding": "gzip"
+    {
+      "before": [
+        "<C-p>"
+      ],
+      "after": [
+        "<C-o>",
+        "k"
+      ]
     },
-    "rest-client.environmentVariables": {
-        "$shared": {
-            "version": "v1"
-        },
-        "local": {
-            "version": "v2",
-            "host": "localhost"
-        }
+    {
+      "before": [
+        "<C-a>"
+      ],
+      "after": [
+        "<C-o>",
+        "I"
+      ]
     },
-    "markdown.extension.list.indentationSize": "inherit",
-    "vscode-markdown.config": {
-      "lists": { "indent": 2 }
-    },
-    "editor.detectIndentation": false,
-    "[jsonc]": {
-      "editor.defaultFormatter": "HookyQR.beautify"
+    {
+      "before": [
+        "<C-e>"
+      ],
+      "after": [
+        "<C-o>",
+        "A"
+      ]
     }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [{
+      "before": [
+        "j"
+      ],
+      "after": [
+        "g",
+        "j"
+      ]
+    },
+    {
+      "before": [
+        "k"
+      ],
+      "after": [
+        "g",
+        "k"
+      ]
+    }
+  ],
+  "editor.formatOnSave": true,
+  "zenMode.hideTabs": false,
+  "editor.minimap.enabled": false,
+  "editor.tabSize": 2,
+  "[markdown]": {
+    "editor.tabSize": 2
+  },
+  "editor.insertSpaces": true,
+  "markdown.preview.fontSize": 20,
+  "window.zoomLevel": 0,
+  "markdownlint.run": "onSave",
+  "markdown.extension.toc.githubCompatibility": true,
+  "workbench.iconTheme": "vscode-icons",
+  "prettier.disableLanguages": [
+    "markdown",
+    "md"
+  ],
+  "json.format.enable": true,
+  "markdown.extension.toc.levels": "1..3",
+  "pasteImage.basePath": "${currentFileDir}/assets",
+  "pasteImage.path": "${currentFileDir}/assets",
+  "ruby.intellisense": "rubyLocate",
+  "ruby.useLanguageServer": true,
+  "solargraph.definitions": true,
+  "solargraph.diagnostics": true,
+  "languageTool.enabled": false,
+  "explorer.confirmDelete": false,
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 100,
+  "workbench.commandPalette.history": 9999,
+  "rest-client.defaultHeaders": {
+    "User-Agent": "vscode-restclient",
+    "Accept-Encoding": "gzip"
+  },
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "version": "v1"
+    },
+    "local": {
+      "version": "v2",
+      "host": "localhost"
+    }
+  },
+  "markdown.extension.list.indentationSize": "inherit",
+  "vscode-markdown.config": {
+    "lists": {
+      "indent": 2
+    }
+  },
+  "editor.detectIndentation": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "editor.cursorBlinking": "smooth",
+  // "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorStyle": "line",
+  "telemetry.enableTelemetry": false,
+  "workbench.editor.highlightModifiedTabs": true
 }
