@@ -208,7 +208,7 @@ function tree_select() {
       if [ -d $1 ]; then
         ls -lFG --color=auto $1
       else
-        head -n 100 $1
+        head -n 300 $1 | highlight -O ansi
       fi
     }; f {}' | \
       sed -e "s/ ->.*\$//g" | \
