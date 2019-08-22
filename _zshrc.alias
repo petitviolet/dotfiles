@@ -206,7 +206,7 @@ function tree_select() {
     fzf --preview 'f() {
       set -- $(echo -- "$@" | grep -o "\./.*$");
       if [ -d $1 ]; then
-        ls -lFG --color=auto $1
+        ls -lFG --color=always $1
       else
         cat $1 | highlight -O ansi
       fi
@@ -298,7 +298,10 @@ bindkey "^xp" select_kill
 # Git commands using peco/fzf
 ##########################################
 
-export FZF_DEFAULT_OPTS="--no-sort --exact --cycle --multi --ansi --reverse --border --bind=ctrl-t:toggle --bind=ctrl-k:kill-line --bind=?:toggle-preview --bind=down:preview-down --bind=up:preview-up"
+export FZF_DEFAULT_OPTS="--no-sort --exact --cycle --multi --ansi --reverse --border
+  --color hl:#ee3333,hl+:#ee1111
+  --bind=ctrl-t:toggle --bind=ctrl-k:kill-line --bind=?:toggle-preview --bind=down:preview-down --bind=up:preview-up
+"
 # export FZF_DEFAULT_COMMAND='ag --nocolor --hidden -g ""'
 # export FZF_DEFAULT_COMMAND='echo "hoge"'
 
@@ -312,7 +315,7 @@ function select_file_from_git_status() {
       elif [ $(echo $original | grep -E "^\?\?" | wc -l) -eq 0 ]; then # unstaged
         git diff --color $2
       elif [ -d $2 ]; then # directory
-        ls -la $2
+        ls -la --color=always $2
       else
         git diff --color --no-index /dev/null $2 # untracked
       fi
@@ -422,11 +425,26 @@ function insert_selected_git_hashes(){
 zle -N insert_selected_git_hashes
 bindkey "^g^l" insert_selected_git_hashes
 
+function git_grep_list() {
+  local query=$LBUFFER
+  git grep "$query" | \
+    fzf --query="$query" --preview-window=down:wrap --preview 'f() {
+      set -- $(echo "$@");
+      file=$(echo $1 | cut -d":" -f1);
+      lineno=$(echo $1 | cut -d":" -f2)
+      # echo ${file} ${lineno}
+      # less +"${lineno}"g -j 5 -N "${file}"
+      bat --color=always --style=numbers "${file}"
+    }; f {}'
+}
+zle -N git_grep_list
+bindkey "^g^g" git_grep_list
+
 #########################################
 # ghq with fzf
 
 function select_path_from_ghq() {
-  ghq list -p | fzf --preview 'ls -l {}' | tr -d '\n'
+  ghq list -p | fzf --preview 'ls -l --color=always {}' | tr -d '\n'
 }
 function insert_selected_path_from_ghq() {
     LBUFFER+=$(select_path_from_ghq)
