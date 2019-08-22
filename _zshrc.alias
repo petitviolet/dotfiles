@@ -430,11 +430,14 @@ function git_grep_list() {
   git grep "$query" | \
     fzf --query="$query" --preview-window=down:wrap --preview 'f() {
       set -- $(echo "$@");
-      file=$(echo $1 | cut -d":" -f1);
-      lineno=$(echo $1 | cut -d":" -f2)
-      # echo ${file} ${lineno}
+      local file=$(echo $1 | cut -d":" -f1);
+      local lineno=$(echo $1 | cut -d":" -f2)
       # less +"${lineno}"g -j 5 -N "${file}"
-      bat --color=always --style=numbers "${file}"
+      local a=15
+      local no_begin=$(if [[ $((lineno - a)) > 0 ]]; then echo $((lineno - a)); else echo 0; fi)
+      local no_end=$((lineno + a))
+      # bat --color=always "${file}" | sed -n "${no_begin},$"p
+      bat --color=always --style=numbers --line-range "${no_begin}:${no_end}" "${file}"
     }; f {}'
 }
 zle -N git_grep_list
