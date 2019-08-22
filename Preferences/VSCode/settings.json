@@ -117,5 +117,7 @@
   // "editor.cursorSmoothCaretAnimation": true,
   "editor.cursorStyle": "line",
   "telemetry.enableTelemetry": false,
-  "workbench.editor.highlightModifiedTabs": true
+  "workbench.editor.highlightModifiedTabs": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }
