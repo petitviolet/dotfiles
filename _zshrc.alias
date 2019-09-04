@@ -467,6 +467,20 @@ function cd_ghq() {
 zle -N cd_ghq
 bindkey "^g^p" cd_ghq
 
+######
+# pet(snippet)
+# https://github.com/knqyf263/pet
+#####
+
+function pet-select() {
+  BUFFER=$(pet search --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle redisplay
+}
+zle -N pet-select
+stty -ixon
+bindkey '^s' pet-select
+
 ##########################################
 # GCP commands(gcloud) using peco
 ##########################################
