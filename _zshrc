@@ -89,6 +89,7 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
+zstyle ':completion:*' use-cache yes
 
 # URLを自動エスケープ
 # auto-fuと競合する
@@ -376,7 +377,7 @@ if [ $commands[kubectl] ]; then
 
     # Load auto-completion
     source <(kubectl completion zsh)
-    echo 'loaded kubectl completion'
+    echo 'loaded kubectl completion' >&2
 
     # Execute 'kubectl' binary
     $0 "$@"
@@ -395,7 +396,7 @@ if [ $commands[aws] ]; then
 
     # Load completion
     source /usr/local/bin/aws_zsh_completer.sh
-    echo 'loaded aws completion'
+    echo 'loaded aws completion' >&2
 
     # Execute 'aws' binary
     $0 "$@"
