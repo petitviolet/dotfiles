@@ -208,7 +208,7 @@ function tree_select() {
       if [ -d $1 ]; then
         ls -lFG --color=always $1
       else
-        cat $1 | highlight -O ansi
+        cat $1 | highlight -O ansi --syntax "$(echo ${1##*.})" || cat $1
       fi
     }; f {}' | \
       sed -e "s/ ->.*\$//g" | \
