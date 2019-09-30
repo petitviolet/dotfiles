@@ -26,7 +26,7 @@
   editor = vim
   quotepath = false
 [ghq]
-  root = ~/Code/go/ghq
+  root = ~/.ghq
 [filter "media"]
   required = true
 	clean = git media clean %f
