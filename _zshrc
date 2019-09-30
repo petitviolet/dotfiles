@@ -261,7 +261,7 @@ function history-all { history -E 1 }
 # プロンプト表示関連
 #----------------------------------------------------------
 # 右側に時間を表示する
-RPROMPT="%D %*"
+# RPROMPT="%D %*"
 # 右側まで入力が来ら時間を消す
 setopt transient_rprompt
 # プロンプト
