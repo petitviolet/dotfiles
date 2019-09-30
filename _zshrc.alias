@@ -425,6 +425,23 @@ function insert_selected_git_hashes(){
 zle -N insert_selected_git_hashes
 bindkey "^g^l" insert_selected_git_hashes
 
+function select_git_stash() {
+  git stash list --color=always | \
+    fzf --preview 'f() {
+      set -- $(echo "$@");
+      git stash show -p --color=always $(echo $1 | tr -d ":")
+    }; f {}' | \
+    awk -F' ' '{ print $1 }' | \
+    tr -d '\n' | \
+    tr -d ':'
+}
+function insert_selected_git_stash(){
+    LBUFFER+=$(select_git_stash)
+    CURSOR=$#LBUFFER
+}
+zle -N insert_selected_git_stash
+bindkey "^gs" insert_selected_git_stash
+
 function git_grep_list() {
   local query=$LBUFFER
   git grep "$query" | \
