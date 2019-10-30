@@ -60,6 +60,9 @@ export LESS=' -R -N '
 # export LESSOPEN='| /usr/local/bin/src-hilite-lesspipe.sh %s'
 export GREP_OPTIONS="--color=auto"
 
+function jq.ec2 {
+  jq -rS '.Reservations[] | .Instances[] | [[.Tags[] | select(.Key == "target").Value][], .InstanceId, .PrivateIpAddress, .State.Name, .LaunchTime] | @tsv' | column
+}
 
 # --------------------------------------------------
 #  original commands
@@ -180,7 +183,7 @@ function select_history() {
         set -- $(echo -- "$@");
         echo "${@:4}" | highlight -O ansi --syntax sh
       }; f {}'|\
-        awk -F'  ' '{ print $2 }')
+        awk -F'  ' '{ print $2 }' | sed -e 's/ ###.*//g')
     CURSOR=$#BUFFER
     # zle clear-screen
 }
