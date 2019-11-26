@@ -258,10 +258,15 @@ setopt hist_save_no_dups
 
 # 全履歴の一覧を出力する
 function history-all { history -E 1 }
-function zshaddhistory() {
-    # print -sr "${1%%$'\n'} ### $(echo $PWD | sed -e "s;$HOME;~;")"
-    fc -p
-}
+# function zshaddhistory() {
+#     # print -sr "${1%%$'\n'} ### $(echo $PWD | sed -e "s;$HOME;~;")"
+#     fc -p
+# }
+# alias hs="command history"
+# ZSH_HISTORY_KEYBIND_GET="^r"
+# ZSH_HISTORY_FILTER_OPTIONS="--filter-branch --filter-dir"
+# ZSH_HISTORY_KEYBIND_ARROW_UP="^p"
+# ZSH_HISTORY_KEYBIND_ARROW_DOWN="^n"
 
 #----------------------------------------------------------
 # プロンプト表示関連
