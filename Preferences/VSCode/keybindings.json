@@ -141,7 +141,29 @@
   },
   {
     "key": "cmd+b",
-    "command": "-markdown.extension.editing.toggleBold",
+    "command": "-markdown.extension.editing.toggleMathReverse",
     "when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'"
+  },
+  {
+    "key": "cmd+8",
+    "command": "-workbench.action.focusEighthEditorGroup"
+  },
+  {
+    "key": "cmd+5",
+    "command": "-workbench.action.focusFifthEditorGroup"
+  },
+  {
+    "key": "cmd+2",
+    "command": "-workbench.action.focusSecondEditorGroup"
+  },
+  {
+    "key": "cmd+2",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
+  {
+    "key": "f12",
+    "command": "-editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
   }
 ]

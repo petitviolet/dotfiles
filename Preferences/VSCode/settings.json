@@ -1,5 +1,5 @@
 {
-  "editor.fontSize": 18,
+  "editor.fontSize": 17,
   "vim.hlsearch": true,
   "vim.useCtrlKeys": true,
   "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-…、。「」【】『』（）！？　てにをはがのともへでや",
@@ -58,6 +58,12 @@
         "g",
         "k"
       ]
+    },
+    {
+      "before":["<Esc>"],
+      "commands": [
+        ":nohl"
+      ]
     }
   ],
   "editor.formatOnSave": true,
@@ -65,14 +71,14 @@
   "editor.minimap.enabled": false,
   "editor.tabSize": 2,
   "[markdown]": {
-    "editor.tabSize": 2
+    "editor.tabSize": 4
   },
   "editor.insertSpaces": true,
   "markdown.preview.fontSize": 20,
   "window.zoomLevel": 0,
   "markdownlint.run": "onSave",
   "markdown.extension.toc.githubCompatibility": true,
-  "workbench.iconTheme": "vscode-icons",
+  "workbench.iconTheme": "vs-seti",
   "prettier.disableLanguages": [
     "markdown",
     "md"
@@ -81,10 +87,6 @@
   "markdown.extension.toc.levels": "1..3",
   "pasteImage.basePath": "${currentFileDir}/assets",
   "pasteImage.path": "${currentFileDir}/assets",
-  "ruby.intellisense": "rubyLocate",
-  "ruby.useLanguageServer": true,
-  "solargraph.definitions": true,
-  "solargraph.diagnostics": true,
   "languageTool.enabled": false,
   "explorer.confirmDelete": false,
   "editor.wordWrap": "on",
@@ -120,5 +122,9 @@
   "workbench.editor.highlightModifiedTabs": true,
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "workbench.editor.enablePreview": false
+  "workbench.editor.enablePreview": false,
+  "ruby.intellisense": "rubyLocate",
+  "ruby.useLanguageServer": true,
+  "solargraph.definitions": true,
+  "solargraph.diagnostics": true,
 }
