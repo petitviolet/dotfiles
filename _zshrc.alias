@@ -346,12 +346,12 @@ bindkey "^g^a" select_git_add
 function select_from_git_branch() {
   # local list=$(git branch --sort=refname --sort=-authordate --color --all  --format='%(color:red)%(authordate:short)%(color:reset) %(objectname:short) %(align:width=45,position=left)%(color:green)%(refname:short)%(color:reset)%(end) <%(align:20,left)%(authorname)%(end)>[%(subject)] %(if)%(HEAD)%(then)* %(else)%(end)'; \
   local list=$(\
-    git branch --sort=refname --sort=-authordate --color --all \
+    git branch --sort=refname --sort=-committerdate --color --all \
       --format='%(color:red)%(authordate:short)%(color:reset) %(objectname:short) %(color:green)%(refname:short)%(color:reset) %(if)%(HEAD)%(then)* %(else)%(end)'; \
     git tag --color -l \
       --format='%(color:red)%(creatordate:short)%(color:reset) %(objectname:short) %(color:yellow)%(align:width=45,position=left)%(refname:short)%(color:reset)%(end)')
 
-  echo $list | fzf --preview 'f() {
+  echo $list | fzf --preview-window=down:wrap --preview 'f() {
       set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}");
       [ $# -eq 0 ] || git --no-pager log --oneline -100 --pretty=format:"%C(red)%ad%Creset %C(green)%h%Creset %C(blue)%<(15,trunc)%an%Creset: %s" --date=short --color $1;
     }; f {}' |\
@@ -414,7 +414,7 @@ bindkey "^g^s" insert_selected_git_files
 
 function select_git_hash() {
   git log --color=always --date=short --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset) %C(cyan)@%an%C(reset) %C(auto)%d%C(reset) %s" | \
-    fzf --preview 'f() {
+    fzf --preview-window=down:wrap --preview 'f() {
       set -- $(echo "$@");
       git show --color=always $1
     }; f {}' | \
