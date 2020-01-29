@@ -140,11 +140,10 @@ repo = 'Shougo/neomru.vim'
 on_source = ['unite.vim']
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-
+on_i = 1
 [[plugins]]
 repo = 'Shougo/neco-syntax'
 on_i = 1
-
 [[plugins]]
 repo = 'roxma/vim-hug-neovim-rpc'
 [[plugins]]
@@ -155,7 +154,10 @@ repo = 'roxma/nvim-yarp'
 # on_i = 1
 [[plugins]]
 repo = 'superbrothers/vim-quickrun-markdown-gfm'
-on_ft = 'md'
+on_ft = ['md', 'markdown']
+[[plugins]]
+repo = 'tpope/vim-markdown'
+on_ft = ['md', 'markdown']
 [[plugins]]
 repo = 'junegunn/vim-easy-align'
 on_cmd = ['EasyAlign']
