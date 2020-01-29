@@ -15,7 +15,7 @@
   ae = add -e
   rc = rebase --continue
   ra = rebase --abort
-  ra = cherry-pick
+  cp = cherry-pick
 [rebase]
   instructionFormat = [%ad][%an] %s
 [push]
@@ -47,3 +47,5 @@
 	oneline-log = format:%C(red)%ad%Creset %C(green)%h%Creset %C(blue)%<(15,trunc)%an%Creset: %s
 [credential]
 	helper = osxkeychain
+[commit]
+	verbose = true
