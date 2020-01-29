@@ -115,6 +115,7 @@
   "[jsonc]": {
     "editor.defaultFormatter": "HookyQR.beautify"
   },
+  "explorer.confirmDragAndDrop": false,
   "editor.cursorBlinking": "smooth",
   // "editor.cursorSmoothCaretAnimation": true,
   "editor.cursorStyle": "line",
@@ -127,4 +128,5 @@
   "ruby.useLanguageServer": true,
   "solargraph.definitions": true,
   "solargraph.diagnostics": true,
+  "files.autoSave": "afterDelay"
 }
