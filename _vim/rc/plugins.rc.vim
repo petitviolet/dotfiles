@@ -251,7 +251,9 @@ nnoremap <Leader>q :call Toggle_quickfix_window()<CR>
 " TagBar
 " tbでIDEっぽくなる
 nmap <space>tb :TagbarToggle<CR>
-" autocmd FileType * nested :call tagbar#autoopen(0)
+autocmd FileType * nested :call tagbar#autoopen(0)
+let g:tagbar_width = 30
+let g:tagbar_autoshowtag = 1
 
 "" TagBarのcolor
 autocmd VimEnter,Colorscheme * :hi TagbarSignature ctermfg=250 " ctermbg=240
@@ -261,6 +263,7 @@ autocmd VimEnter,Colorscheme * :hi TagbarVisibilityPrivate ctermfg=160 " ctermbg
 " tag jump
 let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
 let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
+let g:vim_tags_auto_generate = 1
 " 候補が複数ある時にそれを表示
 set notagbsearch
 " nnoremap <C-t> :exe("tjump ".expand('<cword>'))<CR>
@@ -268,16 +271,25 @@ autocmd FileType * nnoremap <C-t> g<C-]>
 autocmd FileType bib,tex nnoremap <C-t> vi}g<C-]>
 nnoremap <silent> tn :tag<CR>
 nnoremap <silent> tb :pop<CR>
-set tags=./tags;
+set tags=./tags;$HOME;
 
-nnoremap T :TagsGenerate!<CR>
+nnoremap TT :TagsGenerate!<CR>
+
 
 " nerdtree
 " ファイル管理(tree表示)
 " \nでファイルツリー表示
 nmap <silent> <Leader>e :NERDTreeToggle<CR>
-vmap <silent> <Leader>e <Esc> :NERDTreeToggle<CR>
+" vmap <silent> <Leader>e <Esc> :NERDTreeToggle<CR>
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+function s:MoveToFileAtStart()
+  call feedkeys("\<C-w>l")
+endfunction
+autocmd VimEnter *  NERDTree | call s:MoveToFileAtStart()
+
 
 " UndoTree
 " \uで開く
