@@ -7,9 +7,6 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/vundle/
-call vundle#rc()
-
 "-----------------------------------------------------
 " 文法チェック
 "-----------------------------------------------------
@@ -31,8 +28,6 @@ nmap <Leader>S :SyntasticCheck<CR>
 "-----------------------------------------------------
 " 表示関係
 "-----------------------------------------------------
-" 相対行がぬるぬる表示される
-" NeoBundle 'myusuf3/numbers'
 
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors = 0
@@ -73,7 +68,7 @@ let g:deoplete#enable_auto_delimiter = 1
 " 1文字目の入力から補完のポップアップを表示
 let g:deoplete#auto_completion_start_length = 1
 " バックスペースで補完のポップアップを閉じる
-inoremap <expr><BS> deoplete#smart_close_popup()."<C-h>"
+" inoremap <expr><BS> deoplete#smart_close_popup()."<C-h>"
 
 " " if_luaが有効ならneocompleteを使う
 " if dein#tap('neocomplete') && has('lua')
@@ -235,16 +230,6 @@ endfunction
 " <Leader>qでquickfixウィンドウをtoggleする
 nnoremap <Leader>q :call Toggle_quickfix_window()<CR>
 
-" vimsehll
-" いらない
-" vsでvimshellを起動
-" NeoBundle 'Shougo/vimshell.git'
-" let g:vimshell_interactive_update_time = 10
-" let g:vimshell_prompt = $USER."% "
-" "vimshell map
-" nmap vs :VimShell<CR>
-" nmap vp :VimShellPop<CR>
-
 "--------------------------------------------------
 " IDEっぽいやつ
 "--------------------------------------------------
@@ -394,7 +379,6 @@ autocmd FileType python let b:did_ftplugin = 1
 "-----------------------------------------------------
 " emmet
 "-----------------------------------------------------
-" NeoBundle 'mattn/emmet-vim'
 let g:user_emmet_settings = {
       \  'lang' : 'ja',
       \  'indentation' : '  ',
@@ -565,12 +549,6 @@ endif
 let g:LanguageClient_serverCommands = {
         \ 'ruby': ['solargraph', 'stdio'],
         \ }
-
-
-"-----------------------------------------------------
-" Like IDE
-"-----------------------------------------------------
-" NeoBundle 'wincent/Command-T'
 
 
 "-----------------------------------------------------
