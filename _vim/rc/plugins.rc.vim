@@ -59,6 +59,7 @@ if !has('nvim')
   call dein#add('roxma/nvim-yarp')
   call dein#add('roxma/vim-hug-neovim-rpc')
 endif
+let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 
 " 起動時にneocompleteを有効にする
 let g:deoplete#enable_at_startup = 1
