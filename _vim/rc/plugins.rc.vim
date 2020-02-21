@@ -248,7 +248,7 @@ autocmd VimEnter,Colorscheme * :hi TagbarVisibilityPrivate ctermfg=160 " ctermbg
 
 " tag jump
 let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
-let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle list --paths` 2>/dev/null"
 let g:vim_tags_auto_generate = 1
 " 候補が複数ある時にそれを表示
 set notagbsearch
