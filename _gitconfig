@@ -27,6 +27,7 @@
 	excludesfile = ~/.gitignore_global
   editor = vim
   quotepath = false
+  pager = cat
 [ghq]
   root = ~/.ghq
 [filter "media"]
