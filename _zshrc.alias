@@ -205,7 +205,7 @@ bindkey '^@' select_cdr
 
 # select file from `tree` and open it with vim
 function tree_select() {
-  tree -N -a --charset=o -f -I '.DS_Store|undodir|.git|.idea|resolution-cache|target/streams|node_modules|.db/data' | \
+  tree -N -a --charset=o -f -I '.DS_Store|undodir|.git|.cache|.idea|resolution-cache|target/streams|node_modules|.db/data' | \
     fzf --preview 'f() {
       set -- $(echo -- "$@" | grep -o "\./.*$");
       if [ -d $1 ]; then
