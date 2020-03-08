@@ -254,7 +254,7 @@ let g:vim_tags_auto_generate = 1
 " 候補が複数ある時にそれを表示
 set notagbsearch
 " nnoremap <C-t> :exe("tjump ".expand('<cword>'))<CR>
-autocmd FileType * nnoremap <C-t> g<C-]>
+" autocmd FileType * nnoremap <C-t> g<C-]>
 autocmd FileType bib,tex nnoremap <C-t> vi}g<C-]>
 nnoremap <silent> tn :tag<CR>
 nnoremap <silent> tb :pop<CR>
@@ -577,7 +577,10 @@ set foldlevel=99
 "-----------------------------------------------------
 
 au BufRead,BufNewFile *.md set filetype=markdown
-let g:previm_open_cmd = 'open -a Firefox'
+let g:previm_open_cmd = 'open'
+
+let g:markdown_minlines = 100
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'js=javascript', 'ruby', 'java', 'json']
 
 "-----------------------------------------------------
 " ファイルタイププラグインおよびインデントの有効化
