@@ -331,11 +331,12 @@ exe "hi! Error"           .s:fg_red         .s:bg_none        .s:fmt_undr
 exe "hi! Todo"            .s:fg_addfg       .s:bg_none        .s:fmt_none
 
 " Quickfix window highlighting
-exe "hi! qfLineNr"        .s:fg_yellow      .s:bg_none        .s:fmt_none
+exe "hi! qfLineNr"        .s:fg_yellow      .s:bg_none        .s:fmt_bold
 "   qfFileName"
 "   qfLineNr"
 "   qfError"
-hi LineNr ctermfg=47 ctermbg=0
+exe "hi! LineNr"        .s:fg_blue      .s:bg_none        .s:fmt_none
+" default: hi LineNr ctermfg=47 ctermbg=0
 
 "}}}
 " Diff Syntax Highlighting:"{{{
