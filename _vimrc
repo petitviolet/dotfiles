@@ -333,7 +333,7 @@ set statusline+=\|%P\|" ファイル内の何％の位置にあるか
 set statusline+=%{fugitive#statusline()}  " Gitのブランチ名を表示
 
 " ステータスラインの色
-highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=lightgray
+highlight StatusLine term=NONE cterm=NONE ctermfg=255 ctermbg=238
 
 "-----------------------------------------------------
 " タブ・インデント
