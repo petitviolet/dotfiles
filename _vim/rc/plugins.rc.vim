@@ -276,6 +276,7 @@ function s:MoveToFileAtStart()
   call feedkeys("\<C-w>l")
 endfunction
 autocmd VimEnter *  NERDTree | call s:MoveToFileAtStart()
+let NERDTreeShowHidden=1
 
 
 " UndoTree
