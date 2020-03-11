@@ -64,6 +64,7 @@ au BufRead,BufNewFile,BufReadPre *zsh*   set filetype=sh
 au BufRead,BufNewFile,BufReadPre *gradle   set filetype=groovy
 au BufRead,BufNewFile,BufReadPre *conf   set filetype=conf
 au BufRead,BufNewFile,BufReadPre *gohtmltmpl   set filetype=html
+autocmd FileType gitcommit :set formatoptions=q
 
 "-----------------------------------------------------
 " キーバインド変更
