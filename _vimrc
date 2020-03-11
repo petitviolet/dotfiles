@@ -387,7 +387,7 @@ if has("clipboard")
   "   silent! set clipboard^=unnamedplus
   "   set clipboard^=unnamed
   " endif
-  set clipboard=unnamed,autoselect
+  set clipboard+=unnamed ",autoselect
 endif
 
 "-----------------------------------------------------
