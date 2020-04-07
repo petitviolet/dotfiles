@@ -1,22 +1,6 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
   {
-    "key": "cmd+[",
-    "command": "workbench.action.nextEditor"
-  },
-  {
-    "key": "shift+cmd+]",
-    "command": "-workbench.action.nextEditor"
-  },
-  {
-    "key": "cmd+[BracketLeft]",
-    "command": "workbench.action.previousEditor"
-  },
-  {
-    "key": "alt+cmd+left",
-    "command": "-workbench.action.previousEditor"
-  },
-  {
     "key": "ctrl+a",
     "command": "cursorHome",
     "when": "editorTextFocus"
@@ -157,16 +141,20 @@
     "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
   },
   {
-    "key": "cmd+]",
-    "command": "workbench.action.navigateBack"
+    "key": "cmd+[",
+    "command": "workbench.action.previousEditor"
   },
   {
-    "key": "ctrl+[Minus]",
-    "command": "-workbench.action.navigateBack"
+    "key": "cmd+]",
+    "command": "workbench.action.nextEditor"
   },
   {
     "key": "shift+cmd+[",
-    "command": "-workbench.action.previousEditor"
+    "command": "workbench.action.navigateBack"
+  },
+  {
+    "key": "shift+cmd+]",
+    "command": "workbench.action.navigateForward"
   },
   {
     "key": "cmd+2",
