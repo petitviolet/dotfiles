@@ -122,9 +122,9 @@ setopt correct
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
 
 # AWS-CLIの補完
-if [ -z '/usr/local/bin/aws_zsh_completer.sh' ]; then
-  source /usr/local/bin/aws_zsh_completer.sh
-fi
+# if [ -z '/usr/local/bin/aws_zsh_completer.sh' ]; then
+#   source /usr/local/bin/aws_zsh_completer.sh
+# fi
 
 #----------------------------------------
 # 予測の先読み
@@ -407,7 +407,7 @@ if [ $commands[aws] ]; then
 
     # Load completion
     source /usr/local/bin/aws_zsh_completer.sh
-    echo 'loaded aws completion' >&2
+    # echo 'loaded aws completion' >&2
 
     # Execute 'aws' binary
     $0 "$@"
