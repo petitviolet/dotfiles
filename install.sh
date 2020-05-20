@@ -14,3 +14,6 @@ do
     ln -s $HOME/dotfiles/$dotfile $HOME/$fn
   fi
 done
+
+mkdir -p $HOME/.config
+ln -s $HOME/dotfiles/nvim $HOME/.config/nvim

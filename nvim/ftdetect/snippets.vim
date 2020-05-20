@@ -1,0 +1,1 @@
+/Users/Komurasaki/.vim/bundle/ultisnips/ftdetect/snippets.vim

@@ -3,6 +3,7 @@
 _vimperator
 _vim/bundle
 _vim/undodir/*
+nvim/undodir
 _zsh
 .python*
 _atom/blob-store
