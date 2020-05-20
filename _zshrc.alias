@@ -446,9 +446,8 @@ zle -N insert_selected_git_stash
 bindkey "^gs" insert_selected_git_stash
 
 function git_grep_list() {
-  local query=$LBUFFER
-  git grep "$query" | \
-    fzf --query="$query" --preview-window=down:wrap --preview 'f() {
+  local selected=$(git grep "" | \
+    fzf --preview-window=down:wrap --preview 'f() {
       set -- $(echo "$@");
       local file=$(echo $1 | cut -d":" -f1);
       local lineno=$(echo $1 | cut -d":" -f2)
@@ -458,7 +457,11 @@ function git_grep_list() {
       local no_end=$((lineno + a))
       # bat --color=always "${file}" | sed -n "${no_begin},$"p
       bat --color=always --style=numbers --line-range "${no_begin}:${no_end}" "${file}"
-    }; f {}'
+    }; f {}' | \
+      tr -d '\n' | \
+      cut -d ':' -f1
+  )
+  LBUFFER+="${selected}"
 }
 zle -N git_grep_list
 bindkey "^g^g" git_grep_list
