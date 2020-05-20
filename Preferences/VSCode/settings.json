@@ -66,12 +66,12 @@
       ]
     }
   ],
-  "editor.formatOnSave": true,
   "zenMode.hideTabs": false,
   "editor.minimap.enabled": false,
   "editor.tabSize": 2,
   "[markdown]": {
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "editor.quickSuggestions": true
   },
   "editor.insertSpaces": true,
   "markdown.preview.fontSize": 20,
@@ -87,7 +87,10 @@
   "markdown.extension.toc.levels": "1..3",
   "pasteImage.basePath": "${currentFileDir}/assets",
   "pasteImage.path": "${currentFileDir}/assets",
-  "languageTool.enabled": false,
+  "languageTool": {
+    "enabled": true,
+    "language": "en"
+  },
   "explorer.confirmDelete": false,
   "editor.wordWrap": "on",
   "editor.wordWrapColumn": 100,
@@ -95,15 +98,6 @@
   "rest-client.defaultHeaders": {
     "User-Agent": "vscode-restclient",
     "Accept-Encoding": "gzip"
-  },
-  "rest-client.environmentVariables": {
-    "$shared": {
-      "version": "v1"
-    },
-    "local": {
-      "version": "v2",
-      "host": "localhost"
-    }
   },
   "markdown.extension.list.indentationSize": "inherit",
   "vscode-markdown.config": {
@@ -128,5 +122,10 @@
   "ruby.useLanguageServer": true,
   "solargraph.definitions": true,
   "solargraph.diagnostics": true,
-  "files.autoSave": "afterDelay"
+  "files.autoSave": "onWindowChange",
+  "editor.multiCursorModifier": "alt",
+  "editor.tabCompletion": "on",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
