@@ -3,9 +3,29 @@
 # repo = has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 #
 #
+# [[plugins]]
+# repo = 'tomlion/vim-solidity'
+# on_ft = ['solidity']
 [[plugins]]
-repo = 'tomlion/vim-solidity'
-on_ft = ['solidity']
+repo = 'Shougo/neosnippet'
+on_i = 1
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_i = 1
+# vim-lsp and completions
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_i = 1
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+on_i = 1
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+on_i = 1
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+on_i = 1
+
 [[plugins]]
 repo = 'elmcast/elm-vim'
 on_ft = ['elm']
@@ -32,7 +52,7 @@ repo = 'lambdalisue/unite-grep-vcs'
 on_cmd = ['Unite']
 [[plugins]]
 repo = 'scrooloose/nerdtree'
-on_cmd = ['NERDTreeToggle']
+# on_cmd = ['NERDTreeToggle']
 [[plugins]]
 repo = 'h1mesuke/unite-outline'
 on_source = ['unite.vim']
@@ -89,36 +109,36 @@ repo = 'thinca/vim-quickrun'
 # on_cmd = ['QuickRun']
 on_map = [['n', '<Plug>']]
 hook_add = 'nmap <silent> <Space>r <Plug>(quickrun)'
-[[plugins]]
-repo = "mattn/gist-vim"
-on_cmd = ['Gist']
-[[plugins]]
-repo = 'vim-latex/vim-latex'
-on_ft = ['tex']
-[[plugins]]
-repo = 'gre/play2vim'
-on_ft = ['scala']
+# [[plugins]]
+# repo = "mattn/gist-vim"
+# on_cmd = ['Gist']
+# [[plugins]]
+# repo = 'vim-latex/vim-latex'
+# on_ft = ['tex']
+# [[plugins]]
+# repo = 'gre/play2vim'
+# on_ft = ['scala']
 [[plugins]]
 repo = "dag/vim2hs"
 on_ft = ['haskell']
-[[plugins]]
-repo = "eagletmt/unite-haddock"
-on_ft = ['haskell']
-[[plugins]]
-repo = "ujihisa/neco-ghc"
-on_ft = ['haskell']
-[[plugins]]
-repo = "ujihisa/unite-haskellimport"
-on_ft = ['haskell']
-[[plugins]]
-repo = "wlangstroth/vim-racket"
-on_ft = ['rkt', 'racket']
+# [[plugins]]
+# repo = "eagletmt/unite-haddock"
+# on_ft = ['haskell']
+# [[plugins]]
+# repo = "ujihisa/neco-ghc"
+# on_ft = ['haskell']
+# [[plugins]]
+# repo = "ujihisa/unite-haskellimport"
+# on_ft = ['haskell']
+# [[plugins]]
+# repo = "wlangstroth/vim-racket"
+# on_ft = ['rkt', 'racket']
 [[plugins]]
 repo = "vim-scripts/dbext.vim"
 on_ft = ['sql']
-[[plugins]]
-repo = 'bbatsov/rubocop'
-on_ft = ['ruby']
+# [[plugins]]
+# repo = 'bbatsov/rubocop'
+# on_ft = ['ruby']
 [[plugins]]
 repo = 'vim-ruby/vim-ruby'
 on_ft = ['ruby']

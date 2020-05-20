@@ -9,20 +9,6 @@ repo = "mattn/sonictemplate-vim"
 repo = 'scrooloose/syntastic'
 [[plugins]]
 repo = 'nathanaelkane/vim-indent-guides'
-[[plugins]]
-repo = 'Shougo/neosnippet'
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
-# vim-lsp and completions
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 # [[plugins]]
 # repo = "Shougo/tabpagebuffer.vim"
@@ -32,8 +18,8 @@ repo = 'prabirshrestha/asyncomplete-lsp.vim'
 repo = 'rking/ag.vim'
 [[plugins]]
 repo = 'tyru/caw.vim.git'
-[[plugins]]
-repo = 'thinca/vim-qfreplace'
+# [[plugins]]
+# repo = 'thinca/vim-qfreplace'
 [[plugins]]
 repo = 'szw/vim-tags'
 [[plugins]]
@@ -51,17 +37,17 @@ repo = 'LeafCage/yankround.vim'
 repo = 'tpope/vim-surround'
 [[plugins]]
 repo = 'tpope/vim-endwise'
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-[[plugins]]
-repo = 'mattn/webapi-vim'
-[[plugins]]
-repo = 'Konfekt/FastFold'
-[[plugins]]
-repo = 'terryma/vim-multiple-cursors'
-[[plugins]]
-repo = 'haya14busa/incsearch.vim'
-[[plugins]]
-repo = 'easymotion/vim-easymotion'
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
+# [[plugins]]
+# repo = 'mattn/webapi-vim'
+# [[plugins]]
+# repo = 'Konfekt/FastFold'
+# [[plugins]]
+# repo = 'terryma/vim-multiple-cursors'
+# [[plugins]]
+# repo = 'haya14busa/incsearch.vim'
+# [[plugins]]
+# repo = 'easymotion/vim-easymotion'
+# [[plugins]]
+# repo = 'airblade/vim-gitgutter'
+# [[plugins]]
+# repo = 'tpope/vim-fugitive'
