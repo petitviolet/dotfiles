@@ -7,6 +7,8 @@ export OUTPUT_CHARSET=utf-8
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export DISABLE_AUTO_TITLE=true
 export BAT_CONFIG_PATH=$HOME/.bat.conf
+export XDG_CONFIG_HOME=~/.config
+
 
 #----------------------------------------------------------
 # use coreutils as default
@@ -415,3 +417,4 @@ if [ $commands[aws] ]; then
 fi
 # source ~/.zshrc.plugin
 
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
