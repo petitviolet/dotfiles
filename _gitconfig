@@ -6,6 +6,8 @@
   di = diff --unified=0
   st = status
   co = checkout
+  sw = switch
+  rs = restore
   lp = log --decorate --stat --patch
   graph = log --graph --date=short --format=\"%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset) %C(cyan)@%an%C(reset) %C(auto)%d%C(reset) %s \"
   ls = ls-files
