@@ -72,7 +72,7 @@ autocmd FileType gitcommit :set formatoptions=q
 " Leader
 let mapleader = ","
 " TODOを探す
-noremap <Leader>t :noautocmd vimgrep /TODO/j **/*.rb **/*.js **/*.erb **/*.haml<CR>:cw<CR>
+" noremap <Leader>t :noautocmd vimgrep /TODO/j **/*.rb **/*.js **/*.erb **/*.haml<CR>:cw<CR>
 " TABにて対応ペアにジャンプ
 nnoremap <Tab> %
 vnoremap <Tab> %
@@ -136,9 +136,9 @@ cmap w!! w !sudo tee > /dev/null %
 "-----------------------------------------------------
 " テンプレート関連
 "-----------------------------------------------------
-autocmd BufNewFile *.py -r $HOME/.vim/template/py.txt
-autocmd BufNewFile *.php -r $HOME/.vim/template/php.txt
-autocmd BufNewFile *.rkt -r $HOME/.vim/template/rkt.txt
+" autocmd BufNewFile *.py -r $HOME/.vim/template/py.txt
+" autocmd BufNewFile *.php -r $HOME/.vim/template/php.txt
+" autocmd BufNewFile *.rkt -r $HOME/.vim/template/rkt.txt
 
 "-----------------------------------------------------
 " ファイル操作関連
@@ -245,7 +245,7 @@ set backspace=indent,eol,start
 " 入力されているテキストの最大幅を無効にする
 set textwidth=0
 " ウィンドウの幅より長い行は折り返して、次の行に続けて表示する
-set wrap
+" set wrap
 " 対応括弧に'<'と'>'のペアを追加
 set matchpairs& matchpairs+=<:>
 
@@ -331,7 +331,7 @@ set statusline+=%c    " 何列目にカーソルがあるか
 set statusline+=\   " 空白スペース2個
 " set statusline+=%{b:charCounterCount}
 set statusline+=\|%P\|" ファイル内の何％の位置にあるか
-set statusline+=%{fugitive#statusline()}  " Gitのブランチ名を表示
+" set statusline+=%{fugitive#statusline()}  " Gitのブランチ名を表示
 
 " ステータスラインの色
 highlight StatusLine term=NONE cterm=NONE ctermfg=255 ctermbg=238
@@ -446,6 +446,8 @@ command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <co
 "-----------------------------------------------------
 " プラグイン読み込み
 "-----------------------------------------------------
+
+let $PATH = "~/.pyenv/shims:".$PATH
 
 if exists("$HOME/.vimrc_plugins")
   source $HOME/.vimrc_plugins

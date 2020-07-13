@@ -7,8 +7,8 @@ set background=dark
 highlight clear
 let g:colors_name="nu42dark"
 
-let save_cpo = &cpo
-set cpo&vim
+" let save_cpo = &cpo
+" set cpo&vim
 
 hi Normal guifg=#f7f7f7 guibg=#0f0a1f gui=NONE
             \ ctermfg=white ctermbg=black cterm=NONE

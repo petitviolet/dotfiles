@@ -8,6 +8,19 @@ set nocompatible               " be iMproved
 filetype off                   " required!
 
 "-----------------------------------------------------
+" Python preparation
+"-----------------------------------------------------
+" ~/.pyenv/shims を $PATH に追加する
+" これを行わないとpythonが正しく検索されない
+" call s:IncludePath(expand("~/.pyenv/shims"))
+" let $PATH = "~/.pyenv/shims:".$PATH
+set pyxversion=3
+let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
+" let g:python_host_prog = $PYENV_ROOT . '/shims/python2'
+" set encoding=utf-8
+
+
+"-----------------------------------------------------
 " 文法チェック
 "-----------------------------------------------------
 set makeprg=sbtc\ --exec\ compile
@@ -54,19 +67,18 @@ if !has('nvim')
   call dein#add('roxma/nvim-yarp')
   call dein#add('roxma/vim-hug-neovim-rpc')
 endif
-let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 
 " 起動時にneocompleteを有効にする
-let g:deoplete#enable_at_startup = 1
-imap <expr><Tab> pumvisible() ? "\<DOWN>" : "\<Tab>"
-imap <expr><S-Tab> pumvisible() ? "\<UP>" : "\<S-Tab>"
-let g:neocomplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
+" imap <expr><Tab> pumvisible() ? "\<DOWN>" : "\<Tab>"
+" imap <expr><S-Tab> pumvisible() ? "\<UP>" : "\<S-Tab>"
+" let g:neocomplete#enable_at_startup = 1
 " smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
-let g:deoplete#enable_smart_case = 1
+" let g:deoplete#enable_smart_case = 1
 " 区切り文字まで補完する
-let g:deoplete#enable_auto_delimiter = 1
+" let g:deoplete#enable_auto_delimiter = 1
 " 1文字目の入力から補完のポップアップを表示
-let g:deoplete#auto_completion_start_length = 1
+" let g:deoplete#auto_completion_start_length = 1
 " バックスペースで補完のポップアップを閉じる
 " inoremap <expr><BS> deoplete#smart_close_popup()."<C-h>"
 
@@ -140,9 +152,9 @@ let g:multi_cursor_quit_key='<Esc>'
 "--------------------------------------------------
 " Incsearch
 "--------------------------------------------------
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
 
 "--------------------------------------------------
 " Easymotion
@@ -186,8 +198,8 @@ let g:unite_enable_start_insert=1
 nnoremap [unite] <Nop>
 nmap <space>u [unite]
 nnoremap <silent> [unite]u :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
-nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru<CR>
-nnoremap <silent> [unite]i :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]i :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru<CR>
+nnoremap <silent> [unite]c :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=files buffer_tab<CR>
 nnoremap <silent> [unite]g :<C-u>Unite grep/git<CR>
@@ -209,7 +221,7 @@ function! s:unite_my_settings()
   imap <buffer><expr><C-i> unite#do_action('vsplit')
 endfunction
 
-autocmd BufEnter,BufWinEnter \[unite\]* highlight! link CursorLine PmenuSel
+" autocmd BufEnter,BufWinEnter \[unite\]* highlight! link CursorLine PmenuSel
 autocmd BufLeave \[unite\]* highlight! link CursorLine NONE
 
 "--------------------------------------------------
@@ -237,7 +249,7 @@ nnoremap <Leader>q :call Toggle_quickfix_window()<CR>
 " TagBar
 " tbでIDEっぽくなる
 nmap <space>tb :TagbarToggle<CR>
-autocmd VimEnter * nested :call tagbar#autoopen(1)
+" autocmd VimEnter * nested :call tagbar#autoopen(1)
 
 let g:tagbar_width = 30
 let g:tagbar_autoshowtag = 1
@@ -271,6 +283,9 @@ nmap <silent> <Leader>e :NERDTreeToggle<CR>
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" focus on current buffer file
+map <leader>r :NERDTreeFind<cr>
 
 function s:MoveToFileAtStart()
   call feedkeys("\<C-w>l")
@@ -345,10 +360,6 @@ function s:IncludePath(path)
     let $PATH=a:path.delimiter.$PATH
   endif
 endfunction
-
-" ~/.pyenv/shims を $PATH に追加する
-" これを行わないとpythonが正しく検索されない
-call s:IncludePath(expand("~/.pyenv/shims"))
 
 " エラーチェック
 let g:khuno_ignore="E113,E123,E126,E127,E128,E251,E302,E501,E502"
@@ -433,7 +444,7 @@ let g:user_emmet_settings = {
 " html, css, javascript関係
 "-----------------------------------------------------
 autocmd FileType javascript :compiler gjslint
-autocmd QuickFixCmdPost make copen
+" autocmd QuickFixCmdPost make copen
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 
 "-----------------------------------------------------
@@ -497,11 +508,11 @@ command! -nargs=0 PasteGist     call <sid>paste_gist_tag()
 
 
 " airblade/vim-gitgutter
-nnoremap [gitgutter] <Nop>
-nmap <C-h> [gitgutter]
-nmap [gitgutter]j <Plug>GitGutterNextHunk
-nmap [gitgutter]k <Plug>GitGutterPrevHunk
-nmap [gitgutter]u <Plug>GitGutterUndoHunk
+" nnoremap [gitgutter] <Nop>
+" nmap <C-h> [gitgutter]
+" nmap [gitgutter]j <Plug>GitGutterNextHunk
+" nmap [gitgutter]k <Plug>GitGutterPrevHunk
+" nmap [gitgutter]u <Plug>GitGutterUndoHunk
 
 "-----------------------------------------------------
 " latex
