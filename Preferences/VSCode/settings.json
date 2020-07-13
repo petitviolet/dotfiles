@@ -127,5 +127,9 @@
   "editor.tabCompletion": "on",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "python.pythonPath": "/usr/local/bin/python3",
+  "lldb.libpython": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib",
+  "rust-client.channel": "stable"
+
 }
