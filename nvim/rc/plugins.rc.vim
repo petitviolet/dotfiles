@@ -154,7 +154,7 @@ nnoremap <silent> [unite]i :<C-u>UniteWithCurrentDir -buffer-name=files buffer f
 nnoremap <silent> [unite]c :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=files buffer_tab<CR>
-nnoremap <silent> [unite]g :<C-u>Unite grep/git<CR>
+nnoremap <silent> [unite]g :<C-u>Unite grep/git:/<CR>
 function! s:unite_my_settings()
   " Overwrite settings
   nmap <buffer><ESC> <Plug>(unite_exit)
