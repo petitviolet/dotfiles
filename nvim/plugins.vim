@@ -50,8 +50,8 @@ endif
 " call dein#begin(s:dein_dir)
 
 " プラグインリストを収めた TOML ファイル
-let s:toml      = '~/.vim/rc/dein.toml'
-let s:lazy_toml = '~/.vim/rc/dein_lazy.toml'
+let s:toml      = '~/.config/nvim/rc/dein.toml'
+let s:lazy_toml = '~/.config/nvim/rc/dein_lazy.toml'
 let g:cache_home = empty($XDG_CACHE_HOME) ? expand('$HOME/.cache') : $XDG_CACHE_HOME
 let s:dein_cache = g:cache_home . '/.dein'
 

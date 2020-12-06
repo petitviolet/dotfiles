@@ -181,9 +181,24 @@ repo = 'roxma/nvim-yarp'
 [[plugins]]
 repo = 'superbrothers/vim-quickrun-markdown-gfm'
 on_ft = ['md', 'markdown']
+# [[plugins]]
+# repo = 'tpope/vim-markdown'
+# on_ft = ['md', 'markdown']
+
 [[plugins]]
-repo = 'tpope/vim-markdown'
+repo = 'godlygeek/tabular'
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
 on_ft = ['md', 'markdown']
+
 [[plugins]]
 repo = 'junegunn/vim-easy-align'
 on_cmd = ['EasyAlign']
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+# on_ft = ['rust']
+
+[[plugins]]
+repo = 'udalov/kotlin-vim'
+# on_ft = ['kt', 'kotlin']
