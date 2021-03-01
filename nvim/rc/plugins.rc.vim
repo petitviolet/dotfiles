@@ -472,6 +472,10 @@ command! -nargs=0 PasteGist     call <sid>paste_gist_tag()
 " nmap [gitgutter]k <Plug>GitGutterPrevHunk
 " nmap [gitgutter]u <Plug>GitGutterUndoHunk
 
+" tpope/vim-fugitive
+nmap Gd :Gdiff<CR>
+nmap dg :diffget<CR>
+nmap dp :diffput<CR>
 "-----------------------------------------------------
 " latex
 "-----------------------------------------------------
