@@ -47,7 +47,7 @@ repo = 'tpope/vim-endwise'
 # repo = 'haya14busa/incsearch.vim'
 # [[plugins]]
 # repo = 'easymotion/vim-easymotion'
-# [[plugins]]
-# repo = 'airblade/vim-gitgutter'
-# [[plugins]]
-# repo = 'tpope/vim-fugitive'
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+[[plugins]]
+repo = 'tpope/vim-fugitive'
