@@ -129,7 +129,22 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "python.pythonPath": "/usr/local/bin/python3",
-  "lldb.libpython": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib",
-  "rust-client.channel": "stable"
+  // "lldb.libpython": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib",
+  "lldb.libpython": "/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8/lib/libpython3.8.dylib",
+  "rust-client.channel": "stable",
+  "files.watcherExclude": {
+    "**/.bloop": true,
+    "**/.metals": true,
+    "**/.ammonite": true
+  },
+  "ruby.codeCompletion": "rcodetools",
+  "ruby.lint": {
+  },
+  "solargraph.formatting": true,
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true
+  },
+  "gitlens.mode.active": "zen",
+  "redhat.telemetry.enabled": true
 
 }
