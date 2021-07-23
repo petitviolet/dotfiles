@@ -155,9 +155,6 @@ on_ft = ['ruby']
 repo = 'kannokanno/previm'
 on_cmd = ['Previm']
 [[plugins]]
-repo = 'tyru/open-browser.vim'
-on_cmd = ['Previm']
-[[plugins]]
 repo = "Shougo/vimproc.vim"
 # on_source = ['QuickRun']
 build = 'make'

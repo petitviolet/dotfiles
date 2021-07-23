@@ -38,6 +38,7 @@ set vb t_vb=
 set backspace=indent,eol,start
 " 8進数を10進数として扱う
 set nrformats-=octal
+set nrformats+=alpha
 "ペーストを受け付ける
 " set paste
 " マウスを使える場合はvim内で使用可能にする
@@ -64,6 +65,7 @@ au BufRead,BufNewFile,BufReadPre *zsh*   set filetype=sh
 au BufRead,BufNewFile,BufReadPre *gradle   set filetype=groovy
 au BufRead,BufNewFile,BufReadPre *conf   set filetype=conf
 au BufRead,BufNewFile,BufReadPre *gohtmltmpl   set filetype=html
+au BufRead,BufNewFile,BufReadPre *dig   set filetype=yaml
 autocmd FileType gitcommit :set formatoptions=q
 
 "-----------------------------------------------------
@@ -251,12 +253,11 @@ set matchpairs& matchpairs+=<:>
 
 " 行末の空白をハイライト
 " highlight WhitespaceEOL ctermbg=red guibg=red
-" autocmd WinEnter * match WhitespaceEOL /\s\+$/
-" matc WhitespaceEOL /\s\+$/
 " 行末の空白文字を可視化
-highlight WhitespaceEOL cterm=underline ctermbg=red guibg=#FF0000
+highlight WhitespaceEOL cterm=underline ctermfg=white guifg=#FF0000
 au BufWinEnter * let w:m1 = matchadd("WhitespaceEOL", ' +$')
 au WinEnter * let w:m1 = matchadd("WhitespaceEOL", ' +$')
+" autocmd WinEnter * match WhitespaceEOL /\s\+$/
 
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -275,7 +276,7 @@ function! s:RTrim()
   endif
   call setpos(".", s:cursor)
 endfunction
-autocmd BufWritePre * call <SID>RTrim()
+" autocmd BufWritePre * call <SID>RTrim()
 
 " markdownでsyntaxハイライト
 let g:markdown_fenced_languages = [
