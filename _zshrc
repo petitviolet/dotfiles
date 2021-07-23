@@ -81,6 +81,9 @@ bindkey '^m' do_enter
 # 補完関連
 #----------------------------------------------------------
 # 補完機能を強化
+if [ -e ~/.zsh/completions ]; then
+  fpath=(~/.zsh/completions $fpath)
+fi
 autoload -Uz compinit; compinit -u
 
 # 補完メッセージを読みやすくする
@@ -278,7 +281,10 @@ function history-all { history -E 1 }
 # 右側まで入力が来ら時間を消す
 setopt transient_rprompt
 # プロンプト
-function precmd() {
+autoload -Uz add-zsh-hook
+
+add-zsh-hook precmd prompt_precmd
+function prompt_precmd() {
 # PROMPT="%(?.%F{cyan}.%F{red})%f%F{yello} %~% "
 # やや匿名ver
 # PROMPT="%(?.%F{cyan}.%F{red})%f%F{green}%f%F{yello} %~% "

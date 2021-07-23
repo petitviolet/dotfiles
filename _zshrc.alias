@@ -39,6 +39,7 @@ alias restart-adb='adb kill-server; adb start-server'
 # alias adb='adbp'
 # alias pidcat='pidcatp'
 alias ip="ipconfig getifaddr `netstat -rn -f inet | awk '/^default/{print $6;exit}'`"
+export DOCKER_HOST_IP=$(ip)
 alias today='date +"%Y%m%d"'
 alias now='date +"%Y-%m-%d %H:%M:%S %Z" | tr -d "\n"'
 alias be='bundle exec'
@@ -206,7 +207,7 @@ bindkey '^@' select_cdr
 
 # select file from `tree` and open it with vim
 function tree_select() {
-  tree -N -a --charset=o -f -I '.DS_Store|undodir|.git|.cache|.idea|resolution-cache|target/streams|node_modules|.db/data' | \
+  tree -N -a --charset=o -f -I '.DS_Store|undodir|.git|.cache|.idea|resolution-cache|target/streams|node_modules|.db/data|__pycache__' | \
     fzf --preview 'f() {
       set -- $(echo -- "$@" | grep -o "\./.*$");
       if [ -d $1 ]; then
@@ -637,6 +638,18 @@ function gcloud_ssh() {
 zle -N gcloud_ssh
 bindkey "^gcl" gcloud_ssh
 
+function gcloud_auth_access_token() {
+  if [ -z $GOOGLE_APPLICATION_CREDENTIALS ]; then
+    echo "must set $GOOGLE_APPLICATION_CREDENTIALS" 1>&2
+    return;
+  fi
+  local cache="/var/tmp/gcloud-$(basename $GOOGLE_APPLICATION_CREDENTIALS)-access-token"
+  if [ -z $cache ]; then
+    return;
+  fi
+  read_from_cache $cache $((60 * 50)) "gcloud auth application-default print-access-token"
+}
+
 ##########################################
 # kubernetes commands(kubectl) using peco
 ##########################################
@@ -691,7 +704,7 @@ abbreviations=(
 "S"    "| sed"
 "E"    "2>&1 > /dev/null"
 "N"    "> /dev/null"
-"J"    "| jq -S ."
+"J"    "| jq -S '.'"
 "v"    "vim"
 "gs"   "git status"
 "gco"  "git commit -m"
