@@ -327,8 +327,9 @@ function select_file_from_git_status() {
     }; f {}' |\
       # [ $(echo $@ | grep "??" | wc -l) -eq 0 ] && git diff --color $2 || git diff --color --no-index /dev/null $2 }; f {}' |\
     # peco --query "$LBUFFER" | \
-    awk -F ' ' '{print $NF}' |
-    tr '\n' ' '
+    awk -F ' ' '{print $NF}' | \
+    tr '\n' ' ' | \
+    sed -e 's/\([][]\)/\\\1/g'
 }
 
 # select file to git add
