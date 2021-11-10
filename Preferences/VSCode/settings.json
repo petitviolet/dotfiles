@@ -1,5 +1,5 @@
 {
-  "editor.fontSize": 17,
+  "editor.fontSize": 16,
   "vim.hlsearch": true,
   "vim.useCtrlKeys": true,
   "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-…、。「」【】『』（）！？　てにをはがのともへでや",
@@ -145,6 +145,7 @@
     "suppressLineUncommittedWarning": true
   },
   "gitlens.mode.active": "zen",
-  "redhat.telemetry.enabled": true
+  "redhat.telemetry.enabled": true,
+  "editor.fontFamily": "Ricty, Menlo, Monaco, 'Courier New', monospace"
 
 }
