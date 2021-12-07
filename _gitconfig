@@ -45,6 +45,7 @@
 	smudge = git lfs smudge %f
 	required = true
 [init]
+	defaultBranch = main
 	# templatedir = ~/.git_template
 [pretty]
 	oneline-log = format:%C(red)%ad%Creset %C(green)%h%Creset %C(blue)%<(15,trunc)%an%Creset: %s
