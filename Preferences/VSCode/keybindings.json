@@ -188,5 +188,23 @@
     "key": "shift+cmd+v",
     "command": "-markdown-preview-enhanced.openPreview",
     "when": "editorLangId == 'markdown'"
+  },
+  {
+    "key": "alt+cmd+e",
+    "command": "-rest-client.switch-environment"
+  },
+  {
+    "key": "alt+cmd+e",
+    "command": "workbench.files.action.showActiveFileInExplorer"
+  },
+  {
+    "key": "alt+cmd+r",
+    "command": "workbench.action.debug.continue",
+    "when": "debugState == 'stopped'"
+  },
+  {
+    "key": "f5",
+    "command": "-workbench.action.debug.continue",
+    "when": "debugState == 'stopped'"
   }
 ]

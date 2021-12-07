@@ -146,6 +146,18 @@
   },
   "gitlens.mode.active": "zen",
   "redhat.telemetry.enabled": true,
-  "editor.fontFamily": "Ricty, Menlo, Monaco, 'Courier New', monospace"
+  "editor.fontFamily": "Ricty, Menlo, Monaco, 'Courier New', monospace",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "debug.onTaskErrors": "showErrors",
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "workbench.startupEditor": "none",
+  "explorer.autoReveal": false
 
 }
