@@ -508,7 +508,7 @@ stty -ixon
 bindkey '^s' pet-select
 
 ##########################################
-# GCP commands(gcloud) using peco
+# GCP commands(gcloud) using fzf
 ##########################################
 
 # return true if provided file($1) is older than TTL($2)
@@ -555,10 +555,10 @@ function read_from_cache() {
   cat $cache
 }
 
+GCP_ACTIVE_ACCOUNT_CACHE="/var/tmp/gcloud-active-acount.txt"
 # show active GCP acount
 function gcloud_active_account() {
-  local ACCOUNT_CACHE="/var/tmp/gcloud-active-acount.txt"
-  read_from_cache $ACCOUNT_CACHE $((60 * 60 * 1)) "gcloud auth list --filter=status:ACTIVE --format=\"value(account)\""
+  read_from_cache $GCP_ACTIVE_ACCOUNT_CACHE $((60 * 60 * 1)) "gcloud auth list --filter=status:ACTIVE --format=\"value(account)\""
 }
 
 # configurating active GCP account
@@ -566,17 +566,21 @@ function gcloud_set_account() {
   local ACCOUNT_CACHE="/var/tmp/gcloud-account.txt"
   local accounts=$(read_from_cache $ACCOUNT_CACHE $((60 * 60 * 24)) "gcloud auth list --format='value(account)'")
 
-  local selected=$(echo $accounts | peco)
-  echo "Account =>" $selected
-  gcloud config set account $selected
+  local selected=$(echo $accounts | fzf | tr -d '\n' | sed 's/[^a-zA-Z0-9._@-]//g')
+  echo "Account => $selected"
+  gcloud config set account "$selected"
+  rm $GCP_ACTIVE_ACCOUNT_CACHE > /dev/null 2>&1
+  zle accept-line
 }
+zle -N gcloud_set_account
+bindkey "^gca" gcloud_set_account
 
 # select GCP project from active acount
 function gcloud_select_project() {
   local account=$(gcloud_active_account)
   local PROJECT_CACHE="/var/tmp/gcloud-$account-project.txt"
   local result=$(read_from_cache $PROJECT_CACHE $((60 * 60 * 24)) "gcloud projects list")
-  echo $result | peco | awk '{print $1}'
+  echo $result | fzf --header "Account: ${account}" | awk '{print $1}'
 }
 
 function gcloud_select_project_buffer() {
