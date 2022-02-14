@@ -206,5 +206,41 @@
     "key": "f5",
     "command": "-workbench.action.debug.continue",
     "when": "debugState == 'stopped'"
+  },
+  {
+    "key": "ctrl+5",
+    "command": "editor.emmet.action.matchTag"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "-workbench.action.openRecent"
+  },
+  {
+    "key": "cmd+e",
+    "command": "workbench.action.quickOpenRecent"
+  },
+  {
+    "key": "cmd+e",
+    "command": "workbench.action.openRecent"
+  },
+  {
+    "key": "cmd+n",
+    "command": "explorer.newFile"
+  },
+  {
+    "key": "ctrl+cmd+n",
+    "command": "workbench.action.newWindow"
+  },
+  {
+    "key": "shift+cmd+n",
+    "command": "-workbench.action.newWindow"
+  },
+  {
+    "key": "cmd+n",
+    "command": "-workbench.action.files.newUntitledFile"
+  },
+  {
+    "key": "shift+cmd+n",
+    "command": "explorer.newFolder"
   }
 ]

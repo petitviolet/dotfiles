@@ -75,7 +75,6 @@
   },
   "editor.insertSpaces": true,
   "markdown.preview.fontSize": 20,
-  "window.zoomLevel": 0,
   "markdownlint.run": "onSave",
   "markdown.extension.toc.githubCompatibility": true,
   "workbench.iconTheme": "vs-seti",
@@ -144,7 +143,6 @@
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
   },
-  "gitlens.mode.active": "zen",
   "redhat.telemetry.enabled": true,
   "editor.fontFamily": "Ricty, Menlo, Monaco, 'Courier New', monospace",
   "[typescriptreact]": {
@@ -158,6 +156,24 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "workbench.startupEditor": "none",
-  "explorer.autoReveal": false
-
+  "explorer.autoReveal": false,
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "gitlens.fileAnnotations.command": "blame",
+  "gitlens.currentLine.enabled": false,
+  "gitlens.mode.active": "zen",
+  "cSpell.userWords": [
+    "chakra",
+    "datasources",
+    "idempotency",
+    "petitviolet",
+    "ulid"
+  ],
+  "jestrunner.jestCommand": "npx env-cmd -f env/.env.testLocal jest",
+  "editor.formatOnSave": true,
+  "[graphql]": {
+    "editor.formatOnSave": false
+  },
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 20
 }
