@@ -27,7 +27,7 @@
 [core]
   # autocrlf = true
 	excludesfile = ~/.gitignore_global
-  editor = vim
+	editor = nvim
   quotepath = false
   pager = cat
 [ghq]
