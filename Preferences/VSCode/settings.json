@@ -163,11 +163,16 @@
   "gitlens.currentLine.enabled": false,
   "gitlens.mode.active": "zen",
   "cSpell.userWords": [
+    "Behaviour",
     "chakra",
     "datasources",
+    "dryrun",
+    "firestore",
     "idempotency",
+    "Mirrativ",
     "petitviolet",
-    "ulid"
+    "ulid",
+    "upsert"
   ],
   "jestrunner.jestCommand": "npx env-cmd -f env/.env.testLocal jest",
   "editor.formatOnSave": true,
@@ -175,5 +180,9 @@
     "editor.formatOnSave": false
   },
   "workbench.editor.limit.enabled": true,
-  "workbench.editor.limit.value": 20
+  "workbench.editor.limit.value": 12,
+  "workbench.editor.closeEmptyGroups": false,
+  "omnisharp.useGlobalMono": "always",
+  "omnisharp.useModernNet": false,
+  "omnisharp.monoPath":"/Library/Frameworks/Mono.framework/Versions/Current"
 }
