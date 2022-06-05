@@ -367,7 +367,7 @@ set smartindent
 set encoding=utf-8
 "set encoding=japan
 set termencoding=utf-8
-set fileencoding=utf-8
+" set fileencoding=utf-8
 
 "----------------------------------------------------
 " clipboard
