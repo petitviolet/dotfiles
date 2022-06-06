@@ -94,7 +94,7 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'mattn/vim-lsp-icons'
 
 Plug 'Shougo/unite.vim' ", { 'on': 'Unite' }
-Plug 'Shougo/neomru.vim', { 'on': 'Unite' }
+Plug 'Shougo/neomru.vim' ", { 'on': 'Unite' }
 Plug 'lambdalisue/unite-grep-vcs', { 'on': 'Unite' }
 Plug 'scrooloose/nerdtree' ", { 'on': 'NERDTreeToggle' }
 Plug 'mattn/gist-vim', { 'on': 'Gist' }
@@ -241,10 +241,23 @@ command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('/tmp/vim-ls
 
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
-let g:asyncomplete_auto_popup = 1
+
 let g:asyncomplete_auto_completeopt = 0
+let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_popup_delay = 200
-let g:lsp_text_edit_enabled = 1
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"<buffer>
+set completeopt=menuone,noinsert,noselect,preview
+" let g:lsp_text_edit_enabled = 1
 
 
 "-------------
