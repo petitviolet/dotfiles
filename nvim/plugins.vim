@@ -91,6 +91,7 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-lsp-settings'
+Plug 'mattn/vim-lsp-icons'
 
 Plug 'Shougo/unite.vim' ", { 'on': 'Unite' }
 Plug 'Shougo/neomru.vim', { 'on': 'Unite' }
@@ -221,47 +222,30 @@ inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 let g:asyncomplete_auto_popup = 1
 
 
-" "-----------------------------------------------------
-" " deoplete
-" "-----------------------------------------------------
-" " call dein#add('Shougo/deoplete.nvim')
-" " if !has('nvim')
-" "   call dein#add('roxma/nvim-yarp')
-" "   call dein#add('roxma/vim-hug-neovim-rpc')
-" " endif
-" 
-" " 起動時にneocompleteを有効にする
-" let g:deoplete#enable_at_startup = 0
-" imap <expr><Tab> pumvisible() ? "\<DOWN>" : "\<Tab>"
-" imap <expr><S-Tab> pumvisible() ? "\<UP>" : "\<S-Tab>"
-" " smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
-" " let g:deoplete#enable_smart_case = 1
-" " 区切り文字まで補完する
-" let g:deoplete#enable_auto_delimiter = 1
-" " 1文字目の入力から補完のポップアップを表示
-" let g:deoplete#auto_completion_start_length = 1
-" " バックスペースで補完のポップアップを閉じる
-" inoremap <expr><BS> deoplete#smart_close_popup()."<C-h>"
-" 
-" " " Plugin key-mappings.
-" " imap <C-l> <Plug>(neosnippet_expand_or_jump)
-" " smap <C-l> <Plug>(neosnippet_expand_or_jump)
-" " xmap <C-l> <Plug>(neosnippet_expand_target)
-" "
-" " " SuperTab like snippets behavior.
-" " imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-" " \ "\<Plug>(neosnippet_expand_or_jump)"
-" " \: pumvisible() ? "\<C-n>" : "\<TAB>"
-" " smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-" " \ "\<Plug>(neosnippet_expand_or_jump)"
-" " \: "\<TAB>"
-" "
-" " For snippet_complete marker.
-" if has('conceal')
-"   " set conceallevel=2 concealcursor=i
-"   set conceallevel=0
-" endif
-" 
+"-----------------------------------------------------
+" lsp
+"-----------------------------------------------------
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> <f2> <plug>(lsp-rename)
+  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('/tmp/vim-lsp.log')
+
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 0
+let g:asyncomplete_popup_delay = 200
+let g:lsp_text_edit_enabled = 1
+
 
 "-------------
 " multiple-cursor with neocomplete
