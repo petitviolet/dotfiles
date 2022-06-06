@@ -119,7 +119,7 @@ nnoremap j gj
 nnoremap k gk
 nnoremap <space><space> :<C-u>edit ~/.config/nvim/init.vim<CR>
 nnoremap <space>s :<C-u>source ~/.config/nvim/init.vim<CR>
-nnoremap <space>p :<C-u>edit ~/.config/nvim/rc/plugins.rc.vim<CR>
+nnoremap <space>p :<C-u>edit ~/.config/nvim/plugins.vim<CR>
 " nnoremap ; :
 " nnoremap : ;
 
