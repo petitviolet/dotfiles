@@ -42,9 +42,12 @@ alias restart-adb='adb kill-server; adb start-server'
 # export DOCKER_HOST_IP=$(ip)
 alias today='date +"%Y%m%d"'
 alias now='date +"%Y-%m-%d %H:%M:%S %Z" | tr -d "\n"'
+alias unixtime='date +%s | tr -d "\n"'
 alias be='bundle exec'
 alias browse='open -a Vivaldi'
 alias curl='curl -sS' # -A"petitviolet curl"'
+alias tf='terraform'
+alias n='npm'
 
 function mas-install {
   mas search $1 | head -n 1 | cut -d' ' -f 1 | xargs -I{} mas install {}
@@ -290,6 +293,19 @@ function adb_locat_app() {
 function select_kill() {
   local selected=$(ps aux | peco)
   if [ -n "$selected" ]; then
+    echo "kill target: [$selected]" >&2
+    local pid=$(echo $selected | awk '{ print $2 }')
+    LBUFFER="kill $pid"
+    CURSOR=$#LBUFFER
+    # zle accept-line
+  fi
+}
+zle -N select_kill
+bindkey "^xp" select_kill
+
+function select_lsof_kill() {
+  local selected=$(lsof -i | fzf)
+  if [ -n "$selected" ]; then
     echo "kill target: [$selected]"
     local pid=$(echo $selected | awk '{ print $2 }')
     BUFFER="kill $pid"
@@ -297,7 +313,7 @@ function select_kill() {
   fi
 }
 zle -N select_kill
-bindkey "^xp" select_kill
+bindkey "^xl" select_kill
 
 ##########################################
 # Git commands using peco/fzf
@@ -327,7 +343,7 @@ function select_file_from_git_status() {
     }; f {}' |\
       # [ $(echo $@ | grep "??" | wc -l) -eq 0 ] && git diff --color $2 || git diff --color --no-index /dev/null $2 }; f {}' |\
     # peco --query "$LBUFFER" | \
-    awk -F ' ' '{print $NF}' | \
+    awk -F ' ' '{ for(i=2;i<NF;i++){printf("\"%s\" ", $i)} print "\x27"$NF"\x27" }' | \
     tr '\n' ' ' | \
     sed -e 's/\([][]\)/\\\1/g'
 }

@@ -99,7 +99,7 @@ Plug 'lambdalisue/unite-grep-vcs', { 'on': 'Unite' }
 Plug 'scrooloose/nerdtree' ", { 'on': 'NERDTreeToggle' }
 Plug 'mattn/gist-vim', { 'on': 'Gist' }
 Plug 'thinca/vim-quickrun', { 'on': 'QuickRun' }
-Plug 'Shougo/vimproc.vim', { 'on': 'QuickRun', 'build': 'make' }
+Plug 'Shougo/vimproc.vim' ", { 'on': 'QuickRun', 'build': 'make' }
 Plug 'kannokanno/previm', { 'on': 'Previm' }
 
 " Language specific plugins

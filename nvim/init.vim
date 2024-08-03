@@ -128,7 +128,8 @@ noremap p "0p
 noremap P "0P
 vnoremap <sirent> p "0p
 
-" 入力モード中に素早くjjと入力した場合はESCとみなす
+" Ctrl-cでescと同じ動き
+" inoremap <c-c> <esc>  
 " 入力モード中に素早く;;と入力した場合はESCとみなす
 " inoremap  ;;  <Esc>
 

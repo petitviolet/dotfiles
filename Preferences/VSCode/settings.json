@@ -66,12 +66,14 @@
       ]
     }
   ],
-  "zenMode.hideTabs": false,
-  "editor.minimap.enabled": false,
-  "editor.tabSize": 2,
+"editor.minimap.enabled": false,
   "[markdown]": {
     "editor.tabSize": 4,
-    "editor.quickSuggestions": true
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
   },
   "editor.insertSpaces": true,
   "markdown.preview.fontSize": 20,
@@ -103,8 +105,7 @@
     "lists": {
       "indent": 2
     }
-  },
-  "editor.detectIndentation": false,
+},
   "[jsonc]": {
     "editor.defaultFormatter": "HookyQR.beautify"
   },
@@ -122,10 +123,20 @@
   "solargraph.definitions": true,
   "solargraph.diagnostics": true,
   "files.autoSave": "onWindowChange",
-  "editor.multiCursorModifier": "alt",
   "editor.tabCompletion": "on",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    // "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    // "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "python.pythonPath": "/usr/local/bin/python3",
   // "lldb.libpython": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib",
@@ -145,34 +156,36 @@
   },
   "redhat.telemetry.enabled": true,
   "editor.fontFamily": "Ricty, Menlo, Monaco, 'Courier New', monospace",
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "debug.onTaskErrors": "showErrors",
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
   "workbench.startupEditor": "none",
   "explorer.autoReveal": false,
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.fileAnnotations.command": "blame",
   "gitlens.currentLine.enabled": false,
-  "gitlens.mode.active": "zen",
   "cSpell.userWords": [
     "Behaviour",
     "chakra",
     "datasources",
+    "datetime",
+    "Debugf",
     "dryrun",
     "firestore",
+    "gacha",
+    "giftrecord",
     "idempotency",
+    "liff",
+    "Millis",
     "Mirrativ",
+    "mypage",
     "petitviolet",
+    "savedata",
+    "Scriptable",
+    "Timeslot",
+    "trpc",
     "ulid",
-    "upsert"
+    "upsert",
+    "Usecase"
   ],
   "jestrunner.jestCommand": "npx env-cmd -f env/.env.testLocal jest",
   "editor.formatOnSave": true,
@@ -180,9 +193,46 @@
     "editor.formatOnSave": false
   },
   "workbench.editor.limit.enabled": true,
-  "workbench.editor.limit.value": 12,
+  "workbench.editor.limit.value": 60,
   "workbench.editor.closeEmptyGroups": false,
   "omnisharp.useGlobalMono": "always",
+  "files.insertFinalNewline": true,
+  "plantuml.java": "/opt/homebrew/opt/openjdk/bin/java",
+  "plantuml.render": "Local",
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true,
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
+  },
+  "prettier.requireConfig": true,
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+  "go.enableCodeLens": {},
+  "go.goroot": "/Users/petitviolet/.anyenv/envs/goenv/versions/1.19.0",
+  "editor.tabSize": 2,
+  "go.toolsManagement.autoUpdate": true,
   "omnisharp.useModernNet": false,
-  "omnisharp.monoPath":"/Library/Frameworks/Mono.framework/Versions/Current"
+  "git.openRepositoryInParentFolders": "always",
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.advanced": {
+  
+  },
+  "explorer.openEditors.visible": 20,
+  "git.ignoreRebaseWarning": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
+  "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "prisma.showPrismaDataPlatformNotification": false,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "update.showReleaseNotes": false
 }

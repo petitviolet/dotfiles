@@ -8,6 +8,17 @@ export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export DISABLE_AUTO_TITLE=true
 export BAT_CONFIG_PATH=$HOME/.bat.conf
 export XDG_CONFIG_HOME=~/.config
+export AWS_PAGER=""
+export CLICOLOR=1
+
+export PATH=/usr/local/bin:$PATH
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
+export EDITOR=vim
+# export HOMEBREW_CELLAR="/usr/local/Cellar"
+
+
 
 
 #----------------------------------------------------------
@@ -345,10 +356,10 @@ bindkey '^x^p' pbcopy-buffer
 if [ -d $HOME/.anyenv ] ; then
   export PATH="$HOME/.anyenv/bin:$PATH"
   eval "$(anyenv init - zsh)"
-  # for D in `ls $HOME/.anyenv/envs`
-  # do
-  #   export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
-  # done
+  for D in `ls $HOME/.anyenv/envs`
+  do
+    export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+  done
 fi
 
 #----------------------------------------------------------
@@ -408,13 +419,15 @@ if [ $commands[aws] ]; then
 
   # Placeholder 'aws' shell function:
   # Will only be executed on the first call to 'aws'
+
   aws() {
 
     # Remove this function, subsequent calls will execute 'aws' directly
     unfunction "$0"
 
     # Load completion
-    source /usr/local/bin/aws_zsh_completer.sh
+    complete -C "$(which aws_completer)" aws
+    # source /usr/local/bin/aws_zsh_completer
     # echo 'loaded aws completion' >&2
 
     # Execute 'aws' binary
