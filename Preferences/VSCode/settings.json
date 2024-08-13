@@ -234,5 +234,9 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "prisma.showPrismaDataPlatformNotification": false,
   "github.copilot.editor.enableAutoCompletions": true,
-  "update.showReleaseNotes": false
+  "update.showReleaseNotes": false,
+    "workbench.editor.customLabels.patterns": {
+    "**/index.*": "${dirname} .../${dirname(1)}",
+    "**/{page,layout,template,route,actions,hooks,components,utils,types}.{js,ts,jsx,tsx}": "${dirname}/${filename}.${extname} .../${dirname(1)}",
+  }
 }
