@@ -619,6 +619,18 @@ function gcloud_set_project() {
 zle -N gcloud_set_project
 bindkey "^gcs" gcloud_set_project
 
+function gcloud_activate_configurations() {
+  local configuration=$(gcloud config configurations list | fzf | awk '{print $1}')
+  if [ -z $configuration ]; then
+    return;
+  fi
+  echo "activate configuration ${configuration}"
+  LBUFFER="gcloud config configurations activate ${configuration}"
+  zle accept-line
+}
+zle -N gcloud_activate_configurations
+bindkey "^gcc" gcloud_activate_configurations
+
 # select GCP instance with selecting project from active account
 function gcloud_compute_instance() {
   local account=$(gcloud_active_account)
