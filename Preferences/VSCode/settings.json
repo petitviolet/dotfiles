@@ -129,11 +129,21 @@
   },
   "[typescriptreact]": {
     // "editor.defaultFormatter": "vscode.typescript-language-features"
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always"
+    },
+    "editor.formatOnSave": true
   },
   "[typescript]": {
     // "editor.defaultFormatter": "vscode.typescript-language-features"
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always"
+    },
+    "editor.formatOnSave": false
   },
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
@@ -238,5 +248,32 @@
     "workbench.editor.customLabels.patterns": {
     "**/index.*": "${dirname} .../${dirname(1)}",
     "**/{page,layout,template,route,actions,hooks,components,utils,types}.{js,ts,jsx,tsx}": "${dirname}/${filename}.${extname} .../${dirname(1)}",
+  },
+  "githubPullRequests.pullBranch": "never",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.pasteAs.showPasteSelector": "never",
+  "json.schemas": [
+    
+  ],
+  "github.copilot.chat.temporalContext.enabled": true,
+  "eslint.useFlatConfig": true,
+  "gitlens.mode.active": "review",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "github.copilot.chat.localeOverride": "ja",
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
   }
 }

@@ -17,13 +17,13 @@
 "色設定
 " let g:solarized_termcolors=256
 " colorscheme solarized
-" set background=dark
+set background=dark
 " colorscheme earendel
 " colorscheme nu42dark
 " colorscheme jellybeans
 " colorscheme inkpot
-" colorscheme molokai
-colorscheme hybrid
+colorscheme molokai
+" colorscheme hybrid
 " colorscheme mydark
 set t_Co=256
 " viとの互換性をとらない(vimの拡張機能を使うため）
@@ -147,7 +147,7 @@ cmap w!! w !sudo tee > /dev/null %
 " ファイル操作関連
 "-----------------------------------------------------
 " Exploreでカレントディレクトリを開く
-set browsedir=current
+" set browsedir=current
 
 "-----------------------------------------------------
 " バックアップ関連
@@ -367,7 +367,7 @@ set smartindent
 " fileencodingsの設定ではencodingの値を一番最後に記述する
 set encoding=utf-8
 "set encoding=japan
-set termencoding=utf-8
+" set termencoding=utf-8
 " set fileencoding=utf-8
 
 "----------------------------------------------------

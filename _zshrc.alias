@@ -304,16 +304,25 @@ zle -N select_kill
 bindkey "^xp" select_kill
 
 function select_lsof_kill() {
-  local selected=$(lsof -i | fzf)
+  # netstat で LISTEN しているプロセスを取得して fzf で選択
+  local selected=$(netstat -anv -p tcp | ag LISTEN | fzf --header="Select process to kill")
   if [ -n "$selected" ]; then
-    echo "kill target: [$selected]"
-    local pid=$(echo $selected | awk '{ print $2 }')
-    BUFFER="kill $pid"
-    zle accept-line
+    echo "Selected: [$selected]"
+    # netstat の出力から PID を抽出（ macOS の場合、 PID は最後のフィールド）
+    local pid=$(echo $selected | awk '{print $9}')
+    # PID が数値かチェック
+    if [[ "$pid" =~ ^[0-9]+$ ]]; then
+      echo "kill target PID: $pid"
+      BUFFER="kill $pid"
+      zle accept-line
+    else
+      echo "Could not extract PID from selection"
+      return 1
+    fi
   fi
 }
-zle -N select_kill
-bindkey "^xl" select_kill
+zle -N select_lsof_kill
+bindkey "^xl" select_lsof_kill
 
 ##########################################
 # Git commands using peco/fzf
