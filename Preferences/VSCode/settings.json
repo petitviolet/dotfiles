@@ -255,7 +255,6 @@
   "json.schemas": [
     
   ],
-  "github.copilot.chat.temporalContext.enabled": true,
   "eslint.useFlatConfig": true,
   "gitlens.mode.active": "review",
   "gitlens.ai.model": "vscode",
@@ -275,5 +274,7 @@
   },
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+  "github.copilot.chat.editor.temporalContext.enabled": true,
+  "workbench.colorTheme": "Visual Studio Dark"
 }

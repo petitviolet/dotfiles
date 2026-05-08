@@ -304,16 +304,15 @@ zle -N select_kill
 bindkey "^xp" select_kill
 
 function select_lsof_kill() {
-  # netstat で LISTEN しているプロセスを取得して fzf で選択
-  local selected=$(netstat -anv -p tcp | ag LISTEN | fzf --header="Select process to kill")
+  local selected=$(lsof -iTCP -sTCP:LISTEN -P | fzf --header="Select port number to search process to kill" -m | awk '{print $2}')
+  # local selected=$(netstat -anv -p tcp | ag LISTEN | fzf --header="Select process to kill")
   if [ -n "$selected" ]; then
     echo "Selected: [$selected]"
     # netstat の出力から PID を抽出（ macOS の場合、 PID は最後のフィールド）
-    local pid=$(echo $selected | awk '{print $9}')
     # PID が数値かチェック
-    if [[ "$pid" =~ ^[0-9]+$ ]]; then
-      echo "kill target PID: $pid"
-      BUFFER="kill $pid"
+    if [[ "$selected" =~ ^[0-9]+$ ]]; then
+      echo "kill target PID: $selected"
+      BUFFER="kill $selected"
       zle accept-line
     else
       echo "Could not extract PID from selection"
@@ -338,17 +337,24 @@ export FZF_DEFAULT_OPTS="--no-sort --exact --cycle --multi --ansi --reverse --bo
 function select_file_from_git_status() {
   git status -u --short | \
     fzf -m --ansi --reverse --preview 'f() {
-      local original=$@
+      local original="$1"
       set -- $(echo "$@");
-      if [ $(echo $original | grep -E "^M" | wc -l) -eq 1 ]; then # staged
-        git diff --color --cached $2
-      elif [ $(echo $original | grep -E "^\?\?" | wc -l) -eq 0 ]; then # unstaged
-        git diff --color $2
-      elif [ -d $2 ]; then # directory
-        ls -la --color=always $2
-      else
-        git diff --color --no-index /dev/null $2 # untracked
-      fi
+      local file="$2"
+      case "$original" in
+        "?"*) # untracked
+          if [ -d "$file" ]; then
+            ls -la --color=always "$file"
+          else
+            git diff --color --no-index /dev/null "$file"
+          fi
+          ;;
+        " "*) # unstaged only
+          git diff --color "$file"
+          ;;
+        *) # staged (M/A/D/R/C/U in column 1)
+          git diff --color --cached "$file"
+          ;;
+      esac
     }; f {}' |\
       # [ $(echo $@ | grep "??" | wc -l) -eq 0 ] && git diff --color $2 || git diff --color --no-index /dev/null $2 }; f {}' |\
     # peco --query "$LBUFFER" | \
@@ -414,7 +420,7 @@ bindkey "^gco" select_git_checkout
 function select_git_diff() {
     local SELECTED_FILE_TO_DIFF="$(select_file_from_git_status)"
     if [ -n "$SELECTED_FILE_TO_DIFF" ]; then
-      BUFFER="git diff $(echo "$SELECTED_FILE_TO_DIFF" | tr '\n' ' ')"
+      BUFFER="git diff HEAD $(echo "$SELECTED_FILE_TO_DIFF" | tr '\n' ' ')"
       CURSOR=$#BUFFER
     fi
     zle accept-line
@@ -444,7 +450,7 @@ function select_git_hash() {
   git log --color=always --date=short --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset) %C(cyan)@%an%C(reset) %C(auto)%d%C(reset) %s" | \
     fzf --preview-window=down:wrap --preview 'f() {
       set -- $(echo "$@");
-      git show --color=always $1
+      git show --color=always $1 | delta --line-numbers --paging=never
     }; f {}' | \
     awk -F' ' '{ print $1 }' | \
     tr '\n' ' '
