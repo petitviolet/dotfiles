@@ -1,0 +1,156 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  // ===== 既存 (タブ移動: cmd-[/cmd-]) =====
+  {
+    "context": "(VimControl && !menu) || (!Editor && !Terminal)",
+    "bindings": {
+      "cmd-]": "vim::GoToTab",
+      "cmd-[": "vim::GoToPreviousTab"
+    }
+  },
+  {
+    "context": "(VimControl && !menu) || (!Editor && !Terminal)",
+    "unbind": {
+      "g t": "vim::GoToTab",
+      "g shift-t": "vim::GoToPreviousTab"
+    }
+  },
+
+  // ===== Group A: Emacs風カーソル/編集 (insert mode 限定) =====
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-e": [
+        "editor::MoveToEndOfLine",
+        {
+          "stop_at_soft_wraps": false
+        }
+      ]
+    }
+  },
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "ctrl-a": "editor::MoveToBeginningOfLine",
+      "ctrl-f": "editor::MoveRight",
+      "ctrl-b": "editor::MoveLeft",
+      "ctrl-j": "editor::Newline",
+      "ctrl-w": "editor::DeleteToPreviousWordStart",
+      "ctrl-d": "editor::Delete",
+      "ctrl-k": "editor::CutToEndOfLine",
+      "shift-space": "editor::ShowCompletions"
+    }
+  },
+  {
+    "context": "vim_mode == insert",
+    "unbind": {
+      "ctrl-x ctrl-o": "editor::ShowCompletions"
+    }
+  },
+
+  // ===== Group B: 履歴ナビゲーション =====
+  {
+    "context": "Pane",
+    "bindings": {
+      "shift-cmd-[": "pane::GoBack",
+      "shift-cmd-]": "pane::GoForward"
+    }
+  },
+
+  // ===== Group C: ペイン管理 =====
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-cmd-]": "workspace::ActivateNextPane",
+      "alt-cmd-[": "workspace::ActivatePreviousPane",
+      "ctrl-1": ["workspace::ActivatePane", 0],
+      "ctrl-2": "terminal_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "ctrl-cmd-right": "pane::SplitAndMoveRight",
+      "ctrl-cmd-left": "pane::SplitAndMoveLeft"
+    }
+  },
+
+  // ===== Group D: LSP / コード補助 =====
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-p": "editor::Hover",
+      "ctrl-shift-i": "editor::ShowSignatureHelp",
+      "alt-cmd-i": "editor::GoToImplementation"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "cmd-2": "editor::GoToDefinition"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "unbind": {
+      "g d": "editor::GoToDefinition"
+    }
+  },
+
+  // ===== Group E: ファイル/ウィンドウ =====
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-cmd-e": "pane::RevealInProjectPanel"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-e": "projects::OpenRecent",
+      "ctrl-cmd-n": "workspace::NewWindow"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-n": "workspace::NewFile"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "cmd-n": "project_panel::NewFile",
+      "shift-cmd-n": "project_panel::NewDirectory"
+    }
+  },
+
+  // ===== Group F: Markdown プレビュー =====
+  {
+    "context": "Editor && extension == md",
+    "bindings": {
+      "ctrl-shift-m": "markdown::OpenPreview",
+      "ctrl-shift-cmd-m": "markdown::OpenPreviewToTheSide"
+    }
+  },
+
+  // ===== 既存 OutlinePanel =====
+  {
+    "context": "OutlinePanel && not_editing",
+    "bindings": {
+      "ctrl-1": "editor::ToggleFocus"
+    }
+  },
+  {
+    "context": "OutlinePanel && not_editing",
+    "unbind": {
+      "enter": "editor::ToggleFocus"
+    }
+  }
+]
