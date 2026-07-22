@@ -479,6 +479,27 @@ function insert_selected_git_stash(){
 zle -N insert_selected_git_stash
 bindkey "^gs" insert_selected_git_stash
 
+function select_git_worktree() {
+  local selected=$(git worktree list | \
+    fzf --preview 'f() {
+      set -- $(echo -- "$@");
+      [ -d "$1" ] && ls -lFG --color=always "$1"
+    }; f {}' | \
+    awk '{print $1}' | \
+    tr -d '\n')
+  echo $selected
+}
+
+function cd_git_worktree() {
+  local selected_worktree=$(select_git_worktree)
+  if [[ -n $selected_worktree ]]; then
+    BUFFER="cd $selected_worktree"
+    zle accept-line
+  fi
+}
+zle -N cd_git_worktree
+bindkey "^g^w" cd_git_worktree
+
 function git_grep_list() {
   local selected=$(git grep "" | \
     fzf --preview-window=down:wrap --preview 'f() {
