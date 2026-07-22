@@ -24,8 +24,8 @@ rename_workspace = "prefix+$"         # tmux: $ rename-session (workspace 改名
 detach = "prefix+ctrl+d"              # tmux: ^D detach
 
 # --- agent 間の遷移 ---
-previous_agent = "prefix+["           # 前の agent へ
-next_agent = "prefix+]"               # 次の agent へ
+previous_agent = "prefix+{"           # 前の agent へ ([ は copy モードと競合するため {)
+next_agent = "prefix+}"               # 次の agent へ (] は copy モードと競合するため })
 
 # --- Git worktree (Herdr の子 workspace として管理) ---
 open_worktree = "prefix+g"            # 既存 worktree 一覧から開く/フォーカス
@@ -108,3 +108,30 @@ key = "prefix+v"
 command = "equalize-panes.equalize-widths"
 type = "plugin_action"
 description = "横分割の幅を均等化 (tmux even-horizontal 相当)"
+
+# --- swap-pane プラグイン (pane 入れ替え、tmux swap-pane 相当) ---
+# 実体: ~/.ghq/github.com/petitviolet/herdr-plugins/swap-pane (herdr plugin link 済み)
+# pane 移動(focus)が prefix+ctrl+h/j/k/l なので、入れ替えは prefix+shift+h/j/k/l
+[[keys.command]]
+key = "prefix+shift+h"
+command = "swap-pane.swap-left"
+type = "plugin_action"
+description = "左隣の pane と入れ替え"
+
+[[keys.command]]
+key = "prefix+shift+j"
+command = "swap-pane.swap-down"
+type = "plugin_action"
+description = "下隣の pane と入れ替え"
+
+[[keys.command]]
+key = "prefix+shift+k"
+command = "swap-pane.swap-up"
+type = "plugin_action"
+description = "上隣の pane と入れ替え"
+
+[[keys.command]]
+key = "prefix+shift+l"
+command = "swap-pane.swap-right"
+type = "plugin_action"
+description = "右隣の pane と入れ替え"
