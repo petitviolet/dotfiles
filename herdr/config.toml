@@ -1,0 +1,96 @@
+# Herdr 設定ファイル (~/.config/herdr/config.toml)
+#
+# ~/.tmux.conf のキーバインドに準拠した設定。
+# 反映: `herdr server reload-config` または全体メニューの reload config。
+#
+# tmux と Herdr の階層対応:
+#   tmux session -> Herdr workspace  (プロジェクト単位のまとまり)
+#   tmux window  -> Herdr tab        (workspace 内のレイアウト)
+#   tmux pane    -> Herdr pane        (実際のターミナル)
+#
+# キー構文: "prefix+x" = prefix を押してから x。prefix は下の prefix=。
+#           複数割当は配列で ["prefix+n", "prefix+space"]。
+
+[keys]
+# prefix キー (~/.tmux.conf の `set -g prefix ^j` に合わせる)
+prefix = "ctrl+j"
+
+# --- tmux session -> Herdr workspace ---
+workspace_picker = "prefix+shift+8"   # tmux: * list-clients (workspace 一覧)
+new_workspace = "prefix+shift+n"      # workspace 新規作成 (tmux 既定なし/herdr 標準)
+previous_workspace = "prefix+("       # tmux: ( switch-client -p (前の workspace)
+next_workspace = "prefix+)"           # tmux: ) switch-client -n (次の workspace)
+rename_workspace = "prefix+$"         # tmux: $ rename-session (workspace 改名)
+detach = "prefix+ctrl+d"              # tmux: ^D detach
+
+# --- agent 間の遷移 ---
+previous_agent = "prefix+["           # 前の agent へ
+next_agent = "prefix+]"               # 次の agent へ
+
+# --- Git worktree (Herdr の子 workspace として管理) ---
+open_worktree = "prefix+g"            # 既存 worktree 一覧から開く/フォーカス
+new_worktree = "prefix+shift+g"       # ブランチ指定で worktree 作成して開く
+remove_worktree = "prefix+alt+g"      # git worktree remove (確認あり)
+
+# --- tmux window -> Herdr tab ---
+new_tab = ["prefix+c", "prefix+ctrl+c"]          # tmux: c / ^C new-window (tab 新規作成)
+rename_tab = ["prefix+shift+a", "prefix+comma"]  # tmux: A / , rename-window
+next_tab = ["prefix+n", "prefix+space"]          # tmux: n / space / ^N next-window
+previous_tab = ["prefix+p", "prefix+backspace"]  # tmux: p / BSpace previous-window
+switch_tab = "prefix+1..9"                        # tmux: 数字で tab 直接選択
+close_tab = ""                                    # 組込みを無効化 -> confirm-close プラグインへ (prefix+k)
+goto = "prefix+w"                                 # tmux: w list-windows (tab 一覧)
+reload_config = "prefix+r"                        # tmux: r source-file (設定再読込)
+
+# --- tmux pane -> Herdr pane ---
+# pane を作る = 分割:
+split_horizontal = ["prefix+double_quote", "prefix+backslash", "prefix+minus"]  # tmux: " / \ / - -> 上下に分割
+split_vertical = ["prefix+percent", "prefix+|"]                # tmux: % / | -> 左右に分割
+# pane 間の移動:
+focus_pane_left = "prefix+ctrl+h"          # tmux: ^h select-pane -L (左)
+focus_pane_down = "prefix+j"               # tmux: ^j 相当。prefix(=ctrl+j)二重押し不可のため plain j
+focus_pane_up = "prefix+ctrl+k"            # tmux: ^k select-pane -U (上)
+focus_pane_right = "prefix+ctrl+l"         # tmux: ^l select-pane -R (右)
+cycle_pane_previous = "prefix+tab"         # tmux: Tab  select-pane :.- (前の pane へ巡回)
+cycle_pane_next = "prefix+shift+tab"       # tmux: BTab select-pane :.+ (次の pane へ巡回)
+# pane を閉じる (confirm-close プラグインで確認を挟む):
+close_pane = ""                            # 組込みを無効化 -> confirm-close プラグインへ (prefix+x)
+# pane リサイズモード (入った後 hjkl/矢印で調整、esc で終了)
+resize_mode = "prefix+shift+r"             # tmux の r は reload に使用のため shift+r
+
+# 注: select-layout(v/h)・synchronize-panes(s)・last-window(^A) は
+#     Herdr に対応アクションが無いため未割当。
+
+[terminal]
+# 新しい pane/tab/workspace の作業ディレクトリは元 pane を引き継ぐ
+new_cwd = "follow"
+
+[ui]
+# マウス操作を有効化 (境界ドラッグや右クリックメニューでも分割/操作可能)
+mouse_capture = true
+# tab 作成時に名前入力を求めず、自動生成名で即座に作成 (prefix+c)
+prompt_new_tab_name = false
+# workspace を閉じる前に確認ダイアログを表示 (デフォルトも true だが明示)
+confirm_close = true
+
+[session]
+# サーバー再起動後に AI エージェント pane を元の会話セッションへ復元
+resume_agents_on_restore = true
+
+[experimental]
+# サーバー再起動をまたいで pane の画面履歴を保持
+pane_history = true
+
+# --- confirm-close プラグイン (pane/tab の close 前に y/n 確認) ---
+# 実体: ~/.ghq/github.com/petitviolet/herdr-plugins/confirm-close (herdr plugin link 済み)
+[[keys.command]]
+key = "prefix+x"
+command = "confirm-close.confirm-close-pane"
+type = "plugin_action"
+description = "Close pane (with confirmation)"
+
+[[keys.command]]
+key = "prefix+k"
+command = "confirm-close.confirm-close-tab"
+type = "plugin_action"
+description = "Close tab (with confirmation)"
