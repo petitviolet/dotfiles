@@ -94,3 +94,17 @@ key = "prefix+k"
 command = "confirm-close.confirm-close-tab"
 type = "plugin_action"
 description = "Close tab (with confirmation)"
+
+# --- equalize-panes プラグイン (pane サイズ均等化) ---
+# 実体: ~/.ghq/github.com/petitviolet/herdr-plugins/equalize-panes (herdr plugin link 済み)
+[[keys.command]]
+key = "prefix+h"
+command = "equalize-panes.equalize-heights"
+type = "plugin_action"
+description = "縦分割の高さを均等化 (tmux even-vertical 相当)"
+
+[[keys.command]]
+key = "prefix+v"
+command = "equalize-panes.equalize-widths"
+type = "plugin_action"
+description = "横分割の幅を均等化 (tmux even-horizontal 相当)"
