@@ -47,10 +47,12 @@ reload_config = "prefix+r"                        # tmux: r source-file (設定�
 split_horizontal = ["prefix+double_quote", "prefix+backslash", "prefix+minus"]  # tmux: " / \ / - -> 上下に分割
 split_vertical = ["prefix+percent", "prefix+|"]                # tmux: % / | -> 左右に分割
 # pane 間の移動:
-focus_pane_left = "prefix+ctrl+h"          # tmux: ^h select-pane -L (左)
-focus_pane_down = "prefix+j"               # tmux: ^j 相当。prefix(=ctrl+j)二重押し不可のため plain j
-focus_pane_up = "prefix+ctrl+k"            # tmux: ^k select-pane -U (上)
-focus_pane_right = "prefix+ctrl+l"         # tmux: ^l select-pane -R (右)
+# 移動時にズーム(prefix+z)を解除するため focus-unzoom プラグインへ委譲(組込みは無効化)。
+# キーは下の [[keys.command]] で prefix+ctrl+h/k/l と prefix+j に割当。
+focus_pane_left = ""                       # -> focus-unzoom (prefix+ctrl+h)
+focus_pane_down = ""                       # -> focus-unzoom (prefix+j)
+focus_pane_up = ""                         # -> focus-unzoom (prefix+ctrl+k)
+focus_pane_right = ""                      # -> focus-unzoom (prefix+ctrl+l)
 cycle_pane_previous = "prefix+tab"         # tmux: Tab  select-pane :.- (前の pane へ巡回)
 cycle_pane_next = "prefix+shift+tab"       # tmux: BTab select-pane :.+ (次の pane へ巡回)
 # pane を閉じる (confirm-close プラグインで確認を挟む):
@@ -80,6 +82,10 @@ resume_agents_on_restore = true
 [experimental]
 # サーバー再起動をまたいで pane の画面履歴を保持
 pane_history = true
+# Kitty graphics プロトコルによるローカル画像描画。
+# これを有効化するとローカルで Ctrl+V のクリップボード画像貼り付けが通る(herdr issue #205)。
+# 外側ターミナルが Kitty graphics 対応(Ghostty/Kitty/WezTerm 等)である必要がある。
+kitty_graphics = true
 
 # --- confirm-close プラグイン (pane/tab の close 前に y/n 確認) ---
 # 実体: ~/.ghq/github.com/petitviolet/herdr-plugins/confirm-close (herdr plugin link 済み)
@@ -135,3 +141,29 @@ key = "prefix+shift+l"
 command = "swap-pane.swap-right"
 type = "plugin_action"
 description = "右隣の pane と入れ替え"
+
+# --- focus-unzoom プラグイン (移動時にズーム解除してから pane 移動) ---
+# 実体: ~/.ghq/github.com/petitviolet/herdr-plugins/focus-unzoom (herdr plugin link 済み)
+[[keys.command]]
+key = "prefix+ctrl+h"
+command = "focus-unzoom.focus-left"
+type = "plugin_action"
+description = "ズーム解除して左の pane へ"
+
+[[keys.command]]
+key = "prefix+j"
+command = "focus-unzoom.focus-down"
+type = "plugin_action"
+description = "ズーム解除して下の pane へ"
+
+[[keys.command]]
+key = "prefix+ctrl+k"
+command = "focus-unzoom.focus-up"
+type = "plugin_action"
+description = "ズーム解除して上の pane へ"
+
+[[keys.command]]
+key = "prefix+ctrl+l"
+command = "focus-unzoom.focus-right"
+type = "plugin_action"
+description = "ズーム解除して右の pane へ"
