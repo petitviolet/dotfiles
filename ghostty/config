@@ -2,13 +2,14 @@
 # 参照: https://ghostty.org/docs/config/reference
 # pane/tab は herdr 側で管理するため、Ghostty はシンプルな単一ウィンドウ端末とする。
 # 反映: Cmd+Shift+, で reload、または再起動。
+# 注意: Ghostty は「値と同じ行の末尾コメント」を許さない。コメントは必ず独立行に書く。
 
 # --- フォント ---
 font-family = "Ricty"
 font-size = 15
 
 # --- テーマ / 外観 ---
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 background-opacity = 0.97
 background-blur = true
 window-padding-x = 8
@@ -20,21 +21,25 @@ mouse-hide-while-typing = true
 
 # --- macOS ---
 macos-titlebar-style = transparent
-macos-option-as-alt = left          # 右 Option は特殊文字入力用に残す
+# 右 Option は特殊文字入力用に残す
+macos-option-as-alt = left
 macos-non-native-fullscreen = true
 window-colorspace = display-p3
 quit-after-last-window-closed = true
 
 # --- 挙動 ---
-copy-on-select = true               # 選択で自動コピー
-window-save-state = always          # ウィンドウ位置/サイズを復元
+# 選択で自動コピー
+copy-on-select = true
+# ウィンドウ位置/サイズを復元
+window-save-state = always
 window-inherit-working-directory = true
 scrollback-limit = 10000000
-confirm-close-surface = true        # ウィンドウ/サーフェスを閉じる前に確認
+# ウィンドウ/サーフェスを閉じる前に確認
+confirm-close-surface = true
 shell-integration = detect
 
 # 注:
 # - Ctrl+V は Ghostty で何にもバインドせず pane 内アプリへ素通しする(既定)。
 #   これにより herdr 内の Claude Code でクリップボード画像貼り付け(Ctrl+V)が効く。
 # - 透過が邪魔なら background-opacity = 1 / background-blur = false にする。
-# - テーマ変更は `ghostty +list-themes` から選ぶ。
+# - テーマ変更は `ghostty +list-themes` から選ぶ(識別子は表示名そのまま)。
