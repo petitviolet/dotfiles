@@ -167,3 +167,12 @@ key = "prefix+ctrl+l"
 command = "focus-unzoom.focus-right"
 type = "plugin_action"
 description = "ズーム解除して右の pane へ"
+
+# --- tab-number プラグイン (tab ラベルに位置番号を前置) ---
+# 実体: ~/.ghq/github.com/petitviolet/herdr-plugins/tab-number (herdr plugin link 済み)
+# tab.created/closed で自動採番。並べ替え(ドラッグ)後の手動更新用に prefix+i を割当。
+[[keys.command]]
+key = "prefix+i"
+command = "tab-number.renumber"
+type = "plugin_action"
+description = "tab の位置番号を振り直す"
