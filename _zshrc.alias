@@ -8,6 +8,7 @@ case ${OSTYPE} in
     ;;
 esac
 alias vim='nvim'
+alias h='herdr'
 alias ll='ls -l'
 alias la='ls -A'
 alias cp='cp -vi'
