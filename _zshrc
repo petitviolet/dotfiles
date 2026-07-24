@@ -15,7 +15,7 @@ export PATH=/usr/local/bin:$PATH
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
-export EDITOR=vim
+export EDITOR=nvim
 # export HOMEBREW_CELLAR="/usr/local/Cellar"
 
 
