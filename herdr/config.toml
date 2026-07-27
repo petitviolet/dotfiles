@@ -50,8 +50,8 @@ split_vertical = ["prefix+percent", "prefix+|"]                # tmux: % / | -> 
 # 移動時にズーム(prefix+z)を解除するため focus-unzoom プラグインへ委譲(組込みは無効化)。
 # キーは下の [[keys.command]] で prefix+ctrl+h/k/l と prefix+j に割当。
 focus_pane_left = ""                       # -> focus-unzoom (prefix+ctrl+h)
-focus_pane_down = ""                       # -> focus-unzoom (prefix+j)
-focus_pane_up = ""                         # -> focus-unzoom (prefix+ctrl+k)
+focus_pane_down = ""                       # -> focus-cycle (prefix+j、端でラップ)
+focus_pane_up = ""                         # -> focus-cycle (prefix+ctrl+k、端でラップ)
 focus_pane_right = ""                      # -> focus-unzoom (prefix+ctrl+l)
 cycle_pane_previous = "prefix+tab"         # tmux: Tab  select-pane :.- (前の pane へ巡回)
 cycle_pane_next = "prefix+shift+tab"       # tmux: BTab select-pane :.+ (次の pane へ巡回)
@@ -150,17 +150,18 @@ command = "focus-unzoom.focus-left"
 type = "plugin_action"
 description = "ズーム解除して左の pane へ"
 
+# 上下は focus-cycle へ委譲(端で反対端へラップ。ズーム解除も内包)。
 [[keys.command]]
 key = "prefix+j"
-command = "focus-unzoom.focus-down"
+command = "focus-cycle.down"
 type = "plugin_action"
-description = "ズーム解除して下の pane へ"
+description = "ズーム解除して下の pane へ(最下段なら最上段へラップ)"
 
 [[keys.command]]
 key = "prefix+ctrl+k"
-command = "focus-unzoom.focus-up"
+command = "focus-cycle.up"
 type = "plugin_action"
-description = "ズーム解除して上の pane へ"
+description = "ズーム解除して上の pane へ(最上段なら最下段へラップ)"
 
 [[keys.command]]
 key = "prefix+ctrl+l"
