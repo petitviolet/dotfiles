@@ -177,3 +177,13 @@ key = "prefix+i"
 command = "tab-number.renumber"
 type = "plugin_action"
 description = "tab の位置番号を振り直す"
+
+# --- pane-search プラグイン (scrollback を tmux copy-mode 風に検索/コピー) ---
+# 実体: ~/.ghq/github.com/petitviolet/herdr-plugins/pane-search (herdr plugin link 済み)
+# prefix+/ で一体型 copy モード: 検索入力→Enter/Shift+Enter で移動→Space 選択→Enter コピー。
+# 色は terminal バッファで ANSI 描画。prefix+e(全 scrollback)より軽量。要 nvim(既定)。
+[[keys.command]]
+key = "prefix+/"
+command = "pane-search.search"
+type = "plugin_action"
+description = "scrollback を copy モードで検索/コピー(検索→移動→選択→コピー)"
